@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "player": {
+      "PLAYER00": {
+        "copyright": "s14",
+        "person": []
+      },
+      "PLAYER01": {
+        "copyright": "s28",
+        "person": []
+      },
+      "PLAYER02": {
+        "copyright": "s3c",
+        "person": []
+      }
+    }
+  },
+  "new": {
+    "player": {
+      "player_ref01": {
+        "copyright": "s50",
+        "person": []
+      }
+    }
+  }
+}

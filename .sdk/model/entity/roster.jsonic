@@ -1,0 +1,88 @@
+# Entity: roster
+
+main: kit: entity: roster: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "jersey_number"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "person"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "position"
+      req: false
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "roster"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "team_id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "season"
+                orig: "season"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/teams/{id}/roster"
+          parts: [
+            "teams"
+            "{team_id}"
+            "roster"
+          ]
+          rename: {
+            param: {
+              id: "team_id"
+            }
+          }
+          select: {
+            exist: [
+              "season"
+              "team_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "team"
+      ]
+    ]
+  }
+
+
+
+}

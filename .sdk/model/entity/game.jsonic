@@ -1,0 +1,112 @@
+# Entity: game
+
+main: kit: entity: game: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "copyright"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "game_data"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "game_pk"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "link"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "live_data"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "team"
+      req: false
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "game"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/game/{id}/boxscore"
+          parts: [
+            "game"
+            "{id}"
+            "boxscore"
+          ]
+          select: {
+            "$action": "boxscore"
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/game/{id}/feed/live"
+          parts: [
+            "game"
+            "{id}"
+            "feed"
+            "live"
+          ]
+          select: {
+            "$action": "feed_live"
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "standing": {
+      "STANDING00": {
+        "conference": {},
+        "division": {},
+        "team_record": []
+      },
+      "STANDING01": {
+        "conference": {},
+        "division": {},
+        "team_record": []
+      },
+      "STANDING02": {
+        "conference": {},
+        "division": {},
+        "team_record": []
+      }
+    }
+  },
+  "new": {
+    "standing": {
+      "standing_ref01": {
+        "conference": {},
+        "division": {},
+        "team_record": []
+      }
+    }
+  }
+}

@@ -1,0 +1,1091 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "NHL API Documentation",
+    "description": "This API provides access to various publicly available statistics and information from the NHL, aimed at making complex data easily digestible for developers and stats enthusiasts. The documentation includes details about different endpoints, usage examples, and guidelines for contributions.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Drew Hynes",
+      "url": "https://gitlab.com/dword4/nhlapi"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://statsapi.web.nhl.com/api/v1",
+      "description": "NHL Stats API"
+    },
+    {
+      "url": "https://records.nhl.com/site/api",
+      "description": "NHL Records API"
+    }
+  ],
+  "paths": {
+    "/teams": {
+      "get": {
+        "summary": "Get all teams",
+        "description": "Returns a list of all NHL teams",
+        "operationId": "getTeams",
+        "tags": [
+          "Teams"
+        ],
+        "parameters": [
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "Expand modifiers for additional data",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "team.roster",
+                "team.schedule.next",
+                "team.schedule.previous",
+                "team.stats"
+              ]
+            }
+          },
+          {
+            "name": "season",
+            "in": "query",
+            "description": "Season in YYYYYYYY format (e.g., 20192020)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teams/{id}": {
+      "get": {
+        "summary": "Get team by ID",
+        "description": "Returns details for a specific NHL team",
+        "operationId": "getTeamById",
+        "tags": [
+          "Teams"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "expand",
+            "in": "query",
+            "description": "Expand modifiers for additional data",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teams/{id}/roster": {
+      "get": {
+        "summary": "Get team roster",
+        "description": "Returns the roster for a specific NHL team",
+        "operationId": "getTeamRoster",
+        "tags": [
+          "Teams"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "season",
+            "in": "query",
+            "description": "Season in YYYYYYYY format",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RosterResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/people/{id}": {
+      "get": {
+        "summary": "Get player by ID",
+        "description": "Returns details for a specific NHL player",
+        "operationId": "getPlayerById",
+        "tags": [
+          "Players"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Player ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/people/{id}/stats": {
+      "get": {
+        "summary": "Get player statistics",
+        "description": "Returns statistics for a specific NHL player",
+        "operationId": "getPlayerStats",
+        "tags": [
+          "Players"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Player ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "stats",
+            "in": "query",
+            "description": "Type of stats to retrieve",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "statsSingleSeason",
+                "yearByYear",
+                "careerRegularSeason",
+                "homeAndAway"
+              ]
+            }
+          },
+          {
+            "name": "season",
+            "in": "query",
+            "description": "Season in YYYYYYYY format",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerStatsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule": {
+      "get": {
+        "summary": "Get game schedule",
+        "description": "Returns the NHL game schedule",
+        "operationId": "getSchedule",
+        "tags": [
+          "Schedule"
+        ],
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "query",
+            "description": "Team ID to filter schedule",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start date in YYYY-MM-DD format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End date in YYYY-MM-DD format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "season",
+            "in": "query",
+            "description": "Season in YYYYYYYY format",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/game/{id}/feed/live": {
+      "get": {
+        "summary": "Get live game feed",
+        "description": "Returns live game data including plays and current score",
+        "operationId": "getLiveGameFeed",
+        "tags": [
+          "Games"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Game ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LiveGameFeedResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/game/{id}/boxscore": {
+      "get": {
+        "summary": "Get game boxscore",
+        "description": "Returns boxscore data for a specific game",
+        "operationId": "getGameBoxscore",
+        "tags": [
+          "Games"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Game ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoxscoreResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/standings": {
+      "get": {
+        "summary": "Get standings",
+        "description": "Returns NHL standings",
+        "operationId": "getStandings",
+        "tags": [
+          "Standings"
+        ],
+        "parameters": [
+          {
+            "name": "season",
+            "in": "query",
+            "description": "Season in YYYYYYYY format",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandingsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/divisions": {
+      "get": {
+        "summary": "Get all divisions",
+        "description": "Returns a list of all NHL divisions",
+        "operationId": "getDivisions",
+        "tags": [
+          "Divisions"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/divisions/{id}": {
+      "get": {
+        "summary": "Get division by ID",
+        "description": "Returns details for a specific NHL division",
+        "operationId": "getDivisionById",
+        "tags": [
+          "Divisions"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Division ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conferences": {
+      "get": {
+        "summary": "Get all conferences",
+        "description": "Returns a list of all NHL conferences",
+        "operationId": "getConferences",
+        "tags": [
+          "Conferences"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConferencesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conferences/{id}": {
+      "get": {
+        "summary": "Get conference by ID",
+        "description": "Returns details for a specific NHL conference",
+        "operationId": "getConferenceById",
+        "tags": [
+          "Conferences"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Conference ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConferenceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TeamsResponse": {
+        "type": "object",
+        "properties": {
+          "copyright": {
+            "type": "string"
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Team"
+            }
+          }
+        }
+      },
+      "TeamResponse": {
+        "type": "object",
+        "properties": {
+          "copyright": {
+            "type": "string"
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Team"
+            }
+          }
+        }
+      },
+      "Team": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "abbreviation": {
+            "type": "string"
+          },
+          "teamName": {
+            "type": "string"
+          },
+          "locationName": {
+            "type": "string"
+          },
+          "firstYearOfPlay": {
+            "type": "string"
+          },
+          "division": {
+            "$ref": "#/components/schemas/Division"
+          },
+          "conference": {
+            "$ref": "#/components/schemas/Conference"
+          },
+          "franchise": {
+            "$ref": "#/components/schemas/Franchise"
+          },
+          "venue": {
+            "$ref": "#/components/schemas/Venue"
+          }
+        }
+      },
+      "Division": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          }
+        }
+      },
+      "Conference": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          }
+        }
+      },
+      "Franchise": {
+        "type": "object",
+        "properties": {
+          "franchiseId": {
+            "type": "integer"
+          },
+          "teamName": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          }
+        }
+      },
+      "Venue": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "timeZone": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "offset": {
+                "type": "integer"
+              },
+              "tz": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "RosterResponse": {
+        "type": "object",
+        "properties": {
+          "copyright": {
+            "type": "string"
+          },
+          "roster": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RosterPlayer"
+            }
+          }
+        }
+      },
+      "RosterPlayer": {
+        "type": "object",
+        "properties": {
+          "person": {
+            "$ref": "#/components/schemas/Person"
+          },
+          "jerseyNumber": {
+            "type": "string"
+          },
+          "position": {
+            "$ref": "#/components/schemas/Position"
+          }
+        }
+      },
+      "Person": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          }
+        }
+      },
+      "Position": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "abbreviation": {
+            "type": "string"
+          }
+        }
+      },
+      "PlayerResponse": {
+        "type": "object",
+        "properties": {
+          "copyright": {
+            "type": "string"
+          },
+          "people": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Player"
+            }
+          }
+        }
+      },
+      "Player": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "primaryNumber": {
+            "type": "string"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "currentAge": {
+            "type": "integer"
+          },
+          "birthCity": {
+            "type": "string"
+          },
+          "birthCountry": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "height": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "integer"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "rookie": {
+            "type": "boolean"
+          },
+          "shootsCatches": {
+            "type": "string"
+          },
+          "rosterStatus": {
+            "type": "string"
+          },
+          "currentTeam": {
+            "$ref": "#/components/schemas/Team"
+          },
+          "primaryPosition": {
+            "$ref": "#/components/schemas/Position"
+          }
+        }
+      },
+      "PlayerStatsResponse": {
+        "type": "object",
+        "properties": {
+          "copyright": {
+            "type": "string"
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "object"
+                },
+                "splits": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ScheduleResponse": {
+        "type": "object",
+        "properties": {
+          "copyright": {
+            "type": "string"
+          },
+          "totalItems": {
+            "type": "integer"
+          },
+          "totalEvents": {
+            "type": "integer"
+          },
+          "totalGames": {
+            "type": "integer"
+          },
+          "totalMatches": {
+            "type": "integer"
+          },
+          "dates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScheduleDate"
+            }
+          }
+        }
+      },
+      "ScheduleDate": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "totalItems": {
+            "type": "integer"
+          },
+          "totalEvents": {
+            "type": "integer"
+          },
+          "totalGames": {
+            "type": "integer"
+          },
+          "totalMatches": {
+            "type": "integer"
+          },
+          "games": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Game"
+            }
+          }
+        }
+      },
+      "Game": {
+        "type": "object",
+        "properties": {
+          "gamePk": {
+            "type": "integer"
+          },
+          "link": {
+            "type": "string"
+          },
+          "gameType": {
+            "type": "string"
+          },
+          "season": {
+            "type": "string"
+          },
+          "gameDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "object"
+          },
+          "teams": {
+            "type": "object",
+            "properties": {
+              "away": {
+                "$ref": "#/components/schemas/GameTeam"
+              },
+              "home": {
+                "$ref": "#/components/schemas/GameTeam"
+              }
+            }
+          },
+          "venue": {
+            "$ref": "#/components/schemas/Venue"
+          }
+        }
+      },
+      "GameTeam": {
+        "type": "object",
+        "properties": {
+          "leagueRecord": {
+            "type": "object",
+            "properties": {
+              "wins": {
+                "type": "integer"
+              },
+              "losses": {
+                "type": "integer"
+              },
+              "ot": {
+                "type": "integer"
+              }
+            }
+          },
+          "score": {
+            "type": "integer"
+          },
+          "team": {
+            "$ref": "#/components/schemas/Team"
+          }
+        }
+      },
+      "LiveGameFeedResponse": {
+        "type": "object",
+        "properties": {
+          "copyright": {
+            "type": "string"
+          },
+          "gamePk": {
+            "type": "integer"
+          },
+          "link": {
+            "type": "string"
+          },
+          "gameData": {
+            "type": "object"
+          },
+          "liveData": {
+            "type": "object"
+          }
+        }
+      },
+      "BoxscoreResponse": {
+        "type": "object",
+        "properties": {
+          "copyright": {
+            "type": "string"
+          },
+          "teams": {
+            "type": "object",
+            "properties": {
+              "away": {
+                "type": "object"
+              },
+              "home": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "StandingsResponse": {
+        "type": "object",
+        "properties": {
+          "copyright": {
+            "type": "string"
+          },
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "division": {
+                  "$ref": "#/components/schemas/Division"
+                },
+                "conference": {
+                  "$ref": "#/components/schemas/Conference"
+                },
+                "teamRecords": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "DivisionsResponse": {
+        "type": "object",
+        "properties": {
+          "copyright": {
+            "type": "string"
+          },
+          "divisions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Division"
+            }
+          }
+        }
+      },
+      "DivisionResponse": {
+        "type": "object",
+        "properties": {
+          "copyright": {
+            "type": "string"
+          },
+          "divisions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Division"
+            }
+          }
+        }
+      },
+      "ConferencesResponse": {
+        "type": "object",
+        "properties": {
+          "copyright": {
+            "type": "string"
+          },
+          "conferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Conference"
+            }
+          }
+        }
+      },
+      "ConferenceResponse": {
+        "type": "object",
+        "properties": {
+          "copyright": {
+            "type": "string"
+          },
+          "conferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Conference"
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Teams",
+      "description": "Operations related to NHL teams"
+    },
+    {
+      "name": "Players",
+      "description": "Operations related to NHL players"
+    },
+    {
+      "name": "Schedule",
+      "description": "Operations related to NHL game schedules"
+    },
+    {
+      "name": "Games",
+      "description": "Operations related to NHL games"
+    },
+    {
+      "name": "Standings",
+      "description": "Operations related to NHL standings"
+    },
+    {
+      "name": "Divisions",
+      "description": "Operations related to NHL divisions"
+    },
+    {
+      "name": "Conferences",
+      "description": "Operations related to NHL conferences"
+    }
+  ]
+}

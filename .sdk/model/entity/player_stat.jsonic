@@ -1,0 +1,91 @@
+# Entity: player_stat
+
+main: kit: entity: player_stat: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "split"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "type"
+      req: false
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "player_stat"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "person_id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "season"
+                orig: "season"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "stat"
+                orig: "stat"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/people/{id}/stats"
+          parts: [
+            "people"
+            "{person_id}"
+            "stats"
+          ]
+          rename: {
+            param: {
+              id: "person_id"
+            }
+          }
+          select: {
+            exist: [
+              "person_id"
+              "season"
+              "stat"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "person"
+      ]
+    ]
+  }
+
+
+
+}

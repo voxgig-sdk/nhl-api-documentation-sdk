@@ -1,0 +1,63 @@
+# Entity: standing
+
+main: kit: entity: standing: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "conference"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "division"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "team_record"
+      req: false
+      type: "`$ARRAY`"
+    }
+  ]
+
+  name: "standing"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "season"
+                orig: "season"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/standings"
+          parts: [
+            "standings"
+          ]
+          select: {
+            exist: [
+              "season"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

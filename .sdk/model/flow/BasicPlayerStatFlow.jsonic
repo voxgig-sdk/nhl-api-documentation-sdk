@@ -1,0 +1,26 @@
+# BasicPlayerStatFlow
+
+main: kit: flow: BasicPlayerStatFlow:
+{
+  entity: "player_stat",
+  kind: "basic",
+  name: "BasicPlayerStatFlow",
+  step: [
+    {
+      match: {
+        person_id: "person01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "player_stat_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPlayerStatFlow"
+}

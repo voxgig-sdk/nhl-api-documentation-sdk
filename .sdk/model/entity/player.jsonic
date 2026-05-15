@@ -1,0 +1,59 @@
+# Entity: player
+
+main: kit: entity: player: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "copyright"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "person"
+      req: false
+      type: "`$ARRAY`"
+    }
+  ]
+
+  name: "player"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/people/{id}"
+          parts: [
+            "people"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

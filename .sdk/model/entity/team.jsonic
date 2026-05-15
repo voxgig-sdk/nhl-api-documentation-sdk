@@ -1,0 +1,169 @@
+# Entity: team
+
+main: kit: entity: team: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "abbreviation"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "conference"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "copyright"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "division"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "first_year_of_play"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "franchise"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "link"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "location_name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "team"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "team_name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "venue"
+      req: false
+      type: "`$OBJECT`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "team"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "expand"
+                orig: "expand"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "season"
+                orig: "season"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/teams"
+          parts: [
+            "teams"
+          ]
+          select: {
+            exist: [
+              "expand"
+              "season"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "expand"
+                orig: "expand"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/teams/{id}"
+          parts: [
+            "teams"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "expand"
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

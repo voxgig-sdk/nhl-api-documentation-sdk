@@ -1,0 +1,42 @@
+{
+  "existing": {
+    "schedule": {
+      "SCHEDULE00": {
+        "date": "s3c",
+        "game": [],
+        "total_event": "s3e",
+        "total_game": "s3f",
+        "total_item": "s40",
+        "total_match": "s41"
+      },
+      "SCHEDULE01": {
+        "date": "s78",
+        "game": [],
+        "total_event": "s7a",
+        "total_game": "s7b",
+        "total_item": "s7c",
+        "total_match": "s7d"
+      },
+      "SCHEDULE02": {
+        "date": "sb4",
+        "game": [],
+        "total_event": "sb6",
+        "total_game": "sb7",
+        "total_item": "sb8",
+        "total_match": "sb9"
+      }
+    }
+  },
+  "new": {
+    "schedule": {
+      "schedule_ref01": {
+        "date": "sf0",
+        "game": [],
+        "total_event": "sf2",
+        "total_game": "sf3",
+        "total_item": "sf4",
+        "total_match": "sf5"
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "existing": {
+    "conference": {
+      "CONFERENCE00": {
+        "conference": [],
+        "copyright": "s33",
+        "id": "CONFERENCE00",
+        "link": "s35",
+        "name": "s36"
+      },
+      "CONFERENCE01": {
+        "conference": [],
+        "copyright": "s65",
+        "id": "CONFERENCE01",
+        "link": "s67",
+        "name": "s68"
+      },
+      "CONFERENCE02": {
+        "conference": [],
+        "copyright": "s97",
+        "id": "CONFERENCE02",
+        "link": "s99",
+        "name": "s9a"
+      }
+    }
+  },
+  "new": {
+    "conference": {
+      "conference_ref01": {
+        "conference": [],
+        "copyright": "sc9",
+        "link": "scb",
+        "name": "scc"
+      }
+    }
+  }
+}

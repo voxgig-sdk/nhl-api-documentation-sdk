@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "roster": {
+      "ROSTER00": {
+        "jersey_number": "s1e",
+        "person": {},
+        "position": {},
+        "team_id": "TEAM01"
+      },
+      "ROSTER01": {
+        "jersey_number": "s3c",
+        "person": {},
+        "position": {},
+        "team_id": "TEAM01"
+      },
+      "ROSTER02": {
+        "jersey_number": "s5a",
+        "person": {},
+        "position": {},
+        "team_id": "TEAM01"
+      }
+    }
+  },
+  "new": {
+    "roster": {
+      "roster_ref01": {
+        "jersey_number": "s78",
+        "person": {},
+        "position": {}
+      }
+    }
+  }
+}

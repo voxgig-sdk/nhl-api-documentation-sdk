@@ -1,0 +1,29 @@
+{
+  "existing": {
+    "player_stat": {
+      "PLAYER_STAT00": {
+        "split": [],
+        "type": {},
+        "person_id": "PERSON01"
+      },
+      "PLAYER_STAT01": {
+        "split": [],
+        "type": {},
+        "person_id": "PERSON01"
+      },
+      "PLAYER_STAT02": {
+        "split": [],
+        "type": {},
+        "person_id": "PERSON01"
+      }
+    }
+  },
+  "new": {
+    "player_stat": {
+      "player_stat_ref01": {
+        "split": [],
+        "type": {}
+      }
+    }
+  }
+}

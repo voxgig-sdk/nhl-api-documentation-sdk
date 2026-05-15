@@ -1,0 +1,79 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 9
+  metrics: count: path: 13
+  metrics: count: method: 13
+
+  entity: conference: {
+    path: "/conferences": {
+      op: list: method: *GET
+    }
+    path: "/conferences/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: division: {
+    path: "/divisions": {
+      op: list: method: *GET
+    }
+    path: "/divisions/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: game: {
+    path: "/game/{id}/boxscore": {
+      action: "boxscore": {}
+      op: load: method: *GET
+    }
+    path: "/game/{id}/feed/live": {
+      action: "feed_live": {}
+      op: load: method: *GET
+    }
+  }
+
+  entity: player: {
+    path: "/people/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: player_stat: {
+    path: "/people/{id}/stats": {
+      rename: param: "id": *"person_id"
+      op: list: method: *GET
+    }
+  }
+
+  entity: roster: {
+    path: "/teams/{id}/roster": {
+      rename: param: "id": *"team_id"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.roster`")|top
+    }
+  }
+
+  entity: schedule: {
+    path: "/schedule": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: standing: {
+    path: "/standings": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: team: {
+    path: "/teams": {
+      op: list: method: *GET
+    }
+    path: "/teams/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+}

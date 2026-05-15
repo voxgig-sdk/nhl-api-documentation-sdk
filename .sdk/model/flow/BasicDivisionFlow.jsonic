@@ -1,0 +1,44 @@
+# BasicDivisionFlow
+
+main: kit: flow: BasicDivisionFlow:
+{
+  entity: "division",
+  kind: "basic",
+  name: "BasicDivisionFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "division_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "division_ref01",
+        srcdatavar: "division_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "division01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-division_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDivisionFlow"
+}

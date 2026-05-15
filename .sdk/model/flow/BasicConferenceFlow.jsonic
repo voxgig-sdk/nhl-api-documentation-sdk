@@ -1,0 +1,44 @@
+# BasicConferenceFlow
+
+main: kit: flow: BasicConferenceFlow:
+{
+  entity: "conference",
+  kind: "basic",
+  name: "BasicConferenceFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "conference_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "conference_ref01",
+        srcdatavar: "conference_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "conference01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-conference_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicConferenceFlow"
+}

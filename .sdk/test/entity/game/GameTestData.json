@@ -1,0 +1,42 @@
+{
+  "existing": {
+    "game": {
+      "GAME00": {
+        "copyright": "s3c",
+        "game_data": {},
+        "game_pk": "s3e",
+        "link": "s3f",
+        "live_data": {},
+        "team": {}
+      },
+      "GAME01": {
+        "copyright": "s78",
+        "game_data": {},
+        "game_pk": "s7a",
+        "link": "s7b",
+        "live_data": {},
+        "team": {}
+      },
+      "GAME02": {
+        "copyright": "sb4",
+        "game_data": {},
+        "game_pk": "sb6",
+        "link": "sb7",
+        "live_data": {},
+        "team": {}
+      }
+    }
+  },
+  "new": {
+    "game": {
+      "game_ref01": {
+        "copyright": "sf0",
+        "game_data": {},
+        "game_pk": "sf2",
+        "link": "sf3",
+        "live_data": {},
+        "team": {}
+      }
+    }
+  }
+}

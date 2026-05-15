@@ -1,0 +1,26 @@
+# BasicRosterFlow
+
+main: kit: flow: BasicRosterFlow:
+{
+  entity: "roster",
+  kind: "basic",
+  name: "BasicRosterFlow",
+  step: [
+    {
+      match: {
+        team_id: "team01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "roster_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicRosterFlow"
+}

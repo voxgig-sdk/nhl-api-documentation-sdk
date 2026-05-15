@@ -1,0 +1,135 @@
+<?php
+declare(strict_types=1);
+
+// PlayerStat direct test
+
+require_once __DIR__ . '/../nhlapidocumentation_sdk.php';
+require_once __DIR__ . '/Runner.php';
+
+use PHPUnit\Framework\TestCase;
+
+class PlayerStatDirectTest extends TestCase
+{
+    public function test_direct_list_player_stat(): void
+    {
+        $setup = player_stat_direct_setup([
+            ["id" => "direct01"],
+            ["id" => "direct02"],
+        ]);
+        [$_shouldSkip, $_reason] = Runner::is_control_skipped("direct", "direct-list-player_stat", $setup["live"] ? "live" : "unit");
+        if ($_shouldSkip) {
+            $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
+            return;
+        }
+        if ($setup["live"]) {
+            foreach (["person01"] as $_liveKey) {
+                if (!isset($setup["idmap"][$_liveKey]) || $setup["idmap"][$_liveKey] === null) {
+                    $this->markTestSkipped("live test needs $_liveKey via *_ENTID env var (synthetic IDs only)");
+                    return;
+                }
+            }
+        }
+        $client = $setup["client"];
+
+        $params = [];
+        if ($setup["live"]) {
+            $params["person_id"] = $setup["idmap"]["person01"];
+        } else {
+            $params["person_id"] = "direct01";
+        }
+
+        [$result, $err] = $client->direct([
+            "path" => "people/{person_id}/stats",
+            "method" => "GET",
+            "params" => $params,
+        ]);
+        if ($setup["live"]) {
+            // Live mode is lenient: synthetic IDs frequently 4xx and the
+            // list-response shape varies wildly across public APIs. Skip
+            // rather than fail when the call doesn't return a usable list.
+            if ($err !== null) {
+                $this->markTestSkipped("list call failed (likely synthetic IDs against live API): " . (string)$err);
+                return;
+            }
+            if (empty($result["ok"])) {
+                $this->markTestSkipped("list call not ok (likely synthetic IDs against live API)");
+                return;
+            }
+            $status = Helpers::to_int($result["status"]);
+            if ($status < 200 || $status >= 300) {
+                $this->markTestSkipped("expected 2xx status, got " . $status);
+                return;
+            }
+        } else {
+            $this->assertNull($err);
+            $this->assertTrue($result["ok"]);
+            $this->assertEquals(200, Helpers::to_int($result["status"]));
+            $this->assertIsArray($result["data"]);
+            $this->assertCount(2, $result["data"]);
+            $this->assertCount(1, $setup["calls"]);
+        }
+    }
+
+}
+
+
+function player_stat_direct_setup($mockres)
+{
+    Runner::load_env_local();
+
+    $calls = new \ArrayObject();
+
+    $env = Runner::env_override([
+        "NHLAPIDOCUMENTATION_TEST_PLAYER_STAT_ENTID" => [],
+        "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
+        "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
+    ]);
+
+    $live = $env["NHLAPIDOCUMENTATION_TEST_LIVE"] === "TRUE";
+
+    if ($live) {
+        $merged_opts = [
+            "apikey" => $env["NHLAPIDOCUMENTATION_APIKEY"],
+        ];
+        $client = new NhlApiDocumentationSDK($merged_opts);
+        return [
+            "client" => $client,
+            "calls" => $calls,
+            "live" => true,
+            "idmap" => [],
+        ];
+    }
+
+    $mock_fetch = function ($url, $init) use ($calls, $mockres) {
+        $calls[] = ["url" => $url, "init" => $init];
+        return [
+            [
+                "status" => 200,
+                "statusText" => "OK",
+                "headers" => [],
+                "json" => function () use ($mockres) {
+                    if ($mockres !== null) {
+                        return $mockres;
+                    }
+                    return ["id" => "direct01"];
+                },
+                "body" => "mock",
+            ],
+            null,
+        ];
+    };
+
+    $client = new NhlApiDocumentationSDK([
+        "base" => "http://localhost:8080",
+        "system" => [
+            "fetch" => $mock_fetch,
+        ],
+    ]);
+
+    return [
+        "client" => $client,
+        "calls" => $calls,
+        "live" => false,
+        "idmap" => [],
+    ];
+}

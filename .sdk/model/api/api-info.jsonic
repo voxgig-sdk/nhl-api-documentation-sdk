@@ -1,0 +1,32 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "Drew Hynes"
+        url: "https://gitlab.com/dword4/nhlapi"
+      }
+      description: "This API provides access to various publicly available statistics and information from the NHL, aimed at making complex data easily digestible for developers and stats enthusiasts. The documentation includes details about different endpoints, usage examples, and guidelines for contributions."
+      license: {
+        name: "MIT License"
+        url: "https://opensource.org/licenses/MIT"
+      }
+      servers: [
+        {
+          description: "NHL Stats API"
+          url: "https://statsapi.web.nhl.com/api/v1"
+        }
+        {
+          description: "NHL Records API"
+          url: "https://records.nhl.com/site/api"
+        }
+      ]
+      title: "NHL API Documentation"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

@@ -1,0 +1,37 @@
+{
+  "existing": {
+    "division": {
+      "DIVISION00": {
+        "copyright": "s32",
+        "division": [],
+        "id": "DIVISION00",
+        "link": "s35",
+        "name": "s36"
+      },
+      "DIVISION01": {
+        "copyright": "s64",
+        "division": [],
+        "id": "DIVISION01",
+        "link": "s67",
+        "name": "s68"
+      },
+      "DIVISION02": {
+        "copyright": "s96",
+        "division": [],
+        "id": "DIVISION02",
+        "link": "s99",
+        "name": "s9a"
+      }
+    }
+  },
+  "new": {
+    "division": {
+      "division_ref01": {
+        "copyright": "sc8",
+        "division": [],
+        "link": "scb",
+        "name": "scc"
+      }
+    }
+  }
+}
