@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/nhl-api-documentation-sdk"
-	"github.com/voxgig-sdk/nhl-api-documentation-sdk/core"
+	sdk "github.com/voxgig-sdk/nhl-api-documentation-sdk/go"
+	"github.com/voxgig-sdk/nhl-api-documentation-sdk/go/core"
 )
 
 func TestDivisionDirect(t *testing.T) {

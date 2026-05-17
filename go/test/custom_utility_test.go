@@ -3,7 +3,7 @@ package sdktest
 import (
 	"testing"
 
-	sdk "github.com/voxgig-sdk/nhl-api-documentation-sdk"
+	sdk "github.com/voxgig-sdk/nhl-api-documentation-sdk/go"
 )
 
 func TestCustomUtility(t *testing.T) {

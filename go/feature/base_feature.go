@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/nhl-api-documentation-sdk/core"
+	"github.com/voxgig-sdk/nhl-api-documentation-sdk/go/core"
 )
 
 type BaseFeature struct {

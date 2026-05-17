@@ -7,7 +7,8 @@
         "game_pk": "s3e",
         "link": "s3f",
         "live_data": {},
-        "team": {}
+        "team": {},
+        "id": "GAME00"
       },
       "GAME01": {
         "copyright": "s78",
@@ -15,7 +16,8 @@
         "game_pk": "s7a",
         "link": "s7b",
         "live_data": {},
-        "team": {}
+        "team": {},
+        "id": "GAME01"
       },
       "GAME02": {
         "copyright": "sb4",
@@ -23,7 +25,8 @@
         "game_pk": "sb6",
         "link": "sb7",
         "live_data": {},
-        "team": {}
+        "team": {},
+        "id": "GAME02"
       }
     }
   },

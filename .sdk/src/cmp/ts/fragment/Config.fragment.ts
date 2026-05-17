@@ -29,7 +29,7 @@ class Config {
 
 
   options = {
-    base: 'https://statsapi.web.nhl.com/api/v1',
+    base: '$$main.kit.info.servers.0.url$$',
 
     'AUTHBLOCK'headers: 'HEADERS',
 

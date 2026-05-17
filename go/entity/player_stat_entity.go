@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/nhl-api-documentation-sdk/core"
+	"github.com/voxgig-sdk/nhl-api-documentation-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/nhl-api-documentation-sdk/go/utility/struct"
 )
 
 type PlayerStatEntity struct {

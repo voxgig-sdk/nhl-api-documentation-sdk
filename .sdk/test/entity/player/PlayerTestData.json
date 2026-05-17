@@ -3,15 +3,18 @@
     "player": {
       "PLAYER00": {
         "copyright": "s14",
-        "person": []
+        "person": [],
+        "id": "PLAYER00"
       },
       "PLAYER01": {
         "copyright": "s28",
-        "person": []
+        "person": [],
+        "id": "PLAYER01"
       },
       "PLAYER02": {
         "copyright": "s3c",
-        "person": []
+        "person": [],
+        "id": "PLAYER02"
       }
     }
   },
