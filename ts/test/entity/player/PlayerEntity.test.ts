@@ -111,7 +111,6 @@ function basicSetup(extra?: any) {
     'NHL_API_DOCUMENTATION_TEST_PLAYER_ENTID': idmap,
     'NHL_API_DOCUMENTATION_TEST_LIVE': 'FALSE',
     'NHL_API_DOCUMENTATION_TEST_EXPLAIN': 'FALSE',
-    'NHL_API_DOCUMENTATION_APIKEY': 'NONE',
   })
 
   idmap = env['NHL_API_DOCUMENTATION_TEST_PLAYER_ENTID']
@@ -121,7 +120,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new NhlApiDocumentationSDK(merge([
       {
-        apikey: env.NHL_API_DOCUMENTATION_APIKEY,
       },
       extra
     ]))

@@ -91,7 +91,6 @@ function player_basic_setup(extra)
     ["NHLAPIDOCUMENTATION_TEST_PLAYER_ENTID"] = idmap,
     ["NHLAPIDOCUMENTATION_TEST_LIVE"] = "FALSE",
     ["NHLAPIDOCUMENTATION_TEST_EXPLAIN"] = "FALSE",
-    ["NHLAPIDOCUMENTATION_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -103,7 +102,6 @@ function player_basic_setup(extra)
   if env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["NHLAPIDOCUMENTATION_APIKEY"],
       },
       extra or {},
     })

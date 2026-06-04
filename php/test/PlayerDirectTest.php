@@ -77,14 +77,12 @@ function player_direct_setup($mockres)
     $env = Runner::env_override([
         "NHLAPIDOCUMENTATION_TEST_PLAYER_ENTID" => [],
         "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
-        "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
     ]);
 
     $live = $env["NHLAPIDOCUMENTATION_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["NHLAPIDOCUMENTATION_APIKEY"],
         ];
         $client = new NhlApiDocumentationSDK($merged_opts);
         return [

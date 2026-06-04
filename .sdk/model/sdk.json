@@ -25,7 +25,25 @@
           }
         ],
         "title": "NHL API Documentation",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Query NHL teams, players, rosters, schedules, standings, and live game data without authentication",
+        "homepage": "https://gitlab.com/dword4/nhlapi",
+        "docs_url": "https://gitlab.com/dword4/nhlapi",
+        "license_short": "MIT License (documentation project; data is public NHL data)",
+        "license_md": "- The community documentation project ([dword4/nhlapi](https://gitlab.com/dword4/nhlapi)) is published under the MIT License.\n- The underlying data is served by the NHL's public web endpoints; this SDK is unofficial and not affiliated with the NHL.\n- Respect the NHL's terms of use when redistributing data and consider caching responses to avoid excessive load.",
+        "about_md": "The NHL API is a publicly accessible, unauthenticated set of HTTP endpoints used by the NHL's own apps and websites. There is no official developer programme; the most widely-used reference is the community-maintained [dword4/nhlapi](https://gitlab.com/dword4/nhlapi) project by Drew Hynes, which catalogues the routes and response shapes.\n\nNote that the historical host `statsapi.web.nhl.com/api/v1` (the server configured for this SDK) has been deprecated by the NHL. The current host is `https://api-web.nhle.com/v1/` and existing clients should be migrated to it.\n\nWhat you can pull from the API:\n\n- Team metadata, conferences, and divisions\n- Player biographies, current and historical rosters\n- League schedule and individual game data, including live play-by-play\n- Standings by season, conference, and division\n- Aggregated player statistics\n\nEndpoints are read-only GET requests returning JSON and do not require an API key. Because the API is undocumented officially, response shapes can change without notice; pinning to known-good fields and handling missing values defensively is recommended.",
+        "entity_desc": {
+          "conference": "An NHL conference (Eastern, Western) used to group divisions and teams in standings and team listings.",
+          "division": "A division within a conference (e.g. Atlantic, Metropolitan, Central, Pacific) used to organise teams and standings.",
+          "game": "A single NHL game resource exposing schedule entry, boxscore, and live play-by-play data.",
+          "player": "An individual NHL player resource with biographical details and career references.",
+          "player_stat": "Aggregated statistics for a player, typically by season and game type (regular season, playoffs).",
+          "roster": "The set of players currently or historically assigned to a team, usually scoped to a season.",
+          "schedule": "League or team schedule listings, filterable by date range and used to discover game IDs.",
+          "standing": "Team standings for a season, broken down by league, conference, division, or wildcard.",
+          "team": "An NHL franchise resource with metadata such as name, abbreviation, venue, division, and conference."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -33,7 +51,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "conference": {

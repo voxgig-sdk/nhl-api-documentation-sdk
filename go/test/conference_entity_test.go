@@ -135,7 +135,6 @@ func conferenceBasicSetup(extra map[string]any) *entityTestSetup {
 		"NHLAPIDOCUMENTATION_TEST_CONFERENCE_ENTID": idmap,
 		"NHLAPIDOCUMENTATION_TEST_LIVE":      "FALSE",
 		"NHLAPIDOCUMENTATION_TEST_EXPLAIN":   "FALSE",
-		"NHLAPIDOCUMENTATION_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["NHLAPIDOCUMENTATION_TEST_CONFERENCE_ENTID"])
@@ -146,7 +145,6 @@ func conferenceBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["NHLAPIDOCUMENTATION_APIKEY"],
 			},
 			extra,
 		})

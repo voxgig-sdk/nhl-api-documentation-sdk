@@ -20,9 +20,6 @@ class NhlApiDocumentationConfig
             ],
             "options" => [
                 "base" => "https://statsapi.web.nhl.com/api/v1",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
