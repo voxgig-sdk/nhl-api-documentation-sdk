@@ -10,13 +10,13 @@ The Ruby SDK for the NhlApiDocumentation API — an entity-oriented client using
 
 ## Install
 ```bash
-gem install nhl-api-documentation-sdk
+gem install voxgig-sdk-nhl-api-documentation
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "nhl-api-documentation-sdk"
+gem "voxgig-sdk-nhl-api-documentation"
 ```
 
 Then run:

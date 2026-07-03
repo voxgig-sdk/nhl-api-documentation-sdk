@@ -10,7 +10,7 @@ The Python SDK for the NhlApiDocumentation API — an entity-oriented client fol
 
 ## Install
 ```bash
-pip install nhl-api-documentation-sdk
+pip install voxgig-sdk-nhl-api-documentation
 ```
 
 Or install from source:

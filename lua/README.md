@@ -10,7 +10,7 @@ The Lua SDK for the NhlApiDocumentation API — an entity-oriented client using 
 
 ## Install
 ```bash
-luarocks install nhl-api-documentation-sdk
+luarocks install voxgig-sdk-nhl-api-documentation
 ```
 
 If the module is not yet published, add the source directory to

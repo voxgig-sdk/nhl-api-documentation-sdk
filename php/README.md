@@ -10,7 +10,7 @@ The PHP SDK for the NhlApiDocumentation API — an entity-oriented client using 
 
 ## Install
 ```bash
-composer require voxgig/nhl-api-documentation-sdk
+composer require voxgig-sdk/nhl-api-documentation
 ```
 
 

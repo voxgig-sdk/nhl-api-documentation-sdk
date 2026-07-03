@@ -10,7 +10,7 @@ The TypeScript SDK for the NhlApiDocumentation API — a type-safe, entity-orien
 
 ## Install
 ```bash
-npm install nhl-api-documentation
+npm install @voxgig-sdk/nhl-api-documentation
 ```
 ## Tutorial: your first API call
 

@@ -8,12 +8,14 @@ source = {
   dir = "nhl-api-documentation-sdk/lua"
 }
 description = {
-  summary = "NhlApiDocumentation SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the NHL API Documentation public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/nhl-api-documentation-sdk",
+  issues_url = "https://github.com/voxgig-sdk/nhl-api-documentation-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "nhl-api-documentation" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {
