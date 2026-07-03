@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -136,7 +136,7 @@ local conference = client:Conference(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Conference(nil):list(nil, nil)
+local results, err = client:Conference():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -144,7 +144,7 @@ local results, err = client:Conference(nil):list(nil, nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Conference(nil):load({ id = "conference_id" }, nil)
+local result, err = client:Conference():load({ id = "conference_id" })
 ```
 
 ### Common Methods
@@ -200,7 +200,7 @@ local division = client:Division(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Division(nil):list(nil, nil)
+local results, err = client:Division():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -208,7 +208,7 @@ local results, err = client:Division(nil):list(nil, nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Division(nil):load({ id = "division_id" }, nil)
+local result, err = client:Division():load({ id = "division_id" })
 ```
 
 ### Common Methods
@@ -265,7 +265,7 @@ local game = client:Game(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Game(nil):load({ id = "game_id" }, nil)
+local result, err = client:Game():load({ id = "game_id" })
 ```
 
 ### Common Methods
@@ -318,7 +318,7 @@ local player = client:Player(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Player(nil):load({ id = "player_id" }, nil)
+local result, err = client:Player():load({ id = "player_id" })
 ```
 
 ### Common Methods
@@ -371,7 +371,7 @@ local player_stat = client:PlayerStat(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:PlayerStat(nil):list(nil, nil)
+local results, err = client:PlayerStat():list()
 ```
 
 ### Common Methods
@@ -425,7 +425,7 @@ local roster = client:Roster(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Roster(nil):list(nil, nil)
+local results, err = client:Roster():list()
 ```
 
 ### Common Methods
@@ -482,7 +482,7 @@ local schedule = client:Schedule(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Schedule(nil):list(nil, nil)
+local results, err = client:Schedule():list()
 ```
 
 ### Common Methods
@@ -536,7 +536,7 @@ local standing = client:Standing(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Standing(nil):list(nil, nil)
+local results, err = client:Standing():list()
 ```
 
 ### Common Methods
@@ -600,7 +600,7 @@ local team = client:Team(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Team(nil):list(nil, nil)
+local results, err = client:Team():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -608,7 +608,7 @@ local results, err = client:Team(nil):list(nil, nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Team(nil):load({ id = "team_id" }, nil)
+local result, err = client:Team():load({ id = "team_id" })
 ```
 
 ### Common Methods

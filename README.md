@@ -1,24 +1,8 @@
 # NhlApiDocumentation SDK
 
-Query NHL teams, players, rosters, schedules, standings, and live game data without authentication
+NHL API Documentation client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About NHL API Documentation
-
-The NHL API is a publicly accessible, unauthenticated set of HTTP endpoints used by the NHL's own apps and websites. There is no official developer programme; the most widely-used reference is the community-maintained [dword4/nhlapi](https://gitlab.com/dword4/nhlapi) project by Drew Hynes, which catalogues the routes and response shapes.
-
-Note that the historical host `statsapi.web.nhl.com/api/v1` (the server configured for this SDK) has been deprecated by the NHL. The current host is `https://api-web.nhle.com/v1/` and existing clients should be migrated to it.
-
-What you can pull from the API:
-
-- Team metadata, conferences, and divisions
-- Player biographies, current and historical rosters
-- League schedule and individual game data, including live play-by-play
-- Standings by season, conference, and division
-- Aggregated player statistics
-
-Endpoints are read-only GET requests returning JSON and do not require an API key. Because the API is undocumented officially, response shapes can change without notice; pinning to known-good fields and handling missing values defensively is recommended.
 
 ## Try it
 
@@ -52,29 +36,31 @@ gem install nhl-api-documentation-sdk
 luarocks install nhl-api-documentation-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { NhlApiDocumentationSDK } from 'nhl-api-documentation'
 
-const client = new NhlApiDocumentationSDK({})
+const client = new NhlApiDocumentationSDK({
+  apikey: process.env.NHL-API-DOCUMENTATION_APIKEY,
+})
 
 // List all conferences
 const conferences = await client.Conference().list()
+console.log(conferences.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -104,15 +90,15 @@ The API exposes 9 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Conference** | An NHL conference (Eastern, Western) used to group divisions and teams in standings and team listings. | `/conferences` |
-| **Division** | A division within a conference (e.g. Atlantic, Metropolitan, Central, Pacific) used to organise teams and standings. | `/divisions` |
-| **Game** | A single NHL game resource exposing schedule entry, boxscore, and live play-by-play data. | `/game/{id}/boxscore` |
-| **Player** | An individual NHL player resource with biographical details and career references. | `/people/{id}` |
-| **PlayerStat** | Aggregated statistics for a player, typically by season and game type (regular season, playoffs). | `/people/{id}/stats` |
-| **Roster** | The set of players currently or historically assigned to a team, usually scoped to a season. | `/teams/{id}/roster` |
-| **Schedule** | League or team schedule listings, filterable by date range and used to discover game IDs. | `/schedule` |
-| **Standing** | Team standings for a season, broken down by league, conference, division, or wildcard. | `/standings` |
-| **Team** | An NHL franchise resource with metadata such as name, abbreviation, venue, division, and conference. | `/teams` |
+| **Conference** |  | `/conferences` |
+| **Division** |  | `/divisions` |
+| **Game** |  | `/game/{id}/boxscore` |
+| **Player** |  | `/people/{id}` |
+| **PlayerStat** |  | `/people/{id}/stats` |
+| **Roster** |  | `/teams/{id}/roster` |
+| **Schedule** |  | `/schedule` |
+| **Standing** |  | `/standings` |
+| **Team** |  | `/teams` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -122,17 +108,20 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from nhlapidocumentation_sdk import NhlApiDocumentationSDK
 
-client = NhlApiDocumentationSDK({})
+client = NhlApiDocumentationSDK({
+    "apikey": os.environ.get("NHL-API-DOCUMENTATION_APIKEY"),
+})
 
 # List all conferences
-conferences, err = client.Conference(None).list(None, None)
+conferences, err = client.Conference().list()
+print(conferences)
 
 # Load a specific conference
-conference, err = client.Conference(None).load(
-    {"id": "example_id"}, None
-)
+conference, err = client.Conference().load({"id": "example_id"})
+print(conference)
 ```
 
 ### PHP
@@ -141,15 +130,17 @@ conference, err = client.Conference(None).load(
 <?php
 require_once 'nhlapidocumentation_sdk.php';
 
-$client = new NhlApiDocumentationSDK([]);
+$client = new NhlApiDocumentationSDK([
+    "apikey" => getenv("NHL-API-DOCUMENTATION_APIKEY"),
+]);
 
 // List all conferences
-[$conferences, $err] = $client->Conference(null)->list(null, null);
+[$conferences, $err] = $client->Conference()->list();
+print_r($conferences);
 
 // Load a specific conference
-[$conference, $err] = $client->Conference(null)->load(
-    ["id" => "example_id"], null
-);
+[$conference, $err] = $client->Conference()->load(["id" => "example_id"]);
+print_r($conference);
 ```
 
 ### Golang
@@ -157,10 +148,13 @@ $client = new NhlApiDocumentationSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/nhl-api-documentation-sdk/go"
 
-client := sdk.NewNhlApiDocumentationSDK(map[string]any{})
+client := sdk.NewNhlApiDocumentationSDK(map[string]any{
+    "apikey": os.Getenv("NHL-API-DOCUMENTATION_APIKEY"),
+})
 
 // List all conferences
 conferences, err := client.Conference(nil).List(nil, nil)
+fmt.Println(conferences)
 ```
 
 ### Ruby
@@ -168,15 +162,17 @@ conferences, err := client.Conference(nil).List(nil, nil)
 ```ruby
 require_relative "NhlApiDocumentation_sdk"
 
-client = NhlApiDocumentationSDK.new({})
+client = NhlApiDocumentationSDK.new({
+  "apikey" => ENV["NHL-API-DOCUMENTATION_APIKEY"],
+})
 
 # List all conferences
-conferences, err = client.Conference(nil).list(nil, nil)
+conferences, err = client.Conference().list
+puts conferences
 
 # Load a specific conference
-conference, err = client.Conference(nil).load(
-  { "id" => "example_id" }, nil
-)
+conference, err = client.Conference().load({ "id" => "example_id" })
+puts conference
 ```
 
 ### Lua
@@ -184,15 +180,17 @@ conference, err = client.Conference(nil).load(
 ```lua
 local sdk = require("nhl-api-documentation_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("NHL-API-DOCUMENTATION_APIKEY"),
+})
 
 -- List all conferences
-local conferences, err = client:Conference(nil):list(nil, nil)
+local conferences, err = client:Conference():list()
+print(conferences)
 
 -- Load a specific conference
-local conference, err = client:Conference(nil):load(
-  { id = "example_id" }, nil
-)
+local conference, err = client:Conference():load({ id = "example_id" })
+print(conference)
 ```
 
 ## Unit testing in offline mode
@@ -211,25 +209,21 @@ const result = await client.Conference().load({ id: 'test01' })
 ### Python
 
 ```python
-client = NhlApiDocumentationSDK.test(None, None)
-result, err = client.Conference(None).load(
-    {"id": "test01"}, None
-)
+client = NhlApiDocumentationSDK.test()
+result, err = client.Conference().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = NhlApiDocumentationSDK::test(null, null);
-[$result, $err] = $client->Conference(null)->load(
-    ["id" => "test01"], null
-);
+$client = NhlApiDocumentationSDK::test();
+[$result, $err] = $client->Conference()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Conference(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -238,19 +232,15 @@ result, err := client.Conference(nil).Load(
 ### Ruby
 
 ```ruby
-client = NhlApiDocumentationSDK.test(nil, nil)
-result, err = client.Conference(nil).load(
-  { "id" => "test01" }, nil
-)
+client = NhlApiDocumentationSDK.test
+result, err = client.Conference().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Conference(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Conference():load({ id = "test01" })
 ```
 
 ## How it works
@@ -354,14 +344,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the NHL API Documentation
-
-- Upstream: [https://gitlab.com/dword4/nhlapi](https://gitlab.com/dword4/nhlapi)
-
-- The community documentation project ([dword4/nhlapi](https://gitlab.com/dword4/nhlapi)) is published under the MIT License.
-- The underlying data is served by the NHL's public web endpoints; this SDK is unofficial and not affiliated with the NHL.
-- Respect the NHL's terms of use when redistributing data and consider caching responses to avoid excessive load.
 
 ---
 

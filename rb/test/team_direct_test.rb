@@ -116,12 +116,14 @@ def team_direct_setup(mockres)
   env = Runner.env_override({
     "NHLAPIDOCUMENTATION_TEST_TEAM_ENTID" => {},
     "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
+    "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
   })
 
   live = env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
+      "apikey" => env["NHLAPIDOCUMENTATION_APIKEY"],
     }
     client = NhlApiDocumentationSDK.new(merged_opts)
     return {

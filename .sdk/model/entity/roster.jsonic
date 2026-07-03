@@ -68,7 +68,7 @@ main: kit: entity: roster: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.roster`"
           }
         }
       ]

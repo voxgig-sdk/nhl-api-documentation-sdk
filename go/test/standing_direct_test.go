@@ -93,12 +93,14 @@ func standingDirectSetup(mockres any) *standingDirectSetupResult {
 	env := envOverride(map[string]any{
 		"NHLAPIDOCUMENTATION_TEST_STANDING_ENTID": map[string]any{},
 		"NHLAPIDOCUMENTATION_TEST_LIVE":    "FALSE",
+		"NHLAPIDOCUMENTATION_APIKEY":       "NONE",
 	})
 
 	live := env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["NHLAPIDOCUMENTATION_APIKEY"],
 		}
 		client := sdk.NewNhlApiDocumentationSDK(mergedOpts)
 

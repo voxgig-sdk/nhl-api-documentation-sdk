@@ -102,6 +102,7 @@ def _division_basic_setup(extra):
         "NHLAPIDOCUMENTATION_TEST_DIVISION_ENTID": idmap,
         "NHLAPIDOCUMENTATION_TEST_LIVE": "FALSE",
         "NHLAPIDOCUMENTATION_TEST_EXPLAIN": "FALSE",
+        "NHLAPIDOCUMENTATION_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -112,6 +113,7 @@ def _division_basic_setup(extra):
     if env.get("NHLAPIDOCUMENTATION_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("NHLAPIDOCUMENTATION_APIKEY"),
             },
             extra or {},
         ])

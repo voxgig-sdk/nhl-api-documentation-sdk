@@ -117,12 +117,14 @@ function team_direct_setup(mockres)
   local env = runner.env_override({
     ["NHLAPIDOCUMENTATION_TEST_TEAM_ENTID"] = {},
     ["NHLAPIDOCUMENTATION_TEST_LIVE"] = "FALSE",
+    ["NHLAPIDOCUMENTATION_APIKEY"] = "NONE",
   })
 
   local live = env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["NHLAPIDOCUMENTATION_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

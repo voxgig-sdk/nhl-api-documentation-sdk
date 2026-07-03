@@ -83,6 +83,7 @@ def standing_basic_setup(extra)
     "NHLAPIDOCUMENTATION_TEST_STANDING_ENTID" => idmap,
     "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
     "NHLAPIDOCUMENTATION_TEST_EXPLAIN" => "FALSE",
+    "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,6 +95,7 @@ def standing_basic_setup(extra)
   if env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
+        "apikey" => env["NHLAPIDOCUMENTATION_APIKEY"],
       },
       extra || {},
     ])
