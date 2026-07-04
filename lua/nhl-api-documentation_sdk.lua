@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:conference():list() / client:conference():load({ id = ... })
-function NhlApiDocumentationSDK:conference(data)
+-- Idiomatic facade: client:Conference():list() / client:Conference():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NhlApiDocumentationSDK:Conference(data)
   local EntityMod = require("entity.conference_entity")
   if data == nil then
     if self._conference == nil then
@@ -256,15 +257,10 @@ function NhlApiDocumentationSDK:conference(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:conference() instead.
-function NhlApiDocumentationSDK:Conference(data)
-  local EntityMod = require("entity.conference_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:division():list() / client:division():load({ id = ... })
-function NhlApiDocumentationSDK:division(data)
+-- Idiomatic facade: client:Division():list() / client:Division():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NhlApiDocumentationSDK:Division(data)
   local EntityMod = require("entity.division_entity")
   if data == nil then
     if self._division == nil then
@@ -275,15 +271,10 @@ function NhlApiDocumentationSDK:division(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:division() instead.
-function NhlApiDocumentationSDK:Division(data)
-  local EntityMod = require("entity.division_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:game():list() / client:game():load({ id = ... })
-function NhlApiDocumentationSDK:game(data)
+-- Idiomatic facade: client:Game():list() / client:Game():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NhlApiDocumentationSDK:Game(data)
   local EntityMod = require("entity.game_entity")
   if data == nil then
     if self._game == nil then
@@ -294,15 +285,10 @@ function NhlApiDocumentationSDK:game(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:game() instead.
-function NhlApiDocumentationSDK:Game(data)
-  local EntityMod = require("entity.game_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:player():list() / client:player():load({ id = ... })
-function NhlApiDocumentationSDK:player(data)
+-- Idiomatic facade: client:Player():list() / client:Player():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NhlApiDocumentationSDK:Player(data)
   local EntityMod = require("entity.player_entity")
   if data == nil then
     if self._player == nil then
@@ -313,15 +299,10 @@ function NhlApiDocumentationSDK:player(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:player() instead.
-function NhlApiDocumentationSDK:Player(data)
-  local EntityMod = require("entity.player_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:player_stat():list() / client:player_stat():load({ id = ... })
-function NhlApiDocumentationSDK:player_stat(data)
+-- Idiomatic facade: client:PlayerStat():list() / client:PlayerStat():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NhlApiDocumentationSDK:PlayerStat(data)
   local EntityMod = require("entity.player_stat_entity")
   if data == nil then
     if self._player_stat == nil then
@@ -332,15 +313,10 @@ function NhlApiDocumentationSDK:player_stat(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:player_stat() instead.
-function NhlApiDocumentationSDK:PlayerStat(data)
-  local EntityMod = require("entity.player_stat_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:roster():list() / client:roster():load({ id = ... })
-function NhlApiDocumentationSDK:roster(data)
+-- Idiomatic facade: client:Roster():list() / client:Roster():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NhlApiDocumentationSDK:Roster(data)
   local EntityMod = require("entity.roster_entity")
   if data == nil then
     if self._roster == nil then
@@ -351,15 +327,10 @@ function NhlApiDocumentationSDK:roster(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:roster() instead.
-function NhlApiDocumentationSDK:Roster(data)
-  local EntityMod = require("entity.roster_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:schedule():list() / client:schedule():load({ id = ... })
-function NhlApiDocumentationSDK:schedule(data)
+-- Idiomatic facade: client:Schedule():list() / client:Schedule():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NhlApiDocumentationSDK:Schedule(data)
   local EntityMod = require("entity.schedule_entity")
   if data == nil then
     if self._schedule == nil then
@@ -370,15 +341,10 @@ function NhlApiDocumentationSDK:schedule(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:schedule() instead.
-function NhlApiDocumentationSDK:Schedule(data)
-  local EntityMod = require("entity.schedule_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:standing():list() / client:standing():load({ id = ... })
-function NhlApiDocumentationSDK:standing(data)
+-- Idiomatic facade: client:Standing():list() / client:Standing():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NhlApiDocumentationSDK:Standing(data)
   local EntityMod = require("entity.standing_entity")
   if data == nil then
     if self._standing == nil then
@@ -389,15 +355,10 @@ function NhlApiDocumentationSDK:standing(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:standing() instead.
-function NhlApiDocumentationSDK:Standing(data)
-  local EntityMod = require("entity.standing_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:team():list() / client:team():load({ id = ... })
-function NhlApiDocumentationSDK:team(data)
+-- Idiomatic facade: client:Team():list() / client:Team():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NhlApiDocumentationSDK:Team(data)
   local EntityMod = require("entity.team_entity")
   if data == nil then
     if self._team == nil then
@@ -405,12 +366,6 @@ function NhlApiDocumentationSDK:team(data)
     end
     return self._team
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:team() instead.
-function NhlApiDocumentationSDK:Team(data)
-  local EntityMod = require("entity.team_entity")
   return EntityMod.new(self, data)
 end
 

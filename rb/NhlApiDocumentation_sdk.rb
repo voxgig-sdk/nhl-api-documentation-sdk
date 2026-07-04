@@ -208,117 +208,63 @@ class NhlApiDocumentationSDK
   end
 
 
-  # Idiomatic facade: client.conference.list / client.conference.load({ "id" => ... })
-  def conference
-    require_relative 'entity/conference_entity'
-    @conference ||= ConferenceEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.conference instead.
+  # Canonical facade: client.Conference.list / client.Conference.load({ "id" => ... })
   def Conference(data = nil)
     require_relative 'entity/conference_entity'
     ConferenceEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.division.list / client.division.load({ "id" => ... })
-  def division
-    require_relative 'entity/division_entity'
-    @division ||= DivisionEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.division instead.
+  # Canonical facade: client.Division.list / client.Division.load({ "id" => ... })
   def Division(data = nil)
     require_relative 'entity/division_entity'
     DivisionEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.game.list / client.game.load({ "id" => ... })
-  def game
-    require_relative 'entity/game_entity'
-    @game ||= GameEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.game instead.
+  # Canonical facade: client.Game.list / client.Game.load({ "id" => ... })
   def Game(data = nil)
     require_relative 'entity/game_entity'
     GameEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.player.list / client.player.load({ "id" => ... })
-  def player
-    require_relative 'entity/player_entity'
-    @player ||= PlayerEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.player instead.
+  # Canonical facade: client.Player.list / client.Player.load({ "id" => ... })
   def Player(data = nil)
     require_relative 'entity/player_entity'
     PlayerEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.player_stat.list / client.player_stat.load({ "id" => ... })
-  def player_stat
-    require_relative 'entity/player_stat_entity'
-    @player_stat ||= PlayerStatEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.player_stat instead.
+  # Canonical facade: client.PlayerStat.list / client.PlayerStat.load({ "id" => ... })
   def PlayerStat(data = nil)
     require_relative 'entity/player_stat_entity'
     PlayerStatEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.roster.list / client.roster.load({ "id" => ... })
-  def roster
-    require_relative 'entity/roster_entity'
-    @roster ||= RosterEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.roster instead.
+  # Canonical facade: client.Roster.list / client.Roster.load({ "id" => ... })
   def Roster(data = nil)
     require_relative 'entity/roster_entity'
     RosterEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.schedule.list / client.schedule.load({ "id" => ... })
-  def schedule
-    require_relative 'entity/schedule_entity'
-    @schedule ||= ScheduleEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.schedule instead.
+  # Canonical facade: client.Schedule.list / client.Schedule.load({ "id" => ... })
   def Schedule(data = nil)
     require_relative 'entity/schedule_entity'
     ScheduleEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.standing.list / client.standing.load({ "id" => ... })
-  def standing
-    require_relative 'entity/standing_entity'
-    @standing ||= StandingEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.standing instead.
+  # Canonical facade: client.Standing.list / client.Standing.load({ "id" => ... })
   def Standing(data = nil)
     require_relative 'entity/standing_entity'
     StandingEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.team.list / client.team.load({ "id" => ... })
-  def team
-    require_relative 'entity/team_entity'
-    @team ||= TeamEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.team instead.
+  # Canonical facade: client.Team.list / client.Team.load({ "id" => ... })
   def Team(data = nil)
     require_relative 'entity/team_entity'
     TeamEntity.new(self, data)

@@ -28,16 +28,14 @@ require_relative "NhlApiDocumentation_sdk"
 client = NhlApiDocumentationSDK.new
 ```
 
-### 2. List conferences
+### 2. List conference records
 
 ```ruby
 begin
-  result = client.conference.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of Conference records — iterate directly.
+  conferences = client.Conference.list
+  conferences.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -48,8 +46,9 @@ end
 
 ```ruby
 begin
-  result = client.conference.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Conference record (raises on error).
+  conference = client.Conference.load({ "id" => "example_id" })
+  puts conference
 rescue => err
   warn "load failed: #{err}"
 end
@@ -96,13 +95,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = NhlApiDocumentationSDK.test
+client = NhlApiDocumentationSDK.test({
+  "entity" => { "conference" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.conference.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+conference = client.Conference.load({ "id" => "test01" })
+puts conference
 ```
 
 ### Use a custom fetch function
@@ -358,7 +361,7 @@ API path: `/teams`
 
 ### Conference
 
-Create an instance: `const conference = client.conference`
+Create an instance: `conference = client.Conference`
 
 #### Operations
 
@@ -379,20 +382,22 @@ Create an instance: `const conference = client.conference`
 
 #### Example: Load
 
-```ts
-const conference = await client.conference.load({ id: 'conference_id' })
+```ruby
+# load returns the bare Conference record (raises on error).
+conference = client.Conference.load({ "id" => "conference_id" })
 ```
 
 #### Example: List
 
-```ts
-const conferences = await client.conference.list()
+```ruby
+# list returns an Array of Conference records (raises on error).
+conferences = client.Conference.list
 ```
 
 
 ### Division
 
-Create an instance: `const division = client.division`
+Create an instance: `division = client.Division`
 
 #### Operations
 
@@ -413,20 +418,22 @@ Create an instance: `const division = client.division`
 
 #### Example: Load
 
-```ts
-const division = await client.division.load({ id: 'division_id' })
+```ruby
+# load returns the bare Division record (raises on error).
+division = client.Division.load({ "id" => "division_id" })
 ```
 
 #### Example: List
 
-```ts
-const divisions = await client.division.list()
+```ruby
+# list returns an Array of Division records (raises on error).
+divisions = client.Division.list
 ```
 
 
 ### Game
 
-Create an instance: `const game = client.game`
+Create an instance: `game = client.Game`
 
 #### Operations
 
@@ -447,14 +454,15 @@ Create an instance: `const game = client.game`
 
 #### Example: Load
 
-```ts
-const game = await client.game.load({ id: 'game_id' })
+```ruby
+# load returns the bare Game record (raises on error).
+game = client.Game.load({ "id" => "game_id" })
 ```
 
 
 ### Player
 
-Create an instance: `const player = client.player`
+Create an instance: `player = client.Player`
 
 #### Operations
 
@@ -471,14 +479,15 @@ Create an instance: `const player = client.player`
 
 #### Example: Load
 
-```ts
-const player = await client.player.load({ id: 'player_id' })
+```ruby
+# load returns the bare Player record (raises on error).
+player = client.Player.load({ "id" => "player_id" })
 ```
 
 
 ### PlayerStat
 
-Create an instance: `const player_stat = client.player_stat`
+Create an instance: `player_stat = client.PlayerStat`
 
 #### Operations
 
@@ -495,14 +504,15 @@ Create an instance: `const player_stat = client.player_stat`
 
 #### Example: List
 
-```ts
-const player_stats = await client.player_stat.list()
+```ruby
+# list returns an Array of PlayerStat records (raises on error).
+player_stats = client.PlayerStat.list
 ```
 
 
 ### Roster
 
-Create an instance: `const roster = client.roster`
+Create an instance: `roster = client.Roster`
 
 #### Operations
 
@@ -520,14 +530,15 @@ Create an instance: `const roster = client.roster`
 
 #### Example: List
 
-```ts
-const rosters = await client.roster.list()
+```ruby
+# list returns an Array of Roster records (raises on error).
+rosters = client.Roster.list
 ```
 
 
 ### Schedule
 
-Create an instance: `const schedule = client.schedule`
+Create an instance: `schedule = client.Schedule`
 
 #### Operations
 
@@ -548,14 +559,15 @@ Create an instance: `const schedule = client.schedule`
 
 #### Example: List
 
-```ts
-const schedules = await client.schedule.list()
+```ruby
+# list returns an Array of Schedule records (raises on error).
+schedules = client.Schedule.list
 ```
 
 
 ### Standing
 
-Create an instance: `const standing = client.standing`
+Create an instance: `standing = client.Standing`
 
 #### Operations
 
@@ -573,14 +585,15 @@ Create an instance: `const standing = client.standing`
 
 #### Example: List
 
-```ts
-const standings = await client.standing.list()
+```ruby
+# list returns an Array of Standing records (raises on error).
+standings = client.Standing.list
 ```
 
 
 ### Team
 
-Create an instance: `const team = client.team`
+Create an instance: `team = client.Team`
 
 #### Operations
 
@@ -609,14 +622,16 @@ Create an instance: `const team = client.team`
 
 #### Example: Load
 
-```ts
-const team = await client.team.load({ id: 'team_id' })
+```ruby
+# load returns the bare Team record (raises on error).
+team = client.Team.load({ "id" => "team_id" })
 ```
 
 #### Example: List
 
-```ts
-const teams = await client.team.list()
+```ruby
+# list returns an Array of Team records (raises on error).
+teams = client.Team.list
 ```
 
 
@@ -691,7 +706,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-conference = client.conference
+conference = client.Conference
 conference.load({ "id" => "example_id" })
 
 # conference.data_get now returns the loaded conference data

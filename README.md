@@ -26,9 +26,11 @@ import { NhlApiDocumentationSDK } from '@voxgig-sdk/nhl-api-documentation'
 
 const client = new NhlApiDocumentationSDK()
 
-// List all conferences
-const conferences = await client.conference.list()
-console.log(conferences.data)
+// List all conferences (returns Conference[])
+const conferences = await client.Conference().list()
+for (const conference of conferences) {
+  console.log(conference)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -91,12 +93,13 @@ from nhlapidocumentation_sdk import NhlApiDocumentationSDK
 
 client = NhlApiDocumentationSDK()
 
-# List all conferences
-conferences = client.conference.list()
-print(conferences)
+# List all conferences (returns a list, raises on error)
+conferences = client.Conference().list({})
+for conference in conferences:
+    print(conference)
 
-# Load a specific conference
-conference = client.conference.load({"id": "example_id"})
+# Load a specific conference (returns the record, raises on error)
+conference = client.Conference().load({"id": "example_id"})
 print(conference)
 ```
 
@@ -108,12 +111,12 @@ require_once 'nhlapidocumentation_sdk.php';
 
 $client = new NhlApiDocumentationSDK();
 
-// List all conferences (throws on error)
-$conferences = $client->conference()->list();
+// List all conferences (returns an array; throws on error)
+$conferences = $client->Conference()->list();
 print_r($conferences);
 
-// Load a specific conference
-$conference = $client->conference()->load(["id" => "example_id"]);
+// Load a specific conference (returns the bare record; throws on error)
+$conference = $client->Conference()->load(["id" => "example_id"]);
 print_r($conference);
 ```
 
@@ -136,12 +139,12 @@ require_relative "NhlApiDocumentation_sdk"
 
 client = NhlApiDocumentationSDK.new
 
-# List all conferences
-conferences = client.conference.list
+# List all conferences (returns an Array; raises on error)
+conferences = client.Conference.list
 puts conferences
 
-# Load a specific conference
-conference = client.conference.load({ "id" => "example_id" })
+# Load a specific conference (returns the bare record; raises on error)
+conference = client.Conference.load({ "id" => "example_id" })
 puts conference
 ```
 
@@ -153,11 +156,11 @@ local sdk = require("nhl-api-documentation_sdk")
 local client = sdk.new()
 
 -- List all conferences
-local conferences, err = client:conference():list()
+local conferences, err = client:Conference():list()
 print(conferences)
 
 -- Load a specific conference
-local conference, err = client:conference():load({ id = "example_id" })
+local conference, err = client:Conference():load({ id = "example_id" })
 print(conference)
 ```
 
@@ -170,22 +173,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = NhlApiDocumentationSDK.test()
-const result = await client.conference.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const conference = await client.Conference().load({ id: 1 })
+// conference is a bare Conference populated with mock data
+console.log(conference)
 ```
 
 ### Python
 
 ```python
 client = NhlApiDocumentationSDK.test()
-result = client.conference.load({"id": "test01"})
+conference = client.Conference().load({"id": "test01"})
+print(conference)
 ```
 
 ### PHP
 
 ```php
-$client = NhlApiDocumentationSDK::test();
-$result = $client->conference()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = NhlApiDocumentationSDK::test([
+    "entity" => ["conference" => ["test01" => ["id" => "test01"]]],
+]);
+$conference = $client->Conference()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -200,15 +208,18 @@ result, err := client.Conference(nil).Load(
 ### Ruby
 
 ```ruby
-client = NhlApiDocumentationSDK.test
-result = client.conference.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = NhlApiDocumentationSDK.test({
+  "entity" => { "conference" => { "test01" => { "id" => "test01" } } },
+})
+conference = client.Conference.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:conference():load({ id = "test01" })
+local result, err = client:Conference():load({ id = "test01" })
 ```
 
 ## How it works
@@ -256,6 +267,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

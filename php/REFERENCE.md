@@ -117,7 +117,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## ConferenceEntity
 
 ```php
-$conference = $client->conference();
+$conference = $client->Conference();
 ```
 
 ### Fields
@@ -137,7 +137,7 @@ $conference = $client->conference();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->conference()->list([]);
+$results = $client->Conference()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -145,7 +145,7 @@ $results = $client->conference()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->conference()->load(["id" => "conference_id"]);
+$result = $client->Conference()->load(["id" => "conference_id"]);
 ```
 
 ### Common Methods
@@ -181,7 +181,7 @@ Return the entity name.
 ## DivisionEntity
 
 ```php
-$division = $client->division();
+$division = $client->Division();
 ```
 
 ### Fields
@@ -201,7 +201,7 @@ $division = $client->division();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->division()->list([]);
+$results = $client->Division()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -209,7 +209,7 @@ $results = $client->division()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->division()->load(["id" => "division_id"]);
+$result = $client->Division()->load(["id" => "division_id"]);
 ```
 
 ### Common Methods
@@ -245,7 +245,7 @@ Return the entity name.
 ## GameEntity
 
 ```php
-$game = $client->game();
+$game = $client->Game();
 ```
 
 ### Fields
@@ -266,7 +266,7 @@ $game = $client->game();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->game()->load(["id" => "game_id"]);
+$result = $client->Game()->load(["id" => "game_id"]);
 ```
 
 ### Common Methods
@@ -302,7 +302,7 @@ Return the entity name.
 ## PlayerEntity
 
 ```php
-$player = $client->player();
+$player = $client->Player();
 ```
 
 ### Fields
@@ -319,7 +319,7 @@ $player = $client->player();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->player()->load(["id" => "player_id"]);
+$result = $client->Player()->load(["id" => "player_id"]);
 ```
 
 ### Common Methods
@@ -355,7 +355,7 @@ Return the entity name.
 ## PlayerStatEntity
 
 ```php
-$player_stat = $client->player_stat();
+$player_stat = $client->PlayerStat();
 ```
 
 ### Fields
@@ -372,7 +372,7 @@ $player_stat = $client->player_stat();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->player_stat()->list([]);
+$results = $client->PlayerStat()->list([]);
 ```
 
 ### Common Methods
@@ -408,7 +408,7 @@ Return the entity name.
 ## RosterEntity
 
 ```php
-$roster = $client->roster();
+$roster = $client->Roster();
 ```
 
 ### Fields
@@ -426,7 +426,7 @@ $roster = $client->roster();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->roster()->list([]);
+$results = $client->Roster()->list([]);
 ```
 
 ### Common Methods
@@ -462,7 +462,7 @@ Return the entity name.
 ## ScheduleEntity
 
 ```php
-$schedule = $client->schedule();
+$schedule = $client->Schedule();
 ```
 
 ### Fields
@@ -483,7 +483,7 @@ $schedule = $client->schedule();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->schedule()->list([]);
+$results = $client->Schedule()->list([]);
 ```
 
 ### Common Methods
@@ -519,7 +519,7 @@ Return the entity name.
 ## StandingEntity
 
 ```php
-$standing = $client->standing();
+$standing = $client->Standing();
 ```
 
 ### Fields
@@ -537,7 +537,7 @@ $standing = $client->standing();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->standing()->list([]);
+$results = $client->Standing()->list([]);
 ```
 
 ### Common Methods
@@ -573,7 +573,7 @@ Return the entity name.
 ## TeamEntity
 
 ```php
-$team = $client->team();
+$team = $client->Team();
 ```
 
 ### Fields
@@ -601,7 +601,7 @@ $team = $client->team();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->team()->list([]);
+$results = $client->Team()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -609,7 +609,7 @@ $results = $client->team()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->team()->load(["id" => "team_id"]);
+$result = $client->Team()->load(["id" => "team_id"]);
 ```
 
 ### Common Methods

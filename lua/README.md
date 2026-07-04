@@ -31,26 +31,26 @@ local sdk = require("nhl-api-documentation_sdk")
 local client = sdk.new()
 ```
 
-### 2. List conferences
+### 2. List conference records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:conference():list()
+local conferences, err = client:Conference():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(conferences) do
+  print(item["id"], item["name"])
 end
 ```
 
 ### 3. Load a conference
 
 ```lua
-local result, err = client:conference():load({ id = "example_id" })
+local conference, err = client:Conference():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(conference)
 ```
 
 
@@ -96,8 +96,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:conference():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Conference():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -205,17 +205,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local conference, err = client:Conference():load({ id = "example_id" })
+    if err then error(err) end
+    -- conference is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -352,7 +357,7 @@ API path: `/teams`
 
 ### Conference
 
-Create an instance: `const conference = client.conference`
+Create an instance: `local conference = client:Conference(nil)`
 
 #### Operations
 
@@ -373,20 +378,20 @@ Create an instance: `const conference = client.conference`
 
 #### Example: Load
 
-```ts
-const conference = await client.conference.load({ id: 'conference_id' })
+```lua
+local conference, err = client:Conference():load({ id = "conference_id" })
 ```
 
 #### Example: List
 
-```ts
-const conferences = await client.conference.list()
+```lua
+local conferences, err = client:Conference():list()
 ```
 
 
 ### Division
 
-Create an instance: `const division = client.division`
+Create an instance: `local division = client:Division(nil)`
 
 #### Operations
 
@@ -407,20 +412,20 @@ Create an instance: `const division = client.division`
 
 #### Example: Load
 
-```ts
-const division = await client.division.load({ id: 'division_id' })
+```lua
+local division, err = client:Division():load({ id = "division_id" })
 ```
 
 #### Example: List
 
-```ts
-const divisions = await client.division.list()
+```lua
+local divisions, err = client:Division():list()
 ```
 
 
 ### Game
 
-Create an instance: `const game = client.game`
+Create an instance: `local game = client:Game(nil)`
 
 #### Operations
 
@@ -441,14 +446,14 @@ Create an instance: `const game = client.game`
 
 #### Example: Load
 
-```ts
-const game = await client.game.load({ id: 'game_id' })
+```lua
+local game, err = client:Game():load({ id = "game_id" })
 ```
 
 
 ### Player
 
-Create an instance: `const player = client.player`
+Create an instance: `local player = client:Player(nil)`
 
 #### Operations
 
@@ -465,14 +470,14 @@ Create an instance: `const player = client.player`
 
 #### Example: Load
 
-```ts
-const player = await client.player.load({ id: 'player_id' })
+```lua
+local player, err = client:Player():load({ id = "player_id" })
 ```
 
 
 ### PlayerStat
 
-Create an instance: `const player_stat = client.player_stat`
+Create an instance: `local player_stat = client:PlayerStat(nil)`
 
 #### Operations
 
@@ -489,14 +494,14 @@ Create an instance: `const player_stat = client.player_stat`
 
 #### Example: List
 
-```ts
-const player_stats = await client.player_stat.list()
+```lua
+local player_stats, err = client:PlayerStat():list()
 ```
 
 
 ### Roster
 
-Create an instance: `const roster = client.roster`
+Create an instance: `local roster = client:Roster(nil)`
 
 #### Operations
 
@@ -514,14 +519,14 @@ Create an instance: `const roster = client.roster`
 
 #### Example: List
 
-```ts
-const rosters = await client.roster.list()
+```lua
+local rosters, err = client:Roster():list()
 ```
 
 
 ### Schedule
 
-Create an instance: `const schedule = client.schedule`
+Create an instance: `local schedule = client:Schedule(nil)`
 
 #### Operations
 
@@ -542,14 +547,14 @@ Create an instance: `const schedule = client.schedule`
 
 #### Example: List
 
-```ts
-const schedules = await client.schedule.list()
+```lua
+local schedules, err = client:Schedule():list()
 ```
 
 
 ### Standing
 
-Create an instance: `const standing = client.standing`
+Create an instance: `local standing = client:Standing(nil)`
 
 #### Operations
 
@@ -567,14 +572,14 @@ Create an instance: `const standing = client.standing`
 
 #### Example: List
 
-```ts
-const standings = await client.standing.list()
+```lua
+local standings, err = client:Standing():list()
 ```
 
 
 ### Team
 
-Create an instance: `const team = client.team`
+Create an instance: `local team = client:Team(nil)`
 
 #### Operations
 
@@ -603,14 +608,14 @@ Create an instance: `const team = client.team`
 
 #### Example: Load
 
-```ts
-const team = await client.team.load({ id: 'team_id' })
+```lua
+local team, err = client:Team():load({ id = "team_id" })
 ```
 
 #### Example: List
 
-```ts
-const teams = await client.team.list()
+```lua
+local teams, err = client:Team():list()
 ```
 
 
@@ -685,7 +690,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local conference = client:conference()
+local conference = client:Conference()
 conference:load({ id = "example_id" })
 
 -- conference:data_get() now returns the loaded conference data

@@ -30,53 +30,39 @@ go mod edit -replace github.com/voxgig-sdk/nhl-api-documentation-sdk/go=../nhl-a
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
 
 import (
     "fmt"
-
     sdk "github.com/voxgig-sdk/nhl-api-documentation-sdk/go"
-    "github.com/voxgig-sdk/nhl-api-documentation-sdk/go/core"
 )
 
 func main() {
     client := sdk.New()
-```
 
-### 2. List conferences
-
-```go
-    result, err := client.Conference(nil).List(nil, nil)
+    // List conference records — the value is the array of records itself.
+    conferences, err := client.Conference(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-
-    rm := core.ToMapAny(result)
-    if rm["ok"] == true {
-        for _, item := range rm["data"].([]any) {
-            p := core.ToMapAny(item)
-            fmt.Println(p["id"], p["name"])
-        }
+    for _, item := range conferences.([]any) {
+        fmt.Println(item)
     }
-```
 
-### 3. Load a conference
-
-```go
-    result, err = client.Conference(nil).Load(
-        map[string]any{"id": "example_id"}, nil,
-    )
+    // Load a single conference — the value is the loaded record.
+    conference, err := client.Conference(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
-
-    rm = core.ToMapAny(result)
-    if rm["ok"] == true {
-        fmt.Println(rm["data"])
-    }
+    fmt.Println(conference)
 }
 ```
 
@@ -127,10 +113,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Conference(nil).Load(
+conference, err := client.Conference(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(conference) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -235,17 +224,24 @@ All entities implement the `NhlApiDocumentationEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    conference, err := client.Conference(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // conference is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -404,13 +400,21 @@ Create an instance: `conference := client.Conference(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Conference(nil).Load(map[string]any{"id": "conference_id"}, nil)
+conference, err := client.Conference(nil).Load(map[string]any{"id": "conference_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(conference) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Conference(nil).List(nil, nil)
+conferences, err := client.Conference(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(conferences) // the array of records
 ```
 
 
@@ -438,13 +442,21 @@ Create an instance: `division := client.Division(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Division(nil).Load(map[string]any{"id": "division_id"}, nil)
+division, err := client.Division(nil).Load(map[string]any{"id": "division_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(division) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Division(nil).List(nil, nil)
+divisions, err := client.Division(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(divisions) // the array of records
 ```
 
 
@@ -472,7 +484,11 @@ Create an instance: `game := client.Game(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Game(nil).Load(map[string]any{"id": "game_id"}, nil)
+game, err := client.Game(nil).Load(map[string]any{"id": "game_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(game) // the loaded record
 ```
 
 
@@ -496,7 +512,11 @@ Create an instance: `player := client.Player(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Player(nil).Load(map[string]any{"id": "player_id"}, nil)
+player, err := client.Player(nil).Load(map[string]any{"id": "player_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(player) // the loaded record
 ```
 
 
@@ -520,7 +540,11 @@ Create an instance: `player_stat := client.PlayerStat(nil)`
 #### Example: List
 
 ```go
-results, err := client.PlayerStat(nil).List(nil, nil)
+player_stats, err := client.PlayerStat(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(player_stats) // the array of records
 ```
 
 
@@ -545,7 +569,11 @@ Create an instance: `roster := client.Roster(nil)`
 #### Example: List
 
 ```go
-results, err := client.Roster(nil).List(nil, nil)
+rosters, err := client.Roster(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(rosters) // the array of records
 ```
 
 
@@ -573,7 +601,11 @@ Create an instance: `schedule := client.Schedule(nil)`
 #### Example: List
 
 ```go
-results, err := client.Schedule(nil).List(nil, nil)
+schedules, err := client.Schedule(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(schedules) // the array of records
 ```
 
 
@@ -598,7 +630,11 @@ Create an instance: `standing := client.Standing(nil)`
 #### Example: List
 
 ```go
-results, err := client.Standing(nil).List(nil, nil)
+standings, err := client.Standing(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(standings) // the array of records
 ```
 
 
@@ -634,13 +670,21 @@ Create an instance: `team := client.Team(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Team(nil).Load(map[string]any{"id": "team_id"}, nil)
+team, err := client.Team(nil).Load(map[string]any{"id": "team_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(team) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Team(nil).List(nil, nil)
+teams, err := client.Team(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(teams) // the array of records
 ```
 
 

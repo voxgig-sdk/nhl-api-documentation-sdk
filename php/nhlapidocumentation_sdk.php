@@ -233,10 +233,10 @@ class NhlApiDocumentationSDK
 
     private $_conference = null;
 
-    // Idiomatic facade: $client->conference()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Conference() (PHP method
-    // names are case-insensitive).
-    public function conference($data = null)
+    // Canonical facade: $client->Conference()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->conference()
+    // resolves here too.
+    public function Conference($data = null)
     {
         require_once __DIR__ . '/entity/conference_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class NhlApiDocumentationSDK
 
     private $_division = null;
 
-    // Idiomatic facade: $client->division()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Division() (PHP method
-    // names are case-insensitive).
-    public function division($data = null)
+    // Canonical facade: $client->Division()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->division()
+    // resolves here too.
+    public function Division($data = null)
     {
         require_once __DIR__ . '/entity/division_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class NhlApiDocumentationSDK
 
     private $_game = null;
 
-    // Idiomatic facade: $client->game()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Game() (PHP method
-    // names are case-insensitive).
-    public function game($data = null)
+    // Canonical facade: $client->Game()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->game()
+    // resolves here too.
+    public function Game($data = null)
     {
         require_once __DIR__ . '/entity/game_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class NhlApiDocumentationSDK
 
     private $_player = null;
 
-    // Idiomatic facade: $client->player()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Player() (PHP method
-    // names are case-insensitive).
-    public function player($data = null)
+    // Canonical facade: $client->Player()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->player()
+    // resolves here too.
+    public function Player($data = null)
     {
         require_once __DIR__ . '/entity/player_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class NhlApiDocumentationSDK
 
     private $_player_stat = null;
 
-    // Idiomatic facade: $client->player_stat()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias PlayerStat() (PHP method
-    // names are case-insensitive).
-    public function player_stat($data = null)
+    // Canonical facade: $client->PlayerStat()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->player_stat()
+    // resolves here too.
+    public function PlayerStat($data = null)
     {
         require_once __DIR__ . '/entity/player_stat_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class NhlApiDocumentationSDK
 
     private $_roster = null;
 
-    // Idiomatic facade: $client->roster()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Roster() (PHP method
-    // names are case-insensitive).
-    public function roster($data = null)
+    // Canonical facade: $client->Roster()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->roster()
+    // resolves here too.
+    public function Roster($data = null)
     {
         require_once __DIR__ . '/entity/roster_entity.php';
         if ($data === null) {
@@ -341,10 +341,10 @@ class NhlApiDocumentationSDK
 
     private $_schedule = null;
 
-    // Idiomatic facade: $client->schedule()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Schedule() (PHP method
-    // names are case-insensitive).
-    public function schedule($data = null)
+    // Canonical facade: $client->Schedule()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->schedule()
+    // resolves here too.
+    public function Schedule($data = null)
     {
         require_once __DIR__ . '/entity/schedule_entity.php';
         if ($data === null) {
@@ -359,10 +359,10 @@ class NhlApiDocumentationSDK
 
     private $_standing = null;
 
-    // Idiomatic facade: $client->standing()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Standing() (PHP method
-    // names are case-insensitive).
-    public function standing($data = null)
+    // Canonical facade: $client->Standing()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->standing()
+    // resolves here too.
+    public function Standing($data = null)
     {
         require_once __DIR__ . '/entity/standing_entity.php';
         if ($data === null) {
@@ -377,10 +377,10 @@ class NhlApiDocumentationSDK
 
     private $_team = null;
 
-    // Idiomatic facade: $client->team()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Team() (PHP method
-    // names are case-insensitive).
-    public function team($data = null)
+    // Canonical facade: $client->Team()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->team()
+    // resolves here too.
+    public function Team($data = null)
     {
         require_once __DIR__ . '/entity/team_entity.php';
         if ($data === null) {

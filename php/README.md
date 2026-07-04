@@ -29,18 +29,16 @@ require_once 'nhlapidocumentation_sdk.php';
 $client = new NhlApiDocumentationSDK();
 ```
 
-### 2. List conferences
+### 2. List conference records
 
 ```php
 try {
-    $result = $client->conference()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Conference records — iterate directly.
+    $conferences = $client->Conference()->list();
+    foreach ($conferences as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -49,9 +47,10 @@ try {
 
 ```php
 try {
-    $result = $client->conference()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Conference record (throws on error).
+    $conference = $client->Conference()->load(["id" => "example_id"]);
+    print_r($conference);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -97,13 +96,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = NhlApiDocumentationSDK::test();
+$client = NhlApiDocumentationSDK::test([
+    "entity" => ["conference" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->conference()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$conference = $client->Conference()->load(["id" => "test01"]);
+print_r($conference);
 ```
 
 ### Use a custom fetch function
@@ -363,7 +366,7 @@ API path: `/teams`
 
 ### Conference
 
-Create an instance: `const conference = client.conference`
+Create an instance: `$conference = $client->Conference();`
 
 #### Operations
 
@@ -384,20 +387,22 @@ Create an instance: `const conference = client.conference`
 
 #### Example: Load
 
-```ts
-const conference = await client.conference.load({ id: 'conference_id' })
+```php
+// load() returns the bare Conference record (throws on error).
+$conference = $client->Conference()->load(["id" => "conference_id"]);
 ```
 
 #### Example: List
 
-```ts
-const conferences = await client.conference.list()
+```php
+// list() returns an array of Conference records (throws on error).
+$conferences = $client->Conference()->list();
 ```
 
 
 ### Division
 
-Create an instance: `const division = client.division`
+Create an instance: `$division = $client->Division();`
 
 #### Operations
 
@@ -418,20 +423,22 @@ Create an instance: `const division = client.division`
 
 #### Example: Load
 
-```ts
-const division = await client.division.load({ id: 'division_id' })
+```php
+// load() returns the bare Division record (throws on error).
+$division = $client->Division()->load(["id" => "division_id"]);
 ```
 
 #### Example: List
 
-```ts
-const divisions = await client.division.list()
+```php
+// list() returns an array of Division records (throws on error).
+$divisions = $client->Division()->list();
 ```
 
 
 ### Game
 
-Create an instance: `const game = client.game`
+Create an instance: `$game = $client->Game();`
 
 #### Operations
 
@@ -452,14 +459,15 @@ Create an instance: `const game = client.game`
 
 #### Example: Load
 
-```ts
-const game = await client.game.load({ id: 'game_id' })
+```php
+// load() returns the bare Game record (throws on error).
+$game = $client->Game()->load(["id" => "game_id"]);
 ```
 
 
 ### Player
 
-Create an instance: `const player = client.player`
+Create an instance: `$player = $client->Player();`
 
 #### Operations
 
@@ -476,14 +484,15 @@ Create an instance: `const player = client.player`
 
 #### Example: Load
 
-```ts
-const player = await client.player.load({ id: 'player_id' })
+```php
+// load() returns the bare Player record (throws on error).
+$player = $client->Player()->load(["id" => "player_id"]);
 ```
 
 
 ### PlayerStat
 
-Create an instance: `const player_stat = client.player_stat`
+Create an instance: `$player_stat = $client->PlayerStat();`
 
 #### Operations
 
@@ -500,14 +509,15 @@ Create an instance: `const player_stat = client.player_stat`
 
 #### Example: List
 
-```ts
-const player_stats = await client.player_stat.list()
+```php
+// list() returns an array of PlayerStat records (throws on error).
+$player_stats = $client->PlayerStat()->list();
 ```
 
 
 ### Roster
 
-Create an instance: `const roster = client.roster`
+Create an instance: `$roster = $client->Roster();`
 
 #### Operations
 
@@ -525,14 +535,15 @@ Create an instance: `const roster = client.roster`
 
 #### Example: List
 
-```ts
-const rosters = await client.roster.list()
+```php
+// list() returns an array of Roster records (throws on error).
+$rosters = $client->Roster()->list();
 ```
 
 
 ### Schedule
 
-Create an instance: `const schedule = client.schedule`
+Create an instance: `$schedule = $client->Schedule();`
 
 #### Operations
 
@@ -553,14 +564,15 @@ Create an instance: `const schedule = client.schedule`
 
 #### Example: List
 
-```ts
-const schedules = await client.schedule.list()
+```php
+// list() returns an array of Schedule records (throws on error).
+$schedules = $client->Schedule()->list();
 ```
 
 
 ### Standing
 
-Create an instance: `const standing = client.standing`
+Create an instance: `$standing = $client->Standing();`
 
 #### Operations
 
@@ -578,14 +590,15 @@ Create an instance: `const standing = client.standing`
 
 #### Example: List
 
-```ts
-const standings = await client.standing.list()
+```php
+// list() returns an array of Standing records (throws on error).
+$standings = $client->Standing()->list();
 ```
 
 
 ### Team
 
-Create an instance: `const team = client.team`
+Create an instance: `$team = $client->Team();`
 
 #### Operations
 
@@ -614,14 +627,16 @@ Create an instance: `const team = client.team`
 
 #### Example: Load
 
-```ts
-const team = await client.team.load({ id: 'team_id' })
+```php
+// load() returns the bare Team record (throws on error).
+$team = $client->Team()->load(["id" => "team_id"]);
 ```
 
 #### Example: List
 
-```ts
-const teams = await client.team.list()
+```php
+// list() returns an array of Team records (throws on error).
+$teams = $client->Team()->list();
 ```
 
 
@@ -696,7 +711,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$conference = $client->conference();
+$conference = $client->Conference();
 $conference->load(["id" => "example_id"]);
 
 // $conference->dataGet() now returns the loaded conference data

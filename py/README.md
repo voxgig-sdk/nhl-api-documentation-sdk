@@ -31,24 +31,28 @@ from nhlapidocumentation_sdk import NhlApiDocumentationSDK
 client = NhlApiDocumentationSDK()
 ```
 
-### 2. List conferences
+### 2. List conference records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.conference.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    conferences = client.Conference().list({})
+    for conference in conferences:
+        print(conference)
 except Exception as err:
     print(f"list failed: {err}")
 ```
 
 ### 3. Load a conference
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.conference.load({"id": "example_id"})
-    print(result)
+    conference = client.Conference().load({"id": "example_id"})
+    print(conference)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -96,8 +100,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = NhlApiDocumentationSDK.test()
 
-result = client.conference.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+conference = client.Conference().load({"id": "test01"})
+# conference contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -354,7 +359,7 @@ API path: `/teams`
 
 ### Conference
 
-Create an instance: `const conference = client.conference`
+Create an instance: `conference = client.Conference()`
 
 #### Operations
 
@@ -375,20 +380,20 @@ Create an instance: `const conference = client.conference`
 
 #### Example: Load
 
-```ts
-const conference = await client.conference.load({ id: 'conference_id' })
+```python
+conference = client.Conference().load({"id": "conference_id"})
 ```
 
 #### Example: List
 
-```ts
-const conferences = await client.conference.list()
+```python
+conferences = client.Conference().list({})
 ```
 
 
 ### Division
 
-Create an instance: `const division = client.division`
+Create an instance: `division = client.Division()`
 
 #### Operations
 
@@ -409,20 +414,20 @@ Create an instance: `const division = client.division`
 
 #### Example: Load
 
-```ts
-const division = await client.division.load({ id: 'division_id' })
+```python
+division = client.Division().load({"id": "division_id"})
 ```
 
 #### Example: List
 
-```ts
-const divisions = await client.division.list()
+```python
+divisions = client.Division().list({})
 ```
 
 
 ### Game
 
-Create an instance: `const game = client.game`
+Create an instance: `game = client.Game()`
 
 #### Operations
 
@@ -443,14 +448,14 @@ Create an instance: `const game = client.game`
 
 #### Example: Load
 
-```ts
-const game = await client.game.load({ id: 'game_id' })
+```python
+game = client.Game().load({"id": "game_id"})
 ```
 
 
 ### Player
 
-Create an instance: `const player = client.player`
+Create an instance: `player = client.Player()`
 
 #### Operations
 
@@ -467,14 +472,14 @@ Create an instance: `const player = client.player`
 
 #### Example: Load
 
-```ts
-const player = await client.player.load({ id: 'player_id' })
+```python
+player = client.Player().load({"id": "player_id"})
 ```
 
 
 ### PlayerStat
 
-Create an instance: `const player_stat = client.player_stat`
+Create an instance: `player_stat = client.PlayerStat()`
 
 #### Operations
 
@@ -491,14 +496,14 @@ Create an instance: `const player_stat = client.player_stat`
 
 #### Example: List
 
-```ts
-const player_stats = await client.player_stat.list()
+```python
+player_stats = client.PlayerStat().list({})
 ```
 
 
 ### Roster
 
-Create an instance: `const roster = client.roster`
+Create an instance: `roster = client.Roster()`
 
 #### Operations
 
@@ -516,14 +521,14 @@ Create an instance: `const roster = client.roster`
 
 #### Example: List
 
-```ts
-const rosters = await client.roster.list()
+```python
+rosters = client.Roster().list({})
 ```
 
 
 ### Schedule
 
-Create an instance: `const schedule = client.schedule`
+Create an instance: `schedule = client.Schedule()`
 
 #### Operations
 
@@ -544,14 +549,14 @@ Create an instance: `const schedule = client.schedule`
 
 #### Example: List
 
-```ts
-const schedules = await client.schedule.list()
+```python
+schedules = client.Schedule().list({})
 ```
 
 
 ### Standing
 
-Create an instance: `const standing = client.standing`
+Create an instance: `standing = client.Standing()`
 
 #### Operations
 
@@ -569,14 +574,14 @@ Create an instance: `const standing = client.standing`
 
 #### Example: List
 
-```ts
-const standings = await client.standing.list()
+```python
+standings = client.Standing().list({})
 ```
 
 
 ### Team
 
-Create an instance: `const team = client.team`
+Create an instance: `team = client.Team()`
 
 #### Operations
 
@@ -605,14 +610,14 @@ Create an instance: `const team = client.team`
 
 #### Example: Load
 
-```ts
-const team = await client.team.load({ id: 'team_id' })
+```python
+team = client.Team().load({"id": "team_id"})
 ```
 
 #### Example: List
 
-```ts
-const teams = await client.team.list()
+```python
+teams = client.Team().list({})
 ```
 
 
@@ -686,7 +691,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-conference = client.conference
+conference = client.Conference()
 conference.load({"id": "example_id"})
 
 # conference.data_get() now returns the loaded conference data

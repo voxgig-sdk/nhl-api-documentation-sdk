@@ -220,153 +220,63 @@ class NhlApiDocumentationSDK:
         }
 
 
-    @property
-    def conference(self):
-        """Idiomatic facade: client.conference.list() / client.conference.load({"id": ...})."""
-        from entity.conference_entity import ConferenceEntity
-        cached = getattr(self, "_conference", None)
-        if cached is None:
-            cached = ConferenceEntity(self, None)
-            self._conference = cached
-        return cached
-
-    def Conference(self, data=None):
-        # Deprecated: use client.conference instead.
+    def Conference(self, data=None) -> "ConferenceEntity":
+        """Entity factory: client.Conference().list({}) / client.Conference().load({"id": ...})."""
         from entity.conference_entity import ConferenceEntity
         return ConferenceEntity(self, data)
 
 
-    @property
-    def division(self):
-        """Idiomatic facade: client.division.list() / client.division.load({"id": ...})."""
-        from entity.division_entity import DivisionEntity
-        cached = getattr(self, "_division", None)
-        if cached is None:
-            cached = DivisionEntity(self, None)
-            self._division = cached
-        return cached
-
-    def Division(self, data=None):
-        # Deprecated: use client.division instead.
+    def Division(self, data=None) -> "DivisionEntity":
+        """Entity factory: client.Division().list({}) / client.Division().load({"id": ...})."""
         from entity.division_entity import DivisionEntity
         return DivisionEntity(self, data)
 
 
-    @property
-    def game(self):
-        """Idiomatic facade: client.game.list() / client.game.load({"id": ...})."""
-        from entity.game_entity import GameEntity
-        cached = getattr(self, "_game", None)
-        if cached is None:
-            cached = GameEntity(self, None)
-            self._game = cached
-        return cached
-
-    def Game(self, data=None):
-        # Deprecated: use client.game instead.
+    def Game(self, data=None) -> "GameEntity":
+        """Entity factory: client.Game().list({}) / client.Game().load({"id": ...})."""
         from entity.game_entity import GameEntity
         return GameEntity(self, data)
 
 
-    @property
-    def player(self):
-        """Idiomatic facade: client.player.list() / client.player.load({"id": ...})."""
-        from entity.player_entity import PlayerEntity
-        cached = getattr(self, "_player", None)
-        if cached is None:
-            cached = PlayerEntity(self, None)
-            self._player = cached
-        return cached
-
-    def Player(self, data=None):
-        # Deprecated: use client.player instead.
+    def Player(self, data=None) -> "PlayerEntity":
+        """Entity factory: client.Player().list({}) / client.Player().load({"id": ...})."""
         from entity.player_entity import PlayerEntity
         return PlayerEntity(self, data)
 
 
-    @property
-    def player_stat(self):
-        """Idiomatic facade: client.player_stat.list() / client.player_stat.load({"id": ...})."""
-        from entity.player_stat_entity import PlayerStatEntity
-        cached = getattr(self, "_player_stat", None)
-        if cached is None:
-            cached = PlayerStatEntity(self, None)
-            self._player_stat = cached
-        return cached
-
-    def PlayerStat(self, data=None):
-        # Deprecated: use client.player_stat instead.
+    def PlayerStat(self, data=None) -> "PlayerStatEntity":
+        """Entity factory: client.PlayerStat().list({}) / client.PlayerStat().load({"id": ...})."""
         from entity.player_stat_entity import PlayerStatEntity
         return PlayerStatEntity(self, data)
 
 
-    @property
-    def roster(self):
-        """Idiomatic facade: client.roster.list() / client.roster.load({"id": ...})."""
-        from entity.roster_entity import RosterEntity
-        cached = getattr(self, "_roster", None)
-        if cached is None:
-            cached = RosterEntity(self, None)
-            self._roster = cached
-        return cached
-
-    def Roster(self, data=None):
-        # Deprecated: use client.roster instead.
+    def Roster(self, data=None) -> "RosterEntity":
+        """Entity factory: client.Roster().list({}) / client.Roster().load({"id": ...})."""
         from entity.roster_entity import RosterEntity
         return RosterEntity(self, data)
 
 
-    @property
-    def schedule(self):
-        """Idiomatic facade: client.schedule.list() / client.schedule.load({"id": ...})."""
-        from entity.schedule_entity import ScheduleEntity
-        cached = getattr(self, "_schedule", None)
-        if cached is None:
-            cached = ScheduleEntity(self, None)
-            self._schedule = cached
-        return cached
-
-    def Schedule(self, data=None):
-        # Deprecated: use client.schedule instead.
+    def Schedule(self, data=None) -> "ScheduleEntity":
+        """Entity factory: client.Schedule().list({}) / client.Schedule().load({"id": ...})."""
         from entity.schedule_entity import ScheduleEntity
         return ScheduleEntity(self, data)
 
 
-    @property
-    def standing(self):
-        """Idiomatic facade: client.standing.list() / client.standing.load({"id": ...})."""
-        from entity.standing_entity import StandingEntity
-        cached = getattr(self, "_standing", None)
-        if cached is None:
-            cached = StandingEntity(self, None)
-            self._standing = cached
-        return cached
-
-    def Standing(self, data=None):
-        # Deprecated: use client.standing instead.
+    def Standing(self, data=None) -> "StandingEntity":
+        """Entity factory: client.Standing().list({}) / client.Standing().load({"id": ...})."""
         from entity.standing_entity import StandingEntity
         return StandingEntity(self, data)
 
 
-    @property
-    def team(self):
-        """Idiomatic facade: client.team.list() / client.team.load({"id": ...})."""
-        from entity.team_entity import TeamEntity
-        cached = getattr(self, "_team", None)
-        if cached is None:
-            cached = TeamEntity(self, None)
-            self._team = cached
-        return cached
-
-    def Team(self, data=None):
-        # Deprecated: use client.team instead.
+    def Team(self, data=None) -> "TeamEntity":
+        """Entity factory: client.Team().list({}) / client.Team().load({"id": ...})."""
         from entity.team_entity import TeamEntity
         return TeamEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "NhlApiDocumentationSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -386,3 +296,17 @@ class NhlApiDocumentationSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.conference_entity import ConferenceEntity
+    from entity.division_entity import DivisionEntity
+    from entity.game_entity import GameEntity
+    from entity.player_entity import PlayerEntity
+    from entity.player_stat_entity import PlayerStatEntity
+    from entity.roster_entity import RosterEntity
+    from entity.schedule_entity import ScheduleEntity
+    from entity.standing_entity import StandingEntity
+    from entity.team_entity import TeamEntity
