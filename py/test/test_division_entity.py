@@ -50,16 +50,14 @@ class TestDivisionEntity:
         division_ref01_ent = client.Division(None)
         division_ref01_match = {}
 
-        division_ref01_list_result, err = division_ref01_ent.list(division_ref01_match, None)
-        assert err is None
+        division_ref01_list_result = division_ref01_ent.list(division_ref01_match, None)
         assert isinstance(division_ref01_list_result, list)
 
         # LOAD
         division_ref01_match_dt0 = {
             "id": division_ref01_data["id"],
         }
-        division_ref01_data_dt0_loaded, err = division_ref01_ent.load(division_ref01_match_dt0, None)
-        assert err is None
+        division_ref01_data_dt0_loaded = division_ref01_ent.load(division_ref01_match_dt0, None)
         division_ref01_data_dt0_load_result = helpers.to_map(division_ref01_data_dt0_loaded)
         assert division_ref01_data_dt0_load_result is not None
         assert division_ref01_data_dt0_load_result["id"] == division_ref01_data["id"]
@@ -102,7 +100,6 @@ def _division_basic_setup(extra):
         "NHLAPIDOCUMENTATION_TEST_DIVISION_ENTID": idmap,
         "NHLAPIDOCUMENTATION_TEST_LIVE": "FALSE",
         "NHLAPIDOCUMENTATION_TEST_EXPLAIN": "FALSE",
-        "NHLAPIDOCUMENTATION_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _division_basic_setup(extra):
     if env.get("NHLAPIDOCUMENTATION_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("NHLAPIDOCUMENTATION_APIKEY"),
             },
             extra or {},
         ])

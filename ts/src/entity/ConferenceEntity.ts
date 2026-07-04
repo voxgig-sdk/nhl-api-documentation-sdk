@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Conference,
+  ConferenceLoadMatch,
+  ConferenceListMatch,
+} from '../NhlApiDocumentationTypes'
 
 // TODO: needs Entity superclass
-class ConferenceEntity extends NhlApiDocumentationEntityBase {
+class ConferenceEntity extends NhlApiDocumentationEntityBase<Conference> {
 
   constructor(client: NhlApiDocumentationSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class ConferenceEntity extends NhlApiDocumentationEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: ConferenceLoadMatch, ctrl?: Control): Promise<Conference> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class ConferenceEntity extends NhlApiDocumentationEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Conference> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: ConferenceListMatch, ctrl?: Control): Promise<Conference[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class ConferenceEntity extends NhlApiDocumentationEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Conference[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

@@ -43,8 +43,7 @@ class StandingEntityTest < Minitest::Test
     standing_ref01_ent = client.Standing(nil)
     standing_ref01_match = {}
 
-    standing_ref01_list_result, err = standing_ref01_ent.list(standing_ref01_match, nil)
-    assert_nil err
+    standing_ref01_list_result = standing_ref01_ent.list(standing_ref01_match, nil)
     assert standing_ref01_list_result.is_a?(Array)
 
   end
@@ -83,7 +82,6 @@ def standing_basic_setup(extra)
     "NHLAPIDOCUMENTATION_TEST_STANDING_ENTID" => idmap,
     "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
     "NHLAPIDOCUMENTATION_TEST_EXPLAIN" => "FALSE",
-    "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +93,6 @@ def standing_basic_setup(extra)
   if env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["NHLAPIDOCUMENTATION_APIKEY"],
       },
       extra || {},
     ])

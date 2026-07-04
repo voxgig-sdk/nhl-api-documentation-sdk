@@ -50,16 +50,14 @@ class TestConferenceEntity:
         conference_ref01_ent = client.Conference(None)
         conference_ref01_match = {}
 
-        conference_ref01_list_result, err = conference_ref01_ent.list(conference_ref01_match, None)
-        assert err is None
+        conference_ref01_list_result = conference_ref01_ent.list(conference_ref01_match, None)
         assert isinstance(conference_ref01_list_result, list)
 
         # LOAD
         conference_ref01_match_dt0 = {
             "id": conference_ref01_data["id"],
         }
-        conference_ref01_data_dt0_loaded, err = conference_ref01_ent.load(conference_ref01_match_dt0, None)
-        assert err is None
+        conference_ref01_data_dt0_loaded = conference_ref01_ent.load(conference_ref01_match_dt0, None)
         conference_ref01_data_dt0_load_result = helpers.to_map(conference_ref01_data_dt0_loaded)
         assert conference_ref01_data_dt0_load_result is not None
         assert conference_ref01_data_dt0_load_result["id"] == conference_ref01_data["id"]
@@ -102,7 +100,6 @@ def _conference_basic_setup(extra):
         "NHLAPIDOCUMENTATION_TEST_CONFERENCE_ENTID": idmap,
         "NHLAPIDOCUMENTATION_TEST_LIVE": "FALSE",
         "NHLAPIDOCUMENTATION_TEST_EXPLAIN": "FALSE",
-        "NHLAPIDOCUMENTATION_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _conference_basic_setup(extra):
     if env.get("NHLAPIDOCUMENTATION_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("NHLAPIDOCUMENTATION_APIKEY"),
             },
             extra or {},
         ])

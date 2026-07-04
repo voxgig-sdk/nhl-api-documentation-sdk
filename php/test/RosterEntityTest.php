@@ -52,8 +52,7 @@ class RosterEntityTest extends TestCase
             "team_id" => $setup["idmap"]["team01"],
         ];
 
-        [$roster_ref01_list_result, $err] = $roster_ref01_ent->list($roster_ref01_match, null);
-        $this->assertNull($err);
+        $roster_ref01_list_result = $roster_ref01_ent->list($roster_ref01_match, null);
         $this->assertIsArray($roster_ref01_list_result);
 
     }
@@ -88,7 +87,6 @@ function roster_basic_setup($extra)
         "NHLAPIDOCUMENTATION_TEST_ROSTER_ENTID" => $idmap,
         "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
         "NHLAPIDOCUMENTATION_TEST_EXPLAIN" => "FALSE",
-        "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -100,7 +98,6 @@ function roster_basic_setup($extra)
     if ($env["NHLAPIDOCUMENTATION_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["NHLAPIDOCUMENTATION_APIKEY"],
             ],
             $extra ?? [],
         ]);

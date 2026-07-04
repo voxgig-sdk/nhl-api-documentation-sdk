@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch ConferenceLoadMatch
+---@param ctrl? table
+---@return Conference
+---@return string? err
 function ConferenceEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch ConferenceListMatch
+---@param ctrl? table
+---@return Conference[]
+---@return string? err
 function ConferenceEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

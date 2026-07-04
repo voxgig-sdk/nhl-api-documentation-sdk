@@ -10,6 +10,8 @@ import { ScheduleEntity } from './entity/ScheduleEntity'
 import { StandingEntity } from './entity/StandingEntity'
 import { TeamEntity } from './entity/TeamEntity'
 
+export type * from './NhlApiDocumentationTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -210,54 +212,126 @@ class NhlApiDocumentationSDK {
 
 
 
+  _conference?: ConferenceEntity
+
+  // Idiomatic facade: `client.conference.list()` / `client.conference.load({ id })`.
+  get conference(): ConferenceEntity {
+    return (this._conference ??= new ConferenceEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.conference` instead. */
   Conference(data?: any) {
     const self = this
     return new ConferenceEntity(self,data)
   }
 
 
+  _division?: DivisionEntity
+
+  // Idiomatic facade: `client.division.list()` / `client.division.load({ id })`.
+  get division(): DivisionEntity {
+    return (this._division ??= new DivisionEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.division` instead. */
   Division(data?: any) {
     const self = this
     return new DivisionEntity(self,data)
   }
 
 
+  _game?: GameEntity
+
+  // Idiomatic facade: `client.game.list()` / `client.game.load({ id })`.
+  get game(): GameEntity {
+    return (this._game ??= new GameEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.game` instead. */
   Game(data?: any) {
     const self = this
     return new GameEntity(self,data)
   }
 
 
+  _player?: PlayerEntity
+
+  // Idiomatic facade: `client.player.list()` / `client.player.load({ id })`.
+  get player(): PlayerEntity {
+    return (this._player ??= new PlayerEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.player` instead. */
   Player(data?: any) {
     const self = this
     return new PlayerEntity(self,data)
   }
 
 
+  _player_stat?: PlayerStatEntity
+
+  // Idiomatic facade: `client.player_stat.list()` / `client.player_stat.load({ id })`.
+  get player_stat(): PlayerStatEntity {
+    return (this._player_stat ??= new PlayerStatEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.player_stat` instead. */
   PlayerStat(data?: any) {
     const self = this
     return new PlayerStatEntity(self,data)
   }
 
 
+  _roster?: RosterEntity
+
+  // Idiomatic facade: `client.roster.list()` / `client.roster.load({ id })`.
+  get roster(): RosterEntity {
+    return (this._roster ??= new RosterEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.roster` instead. */
   Roster(data?: any) {
     const self = this
     return new RosterEntity(self,data)
   }
 
 
+  _schedule?: ScheduleEntity
+
+  // Idiomatic facade: `client.schedule.list()` / `client.schedule.load({ id })`.
+  get schedule(): ScheduleEntity {
+    return (this._schedule ??= new ScheduleEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.schedule` instead. */
   Schedule(data?: any) {
     const self = this
     return new ScheduleEntity(self,data)
   }
 
 
+  _standing?: StandingEntity
+
+  // Idiomatic facade: `client.standing.list()` / `client.standing.load({ id })`.
+  get standing(): StandingEntity {
+    return (this._standing ??= new StandingEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.standing` instead. */
   Standing(data?: any) {
     const self = this
     return new StandingEntity(self,data)
   }
 
 
+  _team?: TeamEntity
+
+  // Idiomatic facade: `client.team.list()` / `client.team.load({ id })`.
+  get team(): TeamEntity {
+    return (this._team ??= new TeamEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.team` instead. */
   Team(data?: any) {
     const self = this
     return new TeamEntity(self,data)

@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch DivisionLoadMatch
+---@param ctrl? table
+---@return Division
+---@return string? err
 function DivisionEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch DivisionListMatch
+---@param ctrl? table
+---@return Division[]
+---@return string? err
 function DivisionEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

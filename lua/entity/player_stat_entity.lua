@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch PlayerStatListMatch
+---@param ctrl? table
+---@return PlayerStat[]
+---@return string? err
 function PlayerStatEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

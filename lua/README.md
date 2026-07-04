@@ -9,12 +9,9 @@ The Lua SDK for the NhlApiDocumentation API — an entity-oriented client using 
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-nhl-api-documentation
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/nhl-api-documentation-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("nhl-api-documentation_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("NHL-API-DOCUMENTATION_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 2. List conferences
 
 ```lua
-local result, err = client:Conference():list()
+local result, err = client:conference():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -53,7 +48,7 @@ end
 ### 3. Load a conference
 
 ```lua
-local result, err = client:Conference():load({ id = "example_id" })
+local result, err = client:conference():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -101,7 +96,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:NhlApiDocumentation():load({ id = "test01" })
+local result, err = client:conference():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -134,8 +129,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-NHL-API-DOCUMENTATION_TEST_LIVE=TRUE
-NHL-API-DOCUMENTATION_APIKEY=<your-key>
+NHL_API_DOCUMENTATION_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -158,7 +152,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -359,7 +352,7 @@ API path: `/teams`
 
 ### Conference
 
-Create an instance: `const conference = client.Conference()`
+Create an instance: `const conference = client.conference`
 
 #### Operations
 
@@ -381,19 +374,19 @@ Create an instance: `const conference = client.Conference()`
 #### Example: Load
 
 ```ts
-const conference = await client.Conference().load({ id: 'conference_id' })
+const conference = await client.conference.load({ id: 'conference_id' })
 ```
 
 #### Example: List
 
 ```ts
-const conferences = await client.Conference().list()
+const conferences = await client.conference.list()
 ```
 
 
 ### Division
 
-Create an instance: `const division = client.Division()`
+Create an instance: `const division = client.division`
 
 #### Operations
 
@@ -415,19 +408,19 @@ Create an instance: `const division = client.Division()`
 #### Example: Load
 
 ```ts
-const division = await client.Division().load({ id: 'division_id' })
+const division = await client.division.load({ id: 'division_id' })
 ```
 
 #### Example: List
 
 ```ts
-const divisions = await client.Division().list()
+const divisions = await client.division.list()
 ```
 
 
 ### Game
 
-Create an instance: `const game = client.Game()`
+Create an instance: `const game = client.game`
 
 #### Operations
 
@@ -449,13 +442,13 @@ Create an instance: `const game = client.Game()`
 #### Example: Load
 
 ```ts
-const game = await client.Game().load({ id: 'game_id' })
+const game = await client.game.load({ id: 'game_id' })
 ```
 
 
 ### Player
 
-Create an instance: `const player = client.Player()`
+Create an instance: `const player = client.player`
 
 #### Operations
 
@@ -473,13 +466,13 @@ Create an instance: `const player = client.Player()`
 #### Example: Load
 
 ```ts
-const player = await client.Player().load({ id: 'player_id' })
+const player = await client.player.load({ id: 'player_id' })
 ```
 
 
 ### PlayerStat
 
-Create an instance: `const player_stat = client.PlayerStat()`
+Create an instance: `const player_stat = client.player_stat`
 
 #### Operations
 
@@ -497,13 +490,13 @@ Create an instance: `const player_stat = client.PlayerStat()`
 #### Example: List
 
 ```ts
-const player_stats = await client.PlayerStat().list()
+const player_stats = await client.player_stat.list()
 ```
 
 
 ### Roster
 
-Create an instance: `const roster = client.Roster()`
+Create an instance: `const roster = client.roster`
 
 #### Operations
 
@@ -522,13 +515,13 @@ Create an instance: `const roster = client.Roster()`
 #### Example: List
 
 ```ts
-const rosters = await client.Roster().list()
+const rosters = await client.roster.list()
 ```
 
 
 ### Schedule
 
-Create an instance: `const schedule = client.Schedule()`
+Create an instance: `const schedule = client.schedule`
 
 #### Operations
 
@@ -550,13 +543,13 @@ Create an instance: `const schedule = client.Schedule()`
 #### Example: List
 
 ```ts
-const schedules = await client.Schedule().list()
+const schedules = await client.schedule.list()
 ```
 
 
 ### Standing
 
-Create an instance: `const standing = client.Standing()`
+Create an instance: `const standing = client.standing`
 
 #### Operations
 
@@ -575,13 +568,13 @@ Create an instance: `const standing = client.Standing()`
 #### Example: List
 
 ```ts
-const standings = await client.Standing().list()
+const standings = await client.standing.list()
 ```
 
 
 ### Team
 
-Create an instance: `const team = client.Team()`
+Create an instance: `const team = client.team`
 
 #### Operations
 
@@ -611,13 +604,13 @@ Create an instance: `const team = client.Team()`
 #### Example: Load
 
 ```ts
-const team = await client.Team().load({ id: 'team_id' })
+const team = await client.team.load({ id: 'team_id' })
 ```
 
 #### Example: List
 
 ```ts
-const teams = await client.Team().list()
+const teams = await client.team.list()
 ```
 
 
@@ -692,11 +685,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local conference = client:conference()
+conference:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- conference:data_get() now returns the loaded conference data
+-- conference:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

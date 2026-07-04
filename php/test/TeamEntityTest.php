@@ -50,16 +50,14 @@ class TeamEntityTest extends TestCase
         $team_ref01_ent = $client->Team(null);
         $team_ref01_match = [];
 
-        [$team_ref01_list_result, $err] = $team_ref01_ent->list($team_ref01_match, null);
-        $this->assertNull($err);
+        $team_ref01_list_result = $team_ref01_ent->list($team_ref01_match, null);
         $this->assertIsArray($team_ref01_list_result);
 
         // LOAD
         $team_ref01_match_dt0 = [
             "id" => $team_ref01_data["id"],
         ];
-        [$team_ref01_data_dt0_loaded, $err] = $team_ref01_ent->load($team_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $team_ref01_data_dt0_loaded = $team_ref01_ent->load($team_ref01_match_dt0, null);
         $team_ref01_data_dt0_load_result = Helpers::to_map($team_ref01_data_dt0_loaded);
         $this->assertNotNull($team_ref01_data_dt0_load_result);
         $this->assertEquals($team_ref01_data_dt0_load_result["id"], $team_ref01_data["id"]);
@@ -96,7 +94,6 @@ function team_basic_setup($extra)
         "NHLAPIDOCUMENTATION_TEST_TEAM_ENTID" => $idmap,
         "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
         "NHLAPIDOCUMENTATION_TEST_EXPLAIN" => "FALSE",
-        "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -108,7 +105,6 @@ function team_basic_setup($extra)
     if ($env["NHLAPIDOCUMENTATION_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["NHLAPIDOCUMENTATION_APIKEY"],
             ],
             $extra ?? [],
         ]);

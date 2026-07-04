@@ -42,8 +42,7 @@ class GameEntityTest < Minitest::Test
     # LOAD
     game_ref01_ent = client.Game(nil)
     game_ref01_match_dt0 = {}
-    game_ref01_data_dt0_loaded, err = game_ref01_ent.load(game_ref01_match_dt0, nil)
-    assert_nil err
+    game_ref01_data_dt0_loaded = game_ref01_ent.load(game_ref01_match_dt0, nil)
     assert !game_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def game_basic_setup(extra)
     "NHLAPIDOCUMENTATION_TEST_GAME_ENTID" => idmap,
     "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
     "NHLAPIDOCUMENTATION_TEST_EXPLAIN" => "FALSE",
-    "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def game_basic_setup(extra)
   if env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["NHLAPIDOCUMENTATION_APIKEY"],
       },
       extra || {},
     ])

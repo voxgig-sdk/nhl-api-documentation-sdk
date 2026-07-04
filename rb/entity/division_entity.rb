@@ -45,6 +45,7 @@ class DivisionEntity
     end
   end
 
+  # @return [Division, Hash] the current Division data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class DivisionEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Division fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Division.
+  #
+  # @param reqmatch [DivisionLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Division, Hash] the loaded Division; raises NhlApiDocumentationError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class DivisionEntity
 
 
   
+  # List Division items matching the given filter.
+  #
+  # @param reqmatch [DivisionListMatch, Hash, nil] match filter (any subset of Division fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Division>, Array] the matching Division items; raises NhlApiDocumentationError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

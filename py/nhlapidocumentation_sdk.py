@@ -144,16 +144,23 @@ class NhlApiDocumentationSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class NhlApiDocumentationSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,55 +212,154 @@ class NhlApiDocumentationSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def conference(self):
+        """Idiomatic facade: client.conference.list() / client.conference.load({"id": ...})."""
+        from entity.conference_entity import ConferenceEntity
+        cached = getattr(self, "_conference", None)
+        if cached is None:
+            cached = ConferenceEntity(self, None)
+            self._conference = cached
+        return cached
 
     def Conference(self, data=None):
+        # Deprecated: use client.conference instead.
         from entity.conference_entity import ConferenceEntity
         return ConferenceEntity(self, data)
 
 
+    @property
+    def division(self):
+        """Idiomatic facade: client.division.list() / client.division.load({"id": ...})."""
+        from entity.division_entity import DivisionEntity
+        cached = getattr(self, "_division", None)
+        if cached is None:
+            cached = DivisionEntity(self, None)
+            self._division = cached
+        return cached
+
     def Division(self, data=None):
+        # Deprecated: use client.division instead.
         from entity.division_entity import DivisionEntity
         return DivisionEntity(self, data)
 
 
+    @property
+    def game(self):
+        """Idiomatic facade: client.game.list() / client.game.load({"id": ...})."""
+        from entity.game_entity import GameEntity
+        cached = getattr(self, "_game", None)
+        if cached is None:
+            cached = GameEntity(self, None)
+            self._game = cached
+        return cached
+
     def Game(self, data=None):
+        # Deprecated: use client.game instead.
         from entity.game_entity import GameEntity
         return GameEntity(self, data)
 
 
+    @property
+    def player(self):
+        """Idiomatic facade: client.player.list() / client.player.load({"id": ...})."""
+        from entity.player_entity import PlayerEntity
+        cached = getattr(self, "_player", None)
+        if cached is None:
+            cached = PlayerEntity(self, None)
+            self._player = cached
+        return cached
+
     def Player(self, data=None):
+        # Deprecated: use client.player instead.
         from entity.player_entity import PlayerEntity
         return PlayerEntity(self, data)
 
 
+    @property
+    def player_stat(self):
+        """Idiomatic facade: client.player_stat.list() / client.player_stat.load({"id": ...})."""
+        from entity.player_stat_entity import PlayerStatEntity
+        cached = getattr(self, "_player_stat", None)
+        if cached is None:
+            cached = PlayerStatEntity(self, None)
+            self._player_stat = cached
+        return cached
+
     def PlayerStat(self, data=None):
+        # Deprecated: use client.player_stat instead.
         from entity.player_stat_entity import PlayerStatEntity
         return PlayerStatEntity(self, data)
 
 
+    @property
+    def roster(self):
+        """Idiomatic facade: client.roster.list() / client.roster.load({"id": ...})."""
+        from entity.roster_entity import RosterEntity
+        cached = getattr(self, "_roster", None)
+        if cached is None:
+            cached = RosterEntity(self, None)
+            self._roster = cached
+        return cached
+
     def Roster(self, data=None):
+        # Deprecated: use client.roster instead.
         from entity.roster_entity import RosterEntity
         return RosterEntity(self, data)
 
 
+    @property
+    def schedule(self):
+        """Idiomatic facade: client.schedule.list() / client.schedule.load({"id": ...})."""
+        from entity.schedule_entity import ScheduleEntity
+        cached = getattr(self, "_schedule", None)
+        if cached is None:
+            cached = ScheduleEntity(self, None)
+            self._schedule = cached
+        return cached
+
     def Schedule(self, data=None):
+        # Deprecated: use client.schedule instead.
         from entity.schedule_entity import ScheduleEntity
         return ScheduleEntity(self, data)
 
 
+    @property
+    def standing(self):
+        """Idiomatic facade: client.standing.list() / client.standing.load({"id": ...})."""
+        from entity.standing_entity import StandingEntity
+        cached = getattr(self, "_standing", None)
+        if cached is None:
+            cached = StandingEntity(self, None)
+            self._standing = cached
+        return cached
+
     def Standing(self, data=None):
+        # Deprecated: use client.standing instead.
         from entity.standing_entity import StandingEntity
         return StandingEntity(self, data)
 
 
+    @property
+    def team(self):
+        """Idiomatic facade: client.team.list() / client.team.load({"id": ...})."""
+        from entity.team_entity import TeamEntity
+        cached = getattr(self, "_team", None)
+        if cached is None:
+            cached = TeamEntity(self, None)
+            self._team = cached
+        return cached
+
     def Team(self, data=None):
+        # Deprecated: use client.team instead.
         from entity.team_entity import TeamEntity
         return TeamEntity(self, data)
 

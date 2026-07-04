@@ -9,9 +9,12 @@ The TypeScript SDK for the NhlApiDocumentation API — a type-safe, entity-orien
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/nhl-api-documentation
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/nhl-api-documentation-sdk/releases](https://github.com/voxgig-sdk/nhl-api-documentation-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { NhlApiDocumentationSDK } from 'nhl-api-documentation'
+import { NhlApiDocumentationSDK } from '@voxgig-sdk/nhl-api-documentation'
 
-const client = new NhlApiDocumentationSDK({
-  apikey: process.env.NHL-API-DOCUMENTATION_APIKEY,
-})
+const client = new NhlApiDocumentationSDK()
 ```
 
 ### 2. List conferences
 
 ```ts
-const result = await client.Conference().list()
+const result = await client.conference.list()
 
 if (result.ok) {
   for (const item of result.data) {
@@ -42,7 +43,7 @@ if (result.ok) {
 ### 3. Load a conference
 
 ```ts
-const result = await client.Conference().load({ id: 'example_id' })
+const result = await client.conference.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -91,7 +92,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = NhlApiDocumentationSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.conference.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -99,7 +100,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new NhlApiDocumentationSDK({ apikey: '...' })
+const client = new NhlApiDocumentationSDK()
 const testClient = client.tester()
 ```
 
@@ -108,7 +109,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.conference
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -135,7 +136,6 @@ const logger = {
 }
 
 const client = new NhlApiDocumentationSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -145,8 +145,7 @@ const client = new NhlApiDocumentationSDK({
 Create a `.env.local` file at the project root:
 
 ```
-NHL-API-DOCUMENTATION_TEST_LIVE=TRUE
-NHL-API-DOCUMENTATION_APIKEY=<your-key>
+NHL_API_DOCUMENTATION_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -164,7 +163,6 @@ cd ts && npm test
 
 ```ts
 new NhlApiDocumentationSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -175,7 +173,6 @@ new NhlApiDocumentationSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -402,7 +399,7 @@ API path: `/teams`
 
 ### Conference
 
-Create an instance: `const conference = client.Conference()`
+Create an instance: `const conference = client.conference`
 
 #### Operations
 
@@ -424,19 +421,19 @@ Create an instance: `const conference = client.Conference()`
 #### Example: Load
 
 ```ts
-const conference = await client.Conference().load({ id: 'conference_id' })
+const conference = await client.conference.load({ id: 'conference_id' })
 ```
 
 #### Example: List
 
 ```ts
-const conferences = await client.Conference().list()
+const conferences = await client.conference.list()
 ```
 
 
 ### Division
 
-Create an instance: `const division = client.Division()`
+Create an instance: `const division = client.division`
 
 #### Operations
 
@@ -458,19 +455,19 @@ Create an instance: `const division = client.Division()`
 #### Example: Load
 
 ```ts
-const division = await client.Division().load({ id: 'division_id' })
+const division = await client.division.load({ id: 'division_id' })
 ```
 
 #### Example: List
 
 ```ts
-const divisions = await client.Division().list()
+const divisions = await client.division.list()
 ```
 
 
 ### Game
 
-Create an instance: `const game = client.Game()`
+Create an instance: `const game = client.game`
 
 #### Operations
 
@@ -492,13 +489,13 @@ Create an instance: `const game = client.Game()`
 #### Example: Load
 
 ```ts
-const game = await client.Game().load({ id: 'game_id' })
+const game = await client.game.load({ id: 'game_id' })
 ```
 
 
 ### Player
 
-Create an instance: `const player = client.Player()`
+Create an instance: `const player = client.player`
 
 #### Operations
 
@@ -516,13 +513,13 @@ Create an instance: `const player = client.Player()`
 #### Example: Load
 
 ```ts
-const player = await client.Player().load({ id: 'player_id' })
+const player = await client.player.load({ id: 'player_id' })
 ```
 
 
 ### PlayerStat
 
-Create an instance: `const player_stat = client.PlayerStat()`
+Create an instance: `const player_stat = client.player_stat`
 
 #### Operations
 
@@ -540,13 +537,13 @@ Create an instance: `const player_stat = client.PlayerStat()`
 #### Example: List
 
 ```ts
-const player_stats = await client.PlayerStat().list()
+const player_stats = await client.player_stat.list()
 ```
 
 
 ### Roster
 
-Create an instance: `const roster = client.Roster()`
+Create an instance: `const roster = client.roster`
 
 #### Operations
 
@@ -565,13 +562,13 @@ Create an instance: `const roster = client.Roster()`
 #### Example: List
 
 ```ts
-const rosters = await client.Roster().list()
+const rosters = await client.roster.list()
 ```
 
 
 ### Schedule
 
-Create an instance: `const schedule = client.Schedule()`
+Create an instance: `const schedule = client.schedule`
 
 #### Operations
 
@@ -593,13 +590,13 @@ Create an instance: `const schedule = client.Schedule()`
 #### Example: List
 
 ```ts
-const schedules = await client.Schedule().list()
+const schedules = await client.schedule.list()
 ```
 
 
 ### Standing
 
-Create an instance: `const standing = client.Standing()`
+Create an instance: `const standing = client.standing`
 
 #### Operations
 
@@ -618,13 +615,13 @@ Create an instance: `const standing = client.Standing()`
 #### Example: List
 
 ```ts
-const standings = await client.Standing().list()
+const standings = await client.standing.list()
 ```
 
 
 ### Team
 
-Create an instance: `const team = client.Team()`
+Create an instance: `const team = client.team`
 
 #### Operations
 
@@ -654,13 +651,13 @@ Create an instance: `const team = client.Team()`
 #### Example: Load
 
 ```ts
-const team = await client.Team().load({ id: 'team_id' })
+const team = await client.team.load({ id: 'team_id' })
 ```
 
 #### Example: List
 
 ```ts
-const teams = await client.Team().list()
+const teams = await client.team.list()
 ```
 
 
@@ -721,7 +718,7 @@ nhl-api-documentation/
 Import the SDK from the package root:
 
 ```ts
-import { NhlApiDocumentationSDK } from 'nhl-api-documentation'
+import { NhlApiDocumentationSDK } from '@voxgig-sdk/nhl-api-documentation'
 ```
 
 ### Entity state
@@ -731,11 +728,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const conference = client.conference
+await conference.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// conference.data() now returns the loaded conference data
+// conference.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

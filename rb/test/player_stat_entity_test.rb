@@ -45,8 +45,7 @@ class PlayerStatEntityTest < Minitest::Test
       "person_id" => setup[:idmap]["person01"],
     }
 
-    player_stat_ref01_list_result, err = player_stat_ref01_ent.list(player_stat_ref01_match, nil)
-    assert_nil err
+    player_stat_ref01_list_result = player_stat_ref01_ent.list(player_stat_ref01_match, nil)
     assert player_stat_ref01_list_result.is_a?(Array)
 
   end
@@ -85,7 +84,6 @@ def player_stat_basic_setup(extra)
     "NHLAPIDOCUMENTATION_TEST_PLAYER_STAT_ENTID" => idmap,
     "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
     "NHLAPIDOCUMENTATION_TEST_EXPLAIN" => "FALSE",
-    "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -97,7 +95,6 @@ def player_stat_basic_setup(extra)
   if env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["NHLAPIDOCUMENTATION_APIKEY"],
       },
       extra || {},
     ])

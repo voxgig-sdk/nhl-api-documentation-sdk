@@ -33,7 +33,7 @@ class RosterDirectTest < Minitest::Test
       params["team_id"] = "direct01"
     end
 
-    result, err = client.direct({
+    result = client.direct({
       "path" => "teams/{team_id}/roster",
       "method" => "GET",
       "params" => params,
@@ -42,8 +42,8 @@ class RosterDirectTest < Minitest::Test
       # Live mode is lenient: synthetic IDs frequently 4xx and the list-
       # response shape varies wildly across public APIs. Skip rather than
       # fail when the call doesn't return a usable list.
-      if !err.nil?
-        skip("list call failed (likely synthetic IDs against live API): #{err}")
+      if !result["err"].nil?
+        skip("list call failed (likely synthetic IDs against live API): #{result["err"]}")
         return
       end
       unless result["ok"]
@@ -56,7 +56,7 @@ class RosterDirectTest < Minitest::Test
         return
       end
     else
-      assert_nil err
+      assert_nil result["err"]
       assert result["ok"]
       assert_equal 200, Helpers.to_int(result["status"])
       assert result["data"].is_a?(Array)
@@ -76,14 +76,12 @@ def roster_direct_setup(mockres)
   env = Runner.env_override({
     "NHLAPIDOCUMENTATION_TEST_ROSTER_ENTID" => {},
     "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
-    "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
   })
 
   live = env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["NHLAPIDOCUMENTATION_APIKEY"],
     }
     client = NhlApiDocumentationSDK.new(merged_opts)
     return {

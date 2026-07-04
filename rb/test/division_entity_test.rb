@@ -43,16 +43,14 @@ class DivisionEntityTest < Minitest::Test
     division_ref01_ent = client.Division(nil)
     division_ref01_match = {}
 
-    division_ref01_list_result, err = division_ref01_ent.list(division_ref01_match, nil)
-    assert_nil err
+    division_ref01_list_result = division_ref01_ent.list(division_ref01_match, nil)
     assert division_ref01_list_result.is_a?(Array)
 
     # LOAD
     division_ref01_match_dt0 = {
       "id" => division_ref01_data["id"],
     }
-    division_ref01_data_dt0_loaded, err = division_ref01_ent.load(division_ref01_match_dt0, nil)
-    assert_nil err
+    division_ref01_data_dt0_loaded = division_ref01_ent.load(division_ref01_match_dt0, nil)
     division_ref01_data_dt0_load_result = Helpers.to_map(division_ref01_data_dt0_loaded)
     assert !division_ref01_data_dt0_load_result.nil?
     assert_equal division_ref01_data_dt0_load_result["id"], division_ref01_data["id"]
@@ -93,7 +91,6 @@ def division_basic_setup(extra)
     "NHLAPIDOCUMENTATION_TEST_DIVISION_ENTID" => idmap,
     "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
     "NHLAPIDOCUMENTATION_TEST_EXPLAIN" => "FALSE",
-    "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -105,7 +102,6 @@ def division_basic_setup(extra)
   if env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["NHLAPIDOCUMENTATION_APIKEY"],
       },
       extra || {},
     ])

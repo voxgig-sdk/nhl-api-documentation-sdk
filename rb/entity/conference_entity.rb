@@ -45,6 +45,7 @@ class ConferenceEntity
     end
   end
 
+  # @return [Conference, Hash] the current Conference data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class ConferenceEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Conference fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Conference.
+  #
+  # @param reqmatch [ConferenceLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Conference, Hash] the loaded Conference; raises NhlApiDocumentationError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class ConferenceEntity
 
 
   
+  # List Conference items matching the given filter.
+  #
+  # @param reqmatch [ConferenceListMatch, Hash, nil] match filter (any subset of Conference fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Conference>, Array] the matching Conference items; raises NhlApiDocumentationError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

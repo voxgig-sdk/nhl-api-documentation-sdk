@@ -245,46 +245,73 @@ func (sdk *NhlApiDocumentationSDK) Direct(fetchargs map[string]any) (map[string]
 }
 
 
+// Conference returns a Conference entity bound to this client.
+// Idiomatic usage: client.Conference(nil).List(nil, nil) or
+// client.Conference(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NhlApiDocumentationSDK) Conference(data map[string]any) NhlApiDocumentationEntity {
 	return NewConferenceEntityFunc(sdk, data)
 }
 
 
+// Division returns a Division entity bound to this client.
+// Idiomatic usage: client.Division(nil).List(nil, nil) or
+// client.Division(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NhlApiDocumentationSDK) Division(data map[string]any) NhlApiDocumentationEntity {
 	return NewDivisionEntityFunc(sdk, data)
 }
 
 
+// Game returns a Game entity bound to this client.
+// Idiomatic usage: client.Game(nil).List(nil, nil) or
+// client.Game(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NhlApiDocumentationSDK) Game(data map[string]any) NhlApiDocumentationEntity {
 	return NewGameEntityFunc(sdk, data)
 }
 
 
+// Player returns a Player entity bound to this client.
+// Idiomatic usage: client.Player(nil).List(nil, nil) or
+// client.Player(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NhlApiDocumentationSDK) Player(data map[string]any) NhlApiDocumentationEntity {
 	return NewPlayerEntityFunc(sdk, data)
 }
 
 
+// PlayerStat returns a PlayerStat entity bound to this client.
+// Idiomatic usage: client.PlayerStat(nil).List(nil, nil) or
+// client.PlayerStat(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NhlApiDocumentationSDK) PlayerStat(data map[string]any) NhlApiDocumentationEntity {
 	return NewPlayerStatEntityFunc(sdk, data)
 }
 
 
+// Roster returns a Roster entity bound to this client.
+// Idiomatic usage: client.Roster(nil).List(nil, nil) or
+// client.Roster(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NhlApiDocumentationSDK) Roster(data map[string]any) NhlApiDocumentationEntity {
 	return NewRosterEntityFunc(sdk, data)
 }
 
 
+// Schedule returns a Schedule entity bound to this client.
+// Idiomatic usage: client.Schedule(nil).List(nil, nil) or
+// client.Schedule(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NhlApiDocumentationSDK) Schedule(data map[string]any) NhlApiDocumentationEntity {
 	return NewScheduleEntityFunc(sdk, data)
 }
 
 
+// Standing returns a Standing entity bound to this client.
+// Idiomatic usage: client.Standing(nil).List(nil, nil) or
+// client.Standing(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NhlApiDocumentationSDK) Standing(data map[string]any) NhlApiDocumentationEntity {
 	return NewStandingEntityFunc(sdk, data)
 }
 
 
+// Team returns a Team entity bound to this client.
+// Idiomatic usage: client.Team(nil).List(nil, nil) or
+// client.Team(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NhlApiDocumentationSDK) Team(data map[string]any) NhlApiDocumentationEntity {
 	return NewTeamEntityFunc(sdk, data)
 }

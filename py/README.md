@@ -9,11 +9,9 @@ The Python SDK for the NhlApiDocumentation API — an entity-oriented client fol
 
 
 ## Install
-```bash
-pip install voxgig-sdk-nhl-api-documentation
-```
-
-Or install from source:
+This package is not yet published to PyPI. Install it from the GitHub
+release tag (`py/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/nhl-api-documentation-sdk/releases)) or
+from a source checkout:
 
 ```bash
 pip install -e .
@@ -28,34 +26,31 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
-import os
 from nhlapidocumentation_sdk import NhlApiDocumentationSDK
 
-client = NhlApiDocumentationSDK({
-    "apikey": os.environ.get("NHL-API-DOCUMENTATION_APIKEY"),
-})
+client = NhlApiDocumentationSDK()
 ```
 
 ### 2. List conferences
 
 ```python
-result, err = client.Conference().list()
-if err:
-    raise Exception(err)
-
-if isinstance(result, list):
+try:
+    result = client.conference.list()
     for item in result:
         d = item.data_get()
         print(d["id"], d["name"])
+except Exception as err:
+    print(f"list failed: {err}")
 ```
 
 ### 3. Load a conference
 
 ```python
-result, err = client.Conference().load({"id": "example_id"})
-if err:
-    raise Exception(err)
-print(result)
+try:
+    result = client.conference.load({"id": "example_id"})
+    print(result)
+except Exception as err:
+    print(f"load failed: {err}")
 ```
 
 
@@ -66,29 +61,28 @@ print(result)
 For endpoints not covered by entity methods:
 
 ```python
-result, err = client.direct({
+result = client.direct({
     "path": "/api/resource/{id}",
     "method": "GET",
     "params": {"id": "example"},
 })
-if err:
-    raise Exception(err)
 
 if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
+else:
+    print(result["err"])     # error value
 ```
 
 ### Prepare a request without sending it
 
 ```python
-fetchdef, err = client.prepare({
+# prepare() returns the fetch definition and raises on error.
+fetchdef = client.prepare({
     "path": "/api/resource/{id}",
     "method": "DELETE",
     "params": {"id": "example"},
 })
-if err:
-    raise Exception(err)
 
 print(fetchdef["url"])
 print(fetchdef["method"])
@@ -102,7 +96,7 @@ Create a mock client for unit testing — no server required:
 ```python
 client = NhlApiDocumentationSDK.test()
 
-result, err = client.NhlApiDocumentation().load({"id": "test01"})
+result = client.conference.load({"id": "test01"})
 # result contains mock response data
 ```
 
@@ -132,8 +126,7 @@ client = NhlApiDocumentationSDK({
 Create a `.env.local` file at the project root:
 
 ```
-NHL-API-DOCUMENTATION_TEST_LIVE=TRUE
-NHL-API-DOCUMENTATION_APIKEY=<your-key>
+NHL_API_DOCUMENTATION_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -157,7 +150,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |
@@ -179,8 +171,8 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | --- | --- | --- |
 | `options_map` | `() -> dict` | Deep copy of current SDK options. |
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
-| `prepare` | `(fetchargs) -> (dict, err)` | Build an HTTP request definition without sending. |
-| `direct` | `(fetchargs) -> (dict, err)` | Build and send an HTTP request. |
+| `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
+| `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
 | `Conference` | `(data) -> ConferenceEntity` | Create a Conference entity instance. |
 | `Division` | `(data) -> DivisionEntity` | Create a Division entity instance. |
 | `Game` | `(data) -> GameEntity` | Create a Game entity instance. |
@@ -197,11 +189,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> (any, err)` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> (any, err)` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> (any, err)` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> (any, err)` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> (any, err)` | Remove an entity. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -211,8 +203,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`dict` with these keys:
+Entity operations return the bare result data (a `dict` for single-entity
+ops, a `list` for `list`) and raise on error. Wrap calls in
+`try`/`except` to handle failures.
+
+The `direct()` escape hatch never raises — it returns a result `dict`
+you branch on via `result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -358,7 +354,7 @@ API path: `/teams`
 
 ### Conference
 
-Create an instance: `const conference = client.Conference()`
+Create an instance: `const conference = client.conference`
 
 #### Operations
 
@@ -380,19 +376,19 @@ Create an instance: `const conference = client.Conference()`
 #### Example: Load
 
 ```ts
-const conference = await client.Conference().load({ id: 'conference_id' })
+const conference = await client.conference.load({ id: 'conference_id' })
 ```
 
 #### Example: List
 
 ```ts
-const conferences = await client.Conference().list()
+const conferences = await client.conference.list()
 ```
 
 
 ### Division
 
-Create an instance: `const division = client.Division()`
+Create an instance: `const division = client.division`
 
 #### Operations
 
@@ -414,19 +410,19 @@ Create an instance: `const division = client.Division()`
 #### Example: Load
 
 ```ts
-const division = await client.Division().load({ id: 'division_id' })
+const division = await client.division.load({ id: 'division_id' })
 ```
 
 #### Example: List
 
 ```ts
-const divisions = await client.Division().list()
+const divisions = await client.division.list()
 ```
 
 
 ### Game
 
-Create an instance: `const game = client.Game()`
+Create an instance: `const game = client.game`
 
 #### Operations
 
@@ -448,13 +444,13 @@ Create an instance: `const game = client.Game()`
 #### Example: Load
 
 ```ts
-const game = await client.Game().load({ id: 'game_id' })
+const game = await client.game.load({ id: 'game_id' })
 ```
 
 
 ### Player
 
-Create an instance: `const player = client.Player()`
+Create an instance: `const player = client.player`
 
 #### Operations
 
@@ -472,13 +468,13 @@ Create an instance: `const player = client.Player()`
 #### Example: Load
 
 ```ts
-const player = await client.Player().load({ id: 'player_id' })
+const player = await client.player.load({ id: 'player_id' })
 ```
 
 
 ### PlayerStat
 
-Create an instance: `const player_stat = client.PlayerStat()`
+Create an instance: `const player_stat = client.player_stat`
 
 #### Operations
 
@@ -496,13 +492,13 @@ Create an instance: `const player_stat = client.PlayerStat()`
 #### Example: List
 
 ```ts
-const player_stats = await client.PlayerStat().list()
+const player_stats = await client.player_stat.list()
 ```
 
 
 ### Roster
 
-Create an instance: `const roster = client.Roster()`
+Create an instance: `const roster = client.roster`
 
 #### Operations
 
@@ -521,13 +517,13 @@ Create an instance: `const roster = client.Roster()`
 #### Example: List
 
 ```ts
-const rosters = await client.Roster().list()
+const rosters = await client.roster.list()
 ```
 
 
 ### Schedule
 
-Create an instance: `const schedule = client.Schedule()`
+Create an instance: `const schedule = client.schedule`
 
 #### Operations
 
@@ -549,13 +545,13 @@ Create an instance: `const schedule = client.Schedule()`
 #### Example: List
 
 ```ts
-const schedules = await client.Schedule().list()
+const schedules = await client.schedule.list()
 ```
 
 
 ### Standing
 
-Create an instance: `const standing = client.Standing()`
+Create an instance: `const standing = client.standing`
 
 #### Operations
 
@@ -574,13 +570,13 @@ Create an instance: `const standing = client.Standing()`
 #### Example: List
 
 ```ts
-const standings = await client.Standing().list()
+const standings = await client.standing.list()
 ```
 
 
 ### Team
 
-Create an instance: `const team = client.Team()`
+Create an instance: `const team = client.team`
 
 #### Operations
 
@@ -610,13 +606,13 @@ Create an instance: `const team = client.Team()`
 #### Example: Load
 
 ```ts
-const team = await client.Team().load({ id: 'team_id' })
+const team = await client.team.load({ id: 'team_id' })
 ```
 
 #### Example: List
 
 ```ts
-const teams = await client.Team().list()
+const teams = await client.team.list()
 ```
 
 
@@ -690,11 +686,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-moon = client.Moon()
-moon.load({"planet_id": "earth", "id": "luna"})
+conference = client.conference
+conference.load({"id": "example_id"})
 
-# moon.data_get() now returns the loaded moon data
-# moon.match_get() returns the last match criteria
+# conference.data_get() now returns the loaded conference data
+# conference.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

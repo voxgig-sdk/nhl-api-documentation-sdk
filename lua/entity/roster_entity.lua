@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch RosterListMatch
+---@param ctrl? table
+---@return Roster[]
+---@return string? err
 function RosterEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

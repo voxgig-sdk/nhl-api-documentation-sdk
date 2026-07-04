@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Roster,
+  RosterListMatch,
+} from '../NhlApiDocumentationTypes'
 
 // TODO: needs Entity superclass
-class RosterEntity extends NhlApiDocumentationEntityBase {
+class RosterEntity extends NhlApiDocumentationEntityBase<Roster> {
 
   constructor(client: NhlApiDocumentationSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class RosterEntity extends NhlApiDocumentationEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: RosterListMatch, ctrl?: Control): Promise<Roster[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class RosterEntity extends NhlApiDocumentationEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Roster[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

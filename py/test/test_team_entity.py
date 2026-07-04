@@ -50,16 +50,14 @@ class TestTeamEntity:
         team_ref01_ent = client.Team(None)
         team_ref01_match = {}
 
-        team_ref01_list_result, err = team_ref01_ent.list(team_ref01_match, None)
-        assert err is None
+        team_ref01_list_result = team_ref01_ent.list(team_ref01_match, None)
         assert isinstance(team_ref01_list_result, list)
 
         # LOAD
         team_ref01_match_dt0 = {
             "id": team_ref01_data["id"],
         }
-        team_ref01_data_dt0_loaded, err = team_ref01_ent.load(team_ref01_match_dt0, None)
-        assert err is None
+        team_ref01_data_dt0_loaded = team_ref01_ent.load(team_ref01_match_dt0, None)
         team_ref01_data_dt0_load_result = helpers.to_map(team_ref01_data_dt0_loaded)
         assert team_ref01_data_dt0_load_result is not None
         assert team_ref01_data_dt0_load_result["id"] == team_ref01_data["id"]
@@ -102,7 +100,6 @@ def _team_basic_setup(extra):
         "NHLAPIDOCUMENTATION_TEST_TEAM_ENTID": idmap,
         "NHLAPIDOCUMENTATION_TEST_LIVE": "FALSE",
         "NHLAPIDOCUMENTATION_TEST_EXPLAIN": "FALSE",
-        "NHLAPIDOCUMENTATION_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _team_basic_setup(extra):
     if env.get("NHLAPIDOCUMENTATION_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("NHLAPIDOCUMENTATION_APIKEY"),
             },
             extra or {},
         ])

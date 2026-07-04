@@ -49,8 +49,7 @@ class TestGameEntity:
         # LOAD
         game_ref01_ent = client.Game(None)
         game_ref01_match_dt0 = {}
-        game_ref01_data_dt0_loaded, err = game_ref01_ent.load(game_ref01_match_dt0, None)
-        assert err is None
+        game_ref01_data_dt0_loaded = game_ref01_ent.load(game_ref01_match_dt0, None)
         assert game_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _game_basic_setup(extra):
         "NHLAPIDOCUMENTATION_TEST_GAME_ENTID": idmap,
         "NHLAPIDOCUMENTATION_TEST_LIVE": "FALSE",
         "NHLAPIDOCUMENTATION_TEST_EXPLAIN": "FALSE",
-        "NHLAPIDOCUMENTATION_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _game_basic_setup(extra):
     if env.get("NHLAPIDOCUMENTATION_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("NHLAPIDOCUMENTATION_APIKEY"),
             },
             extra or {},
         ])

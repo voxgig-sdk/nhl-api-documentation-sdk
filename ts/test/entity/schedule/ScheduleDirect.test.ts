@@ -79,14 +79,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'NHLAPIDOCUMENTATION_TEST_SCHEDULE_ENTID': {},
     'NHLAPIDOCUMENTATION_TEST_LIVE': 'FALSE',
-    'NHLAPIDOCUMENTATION_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.NHLAPIDOCUMENTATION_TEST_LIVE
 
   if (live) {
     const client = new NhlApiDocumentationSDK({
-      apikey: env.NHLAPIDOCUMENTATION_APIKEY,
     })
 
     let idmap: any = env['NHLAPIDOCUMENTATION_TEST_SCHEDULE_ENTID']

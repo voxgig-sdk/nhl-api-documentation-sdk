@@ -50,16 +50,14 @@ class DivisionEntityTest extends TestCase
         $division_ref01_ent = $client->Division(null);
         $division_ref01_match = [];
 
-        [$division_ref01_list_result, $err] = $division_ref01_ent->list($division_ref01_match, null);
-        $this->assertNull($err);
+        $division_ref01_list_result = $division_ref01_ent->list($division_ref01_match, null);
         $this->assertIsArray($division_ref01_list_result);
 
         // LOAD
         $division_ref01_match_dt0 = [
             "id" => $division_ref01_data["id"],
         ];
-        [$division_ref01_data_dt0_loaded, $err] = $division_ref01_ent->load($division_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $division_ref01_data_dt0_loaded = $division_ref01_ent->load($division_ref01_match_dt0, null);
         $division_ref01_data_dt0_load_result = Helpers::to_map($division_ref01_data_dt0_loaded);
         $this->assertNotNull($division_ref01_data_dt0_load_result);
         $this->assertEquals($division_ref01_data_dt0_load_result["id"], $division_ref01_data["id"]);
@@ -96,7 +94,6 @@ function division_basic_setup($extra)
         "NHLAPIDOCUMENTATION_TEST_DIVISION_ENTID" => $idmap,
         "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
         "NHLAPIDOCUMENTATION_TEST_EXPLAIN" => "FALSE",
-        "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -108,7 +105,6 @@ function division_basic_setup($extra)
     if ($env["NHLAPIDOCUMENTATION_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["NHLAPIDOCUMENTATION_APIKEY"],
             ],
             $extra ?? [],
         ]);

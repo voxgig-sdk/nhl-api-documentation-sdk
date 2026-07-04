@@ -50,8 +50,7 @@ class TestStandingEntity:
         standing_ref01_ent = client.Standing(None)
         standing_ref01_match = {}
 
-        standing_ref01_list_result, err = standing_ref01_ent.list(standing_ref01_match, None)
-        assert err is None
+        standing_ref01_list_result = standing_ref01_ent.list(standing_ref01_match, None)
         assert isinstance(standing_ref01_list_result, list)
 
 
@@ -92,7 +91,6 @@ def _standing_basic_setup(extra):
         "NHLAPIDOCUMENTATION_TEST_STANDING_ENTID": idmap,
         "NHLAPIDOCUMENTATION_TEST_LIVE": "FALSE",
         "NHLAPIDOCUMENTATION_TEST_EXPLAIN": "FALSE",
-        "NHLAPIDOCUMENTATION_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _standing_basic_setup(extra):
     if env.get("NHLAPIDOCUMENTATION_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("NHLAPIDOCUMENTATION_APIKEY"),
             },
             extra or {},
         ])

@@ -85,6 +85,27 @@ func (e *ConferenceEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Conference; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *ConferenceEntity) DataTyped(data ...Conference) Conference {
+	if len(data) > 0 {
+		return typedFrom[Conference](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Conference](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Conference (all fields
+// optional at the wire level).
+func (e *ConferenceEntity) MatchTyped(match ...Conference) Conference {
+	if len(match) > 0 {
+		return typedFrom[Conference](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Conference](e.Match())
+}
+
 
 func (e *ConferenceEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -111,6 +132,17 @@ func (e *ConferenceEntity) Load(reqmatch map[string]any, ctrl map[string]any) (a
 	})
 }
 
+// LoadTyped is the statically-typed variant of Load: it takes an
+// ConferenceLoadMatch and returns an Conference. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *ConferenceEntity) LoadTyped(reqmatch ConferenceLoadMatch, ctrl map[string]any) (Conference, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Conference{}, err
+	}
+	return typedFrom[Conference](res), nil
+}
+
 
 
 
@@ -131,6 +163,17 @@ func (e *ConferenceEntity) List(reqmatch map[string]any, ctrl map[string]any) (a
 			}
 		}
 	})
+}
+
+// ListTyped is the statically-typed variant of List: it takes an
+// ConferenceListMatch and returns []Conference. It delegates to the untyped
+// List (identical runtime) and converts at the typed boundary.
+func (e *ConferenceEntity) ListTyped(reqmatch ConferenceListMatch, ctrl map[string]any) ([]Conference, error) {
+	res, err := e.List(asMap(reqmatch), ctrl)
+	if err != nil {
+		return nil, err
+	}
+	return typedSliceFrom[Conference](res), nil
 }
 
 

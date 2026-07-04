@@ -49,8 +49,7 @@ class GameEntityTest extends TestCase
         // LOAD
         $game_ref01_ent = $client->Game(null);
         $game_ref01_match_dt0 = [];
-        [$game_ref01_data_dt0_loaded, $err] = $game_ref01_ent->load($game_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $game_ref01_data_dt0_loaded = $game_ref01_ent->load($game_ref01_match_dt0, null);
         $this->assertNotNull($game_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function game_basic_setup($extra)
         "NHLAPIDOCUMENTATION_TEST_GAME_ENTID" => $idmap,
         "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
         "NHLAPIDOCUMENTATION_TEST_EXPLAIN" => "FALSE",
-        "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function game_basic_setup($extra)
     if ($env["NHLAPIDOCUMENTATION_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["NHLAPIDOCUMENTATION_APIKEY"],
             ],
             $extra ?? [],
         ]);

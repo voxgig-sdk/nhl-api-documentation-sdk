@@ -43,16 +43,14 @@ class ConferenceEntityTest < Minitest::Test
     conference_ref01_ent = client.Conference(nil)
     conference_ref01_match = {}
 
-    conference_ref01_list_result, err = conference_ref01_ent.list(conference_ref01_match, nil)
-    assert_nil err
+    conference_ref01_list_result = conference_ref01_ent.list(conference_ref01_match, nil)
     assert conference_ref01_list_result.is_a?(Array)
 
     # LOAD
     conference_ref01_match_dt0 = {
       "id" => conference_ref01_data["id"],
     }
-    conference_ref01_data_dt0_loaded, err = conference_ref01_ent.load(conference_ref01_match_dt0, nil)
-    assert_nil err
+    conference_ref01_data_dt0_loaded = conference_ref01_ent.load(conference_ref01_match_dt0, nil)
     conference_ref01_data_dt0_load_result = Helpers.to_map(conference_ref01_data_dt0_loaded)
     assert !conference_ref01_data_dt0_load_result.nil?
     assert_equal conference_ref01_data_dt0_load_result["id"], conference_ref01_data["id"]
@@ -93,7 +91,6 @@ def conference_basic_setup(extra)
     "NHLAPIDOCUMENTATION_TEST_CONFERENCE_ENTID" => idmap,
     "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
     "NHLAPIDOCUMENTATION_TEST_EXPLAIN" => "FALSE",
-    "NHLAPIDOCUMENTATION_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -105,7 +102,6 @@ def conference_basic_setup(extra)
   if env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["NHLAPIDOCUMENTATION_APIKEY"],
       },
       extra || {},
     ])
