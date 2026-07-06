@@ -28,7 +28,7 @@ class ConferenceLoadMatch
     public int $id;
 }
 
-/** Match filter for Conference#list (any subset of Conference fields). */
+/** Request payload for Conference#list. */
 class ConferenceListMatch
 {
     public ?array $conference = null;
@@ -54,7 +54,7 @@ class DivisionLoadMatch
     public int $id;
 }
 
-/** Match filter for Division#list (any subset of Division fields). */
+/** Request payload for Division#list. */
 class DivisionListMatch
 {
     public ?string $copyright = null;
@@ -132,7 +132,7 @@ class Schedule
     public ?int $total_match = null;
 }
 
-/** Match filter for Schedule#list (any subset of Schedule fields). */
+/** Request payload for Schedule#list. */
 class ScheduleListMatch
 {
     public ?string $date = null;
@@ -151,7 +151,7 @@ class Standing
     public ?array $team_record = null;
 }
 
-/** Match filter for Standing#list (any subset of Standing fields). */
+/** Request payload for Standing#list. */
 class StandingListMatch
 {
     public ?array $conference = null;
@@ -183,7 +183,7 @@ class TeamLoadMatch
     public int $id;
 }
 
-/** Match filter for Team#list (any subset of Team fields). */
+/** Request payload for Team#list. */
 class TeamListMatch
 {
     public ?string $abbreviation = null;

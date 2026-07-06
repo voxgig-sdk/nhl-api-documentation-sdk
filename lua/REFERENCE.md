@@ -122,11 +122,11 @@ local conference = client:Conference(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | ``$ARRAY`` | No |  |
-| `copyright` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `conference` | `table` | No |  |
+| `copyright` | `string` | No |  |
+| `id` | `number` | No |  |
+| `link` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
@@ -186,11 +186,11 @@ local division = client:Division(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `division` | ``$ARRAY`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `copyright` | `string` | No |  |
+| `division` | `table` | No |  |
+| `id` | `number` | No |  |
+| `link` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
@@ -250,12 +250,12 @@ local game = client:Game(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `game_data` | ``$OBJECT`` | No |  |
-| `game_pk` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `live_data` | ``$OBJECT`` | No |  |
-| `team` | ``$OBJECT`` | No |  |
+| `copyright` | `string` | No |  |
+| `game_data` | `table` | No |  |
+| `game_pk` | `number` | No |  |
+| `link` | `string` | No |  |
+| `live_data` | `table` | No |  |
+| `team` | `table` | No |  |
 
 ### Operations
 
@@ -307,8 +307,8 @@ local player = client:Player(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `person` | ``$ARRAY`` | No |  |
+| `copyright` | `string` | No |  |
+| `person` | `table` | No |  |
 
 ### Operations
 
@@ -360,8 +360,8 @@ local player_stat = client:PlayerStat(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `split` | ``$ARRAY`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
+| `split` | `table` | No |  |
+| `type` | `table` | No |  |
 
 ### Operations
 
@@ -413,9 +413,9 @@ local roster = client:Roster(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `jersey_number` | ``$STRING`` | No |  |
-| `person` | ``$OBJECT`` | No |  |
-| `position` | ``$OBJECT`` | No |  |
+| `jersey_number` | `string` | No |  |
+| `person` | `table` | No |  |
+| `position` | `table` | No |  |
 
 ### Operations
 
@@ -467,12 +467,12 @@ local schedule = client:Schedule(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `game` | ``$ARRAY`` | No |  |
-| `total_event` | ``$INTEGER`` | No |  |
-| `total_game` | ``$INTEGER`` | No |  |
-| `total_item` | ``$INTEGER`` | No |  |
-| `total_match` | ``$INTEGER`` | No |  |
+| `date` | `string` | No |  |
+| `game` | `table` | No |  |
+| `total_event` | `number` | No |  |
+| `total_game` | `number` | No |  |
+| `total_item` | `number` | No |  |
+| `total_match` | `number` | No |  |
 
 ### Operations
 
@@ -524,9 +524,9 @@ local standing = client:Standing(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | ``$OBJECT`` | No |  |
-| `division` | ``$OBJECT`` | No |  |
-| `team_record` | ``$ARRAY`` | No |  |
+| `conference` | `table` | No |  |
+| `division` | `table` | No |  |
+| `team_record` | `table` | No |  |
 
 ### Operations
 
@@ -578,19 +578,19 @@ local team = client:Team(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | ``$STRING`` | No |  |
-| `conference` | ``$OBJECT`` | No |  |
-| `copyright` | ``$STRING`` | No |  |
-| `division` | ``$OBJECT`` | No |  |
-| `first_year_of_play` | ``$STRING`` | No |  |
-| `franchise` | ``$OBJECT`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `location_name` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `team` | ``$ARRAY`` | No |  |
-| `team_name` | ``$STRING`` | No |  |
-| `venue` | ``$OBJECT`` | No |  |
+| `abbreviation` | `string` | No |  |
+| `conference` | `table` | No |  |
+| `copyright` | `string` | No |  |
+| `division` | `table` | No |  |
+| `first_year_of_play` | `string` | No |  |
+| `franchise` | `table` | No |  |
+| `id` | `number` | No |  |
+| `link` | `string` | No |  |
+| `location_name` | `string` | No |  |
+| `name` | `string` | No |  |
+| `team` | `table` | No |  |
+| `team_name` | `string` | No |  |
+| `venue` | `table` | No |  |
 
 ### Operations
 

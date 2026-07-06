@@ -4,6 +4,8 @@
 
 The PHP SDK for the NhlApiDocumentation API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Conference()` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -36,7 +38,7 @@ try {
     // list() returns an array of Conference records — iterate directly.
     $conferences = $client->Conference()->list();
     foreach ($conferences as $item) {
-        echo $item["id"] . " " . $item["name"] . "\n";
+        echo $item["id"] . " " . $item["conference"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -52,6 +54,37 @@ try {
     print_r($conference);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
+}
+```
+
+
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $conferences = $client->Conference()->list();
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -75,7 +108,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -104,8 +140,8 @@ $client = NhlApiDocumentationSDK::test([
     "entity" => ["conference" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// load() returns the bare mock record (throws on error).
-$conference = $client->Conference()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$conference = $client->Conference()->list();
 print_r($conference);
 ```
 
@@ -202,10 +238,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
-| `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
+| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -379,11 +412,11 @@ Create an instance: `$conference = $client->Conference();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `conference` | ``$ARRAY`` |  |
-| `copyright` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
+| `conference` | `array` |  |
+| `copyright` | `string` |  |
+| `id` | `int` |  |
+| `link` | `string` |  |
+| `name` | `string` |  |
 
 #### Example: Load
 
@@ -415,11 +448,11 @@ Create an instance: `$division = $client->Division();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `copyright` | ``$STRING`` |  |
-| `division` | ``$ARRAY`` |  |
-| `id` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
+| `copyright` | `string` |  |
+| `division` | `array` |  |
+| `id` | `int` |  |
+| `link` | `string` |  |
+| `name` | `string` |  |
 
 #### Example: Load
 
@@ -450,12 +483,12 @@ Create an instance: `$game = $client->Game();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `copyright` | ``$STRING`` |  |
-| `game_data` | ``$OBJECT`` |  |
-| `game_pk` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `live_data` | ``$OBJECT`` |  |
-| `team` | ``$OBJECT`` |  |
+| `copyright` | `string` |  |
+| `game_data` | `array` |  |
+| `game_pk` | `int` |  |
+| `link` | `string` |  |
+| `live_data` | `array` |  |
+| `team` | `array` |  |
 
 #### Example: Load
 
@@ -479,8 +512,8 @@ Create an instance: `$player = $client->Player();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `copyright` | ``$STRING`` |  |
-| `person` | ``$ARRAY`` |  |
+| `copyright` | `string` |  |
+| `person` | `array` |  |
 
 #### Example: Load
 
@@ -504,8 +537,8 @@ Create an instance: `$player_stat = $client->PlayerStat();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `split` | ``$ARRAY`` |  |
-| `type` | ``$OBJECT`` |  |
+| `split` | `array` |  |
+| `type` | `array` |  |
 
 #### Example: List
 
@@ -529,9 +562,9 @@ Create an instance: `$roster = $client->Roster();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `jersey_number` | ``$STRING`` |  |
-| `person` | ``$OBJECT`` |  |
-| `position` | ``$OBJECT`` |  |
+| `jersey_number` | `string` |  |
+| `person` | `array` |  |
+| `position` | `array` |  |
 
 #### Example: List
 
@@ -555,12 +588,12 @@ Create an instance: `$schedule = $client->Schedule();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$STRING`` |  |
-| `game` | ``$ARRAY`` |  |
-| `total_event` | ``$INTEGER`` |  |
-| `total_game` | ``$INTEGER`` |  |
-| `total_item` | ``$INTEGER`` |  |
-| `total_match` | ``$INTEGER`` |  |
+| `date` | `string` |  |
+| `game` | `array` |  |
+| `total_event` | `int` |  |
+| `total_game` | `int` |  |
+| `total_item` | `int` |  |
+| `total_match` | `int` |  |
 
 #### Example: List
 
@@ -584,9 +617,9 @@ Create an instance: `$standing = $client->Standing();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `conference` | ``$OBJECT`` |  |
-| `division` | ``$OBJECT`` |  |
-| `team_record` | ``$ARRAY`` |  |
+| `conference` | `array` |  |
+| `division` | `array` |  |
+| `team_record` | `array` |  |
 
 #### Example: List
 
@@ -611,19 +644,19 @@ Create an instance: `$team = $client->Team();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbreviation` | ``$STRING`` |  |
-| `conference` | ``$OBJECT`` |  |
-| `copyright` | ``$STRING`` |  |
-| `division` | ``$OBJECT`` |  |
-| `first_year_of_play` | ``$STRING`` |  |
-| `franchise` | ``$OBJECT`` |  |
-| `id` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `location_name` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `team` | ``$ARRAY`` |  |
-| `team_name` | ``$STRING`` |  |
-| `venue` | ``$OBJECT`` |  |
+| `abbreviation` | `string` |  |
+| `conference` | `array` |  |
+| `copyright` | `string` |  |
+| `division` | `array` |  |
+| `first_year_of_play` | `string` |  |
+| `franchise` | `array` |  |
+| `id` | `int` |  |
+| `link` | `string` |  |
+| `location_name` | `string` |  |
+| `name` | `string` |  |
+| `team` | `array` |  |
+| `team_name` | `string` |  |
+| `venue` | `array` |  |
 
 #### Example: Load
 
@@ -640,12 +673,16 @@ $teams = $client->Team()->list();
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -662,8 +699,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -707,15 +745,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
 $conference = $client->Conference();
-$conference->load(["id" => "example_id"]);
+$conference->list();
 
-// $conference->dataGet() now returns the loaded conference data
-// $conference->matchGet() returns the last match criteria
+// $conference->data_get() now returns the conference data from the last list
+// $conference->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

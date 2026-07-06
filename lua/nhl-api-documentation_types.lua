@@ -17,6 +17,11 @@
 ---@field id number
 
 ---@class ConferenceListMatch
+---@field conference? table
+---@field copyright? string
+---@field id? number
+---@field link? string
+---@field name? string
 
 ---@class Division
 ---@field copyright? string
@@ -29,6 +34,11 @@
 ---@field id number
 
 ---@class DivisionListMatch
+---@field copyright? string
+---@field division? table
+---@field id? number
+---@field link? string
+---@field name? string
 
 ---@class Game
 ---@field copyright? string
@@ -72,6 +82,12 @@
 ---@field total_match? number
 
 ---@class ScheduleListMatch
+---@field date? string
+---@field game? table
+---@field total_event? number
+---@field total_game? number
+---@field total_item? number
+---@field total_match? number
 
 ---@class Standing
 ---@field conference? table
@@ -79,6 +95,9 @@
 ---@field team_record? table
 
 ---@class StandingListMatch
+---@field conference? table
+---@field division? table
+---@field team_record? table
 
 ---@class Team
 ---@field abbreviation? string
@@ -99,6 +118,19 @@
 ---@field id number
 
 ---@class TeamListMatch
+---@field abbreviation? string
+---@field conference? table
+---@field copyright? string
+---@field division? table
+---@field first_year_of_play? string
+---@field franchise? table
+---@field id? number
+---@field link? string
+---@field location_name? string
+---@field name? string
+---@field team? table
+---@field team_name? string
+---@field venue? table
 
 local M = {}
 

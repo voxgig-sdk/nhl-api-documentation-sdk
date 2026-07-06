@@ -8,7 +8,7 @@ Complete API reference for the NhlApiDocumentation Python SDK.
 ### Constructor
 
 ```python
-from nhl-api-documentation_sdk import NhlApiDocumentationSDK
+from nhlapidocumentation_sdk import NhlApiDocumentationSDK
 
 client = NhlApiDocumentationSDK(options)
 ```
@@ -119,20 +119,20 @@ conference = client.Conference()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | ``$ARRAY`` | No |  |
-| `copyright` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `conference` | `list` | No |  |
+| `copyright` | `str` | No |  |
+| `id` | `int` | No |  |
+| `link` | `str` | No |  |
+| `name` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Conference().list({})
+results = client.Conference().list()
 for conference in results:
     print(conference)
 ```
@@ -184,20 +184,20 @@ division = client.Division()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `division` | ``$ARRAY`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `copyright` | `str` | No |  |
+| `division` | `list` | No |  |
+| `id` | `int` | No |  |
+| `link` | `str` | No |  |
+| `name` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Division().list({})
+results = client.Division().list()
 for division in results:
     print(division)
 ```
@@ -249,12 +249,12 @@ game = client.Game()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `game_data` | ``$OBJECT`` | No |  |
-| `game_pk` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `live_data` | ``$OBJECT`` | No |  |
-| `team` | ``$OBJECT`` | No |  |
+| `copyright` | `str` | No |  |
+| `game_data` | `dict` | No |  |
+| `game_pk` | `int` | No |  |
+| `link` | `str` | No |  |
+| `live_data` | `dict` | No |  |
+| `team` | `dict` | No |  |
 
 ### Operations
 
@@ -305,8 +305,8 @@ player = client.Player()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `person` | ``$ARRAY`` | No |  |
+| `copyright` | `str` | No |  |
+| `person` | `list` | No |  |
 
 ### Operations
 
@@ -357,17 +357,17 @@ player_stat = client.PlayerStat()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `split` | ``$ARRAY`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
+| `split` | `list` | No |  |
+| `type` | `dict` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.PlayerStat().list({})
+results = client.PlayerStat().list()
 for player_stat in results:
     print(player_stat)
 ```
@@ -411,18 +411,18 @@ roster = client.Roster()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `jersey_number` | ``$STRING`` | No |  |
-| `person` | ``$OBJECT`` | No |  |
-| `position` | ``$OBJECT`` | No |  |
+| `jersey_number` | `str` | No |  |
+| `person` | `dict` | No |  |
+| `position` | `dict` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Roster().list({})
+results = client.Roster().list()
 for roster in results:
     print(roster)
 ```
@@ -466,21 +466,21 @@ schedule = client.Schedule()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `game` | ``$ARRAY`` | No |  |
-| `total_event` | ``$INTEGER`` | No |  |
-| `total_game` | ``$INTEGER`` | No |  |
-| `total_item` | ``$INTEGER`` | No |  |
-| `total_match` | ``$INTEGER`` | No |  |
+| `date` | `str` | No |  |
+| `game` | `list` | No |  |
+| `total_event` | `int` | No |  |
+| `total_game` | `int` | No |  |
+| `total_item` | `int` | No |  |
+| `total_match` | `int` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Schedule().list({})
+results = client.Schedule().list()
 for schedule in results:
     print(schedule)
 ```
@@ -524,18 +524,18 @@ standing = client.Standing()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | ``$OBJECT`` | No |  |
-| `division` | ``$OBJECT`` | No |  |
-| `team_record` | ``$ARRAY`` | No |  |
+| `conference` | `dict` | No |  |
+| `division` | `dict` | No |  |
+| `team_record` | `list` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Standing().list({})
+results = client.Standing().list()
 for standing in results:
     print(standing)
 ```
@@ -579,28 +579,28 @@ team = client.Team()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | ``$STRING`` | No |  |
-| `conference` | ``$OBJECT`` | No |  |
-| `copyright` | ``$STRING`` | No |  |
-| `division` | ``$OBJECT`` | No |  |
-| `first_year_of_play` | ``$STRING`` | No |  |
-| `franchise` | ``$OBJECT`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `location_name` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `team` | ``$ARRAY`` | No |  |
-| `team_name` | ``$STRING`` | No |  |
-| `venue` | ``$OBJECT`` | No |  |
+| `abbreviation` | `str` | No |  |
+| `conference` | `dict` | No |  |
+| `copyright` | `str` | No |  |
+| `division` | `dict` | No |  |
+| `first_year_of_play` | `str` | No |  |
+| `franchise` | `dict` | No |  |
+| `id` | `int` | No |  |
+| `link` | `str` | No |  |
+| `location_name` | `str` | No |  |
+| `name` | `str` | No |  |
+| `team` | `list` | No |  |
+| `team_name` | `str` | No |  |
+| `venue` | `dict` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Team().list({})
+results = client.Team().list()
 for team in results:
     print(team)
 ```

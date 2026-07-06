@@ -8,7 +8,7 @@ Complete API reference for the NhlApiDocumentation Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'nhl-api-documentation_sdk'
+require_relative 'NhlApiDocumentation_sdk'
 
 client = NhlApiDocumentationSDK.new(options)
 ```
@@ -125,20 +125,20 @@ conference = client.Conference
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | ``$ARRAY`` | No |  |
-| `copyright` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `conference` | `Array` | No |  |
+| `copyright` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `link` | `String` | No |  |
+| `name` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Conference.list(nil)
+results = client.Conference.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -189,20 +189,20 @@ division = client.Division
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `division` | ``$ARRAY`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `copyright` | `String` | No |  |
+| `division` | `Array` | No |  |
+| `id` | `Integer` | No |  |
+| `link` | `String` | No |  |
+| `name` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Division.list(nil)
+results = client.Division.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -253,12 +253,12 @@ game = client.Game
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `game_data` | ``$OBJECT`` | No |  |
-| `game_pk` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `live_data` | ``$OBJECT`` | No |  |
-| `team` | ``$OBJECT`` | No |  |
+| `copyright` | `String` | No |  |
+| `game_data` | `Hash` | No |  |
+| `game_pk` | `Integer` | No |  |
+| `link` | `String` | No |  |
+| `live_data` | `Hash` | No |  |
+| `team` | `Hash` | No |  |
 
 ### Operations
 
@@ -310,8 +310,8 @@ player = client.Player
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `person` | ``$ARRAY`` | No |  |
+| `copyright` | `String` | No |  |
+| `person` | `Array` | No |  |
 
 ### Operations
 
@@ -363,17 +363,17 @@ player_stat = client.PlayerStat
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `split` | ``$ARRAY`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
+| `split` | `Array` | No |  |
+| `type` | `Hash` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.PlayerStat.list(nil)
+results = client.PlayerStat.list
 ```
 
 ### Common Methods
@@ -416,18 +416,18 @@ roster = client.Roster
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `jersey_number` | ``$STRING`` | No |  |
-| `person` | ``$OBJECT`` | No |  |
-| `position` | ``$OBJECT`` | No |  |
+| `jersey_number` | `String` | No |  |
+| `person` | `Hash` | No |  |
+| `position` | `Hash` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Roster.list(nil)
+results = client.Roster.list
 ```
 
 ### Common Methods
@@ -470,21 +470,21 @@ schedule = client.Schedule
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `game` | ``$ARRAY`` | No |  |
-| `total_event` | ``$INTEGER`` | No |  |
-| `total_game` | ``$INTEGER`` | No |  |
-| `total_item` | ``$INTEGER`` | No |  |
-| `total_match` | ``$INTEGER`` | No |  |
+| `date` | `String` | No |  |
+| `game` | `Array` | No |  |
+| `total_event` | `Integer` | No |  |
+| `total_game` | `Integer` | No |  |
+| `total_item` | `Integer` | No |  |
+| `total_match` | `Integer` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Schedule.list(nil)
+results = client.Schedule.list
 ```
 
 ### Common Methods
@@ -527,18 +527,18 @@ standing = client.Standing
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | ``$OBJECT`` | No |  |
-| `division` | ``$OBJECT`` | No |  |
-| `team_record` | ``$ARRAY`` | No |  |
+| `conference` | `Hash` | No |  |
+| `division` | `Hash` | No |  |
+| `team_record` | `Array` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Standing.list(nil)
+results = client.Standing.list
 ```
 
 ### Common Methods
@@ -581,28 +581,28 @@ team = client.Team
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | ``$STRING`` | No |  |
-| `conference` | ``$OBJECT`` | No |  |
-| `copyright` | ``$STRING`` | No |  |
-| `division` | ``$OBJECT`` | No |  |
-| `first_year_of_play` | ``$STRING`` | No |  |
-| `franchise` | ``$OBJECT`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `location_name` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `team` | ``$ARRAY`` | No |  |
-| `team_name` | ``$STRING`` | No |  |
-| `venue` | ``$OBJECT`` | No |  |
+| `abbreviation` | `String` | No |  |
+| `conference` | `Hash` | No |  |
+| `copyright` | `String` | No |  |
+| `division` | `Hash` | No |  |
+| `first_year_of_play` | `String` | No |  |
+| `franchise` | `Hash` | No |  |
+| `id` | `Integer` | No |  |
+| `link` | `String` | No |  |
+| `location_name` | `String` | No |  |
+| `name` | `String` | No |  |
+| `team` | `Array` | No |  |
+| `team_name` | `String` | No |  |
+| `venue` | `Hash` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Team.list(nil)
+results = client.Team.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`

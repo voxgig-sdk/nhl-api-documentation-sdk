@@ -22,8 +22,7 @@ type ConferenceLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// ConferenceListMatch mirrors the conference fields as an all-optional match
-// filter (Go analog of Partial<Conference>).
+// ConferenceListMatch is the typed request payload for Conference.ListTyped.
 type ConferenceListMatch struct {
 	Conference *[]any `json:"conference,omitempty"`
 	Copyright *string `json:"copyright,omitempty"`
@@ -46,8 +45,7 @@ type DivisionLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// DivisionListMatch mirrors the division fields as an all-optional match
-// filter (Go analog of Partial<Division>).
+// DivisionListMatch is the typed request payload for Division.ListTyped.
 type DivisionListMatch struct {
 	Copyright *string `json:"copyright,omitempty"`
 	Division *[]any `json:"division,omitempty"`
@@ -115,8 +113,7 @@ type Schedule struct {
 	TotalMatch *int `json:"total_match,omitempty"`
 }
 
-// ScheduleListMatch mirrors the schedule fields as an all-optional match
-// filter (Go analog of Partial<Schedule>).
+// ScheduleListMatch is the typed request payload for Schedule.ListTyped.
 type ScheduleListMatch struct {
 	Date *string `json:"date,omitempty"`
 	Game *[]any `json:"game,omitempty"`
@@ -133,8 +130,7 @@ type Standing struct {
 	TeamRecord *[]any `json:"team_record,omitempty"`
 }
 
-// StandingListMatch mirrors the standing fields as an all-optional match
-// filter (Go analog of Partial<Standing>).
+// StandingListMatch is the typed request payload for Standing.ListTyped.
 type StandingListMatch struct {
 	Conference *map[string]any `json:"conference,omitempty"`
 	Division *map[string]any `json:"division,omitempty"`
@@ -163,8 +159,7 @@ type TeamLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// TeamListMatch mirrors the team fields as an all-optional match
-// filter (Go analog of Partial<Team>).
+// TeamListMatch is the typed request payload for Team.ListTyped.
 type TeamListMatch struct {
 	Abbreviation *string `json:"abbreviation,omitempty"`
 	Conference *map[string]any `json:"conference,omitempty"`

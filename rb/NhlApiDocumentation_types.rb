@@ -42,7 +42,7 @@ ConferenceLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Conference#list (any subset of Conference fields).
+# Request payload for Conference#list.
 #
 # @!attribute [rw] conference
 #   @return [Array, nil]
@@ -101,7 +101,7 @@ DivisionLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Division#list (any subset of Division fields).
+# Request payload for Division#list.
 #
 # @!attribute [rw] copyright
 #   @return [String, nil]
@@ -263,7 +263,7 @@ Schedule = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Schedule#list (any subset of Schedule fields).
+# Request payload for Schedule#list.
 #
 # @!attribute [rw] date
 #   @return [String, nil]
@@ -309,7 +309,7 @@ Standing = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Standing#list (any subset of Standing fields).
+# Request payload for Standing#list.
 #
 # @!attribute [rw] conference
 #   @return [Hash, nil]
@@ -392,7 +392,7 @@ TeamLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Team#list (any subset of Team fields).
+# Request payload for Team#list.
 #
 # @!attribute [rw] abbreviation
 #   @return [String, nil]

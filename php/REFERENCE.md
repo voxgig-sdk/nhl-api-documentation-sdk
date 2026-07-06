@@ -8,7 +8,7 @@ Complete API reference for the NhlApiDocumentation PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/nhl-api-documentation_sdk.php';
+require_once __DIR__ . '/nhlapidocumentation_sdk.php';
 
 $client = new NhlApiDocumentationSDK($options);
 ```
@@ -77,11 +77,11 @@ Create a new `StandingEntity` instance. Pass `null` for no initial data.
 
 Create a new `TeamEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): NhlApiDocumentationUtility`
 
 Return a copy of the SDK utility object.
 
@@ -124,20 +124,20 @@ $conference = $client->Conference();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | ``$ARRAY`` | No |  |
-| `copyright` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `conference` | `array` | No |  |
+| `copyright` | `string` | No |  |
+| `id` | `int` | No |  |
+| `link` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Conference()->list([]);
+$results = $client->Conference()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -150,19 +150,19 @@ $result = $client->Conference()->load(["id" => "conference_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -171,7 +171,7 @@ Set the entity match criteria.
 Create a new `ConferenceEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -188,20 +188,20 @@ $division = $client->Division();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `division` | ``$ARRAY`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `copyright` | `string` | No |  |
+| `division` | `array` | No |  |
+| `id` | `int` | No |  |
+| `link` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Division()->list([]);
+$results = $client->Division()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -214,19 +214,19 @@ $result = $client->Division()->load(["id" => "division_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -235,7 +235,7 @@ Set the entity match criteria.
 Create a new `DivisionEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -252,12 +252,12 @@ $game = $client->Game();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `game_data` | ``$OBJECT`` | No |  |
-| `game_pk` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `live_data` | ``$OBJECT`` | No |  |
-| `team` | ``$OBJECT`` | No |  |
+| `copyright` | `string` | No |  |
+| `game_data` | `array` | No |  |
+| `game_pk` | `int` | No |  |
+| `link` | `string` | No |  |
+| `live_data` | `array` | No |  |
+| `team` | `array` | No |  |
 
 ### Operations
 
@@ -271,19 +271,19 @@ $result = $client->Game()->load(["id" => "game_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -292,7 +292,7 @@ Set the entity match criteria.
 Create a new `GameEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -309,8 +309,8 @@ $player = $client->Player();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `person` | ``$ARRAY`` | No |  |
+| `copyright` | `string` | No |  |
+| `person` | `array` | No |  |
 
 ### Operations
 
@@ -324,19 +324,19 @@ $result = $client->Player()->load(["id" => "player_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -345,7 +345,7 @@ Set the entity match criteria.
 Create a new `PlayerEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -362,34 +362,34 @@ $player_stat = $client->PlayerStat();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `split` | ``$ARRAY`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
+| `split` | `array` | No |  |
+| `type` | `array` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->PlayerStat()->list([]);
+$results = $client->PlayerStat()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -398,7 +398,7 @@ Set the entity match criteria.
 Create a new `PlayerStatEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -415,35 +415,35 @@ $roster = $client->Roster();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `jersey_number` | ``$STRING`` | No |  |
-| `person` | ``$OBJECT`` | No |  |
-| `position` | ``$OBJECT`` | No |  |
+| `jersey_number` | `string` | No |  |
+| `person` | `array` | No |  |
+| `position` | `array` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Roster()->list([]);
+$results = $client->Roster()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -452,7 +452,7 @@ Set the entity match criteria.
 Create a new `RosterEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -469,38 +469,38 @@ $schedule = $client->Schedule();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `game` | ``$ARRAY`` | No |  |
-| `total_event` | ``$INTEGER`` | No |  |
-| `total_game` | ``$INTEGER`` | No |  |
-| `total_item` | ``$INTEGER`` | No |  |
-| `total_match` | ``$INTEGER`` | No |  |
+| `date` | `string` | No |  |
+| `game` | `array` | No |  |
+| `total_event` | `int` | No |  |
+| `total_game` | `int` | No |  |
+| `total_item` | `int` | No |  |
+| `total_match` | `int` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Schedule()->list([]);
+$results = $client->Schedule()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -509,7 +509,7 @@ Set the entity match criteria.
 Create a new `ScheduleEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -526,35 +526,35 @@ $standing = $client->Standing();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | ``$OBJECT`` | No |  |
-| `division` | ``$OBJECT`` | No |  |
-| `team_record` | ``$ARRAY`` | No |  |
+| `conference` | `array` | No |  |
+| `division` | `array` | No |  |
+| `team_record` | `array` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Standing()->list([]);
+$results = $client->Standing()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -563,7 +563,7 @@ Set the entity match criteria.
 Create a new `StandingEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -580,28 +580,28 @@ $team = $client->Team();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | ``$STRING`` | No |  |
-| `conference` | ``$OBJECT`` | No |  |
-| `copyright` | ``$STRING`` | No |  |
-| `division` | ``$OBJECT`` | No |  |
-| `first_year_of_play` | ``$STRING`` | No |  |
-| `franchise` | ``$OBJECT`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `location_name` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `team` | ``$ARRAY`` | No |  |
-| `team_name` | ``$STRING`` | No |  |
-| `venue` | ``$OBJECT`` | No |  |
+| `abbreviation` | `string` | No |  |
+| `conference` | `array` | No |  |
+| `copyright` | `string` | No |  |
+| `division` | `array` | No |  |
+| `first_year_of_play` | `string` | No |  |
+| `franchise` | `array` | No |  |
+| `id` | `int` | No |  |
+| `link` | `string` | No |  |
+| `location_name` | `string` | No |  |
+| `name` | `string` | No |  |
+| `team` | `array` | No |  |
+| `team_name` | `string` | No |  |
+| `venue` | `array` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Team()->list([]);
+$results = $client->Team()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -614,19 +614,19 @@ $result = $client->Team()->load(["id" => "team_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -635,7 +635,7 @@ Set the entity match criteria.
 Create a new `TeamEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

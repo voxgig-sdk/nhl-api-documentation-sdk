@@ -129,11 +129,11 @@ conference := client.Conference(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | ``$ARRAY`` | No |  |
-| `copyright` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `conference` | `[]any` | No |  |
+| `copyright` | `string` | No |  |
+| `id` | `int` | No |  |
+| `link` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
@@ -187,11 +187,11 @@ division := client.Division(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `division` | ``$ARRAY`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `copyright` | `string` | No |  |
+| `division` | `[]any` | No |  |
+| `id` | `int` | No |  |
+| `link` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
@@ -245,12 +245,12 @@ game := client.Game(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `game_data` | ``$OBJECT`` | No |  |
-| `game_pk` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `live_data` | ``$OBJECT`` | No |  |
-| `team` | ``$OBJECT`` | No |  |
+| `copyright` | `string` | No |  |
+| `game_data` | `map[string]any` | No |  |
+| `game_pk` | `int` | No |  |
+| `link` | `string` | No |  |
+| `live_data` | `map[string]any` | No |  |
+| `team` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -296,8 +296,8 @@ player := client.Player(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `person` | ``$ARRAY`` | No |  |
+| `copyright` | `string` | No |  |
+| `person` | `[]any` | No |  |
 
 ### Operations
 
@@ -343,8 +343,8 @@ player_stat := client.PlayerStat(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `split` | ``$ARRAY`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
+| `split` | `[]any` | No |  |
+| `type` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -390,9 +390,9 @@ roster := client.Roster(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `jersey_number` | ``$STRING`` | No |  |
-| `person` | ``$OBJECT`` | No |  |
-| `position` | ``$OBJECT`` | No |  |
+| `jersey_number` | `string` | No |  |
+| `person` | `map[string]any` | No |  |
+| `position` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -438,12 +438,12 @@ schedule := client.Schedule(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `game` | ``$ARRAY`` | No |  |
-| `total_event` | ``$INTEGER`` | No |  |
-| `total_game` | ``$INTEGER`` | No |  |
-| `total_item` | ``$INTEGER`` | No |  |
-| `total_match` | ``$INTEGER`` | No |  |
+| `date` | `string` | No |  |
+| `game` | `[]any` | No |  |
+| `total_event` | `int` | No |  |
+| `total_game` | `int` | No |  |
+| `total_item` | `int` | No |  |
+| `total_match` | `int` | No |  |
 
 ### Operations
 
@@ -489,9 +489,9 @@ standing := client.Standing(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | ``$OBJECT`` | No |  |
-| `division` | ``$OBJECT`` | No |  |
-| `team_record` | ``$ARRAY`` | No |  |
+| `conference` | `map[string]any` | No |  |
+| `division` | `map[string]any` | No |  |
+| `team_record` | `[]any` | No |  |
 
 ### Operations
 
@@ -537,19 +537,19 @@ team := client.Team(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | ``$STRING`` | No |  |
-| `conference` | ``$OBJECT`` | No |  |
-| `copyright` | ``$STRING`` | No |  |
-| `division` | ``$OBJECT`` | No |  |
-| `first_year_of_play` | ``$STRING`` | No |  |
-| `franchise` | ``$OBJECT`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `location_name` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `team` | ``$ARRAY`` | No |  |
-| `team_name` | ``$STRING`` | No |  |
-| `venue` | ``$OBJECT`` | No |  |
+| `abbreviation` | `string` | No |  |
+| `conference` | `map[string]any` | No |  |
+| `copyright` | `string` | No |  |
+| `division` | `map[string]any` | No |  |
+| `first_year_of_play` | `string` | No |  |
+| `franchise` | `map[string]any` | No |  |
+| `id` | `int` | No |  |
+| `link` | `string` | No |  |
+| `location_name` | `string` | No |  |
+| `name` | `string` | No |  |
+| `team` | `[]any` | No |  |
+| `team_name` | `string` | No |  |
+| `venue` | `map[string]any` | No |  |
 
 ### Operations
 

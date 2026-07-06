@@ -4,6 +4,8 @@
 
 The Ruby SDK for the NhlApiDocumentation API — an entity-oriented client using idiomatic Ruby conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Conference` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -35,7 +37,7 @@ begin
   # list returns an Array of Conference records — iterate directly.
   conferences = client.Conference.list
   conferences.each do |item|
-    puts "#{item["id"]} #{item["name"]}"
+    puts "#{item["id"]} #{item["conference"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -52,6 +54,33 @@ begin
 rescue => err
   warn "load failed: #{err}"
 end
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so rescue them:
+
+```ruby
+begin
+  conferences = client.Conference.list()
+rescue => err
+  warn "list failed: #{err}"
+end
+```
+
+`direct` does **not** raise — it returns the result hash. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```ruby
+result = client.direct({
+  "path" => "/api/resource/{id}",
+  "method" => "GET",
+  "params" => { "id" => "example_id" },
+})
+
+warn "request failed: #{result["err"] || "HTTP #{result["status"]}"}" unless result["ok"]
 ```
 
 
@@ -72,7 +101,9 @@ if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
 else
-  warn result["err"]
+  # On an HTTP error status there is no err (only a transport failure sets
+  # it), so fall back to the status code.
+  warn(result["err"] || "HTTP #{result["status"]}")
 end
 ```
 
@@ -103,8 +134,8 @@ client = NhlApiDocumentationSDK.test({
   "entity" => { "conference" => { "test01" => { "id" => "test01" } } },
 })
 
-# load returns the bare mock record (raises on error).
-conference = client.Conference.load({ "id" => "test01" })
+# Entity ops return the bare mock record (raises on error).
+conference = client.Conference.list()
 puts conference
 ```
 
@@ -198,10 +229,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -374,11 +402,11 @@ Create an instance: `conference = client.Conference`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `conference` | ``$ARRAY`` |  |
-| `copyright` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
+| `conference` | `Array` |  |
+| `copyright` | `String` |  |
+| `id` | `Integer` |  |
+| `link` | `String` |  |
+| `name` | `String` |  |
 
 #### Example: Load
 
@@ -410,11 +438,11 @@ Create an instance: `division = client.Division`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `copyright` | ``$STRING`` |  |
-| `division` | ``$ARRAY`` |  |
-| `id` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
+| `copyright` | `String` |  |
+| `division` | `Array` |  |
+| `id` | `Integer` |  |
+| `link` | `String` |  |
+| `name` | `String` |  |
 
 #### Example: Load
 
@@ -445,12 +473,12 @@ Create an instance: `game = client.Game`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `copyright` | ``$STRING`` |  |
-| `game_data` | ``$OBJECT`` |  |
-| `game_pk` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `live_data` | ``$OBJECT`` |  |
-| `team` | ``$OBJECT`` |  |
+| `copyright` | `String` |  |
+| `game_data` | `Hash` |  |
+| `game_pk` | `Integer` |  |
+| `link` | `String` |  |
+| `live_data` | `Hash` |  |
+| `team` | `Hash` |  |
 
 #### Example: Load
 
@@ -474,8 +502,8 @@ Create an instance: `player = client.Player`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `copyright` | ``$STRING`` |  |
-| `person` | ``$ARRAY`` |  |
+| `copyright` | `String` |  |
+| `person` | `Array` |  |
 
 #### Example: Load
 
@@ -499,8 +527,8 @@ Create an instance: `player_stat = client.PlayerStat`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `split` | ``$ARRAY`` |  |
-| `type` | ``$OBJECT`` |  |
+| `split` | `Array` |  |
+| `type` | `Hash` |  |
 
 #### Example: List
 
@@ -524,9 +552,9 @@ Create an instance: `roster = client.Roster`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `jersey_number` | ``$STRING`` |  |
-| `person` | ``$OBJECT`` |  |
-| `position` | ``$OBJECT`` |  |
+| `jersey_number` | `String` |  |
+| `person` | `Hash` |  |
+| `position` | `Hash` |  |
 
 #### Example: List
 
@@ -550,12 +578,12 @@ Create an instance: `schedule = client.Schedule`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$STRING`` |  |
-| `game` | ``$ARRAY`` |  |
-| `total_event` | ``$INTEGER`` |  |
-| `total_game` | ``$INTEGER`` |  |
-| `total_item` | ``$INTEGER`` |  |
-| `total_match` | ``$INTEGER`` |  |
+| `date` | `String` |  |
+| `game` | `Array` |  |
+| `total_event` | `Integer` |  |
+| `total_game` | `Integer` |  |
+| `total_item` | `Integer` |  |
+| `total_match` | `Integer` |  |
 
 #### Example: List
 
@@ -579,9 +607,9 @@ Create an instance: `standing = client.Standing`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `conference` | ``$OBJECT`` |  |
-| `division` | ``$OBJECT`` |  |
-| `team_record` | ``$ARRAY`` |  |
+| `conference` | `Hash` |  |
+| `division` | `Hash` |  |
+| `team_record` | `Array` |  |
 
 #### Example: List
 
@@ -606,19 +634,19 @@ Create an instance: `team = client.Team`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbreviation` | ``$STRING`` |  |
-| `conference` | ``$OBJECT`` |  |
-| `copyright` | ``$STRING`` |  |
-| `division` | ``$OBJECT`` |  |
-| `first_year_of_play` | ``$STRING`` |  |
-| `franchise` | ``$OBJECT`` |  |
-| `id` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `location_name` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `team` | ``$ARRAY`` |  |
-| `team_name` | ``$STRING`` |  |
-| `venue` | ``$OBJECT`` |  |
+| `abbreviation` | `String` |  |
+| `conference` | `Hash` |  |
+| `copyright` | `String` |  |
+| `division` | `Hash` |  |
+| `first_year_of_play` | `String` |  |
+| `franchise` | `Hash` |  |
+| `id` | `Integer` |  |
+| `link` | `String` |  |
+| `location_name` | `String` |  |
+| `name` | `String` |  |
+| `team` | `Array` |  |
+| `team_name` | `String` |  |
+| `venue` | `Hash` |  |
 
 #### Example: Load
 
@@ -635,12 +663,16 @@ teams = client.Team.list
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -657,8 +689,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -702,14 +735,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
 conference = client.Conference
-conference.load({ "id" => "example_id" })
+conference.list()
 
-# conference.data_get now returns the loaded conference data
+# conference.data_get now returns the conference data from the last list
 # conference.match_get returns the last match criteria
 ```
 

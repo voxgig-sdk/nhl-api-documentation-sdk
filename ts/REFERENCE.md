@@ -212,11 +212,11 @@ const conference = client.Conference()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | ``$ARRAY`` | No |  |
-| `copyright` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `conference` | `any[]` | No |  |
+| `copyright` | `string` | No |  |
+| `id` | `number` | No |  |
+| `link` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
@@ -233,7 +233,7 @@ const results = await client.Conference().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Conference().load({ id: 'conference_id' })
+const result = await client.Conference().load({ id: 1 })
 ```
 
 ### Common Methods
@@ -274,11 +274,11 @@ const division = client.Division()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `division` | ``$ARRAY`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `copyright` | `string` | No |  |
+| `division` | `any[]` | No |  |
+| `id` | `number` | No |  |
+| `link` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
@@ -295,7 +295,7 @@ const results = await client.Division().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Division().load({ id: 'division_id' })
+const result = await client.Division().load({ id: 1 })
 ```
 
 ### Common Methods
@@ -336,12 +336,12 @@ const game = client.Game()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `game_data` | ``$OBJECT`` | No |  |
-| `game_pk` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `live_data` | ``$OBJECT`` | No |  |
-| `team` | ``$OBJECT`` | No |  |
+| `copyright` | `string` | No |  |
+| `game_data` | `Record<string, any>` | No |  |
+| `game_pk` | `number` | No |  |
+| `link` | `string` | No |  |
+| `live_data` | `Record<string, any>` | No |  |
+| `team` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -350,7 +350,7 @@ const game = client.Game()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Game().load({ id: 'game_id' })
+const result = await client.Game().load({ id: 1 })
 ```
 
 ### Common Methods
@@ -391,8 +391,8 @@ const player = client.Player()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `copyright` | ``$STRING`` | No |  |
-| `person` | ``$ARRAY`` | No |  |
+| `copyright` | `string` | No |  |
+| `person` | `any[]` | No |  |
 
 ### Operations
 
@@ -401,7 +401,7 @@ const player = client.Player()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Player().load({ id: 'player_id' })
+const result = await client.Player().load({ id: 1 })
 ```
 
 ### Common Methods
@@ -442,8 +442,8 @@ const player_stat = client.PlayerStat()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `split` | ``$ARRAY`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
+| `split` | `any[]` | No |  |
+| `type` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -493,9 +493,9 @@ const roster = client.Roster()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `jersey_number` | ``$STRING`` | No |  |
-| `person` | ``$OBJECT`` | No |  |
-| `position` | ``$OBJECT`` | No |  |
+| `jersey_number` | `string` | No |  |
+| `person` | `Record<string, any>` | No |  |
+| `position` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -545,12 +545,12 @@ const schedule = client.Schedule()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `game` | ``$ARRAY`` | No |  |
-| `total_event` | ``$INTEGER`` | No |  |
-| `total_game` | ``$INTEGER`` | No |  |
-| `total_item` | ``$INTEGER`` | No |  |
-| `total_match` | ``$INTEGER`` | No |  |
+| `date` | `string` | No |  |
+| `game` | `any[]` | No |  |
+| `total_event` | `number` | No |  |
+| `total_game` | `number` | No |  |
+| `total_item` | `number` | No |  |
+| `total_match` | `number` | No |  |
 
 ### Operations
 
@@ -600,9 +600,9 @@ const standing = client.Standing()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | ``$OBJECT`` | No |  |
-| `division` | ``$OBJECT`` | No |  |
-| `team_record` | ``$ARRAY`` | No |  |
+| `conference` | `Record<string, any>` | No |  |
+| `division` | `Record<string, any>` | No |  |
+| `team_record` | `any[]` | No |  |
 
 ### Operations
 
@@ -652,19 +652,19 @@ const team = client.Team()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | ``$STRING`` | No |  |
-| `conference` | ``$OBJECT`` | No |  |
-| `copyright` | ``$STRING`` | No |  |
-| `division` | ``$OBJECT`` | No |  |
-| `first_year_of_play` | ``$STRING`` | No |  |
-| `franchise` | ``$OBJECT`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `location_name` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `team` | ``$ARRAY`` | No |  |
-| `team_name` | ``$STRING`` | No |  |
-| `venue` | ``$OBJECT`` | No |  |
+| `abbreviation` | `string` | No |  |
+| `conference` | `Record<string, any>` | No |  |
+| `copyright` | `string` | No |  |
+| `division` | `Record<string, any>` | No |  |
+| `first_year_of_play` | `string` | No |  |
+| `franchise` | `Record<string, any>` | No |  |
+| `id` | `number` | No |  |
+| `link` | `string` | No |  |
+| `location_name` | `string` | No |  |
+| `name` | `string` | No |  |
+| `team` | `any[]` | No |  |
+| `team_name` | `string` | No |  |
+| `venue` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -681,7 +681,7 @@ const results = await client.Team().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Team().load({ id: 'team_id' })
+const result = await client.Team().load({ id: 1 })
 ```
 
 ### Common Methods

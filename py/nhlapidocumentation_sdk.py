@@ -221,55 +221,55 @@ class NhlApiDocumentationSDK:
 
 
     def Conference(self, data=None) -> "ConferenceEntity":
-        """Entity factory: client.Conference().list({}) / client.Conference().load({"id": ...})."""
+        """Entity factory: client.Conference().list() / client.Conference().load({"id": ...})."""
         from entity.conference_entity import ConferenceEntity
         return ConferenceEntity(self, data)
 
 
     def Division(self, data=None) -> "DivisionEntity":
-        """Entity factory: client.Division().list({}) / client.Division().load({"id": ...})."""
+        """Entity factory: client.Division().list() / client.Division().load({"id": ...})."""
         from entity.division_entity import DivisionEntity
         return DivisionEntity(self, data)
 
 
     def Game(self, data=None) -> "GameEntity":
-        """Entity factory: client.Game().list({}) / client.Game().load({"id": ...})."""
+        """Entity factory: client.Game().list() / client.Game().load({"id": ...})."""
         from entity.game_entity import GameEntity
         return GameEntity(self, data)
 
 
     def Player(self, data=None) -> "PlayerEntity":
-        """Entity factory: client.Player().list({}) / client.Player().load({"id": ...})."""
+        """Entity factory: client.Player().list() / client.Player().load({"id": ...})."""
         from entity.player_entity import PlayerEntity
         return PlayerEntity(self, data)
 
 
     def PlayerStat(self, data=None) -> "PlayerStatEntity":
-        """Entity factory: client.PlayerStat().list({}) / client.PlayerStat().load({"id": ...})."""
+        """Entity factory: client.PlayerStat().list() / client.PlayerStat().load({"id": ...})."""
         from entity.player_stat_entity import PlayerStatEntity
         return PlayerStatEntity(self, data)
 
 
     def Roster(self, data=None) -> "RosterEntity":
-        """Entity factory: client.Roster().list({}) / client.Roster().load({"id": ...})."""
+        """Entity factory: client.Roster().list() / client.Roster().load({"id": ...})."""
         from entity.roster_entity import RosterEntity
         return RosterEntity(self, data)
 
 
     def Schedule(self, data=None) -> "ScheduleEntity":
-        """Entity factory: client.Schedule().list({}) / client.Schedule().load({"id": ...})."""
+        """Entity factory: client.Schedule().list() / client.Schedule().load({"id": ...})."""
         from entity.schedule_entity import ScheduleEntity
         return ScheduleEntity(self, data)
 
 
     def Standing(self, data=None) -> "StandingEntity":
-        """Entity factory: client.Standing().list({}) / client.Standing().load({"id": ...})."""
+        """Entity factory: client.Standing().list() / client.Standing().load({"id": ...})."""
         from entity.standing_entity import StandingEntity
         return StandingEntity(self, data)
 
 
     def Team(self, data=None) -> "TeamEntity":
-        """Entity factory: client.Team().list({}) / client.Team().load({"id": ...})."""
+        """Entity factory: client.Team().list() / client.Team().load({"id": ...})."""
         from entity.team_entity import TeamEntity
         return TeamEntity(self, data)
 

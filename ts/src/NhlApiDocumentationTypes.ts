@@ -17,7 +17,13 @@ export interface ConferenceLoadMatch {
   id: number
 }
 
-export type ConferenceListMatch = Partial<Conference>
+export interface ConferenceListMatch {
+  conference?: any[]
+  copyright?: string
+  id?: number
+  link?: string
+  name?: string
+}
 
 export interface Division {
   copyright?: string
@@ -31,7 +37,13 @@ export interface DivisionLoadMatch {
   id: number
 }
 
-export type DivisionListMatch = Partial<Division>
+export interface DivisionListMatch {
+  copyright?: string
+  division?: any[]
+  id?: number
+  link?: string
+  name?: string
+}
 
 export interface Game {
   copyright?: string
@@ -83,7 +95,14 @@ export interface Schedule {
   total_match?: number
 }
 
-export type ScheduleListMatch = Partial<Schedule>
+export interface ScheduleListMatch {
+  date?: string
+  game?: any[]
+  total_event?: number
+  total_game?: number
+  total_item?: number
+  total_match?: number
+}
 
 export interface Standing {
   conference?: Record<string, any>
@@ -91,7 +110,11 @@ export interface Standing {
   team_record?: any[]
 }
 
-export type StandingListMatch = Partial<Standing>
+export interface StandingListMatch {
+  conference?: Record<string, any>
+  division?: Record<string, any>
+  team_record?: any[]
+}
 
 export interface Team {
   abbreviation?: string
@@ -113,5 +136,19 @@ export interface TeamLoadMatch {
   id: number
 }
 
-export type TeamListMatch = Partial<Team>
+export interface TeamListMatch {
+  abbreviation?: string
+  conference?: Record<string, any>
+  copyright?: string
+  division?: Record<string, any>
+  first_year_of_play?: string
+  franchise?: Record<string, any>
+  id?: number
+  link?: string
+  location_name?: string
+  name?: string
+  team?: any[]
+  team_name?: string
+  venue?: Record<string, any>
+}
 

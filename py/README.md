@@ -4,6 +4,11 @@
 
 The Python SDK for the NhlApiDocumentation API — an entity-oriented client following Pythonic conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Conference()` — each
+carrying a small, uniform set of operations (`list`, `load`) instead of raw URL
+paths and query strings. You work with named resources and verbs, which
+keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -38,7 +43,7 @@ error — iterate it directly.
 
 ```python
 try:
-    conferences = client.Conference().list({})
+    conferences = client.Conference().list()
     for conference in conferences:
         print(conference)
 except Exception as err:
@@ -55,6 +60,34 @@ try:
     print(conference)
 except Exception as err:
     print(f"load failed: {err}")
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so wrap them in `try` / `except`:
+
+```python
+try:
+    conferences = client.Conference().list()
+    print(conferences)
+except Exception as err:
+    print(f"list failed: {err}")
+```
+
+`direct()` does **not** raise — it returns the result envelope. Branch
+on `ok`; on failure `status` holds the HTTP status (for error responses)
+and `err` holds a transport error, so read both defensively:
+
+```python
+result = client.direct({
+    "path": "/api/resource/{id}",
+    "method": "GET",
+    "params": {"id": "example_id"},
+})
+
+if not result["ok"]:
+    print("request failed:", result.get("status"), result.get("err"))
 ```
 
 
@@ -75,7 +108,10 @@ if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
 else:
-    print(result["err"])     # error value
+    # A non-2xx response carries status + data (the error body); a
+    # transport-level failure carries err instead. Only one is present, so
+    # read both with .get() rather than indexing a key that may be absent.
+    print(result.get("status"), result.get("err"))
 ```
 
 ### Prepare a request without sending it
@@ -101,7 +137,7 @@ Create a mock client for unit testing — no server required:
 client = NhlApiDocumentationSDK.test()
 
 # Entity ops return the bare record and raise on error.
-conference = client.Conference().load({"id": "test01"})
+conference = client.Conference().list()
 # conference contains the mock response record
 ```
 
@@ -196,9 +232,6 @@ All entities share the same interface.
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
 | `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -365,18 +398,18 @@ Create an instance: `conference = client.Conference()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `conference` | ``$ARRAY`` |  |
-| `copyright` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
+| `conference` | `list` |  |
+| `copyright` | `str` |  |
+| `id` | `int` |  |
+| `link` | `str` |  |
+| `name` | `str` |  |
 
 #### Example: Load
 
@@ -387,7 +420,7 @@ conference = client.Conference().load({"id": "conference_id"})
 #### Example: List
 
 ```python
-conferences = client.Conference().list({})
+conferences = client.Conference().list()
 ```
 
 
@@ -399,18 +432,18 @@ Create an instance: `division = client.Division()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `copyright` | ``$STRING`` |  |
-| `division` | ``$ARRAY`` |  |
-| `id` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
+| `copyright` | `str` |  |
+| `division` | `list` |  |
+| `id` | `int` |  |
+| `link` | `str` |  |
+| `name` | `str` |  |
 
 #### Example: Load
 
@@ -421,7 +454,7 @@ division = client.Division().load({"id": "division_id"})
 #### Example: List
 
 ```python
-divisions = client.Division().list({})
+divisions = client.Division().list()
 ```
 
 
@@ -439,12 +472,12 @@ Create an instance: `game = client.Game()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `copyright` | ``$STRING`` |  |
-| `game_data` | ``$OBJECT`` |  |
-| `game_pk` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `live_data` | ``$OBJECT`` |  |
-| `team` | ``$OBJECT`` |  |
+| `copyright` | `str` |  |
+| `game_data` | `dict` |  |
+| `game_pk` | `int` |  |
+| `link` | `str` |  |
+| `live_data` | `dict` |  |
+| `team` | `dict` |  |
 
 #### Example: Load
 
@@ -467,8 +500,8 @@ Create an instance: `player = client.Player()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `copyright` | ``$STRING`` |  |
-| `person` | ``$ARRAY`` |  |
+| `copyright` | `str` |  |
+| `person` | `list` |  |
 
 #### Example: Load
 
@@ -485,19 +518,19 @@ Create an instance: `player_stat = client.PlayerStat()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `split` | ``$ARRAY`` |  |
-| `type` | ``$OBJECT`` |  |
+| `split` | `list` |  |
+| `type` | `dict` |  |
 
 #### Example: List
 
 ```python
-player_stats = client.PlayerStat().list({})
+player_stats = client.PlayerStat().list()
 ```
 
 
@@ -509,20 +542,20 @@ Create an instance: `roster = client.Roster()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `jersey_number` | ``$STRING`` |  |
-| `person` | ``$OBJECT`` |  |
-| `position` | ``$OBJECT`` |  |
+| `jersey_number` | `str` |  |
+| `person` | `dict` |  |
+| `position` | `dict` |  |
 
 #### Example: List
 
 ```python
-rosters = client.Roster().list({})
+rosters = client.Roster().list()
 ```
 
 
@@ -534,23 +567,23 @@ Create an instance: `schedule = client.Schedule()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$STRING`` |  |
-| `game` | ``$ARRAY`` |  |
-| `total_event` | ``$INTEGER`` |  |
-| `total_game` | ``$INTEGER`` |  |
-| `total_item` | ``$INTEGER`` |  |
-| `total_match` | ``$INTEGER`` |  |
+| `date` | `str` |  |
+| `game` | `list` |  |
+| `total_event` | `int` |  |
+| `total_game` | `int` |  |
+| `total_item` | `int` |  |
+| `total_match` | `int` |  |
 
 #### Example: List
 
 ```python
-schedules = client.Schedule().list({})
+schedules = client.Schedule().list()
 ```
 
 
@@ -562,20 +595,20 @@ Create an instance: `standing = client.Standing()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `conference` | ``$OBJECT`` |  |
-| `division` | ``$OBJECT`` |  |
-| `team_record` | ``$ARRAY`` |  |
+| `conference` | `dict` |  |
+| `division` | `dict` |  |
+| `team_record` | `list` |  |
 
 #### Example: List
 
 ```python
-standings = client.Standing().list({})
+standings = client.Standing().list()
 ```
 
 
@@ -587,26 +620,26 @@ Create an instance: `team = client.Team()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbreviation` | ``$STRING`` |  |
-| `conference` | ``$OBJECT`` |  |
-| `copyright` | ``$STRING`` |  |
-| `division` | ``$OBJECT`` |  |
-| `first_year_of_play` | ``$STRING`` |  |
-| `franchise` | ``$OBJECT`` |  |
-| `id` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `location_name` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `team` | ``$ARRAY`` |  |
-| `team_name` | ``$STRING`` |  |
-| `venue` | ``$OBJECT`` |  |
+| `abbreviation` | `str` |  |
+| `conference` | `dict` |  |
+| `copyright` | `str` |  |
+| `division` | `dict` |  |
+| `first_year_of_play` | `str` |  |
+| `franchise` | `dict` |  |
+| `id` | `int` |  |
+| `link` | `str` |  |
+| `location_name` | `str` |  |
+| `name` | `str` |  |
+| `team` | `list` |  |
+| `team_name` | `str` |  |
+| `venue` | `dict` |  |
 
 #### Example: Load
 
@@ -617,16 +650,20 @@ team = client.Team().load({"id": "team_id"})
 #### Example: List
 
 ```python
-teams = client.Team().list({})
+teams = client.Team().list()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -643,8 +680,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return tuple.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -687,14 +725,14 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
 conference = client.Conference()
-conference.load({"id": "example_id"})
+conference.list()
 
-# conference.data_get() now returns the loaded conference data
+# conference.data_get() now returns the conference data from the last list
 # conference.match_get() returns the last match criteria
 ```
 
