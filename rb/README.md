@@ -49,7 +49,7 @@ end
 ```ruby
 begin
   # load returns the bare Conference record (raises on error).
-  conference = client.Conference.load({ "id" => "example_id" })
+  conference = client.Conference.load({ "id" => 1 })
   puts conference
 rescue => err
   warn "load failed: #{err}"
@@ -412,7 +412,7 @@ Create an instance: `conference = client.Conference`
 
 ```ruby
 # load returns the bare Conference record (raises on error).
-conference = client.Conference.load({ "id" => "conference_id" })
+conference = client.Conference.load({ "id" => 1 })
 ```
 
 #### Example: List
@@ -448,7 +448,7 @@ Create an instance: `division = client.Division`
 
 ```ruby
 # load returns the bare Division record (raises on error).
-division = client.Division.load({ "id" => "division_id" })
+division = client.Division.load({ "id" => 1 })
 ```
 
 #### Example: List
@@ -484,7 +484,7 @@ Create an instance: `game = client.Game`
 
 ```ruby
 # load returns the bare Game record (raises on error).
-game = client.Game.load({ "id" => "game_id" })
+game = client.Game.load({ "id" => 1 })
 ```
 
 
@@ -509,7 +509,7 @@ Create an instance: `player = client.Player`
 
 ```ruby
 # load returns the bare Player record (raises on error).
-player = client.Player.load({ "id" => "player_id" })
+player = client.Player.load({ "id" => 1 })
 ```
 
 
@@ -652,7 +652,7 @@ Create an instance: `team = client.Team`
 
 ```ruby
 # load returns the bare Team record (raises on error).
-team = client.Team.load({ "id" => "team_id" })
+team = client.Team.load({ "id" => 1 })
 ```
 
 #### Example: List

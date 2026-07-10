@@ -56,7 +56,7 @@ except Exception as err:
 
 ```python
 try:
-    conference = client.Conference().load({"id": "example_id"})
+    conference = client.Conference().load({"id": 1})
     print(conference)
 except Exception as err:
     print(f"load failed: {err}")
@@ -414,7 +414,7 @@ Create an instance: `conference = client.Conference()`
 #### Example: Load
 
 ```python
-conference = client.Conference().load({"id": "conference_id"})
+conference = client.Conference().load({"id": 1})
 ```
 
 #### Example: List
@@ -448,7 +448,7 @@ Create an instance: `division = client.Division()`
 #### Example: Load
 
 ```python
-division = client.Division().load({"id": "division_id"})
+division = client.Division().load({"id": 1})
 ```
 
 #### Example: List
@@ -482,7 +482,7 @@ Create an instance: `game = client.Game()`
 #### Example: Load
 
 ```python
-game = client.Game().load({"id": "game_id"})
+game = client.Game().load({"id": 1})
 ```
 
 
@@ -506,7 +506,7 @@ Create an instance: `player = client.Player()`
 #### Example: Load
 
 ```python
-player = client.Player().load({"id": "player_id"})
+player = client.Player().load({"id": 1})
 ```
 
 
@@ -644,7 +644,7 @@ Create an instance: `team = client.Team()`
 #### Example: Load
 
 ```python
-team = client.Team().load({"id": "team_id"})
+team = client.Team().load({"id": 1})
 ```
 
 #### Example: List

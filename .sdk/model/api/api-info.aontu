@@ -24,9 +24,9 @@ main: {
           url: "https://records.nhl.com/site/api"
         }
       ]
+      summary: "This API provides access to various publicly available statistics and information from the NHL, aimed at making complex data easily digestible for developers and stats enthusiasts."
       title: "NHL API Documentation"
       version: "1.0.0"
+      website: "https://statsapi.web.nhl.com"
     }
   }
-}
-

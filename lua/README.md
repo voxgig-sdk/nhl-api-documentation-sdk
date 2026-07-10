@@ -50,7 +50,7 @@ end
 ### 3. Load a conference
 
 ```lua
-local conference, err = client:Conference():load({ id = "example_id" })
+local conference, err = client:Conference():load({ id = 1 })
 if err then error(err) end
 print(conference)
 ```
@@ -400,7 +400,7 @@ Create an instance: `local conference = client:Conference(nil)`
 #### Example: Load
 
 ```lua
-local conference, err = client:Conference():load({ id = "conference_id" })
+local conference, err = client:Conference():load({ id = 1 })
 ```
 
 #### Example: List
@@ -434,7 +434,7 @@ Create an instance: `local division = client:Division(nil)`
 #### Example: Load
 
 ```lua
-local division, err = client:Division():load({ id = "division_id" })
+local division, err = client:Division():load({ id = 1 })
 ```
 
 #### Example: List
@@ -468,7 +468,7 @@ Create an instance: `local game = client:Game(nil)`
 #### Example: Load
 
 ```lua
-local game, err = client:Game():load({ id = "game_id" })
+local game, err = client:Game():load({ id = 1 })
 ```
 
 
@@ -492,7 +492,7 @@ Create an instance: `local player = client:Player(nil)`
 #### Example: Load
 
 ```lua
-local player, err = client:Player():load({ id = "player_id" })
+local player, err = client:Player():load({ id = 1 })
 ```
 
 
@@ -630,7 +630,7 @@ Create an instance: `local team = client:Team(nil)`
 #### Example: Load
 
 ```lua
-local team, err = client:Team():load({ id = "team_id" })
+local team, err = client:Team():load({ id = 1 })
 ```
 
 #### Example: List

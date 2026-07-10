@@ -50,7 +50,7 @@ try {
 ```php
 try {
     // load() returns the bare Conference record (throws on error).
-    $conference = $client->Conference()->load(["id" => "example_id"]);
+    $conference = $client->Conference()->load(["id" => 1]);
     print_r($conference);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -422,7 +422,7 @@ Create an instance: `$conference = $client->Conference();`
 
 ```php
 // load() returns the bare Conference record (throws on error).
-$conference = $client->Conference()->load(["id" => "conference_id"]);
+$conference = $client->Conference()->load(["id" => 1]);
 ```
 
 #### Example: List
@@ -458,7 +458,7 @@ Create an instance: `$division = $client->Division();`
 
 ```php
 // load() returns the bare Division record (throws on error).
-$division = $client->Division()->load(["id" => "division_id"]);
+$division = $client->Division()->load(["id" => 1]);
 ```
 
 #### Example: List
@@ -494,7 +494,7 @@ Create an instance: `$game = $client->Game();`
 
 ```php
 // load() returns the bare Game record (throws on error).
-$game = $client->Game()->load(["id" => "game_id"]);
+$game = $client->Game()->load(["id" => 1]);
 ```
 
 
@@ -519,7 +519,7 @@ Create an instance: `$player = $client->Player();`
 
 ```php
 // load() returns the bare Player record (throws on error).
-$player = $client->Player()->load(["id" => "player_id"]);
+$player = $client->Player()->load(["id" => 1]);
 ```
 
 
@@ -662,7 +662,7 @@ Create an instance: `$team = $client->Team();`
 
 ```php
 // load() returns the bare Team record (throws on error).
-$team = $client->Team()->load(["id" => "team_id"]);
+$team = $client->Team()->load(["id" => 1]);
 ```
 
 #### Example: List

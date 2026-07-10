@@ -428,7 +428,7 @@ Create an instance: `conference := client.Conference(nil)`
 #### Example: Load
 
 ```go
-conference, err := client.Conference(nil).Load(map[string]any{"id": "conference_id"}, nil)
+conference, err := client.Conference(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -470,7 +470,7 @@ Create an instance: `division := client.Division(nil)`
 #### Example: Load
 
 ```go
-division, err := client.Division(nil).Load(map[string]any{"id": "division_id"}, nil)
+division, err := client.Division(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -512,7 +512,7 @@ Create an instance: `game := client.Game(nil)`
 #### Example: Load
 
 ```go
-game, err := client.Game(nil).Load(map[string]any{"id": "game_id"}, nil)
+game, err := client.Game(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -540,7 +540,7 @@ Create an instance: `player := client.Player(nil)`
 #### Example: Load
 
 ```go
-player, err := client.Player(nil).Load(map[string]any{"id": "player_id"}, nil)
+player, err := client.Player(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -550,7 +550,7 @@ fmt.Println(player) // the loaded record
 
 ### PlayerStat
 
-Create an instance: `player_stat := client.PlayerStat(nil)`
+Create an instance: `playerStat := client.PlayerStat(nil)`
 
 #### Operations
 
@@ -568,11 +568,11 @@ Create an instance: `player_stat := client.PlayerStat(nil)`
 #### Example: List
 
 ```go
-player_stats, err := client.PlayerStat(nil).List(nil, nil)
+playerStats, err := client.PlayerStat(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(player_stats) // the array of records
+fmt.Println(playerStats) // the array of records
 ```
 
 
@@ -698,7 +698,7 @@ Create an instance: `team := client.Team(nil)`
 #### Example: Load
 
 ```go
-team, err := client.Team(nil).Load(map[string]any{"id": "team_id"}, nil)
+team, err := client.Team(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }

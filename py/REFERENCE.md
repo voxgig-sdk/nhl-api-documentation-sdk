@@ -142,7 +142,7 @@ for conference in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Conference().load({"id": "conference_id"})
+result = client.Conference().load({"id": 1})
 ```
 
 ### Common Methods
@@ -207,7 +207,7 @@ for division in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Division().load({"id": "division_id"})
+result = client.Division().load({"id": 1})
 ```
 
 ### Common Methods
@@ -263,7 +263,7 @@ game = client.Game()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Game().load({"id": "game_id"})
+result = client.Game().load({"id": 1})
 ```
 
 ### Common Methods
@@ -315,7 +315,7 @@ player = client.Player()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Player().load({"id": "player_id"})
+result = client.Player().load({"id": 1})
 ```
 
 ### Common Methods
@@ -610,7 +610,7 @@ for team in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Team().load({"id": "team_id"})
+result = client.Team().load({"id": 1})
 ```
 
 ### Common Methods
