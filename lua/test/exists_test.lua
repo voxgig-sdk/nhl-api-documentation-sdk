@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- NhlApiDocumentation SDK exists test
 
 local sdk = require("nhl-api-documentation_sdk")
 
