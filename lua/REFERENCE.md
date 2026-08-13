@@ -122,7 +122,7 @@ local conference = client:Conference(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | `table` | No |  |
+| `conferences` | `table` | No |  |
 | `copyright` | `string` | No |  |
 | `id` | `number` | No |  |
 | `link` | `string` | No |  |
@@ -187,7 +187,7 @@ local division = client:Division(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `string` | No |  |
-| `division` | `table` | No |  |
+| `divisions` | `table` | No |  |
 | `id` | `number` | No |  |
 | `link` | `string` | No |  |
 | `name` | `string` | No |  |
@@ -250,12 +250,13 @@ local game = client:Game(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `away` | `table` | No |  |
 | `copyright` | `string` | No |  |
-| `game_data` | `table` | No |  |
-| `game_pk` | `number` | No |  |
+| `gameData` | `table` | No |  |
+| `gamePk` | `number` | No |  |
+| `home` | `table` | No |  |
 | `link` | `string` | No |  |
-| `live_data` | `table` | No |  |
-| `team` | `table` | No |  |
+| `liveData` | `table` | No |  |
 
 ### Operations
 
@@ -308,7 +309,7 @@ local player = client:Player(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `string` | No |  |
-| `person` | `table` | No |  |
+| `people` | `table` | No |  |
 
 ### Operations
 
@@ -360,7 +361,7 @@ local player_stat = client:PlayerStat(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `split` | `table` | No |  |
+| `splits` | `table` | No |  |
 | `type` | `table` | No |  |
 
 ### Operations
@@ -413,7 +414,7 @@ local roster = client:Roster(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `jersey_number` | `string` | No |  |
+| `jerseyNumber` | `string` | No |  |
 | `person` | `table` | No |  |
 | `position` | `table` | No |  |
 
@@ -468,11 +469,11 @@ local schedule = client:Schedule(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `date` | `string` | No |  |
-| `game` | `table` | No |  |
-| `total_event` | `number` | No |  |
-| `total_game` | `number` | No |  |
-| `total_item` | `number` | No |  |
-| `total_match` | `number` | No |  |
+| `games` | `table` | No |  |
+| `totalEvents` | `number` | No |  |
+| `totalGames` | `number` | No |  |
+| `totalItems` | `number` | No |  |
+| `totalMatches` | `number` | No |  |
 
 ### Operations
 
@@ -526,7 +527,7 @@ local standing = client:Standing(nil)
 | --- | --- | --- | --- |
 | `conference` | `table` | No |  |
 | `division` | `table` | No |  |
-| `team_record` | `table` | No |  |
+| `teamRecords` | `table` | No |  |
 
 ### Operations
 
@@ -582,14 +583,14 @@ local team = client:Team(nil)
 | `conference` | `table` | No |  |
 | `copyright` | `string` | No |  |
 | `division` | `table` | No |  |
-| `first_year_of_play` | `string` | No |  |
+| `firstYearOfPlay` | `string` | No |  |
 | `franchise` | `table` | No |  |
 | `id` | `number` | No |  |
 | `link` | `string` | No |  |
-| `location_name` | `string` | No |  |
+| `locationName` | `string` | No |  |
 | `name` | `string` | No |  |
-| `team` | `table` | No |  |
-| `team_name` | `string` | No |  |
+| `teamName` | `string` | No |  |
+| `teams` | `table` | No |  |
 | `venue` | `table` | No |  |
 
 ### Operations

@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from nhlapidocumentation_sdk.utility.voxgig_struct import voxgig_struct as vs
 from nhlapidocumentation_sdk import NhlApiDocumentationSDK
-from core import helpers
+from nhlapidocumentation_sdk.core import helpers
 from test import runner
 
 
@@ -105,11 +105,11 @@ def _conference_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "NHLAPIDOCUMENTATION_TEST_CONFERENCE_ENTID": {},
-        "NHLAPIDOCUMENTATION_TEST_LIVE": "FALSE",
+        "NHL_API_DOCUMENTATION_TEST_CONFERENCE_ENTID": {},
+        "NHL_API_DOCUMENTATION_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("NHLAPIDOCUMENTATION_TEST_LIVE") == "TRUE"
+    live = env.get("NHL_API_DOCUMENTATION_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

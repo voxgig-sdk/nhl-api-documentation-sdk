@@ -6,7 +6,7 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Conference {
-  conference?: any[]
+  conferences?: any[]
   copyright?: string
   id?: number
   link?: string
@@ -18,7 +18,7 @@ export interface ConferenceLoadMatch {
 }
 
 export interface ConferenceListMatch {
-  conference?: any[]
+  conferences?: any[]
   copyright?: string
   id?: number
   link?: string
@@ -27,7 +27,7 @@ export interface ConferenceListMatch {
 
 export interface Division {
   copyright?: string
-  division?: any[]
+  divisions?: any[]
   id?: number
   link?: string
   name?: string
@@ -39,28 +39,35 @@ export interface DivisionLoadMatch {
 
 export interface DivisionListMatch {
   copyright?: string
-  division?: any[]
+  divisions?: any[]
   id?: number
   link?: string
   name?: string
 }
 
 export interface Game {
+  away?: Record<string, any>
   copyright?: string
-  game_data?: Record<string, any>
-  game_pk?: number
+  gameData?: Record<string, any>
+  gamePk?: number
+  home?: Record<string, any>
   link?: string
-  live_data?: Record<string, any>
-  team?: Record<string, any>
+  liveData?: Record<string, any>
 }
 
 export interface GameLoadMatch {
   id: number
+
+  // Selects a custom action instead of the plain load:
+  //   'boxscore' | 'feed_live'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface Player {
   copyright?: string
-  person?: any[]
+  people?: any[]
 }
 
 export interface PlayerLoadMatch {
@@ -68,7 +75,7 @@ export interface PlayerLoadMatch {
 }
 
 export interface PlayerStat {
-  split?: any[]
+  splits?: any[]
   type?: Record<string, any>
 }
 
@@ -77,7 +84,7 @@ export interface PlayerStatListMatch {
 }
 
 export interface Roster {
-  jersey_number?: string
+  jerseyNumber?: string
   person?: Record<string, any>
   position?: Record<string, any>
 }
@@ -88,32 +95,32 @@ export interface RosterListMatch {
 
 export interface Schedule {
   date?: string
-  game?: any[]
-  total_event?: number
-  total_game?: number
-  total_item?: number
-  total_match?: number
+  games?: any[]
+  totalEvents?: number
+  totalGames?: number
+  totalItems?: number
+  totalMatches?: number
 }
 
 export interface ScheduleListMatch {
   date?: string
-  game?: any[]
-  total_event?: number
-  total_game?: number
-  total_item?: number
-  total_match?: number
+  games?: any[]
+  totalEvents?: number
+  totalGames?: number
+  totalItems?: number
+  totalMatches?: number
 }
 
 export interface Standing {
   conference?: Record<string, any>
   division?: Record<string, any>
-  team_record?: any[]
+  teamRecords?: any[]
 }
 
 export interface StandingListMatch {
   conference?: Record<string, any>
   division?: Record<string, any>
-  team_record?: any[]
+  teamRecords?: any[]
 }
 
 export interface Team {
@@ -121,14 +128,14 @@ export interface Team {
   conference?: Record<string, any>
   copyright?: string
   division?: Record<string, any>
-  first_year_of_play?: string
+  firstYearOfPlay?: string
   franchise?: Record<string, any>
   id?: number
   link?: string
-  location_name?: string
+  locationName?: string
   name?: string
-  team?: any[]
-  team_name?: string
+  teamName?: string
+  teams?: any[]
   venue?: Record<string, any>
 }
 
@@ -141,14 +148,14 @@ export interface TeamListMatch {
   conference?: Record<string, any>
   copyright?: string
   division?: Record<string, any>
-  first_year_of_play?: string
+  firstYearOfPlay?: string
   franchise?: Record<string, any>
   id?: number
   link?: string
-  location_name?: string
+  locationName?: string
   name?: string
-  team?: any[]
-  team_name?: string
+  teamName?: string
+  teams?: any[]
   venue?: Record<string, any>
 }
 

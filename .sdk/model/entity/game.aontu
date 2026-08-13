@@ -6,19 +6,29 @@ main: kit: entity: game: {
 
   fields: [
     {
+      name: "away"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
       name: "copyright"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "game_data"
+      name: "gameData"
       req: false
       type: "`$OBJECT`"
     }
     {
-      name: "game_pk"
+      name: "gamePk"
       req: false
       type: "`$INTEGER`"
+    }
+    {
+      name: "home"
+      req: false
+      type: "`$OBJECT`"
     }
     {
       name: "link"
@@ -26,12 +36,7 @@ main: kit: entity: game: {
       type: "`$STRING`"
     }
     {
-      name: "live_data"
-      req: false
-      type: "`$OBJECT`"
-    }
-    {
-      name: "team"
+      name: "liveData"
       req: false
       type: "`$OBJECT`"
     }
@@ -69,7 +74,7 @@ main: kit: entity: game: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.teams`"
           }
         }
         {

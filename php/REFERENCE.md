@@ -124,7 +124,7 @@ $conference = $client->Conference();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | `array` | No |  |
+| `conferences` | `array` | No |  |
 | `copyright` | `string` | No |  |
 | `id` | `int` | No |  |
 | `link` | `string` | No |  |
@@ -189,7 +189,7 @@ $division = $client->Division();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `string` | No |  |
-| `division` | `array` | No |  |
+| `divisions` | `array` | No |  |
 | `id` | `int` | No |  |
 | `link` | `string` | No |  |
 | `name` | `string` | No |  |
@@ -252,12 +252,13 @@ $game = $client->Game();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `away` | `array` | No |  |
 | `copyright` | `string` | No |  |
-| `game_data` | `array` | No |  |
-| `game_pk` | `int` | No |  |
+| `gameData` | `array` | No |  |
+| `gamePk` | `int` | No |  |
+| `home` | `array` | No |  |
 | `link` | `string` | No |  |
-| `live_data` | `array` | No |  |
-| `team` | `array` | No |  |
+| `liveData` | `array` | No |  |
 
 ### Operations
 
@@ -310,7 +311,7 @@ $player = $client->Player();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `string` | No |  |
-| `person` | `array` | No |  |
+| `people` | `array` | No |  |
 
 ### Operations
 
@@ -362,7 +363,7 @@ $player_stat = $client->PlayerStat();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `split` | `array` | No |  |
+| `splits` | `array` | No |  |
 | `type` | `array` | No |  |
 
 ### Operations
@@ -415,7 +416,7 @@ $roster = $client->Roster();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `jersey_number` | `string` | No |  |
+| `jerseyNumber` | `string` | No |  |
 | `person` | `array` | No |  |
 | `position` | `array` | No |  |
 
@@ -470,11 +471,11 @@ $schedule = $client->Schedule();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `date` | `string` | No |  |
-| `game` | `array` | No |  |
-| `total_event` | `int` | No |  |
-| `total_game` | `int` | No |  |
-| `total_item` | `int` | No |  |
-| `total_match` | `int` | No |  |
+| `games` | `array` | No |  |
+| `totalEvents` | `int` | No |  |
+| `totalGames` | `int` | No |  |
+| `totalItems` | `int` | No |  |
+| `totalMatches` | `int` | No |  |
 
 ### Operations
 
@@ -528,7 +529,7 @@ $standing = $client->Standing();
 | --- | --- | --- | --- |
 | `conference` | `array` | No |  |
 | `division` | `array` | No |  |
-| `team_record` | `array` | No |  |
+| `teamRecords` | `array` | No |  |
 
 ### Operations
 
@@ -584,14 +585,14 @@ $team = $client->Team();
 | `conference` | `array` | No |  |
 | `copyright` | `string` | No |  |
 | `division` | `array` | No |  |
-| `first_year_of_play` | `string` | No |  |
+| `firstYearOfPlay` | `string` | No |  |
 | `franchise` | `array` | No |  |
 | `id` | `int` | No |  |
 | `link` | `string` | No |  |
-| `location_name` | `string` | No |  |
+| `locationName` | `string` | No |  |
 | `name` | `string` | No |  |
-| `team` | `array` | No |  |
-| `team_name` | `string` | No |  |
+| `teamName` | `string` | No |  |
+| `teams` | `array` | No |  |
 | `venue` | `array` | No |  |
 
 ### Operations

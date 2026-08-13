@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ NhlApiDocumentationUtility.registrar = ->(u) {
   u.prepare_params = NhlApiDocumentationUtilities::PrepareParams
   u.prepare_path = NhlApiDocumentationUtilities::PreparePath
   u.prepare_query = NhlApiDocumentationUtilities::PrepareQuery
+  u.graphql_body = NhlApiDocumentationUtilities::GraphqlBody
+  u.graphql_errors = NhlApiDocumentationUtilities::GraphqlErrors
   u.result_basic = NhlApiDocumentationUtilities::ResultBasic
   u.result_body = NhlApiDocumentationUtilities::ResultBody
   u.result_headers = NhlApiDocumentationUtilities::ResultHeaders

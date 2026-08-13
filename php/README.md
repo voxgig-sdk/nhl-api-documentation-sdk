@@ -38,7 +38,7 @@ try {
     // list() returns an array of Conference records — iterate directly.
     $conferences = $client->Conference()->list();
     foreach ($conferences as $item) {
-        echo $item["id"] . " " . $item["conference"] . "\n";
+        echo $item["id"] . " " . $item["conferences"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -49,7 +49,7 @@ try {
 
 ```php
 try {
-    // load() returns the bare Conference record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Conference record (throws on error).
     $conference = $client->Conference()->load(["id" => 1]);
     print_r($conference);
 } catch (\Throwable $err) {
@@ -65,7 +65,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $conferences = $client->Conference()->list();
+    $divisions = $client->Division()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -137,12 +137,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```php
 $client = NhlApiDocumentationSDK::test([
-    "entity" => ["conference" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["division" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
-$conference = $client->Conference()->list();
-print_r($conference);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$division = $client->Division()->list();
+print_r($division);
 ```
 
 ### Use a custom fetch function
@@ -248,7 +249,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -270,7 +271,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `conference` |  |
+| `conferences` |  |
 | `copyright` |  |
 | `id` |  |
 | `link` |  |
@@ -285,7 +286,7 @@ API path: `/conferences`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
-| `division` |  |
+| `divisions` |  |
 | `id` |  |
 | `link` |  |
 | `name` |  |
@@ -298,12 +299,13 @@ API path: `/divisions`
 
 | Field | Description |
 | --- | --- |
+| `away` |  |
 | `copyright` |  |
-| `game_data` |  |
-| `game_pk` |  |
+| `gameData` |  |
+| `gamePk` |  |
+| `home` |  |
 | `link` |  |
-| `live_data` |  |
-| `team` |  |
+| `liveData` |  |
 
 Operations: Load.
 
@@ -314,7 +316,7 @@ API path: `/game/{id}/boxscore`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
-| `person` |  |
+| `people` |  |
 
 Operations: Load.
 
@@ -324,7 +326,7 @@ API path: `/people/{id}`
 
 | Field | Description |
 | --- | --- |
-| `split` |  |
+| `splits` |  |
 | `type` |  |
 
 Operations: List.
@@ -335,7 +337,7 @@ API path: `/people/{id}/stats`
 
 | Field | Description |
 | --- | --- |
-| `jersey_number` |  |
+| `jerseyNumber` |  |
 | `person` |  |
 | `position` |  |
 
@@ -348,11 +350,11 @@ API path: `/teams/{id}/roster`
 | Field | Description |
 | --- | --- |
 | `date` |  |
-| `game` |  |
-| `total_event` |  |
-| `total_game` |  |
-| `total_item` |  |
-| `total_match` |  |
+| `games` |  |
+| `totalEvents` |  |
+| `totalGames` |  |
+| `totalItems` |  |
+| `totalMatches` |  |
 
 Operations: List.
 
@@ -364,7 +366,7 @@ API path: `/schedule`
 | --- | --- |
 | `conference` |  |
 | `division` |  |
-| `team_record` |  |
+| `teamRecords` |  |
 
 Operations: List.
 
@@ -378,14 +380,14 @@ API path: `/standings`
 | `conference` |  |
 | `copyright` |  |
 | `division` |  |
-| `first_year_of_play` |  |
+| `firstYearOfPlay` |  |
 | `franchise` |  |
 | `id` |  |
 | `link` |  |
-| `location_name` |  |
+| `locationName` |  |
 | `name` |  |
-| `team` |  |
-| `team_name` |  |
+| `teamName` |  |
+| `teams` |  |
 | `venue` |  |
 
 Operations: List, Load.
@@ -412,7 +414,7 @@ Create an instance: `$conference = $client->Conference();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `conference` | `array` |  |
+| `conferences` | `array` |  |
 | `copyright` | `string` |  |
 | `id` | `int` |  |
 | `link` | `string` |  |
@@ -421,7 +423,7 @@ Create an instance: `$conference = $client->Conference();`
 #### Example: Load
 
 ```php
-// load() returns the bare Conference record (throws on error).
+// load() returns the ENTITY — call data_get() for the Conference record (throws on error).
 $conference = $client->Conference()->load(["id" => 1]);
 ```
 
@@ -449,7 +451,7 @@ Create an instance: `$division = $client->Division();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `string` |  |
-| `division` | `array` |  |
+| `divisions` | `array` |  |
 | `id` | `int` |  |
 | `link` | `string` |  |
 | `name` | `string` |  |
@@ -457,7 +459,7 @@ Create an instance: `$division = $client->Division();`
 #### Example: Load
 
 ```php
-// load() returns the bare Division record (throws on error).
+// load() returns the ENTITY — call data_get() for the Division record (throws on error).
 $division = $client->Division()->load(["id" => 1]);
 ```
 
@@ -483,17 +485,18 @@ Create an instance: `$game = $client->Game();`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `away` | `array` |  |
 | `copyright` | `string` |  |
-| `game_data` | `array` |  |
-| `game_pk` | `int` |  |
+| `gameData` | `array` |  |
+| `gamePk` | `int` |  |
+| `home` | `array` |  |
 | `link` | `string` |  |
-| `live_data` | `array` |  |
-| `team` | `array` |  |
+| `liveData` | `array` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Game record (throws on error).
+// load() returns the ENTITY — call data_get() for the Game record (throws on error).
 $game = $client->Game()->load(["id" => 1]);
 ```
 
@@ -513,12 +516,12 @@ Create an instance: `$player = $client->Player();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `string` |  |
-| `person` | `array` |  |
+| `people` | `array` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Player record (throws on error).
+// load() returns the ENTITY — call data_get() for the Player record (throws on error).
 $player = $client->Player()->load(["id" => 1]);
 ```
 
@@ -537,7 +540,7 @@ Create an instance: `$player_stat = $client->PlayerStat();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `split` | `array` |  |
+| `splits` | `array` |  |
 | `type` | `array` |  |
 
 #### Example: List
@@ -562,7 +565,7 @@ Create an instance: `$roster = $client->Roster();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `jersey_number` | `string` |  |
+| `jerseyNumber` | `string` |  |
 | `person` | `array` |  |
 | `position` | `array` |  |
 
@@ -589,11 +592,11 @@ Create an instance: `$schedule = $client->Schedule();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `date` | `string` |  |
-| `game` | `array` |  |
-| `total_event` | `int` |  |
-| `total_game` | `int` |  |
-| `total_item` | `int` |  |
-| `total_match` | `int` |  |
+| `games` | `array` |  |
+| `totalEvents` | `int` |  |
+| `totalGames` | `int` |  |
+| `totalItems` | `int` |  |
+| `totalMatches` | `int` |  |
 
 #### Example: List
 
@@ -619,7 +622,7 @@ Create an instance: `$standing = $client->Standing();`
 | --- | --- | --- |
 | `conference` | `array` |  |
 | `division` | `array` |  |
-| `team_record` | `array` |  |
+| `teamRecords` | `array` |  |
 
 #### Example: List
 
@@ -648,20 +651,20 @@ Create an instance: `$team = $client->Team();`
 | `conference` | `array` |  |
 | `copyright` | `string` |  |
 | `division` | `array` |  |
-| `first_year_of_play` | `string` |  |
+| `firstYearOfPlay` | `string` |  |
 | `franchise` | `array` |  |
 | `id` | `int` |  |
 | `link` | `string` |  |
-| `location_name` | `string` |  |
+| `locationName` | `string` |  |
 | `name` | `string` |  |
-| `team` | `array` |  |
-| `team_name` | `string` |  |
+| `teamName` | `string` |  |
+| `teams` | `array` |  |
 | `venue` | `array` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Team record (throws on error).
+// load() returns the ENTITY — call data_get() for the Team record (throws on error).
 $team = $client->Team()->load(["id" => 1]);
 ```
 
@@ -749,11 +752,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$conference = $client->Conference();
-$conference->list();
+$division = $client->Division();
+$division->list();
 
-// $conference->data_get() now returns the conference data from the last list
-// $conference->match_get() returns the last match criteria
+// $division->data_get() now returns the division data from the last list
+// $division->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

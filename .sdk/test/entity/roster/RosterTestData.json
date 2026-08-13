@@ -2,19 +2,19 @@
   "existing": {
     "roster": {
       "ROSTER00": {
-        "jersey_number": "s1e",
+        "jerseyNumber": "s1e",
         "person": {},
         "position": {},
         "team_id": "TEAM01"
       },
       "ROSTER01": {
-        "jersey_number": "s3c",
+        "jerseyNumber": "s3c",
         "person": {},
         "position": {},
         "team_id": "TEAM01"
       },
       "ROSTER02": {
-        "jersey_number": "s5a",
+        "jerseyNumber": "s5a",
         "person": {},
         "position": {},
         "team_id": "TEAM01"
@@ -24,7 +24,7 @@
   "new": {
     "roster": {
       "roster_ref01": {
-        "jersey_number": "s78",
+        "jerseyNumber": "s78",
         "person": {},
         "position": {}
       }

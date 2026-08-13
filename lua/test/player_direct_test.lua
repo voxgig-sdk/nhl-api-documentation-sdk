@@ -70,11 +70,11 @@ function player_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["NHLAPIDOCUMENTATION_TEST_PLAYER_ENTID"] = {},
-    ["NHLAPIDOCUMENTATION_TEST_LIVE"] = "FALSE",
+    ["NHL_API_DOCUMENTATION_TEST_PLAYER_ENTID"] = {},
+    ["NHL_API_DOCUMENTATION_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
+  local live = env["NHL_API_DOCUMENTATION_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

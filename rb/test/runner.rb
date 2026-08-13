@@ -23,8 +23,8 @@ module NhlApiDocumentationTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("NHLAPIDOCUMENTATION_TEST_LIVE")
-    override = getenv("NHLAPIDOCUMENTATION_TEST_OVERRIDE")
+    live = getenv("NHL_API_DOCUMENTATION_TEST_LIVE")
+    override = getenv("NHL_API_DOCUMENTATION_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module NhlApiDocumentationTestRunner
       end
     end
 
-    explain = getenv("NHLAPIDOCUMENTATION_TEST_EXPLAIN")
-    m["NHLAPIDOCUMENTATION_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("NHL_API_DOCUMENTATION_TEST_EXPLAIN")
+    m["NHL_API_DOCUMENTATION_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

@@ -11,7 +11,7 @@ main: kit: entity: division: {
       type: "`$STRING`"
     }
     {
-      name: "division"
+      name: "divisions"
       req: false
       type: "`$ARRAY`"
     }
@@ -50,7 +50,7 @@ main: kit: entity: division: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.divisions`"
           }
         }
       ]

@@ -11,7 +11,7 @@ main: kit: entity: player: {
       type: "`$STRING`"
     }
     {
-      name: "person"
+      name: "people"
       req: false
       type: "`$ARRAY`"
     }

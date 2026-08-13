@@ -26,7 +26,7 @@ main: kit: entity: team: {
       type: "`$OBJECT`"
     }
     {
-      name: "first_year_of_play"
+      name: "firstYearOfPlay"
       req: false
       type: "`$STRING`"
     }
@@ -46,7 +46,7 @@ main: kit: entity: team: {
       type: "`$STRING`"
     }
     {
-      name: "location_name"
+      name: "locationName"
       req: false
       type: "`$STRING`"
     }
@@ -56,14 +56,14 @@ main: kit: entity: team: {
       type: "`$STRING`"
     }
     {
-      name: "team"
-      req: false
-      type: "`$ARRAY`"
-    }
-    {
-      name: "team_name"
+      name: "teamName"
       req: false
       type: "`$STRING`"
+    }
+    {
+      name: "teams"
+      req: false
+      type: "`$ARRAY`"
     }
     {
       name: "venue"
@@ -114,7 +114,7 @@ main: kit: entity: team: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.teams`"
           }
         }
       ]

@@ -70,7 +70,7 @@ describe("ConferenceEntity", function()
     -- The basic flow consumes synthetic IDs from the fixture. In live mode
     -- without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup.synthetic_only then
-      pending("live entity test uses synthetic IDs from fixture — set NHLAPIDOCUMENTATION_TEST_CONFERENCE_ENTID JSON to run live")
+      pending("live entity test uses synthetic IDs from fixture — set NHL_API_DOCUMENTATION_TEST_CONFERENCE_ENTID JSON to run live")
       return
     end
     local client = setup.client
@@ -97,7 +97,7 @@ describe("ConferenceEntity", function()
     }
     local conference_ref01_data_dt0_loaded, err = conference_ref01_ent:load(conference_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local conference_ref01_data_dt0_load_result = helpers.to_map(conference_ref01_data_dt0_loaded)
+    local conference_ref01_data_dt0_load_result = helpers.to_map(type(conference_ref01_data_dt0_loaded) == 'table' and conference_ref01_data_dt0_loaded.data_get and conference_ref01_data_dt0_loaded:data_get() or conference_ref01_data_dt0_loaded)
     assert.is_not_nil(conference_ref01_data_dt0_load_result)
     assert.are.equal(conference_ref01_data_dt0_load_result["id"], conference_ref01_data["id"])
 
@@ -136,22 +136,22 @@ function conference_basic_setup(extra)
   -- Detect ENTID env override before envOverride consumes it. When live
   -- mode is on without a real override, the basic test runs against synthetic
   -- IDs from the fixture and 4xx's. Surface this so the test can skip.
-  local entid_env_raw = os.getenv("NHLAPIDOCUMENTATION_TEST_CONFERENCE_ENTID")
+  local entid_env_raw = os.getenv("NHL_API_DOCUMENTATION_TEST_CONFERENCE_ENTID")
   local idmap_overridden = entid_env_raw ~= nil and entid_env_raw:match("^%s*{") ~= nil
 
   local env = runner.env_override({
-    ["NHLAPIDOCUMENTATION_TEST_CONFERENCE_ENTID"] = idmap,
-    ["NHLAPIDOCUMENTATION_TEST_LIVE"] = "FALSE",
-    ["NHLAPIDOCUMENTATION_TEST_EXPLAIN"] = "FALSE",
+    ["NHL_API_DOCUMENTATION_TEST_CONFERENCE_ENTID"] = idmap,
+    ["NHL_API_DOCUMENTATION_TEST_LIVE"] = "FALSE",
+    ["NHL_API_DOCUMENTATION_TEST_EXPLAIN"] = "FALSE",
   })
 
   local idmap_resolved = helpers.to_map(
-    env["NHLAPIDOCUMENTATION_TEST_CONFERENCE_ENTID"])
+    env["NHL_API_DOCUMENTATION_TEST_CONFERENCE_ENTID"])
   if idmap_resolved == nil then
     idmap_resolved = helpers.to_map(idmap)
   end
 
-  if env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE" then
+  if env["NHL_API_DOCUMENTATION_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
       },
@@ -160,13 +160,13 @@ function conference_basic_setup(extra)
     client = sdk.new(helpers.to_map(merged_opts))
   end
 
-  local live = env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
+  local live = env["NHL_API_DOCUMENTATION_TEST_LIVE"] == "TRUE"
   return {
     client = client,
     data = entity_data,
     idmap = idmap_resolved,
     env = env,
-    explain = env["NHLAPIDOCUMENTATION_TEST_EXPLAIN"] == "TRUE",
+    explain = env["NHL_API_DOCUMENTATION_TEST_EXPLAIN"] == "TRUE",
     live = live,
     synthetic_only = live and not idmap_overridden,
     now = os.time() * 1000,

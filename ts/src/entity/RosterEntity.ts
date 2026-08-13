@@ -37,7 +37,7 @@ class RosterEntity extends NhlApiDocumentationEntityBase<Roster> {
 
 
 
-  async list(this: any, reqmatch?: RosterListMatch, ctrl?: Control): Promise<Roster[]> {
+  async list(this: any, reqmatch?: RosterListMatch, ctrl?: Control): Promise<RosterEntity[]> {
 
     const utility = this._utility
 

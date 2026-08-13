@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = NhlApiDocumentationSDK.test()
-const conferences = await client.Conference().list()
-// conferences is an array of bare Conference records populated with mock data
-console.log(conferences)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = NhlApiDocumentationSDK.test({
+  entity: {
+    division: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const divisions = await client.Division().list()
+// divisions is an array of Division entities, populated with mock data
+// — call divisions[0].data() for the record itself
+console.log(divisions)
 ```
 
 ### Python
 
 ```python
 client = NhlApiDocumentationSDK.test()
-conferences = client.Conference().list()
-print(conferences)
+divisions = client.Division().list()
+print(divisions)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(conferences)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = NhlApiDocumentationSDK::test([
-    "entity" => ["conference" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["division" => ["test01" => ["id" => "test01"]]],
 ]);
-$conferences = $client->Conference()->list();
+$divisions = $client->Division()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Conference(nil).List(
+result, err := client.Division(nil).List(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.Conference(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = NhlApiDocumentationSDK.test({
-  "entity" => { "conference" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "division" => { "test01" => { "id" => "test01" } } },
 })
-conferences = client.Conference.list()
+divisions = client.Division.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:Conference():list()
+local results, err = client:Division():list()
 ```
 
 ## Packages
@@ -110,7 +119,7 @@ import { NhlApiDocumentationSDK } from '@voxgig-sdk/nhl-api-documentation'
 
 const client = new NhlApiDocumentationSDK()
 
-// List all conferences (returns Conference[])
+// List all conferences (returns ConferenceEntity[] — .data() for the record)
 const conferences = await client.Conference().list()
 for (const conference of conferences) {
   console.log(conference)
@@ -199,7 +208,7 @@ $client = new NhlApiDocumentationSDK();
 $conferences = $client->Conference()->list();
 print_r($conferences);
 
-// Load a specific conference (returns the bare record; throws on error)
+// Load a specific conference (returns the ENTITY; call data_get() for the record; throws on error)
 $conference = $client->Conference()->load(["id" => 1]);
 print_r($conference);
 ```
@@ -230,7 +239,7 @@ client = NhlApiDocumentationSDK.new
 conferences = client.Conference.list
 puts conferences
 
-# Load a specific conference (returns the bare record; raises on error)
+# Load a specific conference (returns the ENTITY; call data_get for the record)
 conference = client.Conference.load({ "id" => 1 })
 puts conference
 ```
@@ -367,6 +376,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://gitlab.com/dword4/nhlapi](https://gitlab.com/dword4/nhlapi)
 

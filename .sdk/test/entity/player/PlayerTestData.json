@@ -3,17 +3,17 @@
     "player": {
       "PLAYER00": {
         "copyright": "s14",
-        "person": [],
+        "people": [],
         "id": "PLAYER00"
       },
       "PLAYER01": {
         "copyright": "s28",
-        "person": [],
+        "people": [],
         "id": "PLAYER01"
       },
       "PLAYER02": {
         "copyright": "s3c",
-        "person": [],
+        "people": [],
         "id": "PLAYER02"
       }
     }
@@ -22,7 +22,7 @@
     "player": {
       "player_ref01": {
         "copyright": "s50",
-        "person": []
+        "people": []
       }
     }
   }

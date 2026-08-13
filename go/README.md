@@ -75,12 +75,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-conferences, err := client.Conference(nil).List(nil, nil)
+divisions, err := client.Division(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = conferences
+_ = divisions
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -144,13 +144,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-conference, err := client.Conference(nil).List(
+division, err := client.Division(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(conference) // the returned mock data
+fmt.Println(division) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -277,7 +277,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"conference"` |  |
+| `"conferences"` |  |
 | `"copyright"` |  |
 | `"id"` |  |
 | `"link"` |  |
@@ -292,7 +292,7 @@ API path: `/conferences`
 | Field | Description |
 | --- | --- |
 | `"copyright"` |  |
-| `"division"` |  |
+| `"divisions"` |  |
 | `"id"` |  |
 | `"link"` |  |
 | `"name"` |  |
@@ -305,12 +305,13 @@ API path: `/divisions`
 
 | Field | Description |
 | --- | --- |
+| `"away"` |  |
 | `"copyright"` |  |
-| `"game_data"` |  |
-| `"game_pk"` |  |
+| `"gameData"` |  |
+| `"gamePk"` |  |
+| `"home"` |  |
 | `"link"` |  |
-| `"live_data"` |  |
-| `"team"` |  |
+| `"liveData"` |  |
 
 Operations: Load.
 
@@ -321,7 +322,7 @@ API path: `/game/{id}/boxscore`
 | Field | Description |
 | --- | --- |
 | `"copyright"` |  |
-| `"person"` |  |
+| `"people"` |  |
 
 Operations: Load.
 
@@ -331,7 +332,7 @@ API path: `/people/{id}`
 
 | Field | Description |
 | --- | --- |
-| `"split"` |  |
+| `"splits"` |  |
 | `"type"` |  |
 
 Operations: List.
@@ -342,7 +343,7 @@ API path: `/people/{id}/stats`
 
 | Field | Description |
 | --- | --- |
-| `"jersey_number"` |  |
+| `"jerseyNumber"` |  |
 | `"person"` |  |
 | `"position"` |  |
 
@@ -355,11 +356,11 @@ API path: `/teams/{id}/roster`
 | Field | Description |
 | --- | --- |
 | `"date"` |  |
-| `"game"` |  |
-| `"total_event"` |  |
-| `"total_game"` |  |
-| `"total_item"` |  |
-| `"total_match"` |  |
+| `"games"` |  |
+| `"totalEvents"` |  |
+| `"totalGames"` |  |
+| `"totalItems"` |  |
+| `"totalMatches"` |  |
 
 Operations: List.
 
@@ -371,7 +372,7 @@ API path: `/schedule`
 | --- | --- |
 | `"conference"` |  |
 | `"division"` |  |
-| `"team_record"` |  |
+| `"teamRecords"` |  |
 
 Operations: List.
 
@@ -385,14 +386,14 @@ API path: `/standings`
 | `"conference"` |  |
 | `"copyright"` |  |
 | `"division"` |  |
-| `"first_year_of_play"` |  |
+| `"firstYearOfPlay"` |  |
 | `"franchise"` |  |
 | `"id"` |  |
 | `"link"` |  |
-| `"location_name"` |  |
+| `"locationName"` |  |
 | `"name"` |  |
-| `"team"` |  |
-| `"team_name"` |  |
+| `"teamName"` |  |
+| `"teams"` |  |
 | `"venue"` |  |
 
 Operations: List, Load.
@@ -419,7 +420,7 @@ Create an instance: `conference := client.Conference(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `conference` | `[]any` |  |
+| `conferences` | `[]any` |  |
 | `copyright` | `string` |  |
 | `id` | `int` |  |
 | `link` | `string` |  |
@@ -462,7 +463,7 @@ Create an instance: `division := client.Division(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `string` |  |
-| `division` | `[]any` |  |
+| `divisions` | `[]any` |  |
 | `id` | `int` |  |
 | `link` | `string` |  |
 | `name` | `string` |  |
@@ -502,12 +503,13 @@ Create an instance: `game := client.Game(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `away` | `map[string]any` |  |
 | `copyright` | `string` |  |
-| `game_data` | `map[string]any` |  |
-| `game_pk` | `int` |  |
+| `gameData` | `map[string]any` |  |
+| `gamePk` | `int` |  |
+| `home` | `map[string]any` |  |
 | `link` | `string` |  |
-| `live_data` | `map[string]any` |  |
-| `team` | `map[string]any` |  |
+| `liveData` | `map[string]any` |  |
 
 #### Example: Load
 
@@ -535,7 +537,7 @@ Create an instance: `player := client.Player(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `string` |  |
-| `person` | `[]any` |  |
+| `people` | `[]any` |  |
 
 #### Example: Load
 
@@ -562,7 +564,7 @@ Create an instance: `playerStat := client.PlayerStat(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `split` | `[]any` |  |
+| `splits` | `[]any` |  |
 | `type` | `map[string]any` |  |
 
 #### Example: List
@@ -590,7 +592,7 @@ Create an instance: `roster := client.Roster(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `jersey_number` | `string` |  |
+| `jerseyNumber` | `string` |  |
 | `person` | `map[string]any` |  |
 | `position` | `map[string]any` |  |
 
@@ -620,11 +622,11 @@ Create an instance: `schedule := client.Schedule(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `date` | `string` |  |
-| `game` | `[]any` |  |
-| `total_event` | `int` |  |
-| `total_game` | `int` |  |
-| `total_item` | `int` |  |
-| `total_match` | `int` |  |
+| `games` | `[]any` |  |
+| `totalEvents` | `int` |  |
+| `totalGames` | `int` |  |
+| `totalItems` | `int` |  |
+| `totalMatches` | `int` |  |
 
 #### Example: List
 
@@ -653,7 +655,7 @@ Create an instance: `standing := client.Standing(nil)`
 | --- | --- | --- |
 | `conference` | `map[string]any` |  |
 | `division` | `map[string]any` |  |
-| `team_record` | `[]any` |  |
+| `teamRecords` | `[]any` |  |
 
 #### Example: List
 
@@ -685,14 +687,14 @@ Create an instance: `team := client.Team(nil)`
 | `conference` | `map[string]any` |  |
 | `copyright` | `string` |  |
 | `division` | `map[string]any` |  |
-| `first_year_of_play` | `string` |  |
+| `firstYearOfPlay` | `string` |  |
 | `franchise` | `map[string]any` |  |
 | `id` | `int` |  |
 | `link` | `string` |  |
-| `location_name` | `string` |  |
+| `locationName` | `string` |  |
 | `name` | `string` |  |
-| `team` | `[]any` |  |
-| `team_name` | `string` |  |
+| `teamName` | `string` |  |
+| `teams` | `[]any` |  |
 | `venue` | `map[string]any` |  |
 
 #### Example: Load
@@ -789,11 +791,11 @@ Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-conference := client.Conference(nil)
-conference.List(nil, nil)
+division := client.Division(nil)
+division.List(nil, nil)
 
-// conference.Data() now returns the conference data from the last list
-// conference.Match() returns the last match criteria
+// division.Data() now returns the division data from the last list
+// division.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

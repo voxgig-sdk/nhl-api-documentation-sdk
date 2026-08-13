@@ -37,7 +37,7 @@ begin
   # list returns an Array of Conference records — iterate directly.
   conferences = client.Conference.list
   conferences.each do |item|
-    puts "#{item["id"]} #{item["conference"]}"
+    puts "#{item["id"]} #{item["conferences"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -48,7 +48,7 @@ end
 
 ```ruby
 begin
-  # load returns the bare Conference record (raises on error).
+  # load returns the ENTITY — call data_get for the Conference record (raises on error).
   conference = client.Conference.load({ "id" => 1 })
   puts conference
 rescue => err
@@ -63,7 +63,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  conferences = client.Conference.list()
+  divisions = client.Division.list()
 rescue => err
   warn "list failed: #{err}"
 end
@@ -131,12 +131,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
 client = NhlApiDocumentationSDK.test({
-  "entity" => { "conference" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "division" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the bare mock record (raises on error).
-conference = client.Conference.list()
-puts conference
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+division = client.Division.list()
+puts division
 ```
 
 ### Use a custom fetch function
@@ -260,7 +261,7 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `conference` |  |
+| `conferences` |  |
 | `copyright` |  |
 | `id` |  |
 | `link` |  |
@@ -275,7 +276,7 @@ API path: `/conferences`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
-| `division` |  |
+| `divisions` |  |
 | `id` |  |
 | `link` |  |
 | `name` |  |
@@ -288,12 +289,13 @@ API path: `/divisions`
 
 | Field | Description |
 | --- | --- |
+| `away` |  |
 | `copyright` |  |
-| `game_data` |  |
-| `game_pk` |  |
+| `gameData` |  |
+| `gamePk` |  |
+| `home` |  |
 | `link` |  |
-| `live_data` |  |
-| `team` |  |
+| `liveData` |  |
 
 Operations: Load.
 
@@ -304,7 +306,7 @@ API path: `/game/{id}/boxscore`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
-| `person` |  |
+| `people` |  |
 
 Operations: Load.
 
@@ -314,7 +316,7 @@ API path: `/people/{id}`
 
 | Field | Description |
 | --- | --- |
-| `split` |  |
+| `splits` |  |
 | `type` |  |
 
 Operations: List.
@@ -325,7 +327,7 @@ API path: `/people/{id}/stats`
 
 | Field | Description |
 | --- | --- |
-| `jersey_number` |  |
+| `jerseyNumber` |  |
 | `person` |  |
 | `position` |  |
 
@@ -338,11 +340,11 @@ API path: `/teams/{id}/roster`
 | Field | Description |
 | --- | --- |
 | `date` |  |
-| `game` |  |
-| `total_event` |  |
-| `total_game` |  |
-| `total_item` |  |
-| `total_match` |  |
+| `games` |  |
+| `totalEvents` |  |
+| `totalGames` |  |
+| `totalItems` |  |
+| `totalMatches` |  |
 
 Operations: List.
 
@@ -354,7 +356,7 @@ API path: `/schedule`
 | --- | --- |
 | `conference` |  |
 | `division` |  |
-| `team_record` |  |
+| `teamRecords` |  |
 
 Operations: List.
 
@@ -368,14 +370,14 @@ API path: `/standings`
 | `conference` |  |
 | `copyright` |  |
 | `division` |  |
-| `first_year_of_play` |  |
+| `firstYearOfPlay` |  |
 | `franchise` |  |
 | `id` |  |
 | `link` |  |
-| `location_name` |  |
+| `locationName` |  |
 | `name` |  |
-| `team` |  |
-| `team_name` |  |
+| `teamName` |  |
+| `teams` |  |
 | `venue` |  |
 
 Operations: List, Load.
@@ -402,7 +404,7 @@ Create an instance: `conference = client.Conference`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `conference` | `Array` |  |
+| `conferences` | `Array` |  |
 | `copyright` | `String` |  |
 | `id` | `Integer` |  |
 | `link` | `String` |  |
@@ -411,7 +413,7 @@ Create an instance: `conference = client.Conference`
 #### Example: Load
 
 ```ruby
-# load returns the bare Conference record (raises on error).
+# load returns the ENTITY — call data_get for the Conference record (raises on error).
 conference = client.Conference.load({ "id" => 1 })
 ```
 
@@ -439,7 +441,7 @@ Create an instance: `division = client.Division`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `String` |  |
-| `division` | `Array` |  |
+| `divisions` | `Array` |  |
 | `id` | `Integer` |  |
 | `link` | `String` |  |
 | `name` | `String` |  |
@@ -447,7 +449,7 @@ Create an instance: `division = client.Division`
 #### Example: Load
 
 ```ruby
-# load returns the bare Division record (raises on error).
+# load returns the ENTITY — call data_get for the Division record (raises on error).
 division = client.Division.load({ "id" => 1 })
 ```
 
@@ -473,17 +475,18 @@ Create an instance: `game = client.Game`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `away` | `Hash` |  |
 | `copyright` | `String` |  |
-| `game_data` | `Hash` |  |
-| `game_pk` | `Integer` |  |
+| `gameData` | `Hash` |  |
+| `gamePk` | `Integer` |  |
+| `home` | `Hash` |  |
 | `link` | `String` |  |
-| `live_data` | `Hash` |  |
-| `team` | `Hash` |  |
+| `liveData` | `Hash` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Game record (raises on error).
+# load returns the ENTITY — call data_get for the Game record (raises on error).
 game = client.Game.load({ "id" => 1 })
 ```
 
@@ -503,12 +506,12 @@ Create an instance: `player = client.Player`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `String` |  |
-| `person` | `Array` |  |
+| `people` | `Array` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Player record (raises on error).
+# load returns the ENTITY — call data_get for the Player record (raises on error).
 player = client.Player.load({ "id" => 1 })
 ```
 
@@ -527,7 +530,7 @@ Create an instance: `player_stat = client.PlayerStat`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `split` | `Array` |  |
+| `splits` | `Array` |  |
 | `type` | `Hash` |  |
 
 #### Example: List
@@ -552,7 +555,7 @@ Create an instance: `roster = client.Roster`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `jersey_number` | `String` |  |
+| `jerseyNumber` | `String` |  |
 | `person` | `Hash` |  |
 | `position` | `Hash` |  |
 
@@ -579,11 +582,11 @@ Create an instance: `schedule = client.Schedule`
 | Field | Type | Description |
 | --- | --- | --- |
 | `date` | `String` |  |
-| `game` | `Array` |  |
-| `total_event` | `Integer` |  |
-| `total_game` | `Integer` |  |
-| `total_item` | `Integer` |  |
-| `total_match` | `Integer` |  |
+| `games` | `Array` |  |
+| `totalEvents` | `Integer` |  |
+| `totalGames` | `Integer` |  |
+| `totalItems` | `Integer` |  |
+| `totalMatches` | `Integer` |  |
 
 #### Example: List
 
@@ -609,7 +612,7 @@ Create an instance: `standing = client.Standing`
 | --- | --- | --- |
 | `conference` | `Hash` |  |
 | `division` | `Hash` |  |
-| `team_record` | `Array` |  |
+| `teamRecords` | `Array` |  |
 
 #### Example: List
 
@@ -638,20 +641,20 @@ Create an instance: `team = client.Team`
 | `conference` | `Hash` |  |
 | `copyright` | `String` |  |
 | `division` | `Hash` |  |
-| `first_year_of_play` | `String` |  |
+| `firstYearOfPlay` | `String` |  |
 | `franchise` | `Hash` |  |
 | `id` | `Integer` |  |
 | `link` | `String` |  |
-| `location_name` | `String` |  |
+| `locationName` | `String` |  |
 | `name` | `String` |  |
-| `team` | `Array` |  |
-| `team_name` | `String` |  |
+| `teamName` | `String` |  |
+| `teams` | `Array` |  |
 | `venue` | `Hash` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Team record (raises on error).
+# load returns the ENTITY — call data_get for the Team record (raises on error).
 team = client.Team.load({ "id" => 1 })
 ```
 
@@ -739,11 +742,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-conference = client.Conference
-conference.list()
+division = client.Division
+division.list()
 
-# conference.data_get now returns the conference data from the last list
-# conference.match_get returns the last match criteria
+# division.data_get now returns the division data from the last list
+# division.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

@@ -10,7 +10,7 @@
 
 # Conference entity data model.
 #
-# @!attribute [rw] conference
+# @!attribute [rw] conferences
 #   @return [Array, nil]
 #
 # @!attribute [rw] copyright
@@ -25,7 +25,7 @@
 # @!attribute [rw] name
 #   @return [String, nil]
 Conference = Struct.new(
-  :conference,
+  :conferences,
   :copyright,
   :id,
   :link,
@@ -44,7 +44,7 @@ ConferenceLoadMatch = Struct.new(
 
 # Request payload for Conference#list.
 #
-# @!attribute [rw] conference
+# @!attribute [rw] conferences
 #   @return [Array, nil]
 #
 # @!attribute [rw] copyright
@@ -59,7 +59,7 @@ ConferenceLoadMatch = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 ConferenceListMatch = Struct.new(
-  :conference,
+  :conferences,
   :copyright,
   :id,
   :link,
@@ -72,7 +72,7 @@ ConferenceListMatch = Struct.new(
 # @!attribute [rw] copyright
 #   @return [String, nil]
 #
-# @!attribute [rw] division
+# @!attribute [rw] divisions
 #   @return [Array, nil]
 #
 # @!attribute [rw] id
@@ -85,7 +85,7 @@ ConferenceListMatch = Struct.new(
 #   @return [String, nil]
 Division = Struct.new(
   :copyright,
-  :division,
+  :divisions,
   :id,
   :link,
   :name,
@@ -106,7 +106,7 @@ DivisionLoadMatch = Struct.new(
 # @!attribute [rw] copyright
 #   @return [String, nil]
 #
-# @!attribute [rw] division
+# @!attribute [rw] divisions
 #   @return [Array, nil]
 #
 # @!attribute [rw] id
@@ -119,7 +119,7 @@ DivisionLoadMatch = Struct.new(
 #   @return [String, nil]
 DivisionListMatch = Struct.new(
   :copyright,
-  :division,
+  :divisions,
   :id,
   :link,
   :name,
@@ -128,30 +128,34 @@ DivisionListMatch = Struct.new(
 
 # Game entity data model.
 #
+# @!attribute [rw] away
+#   @return [Hash, nil]
+#
 # @!attribute [rw] copyright
 #   @return [String, nil]
 #
-# @!attribute [rw] game_data
+# @!attribute [rw] gameData
 #   @return [Hash, nil]
 #
-# @!attribute [rw] game_pk
+# @!attribute [rw] gamePk
 #   @return [Integer, nil]
+#
+# @!attribute [rw] home
+#   @return [Hash, nil]
 #
 # @!attribute [rw] link
 #   @return [String, nil]
 #
-# @!attribute [rw] live_data
-#   @return [Hash, nil]
-#
-# @!attribute [rw] team
+# @!attribute [rw] liveData
 #   @return [Hash, nil]
 Game = Struct.new(
+  :away,
   :copyright,
-  :game_data,
-  :game_pk,
+  :gameData,
+  :gamePk,
+  :home,
   :link,
-  :live_data,
-  :team,
+  :liveData,
   keyword_init: true
 )
 
@@ -169,11 +173,11 @@ GameLoadMatch = Struct.new(
 # @!attribute [rw] copyright
 #   @return [String, nil]
 #
-# @!attribute [rw] person
+# @!attribute [rw] people
 #   @return [Array, nil]
 Player = Struct.new(
   :copyright,
-  :person,
+  :people,
   keyword_init: true
 )
 
@@ -188,13 +192,13 @@ PlayerLoadMatch = Struct.new(
 
 # PlayerStat entity data model.
 #
-# @!attribute [rw] split
+# @!attribute [rw] splits
 #   @return [Array, nil]
 #
 # @!attribute [rw] type
 #   @return [Hash, nil]
 PlayerStat = Struct.new(
-  :split,
+  :splits,
   :type,
   keyword_init: true
 )
@@ -210,7 +214,7 @@ PlayerStatListMatch = Struct.new(
 
 # Roster entity data model.
 #
-# @!attribute [rw] jersey_number
+# @!attribute [rw] jerseyNumber
 #   @return [String, nil]
 #
 # @!attribute [rw] person
@@ -219,7 +223,7 @@ PlayerStatListMatch = Struct.new(
 # @!attribute [rw] position
 #   @return [Hash, nil]
 Roster = Struct.new(
-  :jersey_number,
+  :jerseyNumber,
   :person,
   :position,
   keyword_init: true
@@ -239,27 +243,27 @@ RosterListMatch = Struct.new(
 # @!attribute [rw] date
 #   @return [String, nil]
 #
-# @!attribute [rw] game
+# @!attribute [rw] games
 #   @return [Array, nil]
 #
-# @!attribute [rw] total_event
+# @!attribute [rw] totalEvents
 #   @return [Integer, nil]
 #
-# @!attribute [rw] total_game
+# @!attribute [rw] totalGames
 #   @return [Integer, nil]
 #
-# @!attribute [rw] total_item
+# @!attribute [rw] totalItems
 #   @return [Integer, nil]
 #
-# @!attribute [rw] total_match
+# @!attribute [rw] totalMatches
 #   @return [Integer, nil]
 Schedule = Struct.new(
   :date,
-  :game,
-  :total_event,
-  :total_game,
-  :total_item,
-  :total_match,
+  :games,
+  :totalEvents,
+  :totalGames,
+  :totalItems,
+  :totalMatches,
   keyword_init: true
 )
 
@@ -268,27 +272,27 @@ Schedule = Struct.new(
 # @!attribute [rw] date
 #   @return [String, nil]
 #
-# @!attribute [rw] game
+# @!attribute [rw] games
 #   @return [Array, nil]
 #
-# @!attribute [rw] total_event
+# @!attribute [rw] totalEvents
 #   @return [Integer, nil]
 #
-# @!attribute [rw] total_game
+# @!attribute [rw] totalGames
 #   @return [Integer, nil]
 #
-# @!attribute [rw] total_item
+# @!attribute [rw] totalItems
 #   @return [Integer, nil]
 #
-# @!attribute [rw] total_match
+# @!attribute [rw] totalMatches
 #   @return [Integer, nil]
 ScheduleListMatch = Struct.new(
   :date,
-  :game,
-  :total_event,
-  :total_game,
-  :total_item,
-  :total_match,
+  :games,
+  :totalEvents,
+  :totalGames,
+  :totalItems,
+  :totalMatches,
   keyword_init: true
 )
 
@@ -300,12 +304,12 @@ ScheduleListMatch = Struct.new(
 # @!attribute [rw] division
 #   @return [Hash, nil]
 #
-# @!attribute [rw] team_record
+# @!attribute [rw] teamRecords
 #   @return [Array, nil]
 Standing = Struct.new(
   :conference,
   :division,
-  :team_record,
+  :teamRecords,
   keyword_init: true
 )
 
@@ -317,12 +321,12 @@ Standing = Struct.new(
 # @!attribute [rw] division
 #   @return [Hash, nil]
 #
-# @!attribute [rw] team_record
+# @!attribute [rw] teamRecords
 #   @return [Array, nil]
 StandingListMatch = Struct.new(
   :conference,
   :division,
-  :team_record,
+  :teamRecords,
   keyword_init: true
 )
 
@@ -340,7 +344,7 @@ StandingListMatch = Struct.new(
 # @!attribute [rw] division
 #   @return [Hash, nil]
 #
-# @!attribute [rw] first_year_of_play
+# @!attribute [rw] firstYearOfPlay
 #   @return [String, nil]
 #
 # @!attribute [rw] franchise
@@ -352,17 +356,17 @@ StandingListMatch = Struct.new(
 # @!attribute [rw] link
 #   @return [String, nil]
 #
-# @!attribute [rw] location_name
+# @!attribute [rw] locationName
 #   @return [String, nil]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] team
-#   @return [Array, nil]
-#
-# @!attribute [rw] team_name
+# @!attribute [rw] teamName
 #   @return [String, nil]
+#
+# @!attribute [rw] teams
+#   @return [Array, nil]
 #
 # @!attribute [rw] venue
 #   @return [Hash, nil]
@@ -371,14 +375,14 @@ Team = Struct.new(
   :conference,
   :copyright,
   :division,
-  :first_year_of_play,
+  :firstYearOfPlay,
   :franchise,
   :id,
   :link,
-  :location_name,
+  :locationName,
   :name,
-  :team,
-  :team_name,
+  :teamName,
+  :teams,
   :venue,
   keyword_init: true
 )
@@ -406,7 +410,7 @@ TeamLoadMatch = Struct.new(
 # @!attribute [rw] division
 #   @return [Hash, nil]
 #
-# @!attribute [rw] first_year_of_play
+# @!attribute [rw] firstYearOfPlay
 #   @return [String, nil]
 #
 # @!attribute [rw] franchise
@@ -418,17 +422,17 @@ TeamLoadMatch = Struct.new(
 # @!attribute [rw] link
 #   @return [String, nil]
 #
-# @!attribute [rw] location_name
+# @!attribute [rw] locationName
 #   @return [String, nil]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] team
-#   @return [Array, nil]
-#
-# @!attribute [rw] team_name
+# @!attribute [rw] teamName
 #   @return [String, nil]
+#
+# @!attribute [rw] teams
+#   @return [Array, nil]
 #
 # @!attribute [rw] venue
 #   @return [Hash, nil]
@@ -437,14 +441,14 @@ TeamListMatch = Struct.new(
   :conference,
   :copyright,
   :division,
-  :first_year_of_play,
+  :firstYearOfPlay,
   :franchise,
   :id,
   :link,
-  :location_name,
+  :locationName,
   :name,
-  :team,
-  :team_name,
+  :teamName,
+  :teams,
   :venue,
   keyword_init: true
 )

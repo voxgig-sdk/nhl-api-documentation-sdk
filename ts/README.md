@@ -35,7 +35,9 @@ const client = new NhlApiDocumentationSDK()
 
 ### 2. List conference records
 
-`list()` resolves to an array of Conference objects — iterate it directly:
+`list()` resolves to an array of Conference ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const conferences = await client.Conference().list()
@@ -65,8 +67,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const conferences = await client.Conference().list()
-  console.log(conferences)
+  const divisions = await client.Division().list()
+  console.log(divisions)
 } catch (err) {
   console.error('list failed:', err)
 }
@@ -132,9 +134,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = NhlApiDocumentationSDK.test()
 
-const conference = await client.Conference().list()
-// conference is a bare entity populated with mock response data
-console.log(conference)
+const division = await client.Division().list()
+// division is the entity, populated with mock response data
+// — call division.data() for the record itself
+console.log(division)
 ```
 
 You can also use the instance method:
@@ -149,7 +152,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Conference()
+const entity = client.Division()
 
 // First call runs the operation and stores its result
 await entity.list()
@@ -307,7 +310,7 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `conference` |  |
+| `conferences` |  |
 | `copyright` |  |
 | `id` |  |
 | `link` |  |
@@ -322,7 +325,7 @@ API path: `/conferences`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
-| `division` |  |
+| `divisions` |  |
 | `id` |  |
 | `link` |  |
 | `name` |  |
@@ -335,12 +338,13 @@ API path: `/divisions`
 
 | Field | Description |
 | --- | --- |
+| `away` |  |
 | `copyright` |  |
-| `game_data` |  |
-| `game_pk` |  |
+| `gameData` |  |
+| `gamePk` |  |
+| `home` |  |
 | `link` |  |
-| `live_data` |  |
-| `team` |  |
+| `liveData` |  |
 
 Operations: load.
 
@@ -351,7 +355,7 @@ API path: `/game/{id}/boxscore`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
-| `person` |  |
+| `people` |  |
 
 Operations: load.
 
@@ -361,7 +365,7 @@ API path: `/people/{id}`
 
 | Field | Description |
 | --- | --- |
-| `split` |  |
+| `splits` |  |
 | `type` |  |
 
 Operations: list.
@@ -372,7 +376,7 @@ API path: `/people/{id}/stats`
 
 | Field | Description |
 | --- | --- |
-| `jersey_number` |  |
+| `jerseyNumber` |  |
 | `person` |  |
 | `position` |  |
 
@@ -385,11 +389,11 @@ API path: `/teams/{id}/roster`
 | Field | Description |
 | --- | --- |
 | `date` |  |
-| `game` |  |
-| `total_event` |  |
-| `total_game` |  |
-| `total_item` |  |
-| `total_match` |  |
+| `games` |  |
+| `totalEvents` |  |
+| `totalGames` |  |
+| `totalItems` |  |
+| `totalMatches` |  |
 
 Operations: list.
 
@@ -401,7 +405,7 @@ API path: `/schedule`
 | --- | --- |
 | `conference` |  |
 | `division` |  |
-| `team_record` |  |
+| `teamRecords` |  |
 
 Operations: list.
 
@@ -415,14 +419,14 @@ API path: `/standings`
 | `conference` |  |
 | `copyright` |  |
 | `division` |  |
-| `first_year_of_play` |  |
+| `firstYearOfPlay` |  |
 | `franchise` |  |
 | `id` |  |
 | `link` |  |
-| `location_name` |  |
+| `locationName` |  |
 | `name` |  |
-| `team` |  |
-| `team_name` |  |
+| `teamName` |  |
+| `teams` |  |
 | `venue` |  |
 
 Operations: list, load.
@@ -449,7 +453,7 @@ Create an instance: `const conference = client.Conference()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `conference` | `any[]` |  |
+| `conferences` | `any[]` |  |
 | `copyright` | `string` |  |
 | `id` | `number` |  |
 | `link` | `string` |  |
@@ -484,7 +488,7 @@ Create an instance: `const division = client.Division()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `string` |  |
-| `division` | `any[]` |  |
+| `divisions` | `any[]` |  |
 | `id` | `number` |  |
 | `link` | `string` |  |
 | `name` | `string` |  |
@@ -516,12 +520,13 @@ Create an instance: `const game = client.Game()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `away` | `Record<string, any>` |  |
 | `copyright` | `string` |  |
-| `game_data` | `Record<string, any>` |  |
-| `game_pk` | `number` |  |
+| `gameData` | `Record<string, any>` |  |
+| `gamePk` | `number` |  |
+| `home` | `Record<string, any>` |  |
 | `link` | `string` |  |
-| `live_data` | `Record<string, any>` |  |
-| `team` | `Record<string, any>` |  |
+| `liveData` | `Record<string, any>` |  |
 
 #### Example: Load
 
@@ -545,7 +550,7 @@ Create an instance: `const player = client.Player()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `string` |  |
-| `person` | `any[]` |  |
+| `people` | `any[]` |  |
 
 #### Example: Load
 
@@ -568,13 +573,13 @@ Create an instance: `const player_stat = client.PlayerStat()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `split` | `any[]` |  |
+| `splits` | `any[]` |  |
 | `type` | `Record<string, any>` |  |
 
 #### Example: List
 
 ```ts
-const player_stats = await client.PlayerStat().list()
+const player_stats = await client.PlayerStat().list({ person_id: 1 })
 ```
 
 
@@ -592,14 +597,14 @@ Create an instance: `const roster = client.Roster()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `jersey_number` | `string` |  |
+| `jerseyNumber` | `string` |  |
 | `person` | `Record<string, any>` |  |
 | `position` | `Record<string, any>` |  |
 
 #### Example: List
 
 ```ts
-const rosters = await client.Roster().list()
+const rosters = await client.Roster().list({ team_id: 1 })
 ```
 
 
@@ -618,11 +623,11 @@ Create an instance: `const schedule = client.Schedule()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `date` | `string` |  |
-| `game` | `any[]` |  |
-| `total_event` | `number` |  |
-| `total_game` | `number` |  |
-| `total_item` | `number` |  |
-| `total_match` | `number` |  |
+| `games` | `any[]` |  |
+| `totalEvents` | `number` |  |
+| `totalGames` | `number` |  |
+| `totalItems` | `number` |  |
+| `totalMatches` | `number` |  |
 
 #### Example: List
 
@@ -647,7 +652,7 @@ Create an instance: `const standing = client.Standing()`
 | --- | --- | --- |
 | `conference` | `Record<string, any>` |  |
 | `division` | `Record<string, any>` |  |
-| `team_record` | `any[]` |  |
+| `teamRecords` | `any[]` |  |
 
 #### Example: List
 
@@ -675,14 +680,14 @@ Create an instance: `const team = client.Team()`
 | `conference` | `Record<string, any>` |  |
 | `copyright` | `string` |  |
 | `division` | `Record<string, any>` |  |
-| `first_year_of_play` | `string` |  |
+| `firstYearOfPlay` | `string` |  |
 | `franchise` | `Record<string, any>` |  |
 | `id` | `number` |  |
 | `link` | `string` |  |
-| `location_name` | `string` |  |
+| `locationName` | `string` |  |
 | `name` | `string` |  |
-| `team` | `any[]` |  |
-| `team_name` | `string` |  |
+| `teamName` | `string` |  |
+| `teams` | `any[]` |  |
 | `venue` | `Record<string, any>` |  |
 
 #### Example: Load
@@ -767,11 +772,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const conference = client.Conference()
-await conference.list()
+const division = client.Division()
+await division.list()
 
-// conference.data() now returns the conference data from the last `list`
-// conference.match() returns the last match criteria
+// division.data() now returns the division data from the last `list`
+// division.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

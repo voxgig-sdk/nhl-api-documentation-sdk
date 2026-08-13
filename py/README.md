@@ -52,7 +52,7 @@ except Exception as err:
 
 ### 3. Load a conference
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -69,8 +69,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    conferences = client.Conference().list()
-    print(conferences)
+    divisions = client.Division().list()
+    print(divisions)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -136,9 +136,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = NhlApiDocumentationSDK.test()
 
-# Entity ops return the bare record and raise on error.
-conference = client.Conference().list()
-# conference contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+division = client.Division().list()
+# division contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -241,7 +242,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -263,7 +264,7 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `conference` |  |
+| `conferences` |  |
 | `copyright` |  |
 | `id` |  |
 | `link` |  |
@@ -278,7 +279,7 @@ API path: `/conferences`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
-| `division` |  |
+| `divisions` |  |
 | `id` |  |
 | `link` |  |
 | `name` |  |
@@ -291,12 +292,13 @@ API path: `/divisions`
 
 | Field | Description |
 | --- | --- |
+| `away` |  |
 | `copyright` |  |
-| `game_data` |  |
-| `game_pk` |  |
+| `gameData` |  |
+| `gamePk` |  |
+| `home` |  |
 | `link` |  |
-| `live_data` |  |
-| `team` |  |
+| `liveData` |  |
 
 Operations: Load.
 
@@ -307,7 +309,7 @@ API path: `/game/{id}/boxscore`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
-| `person` |  |
+| `people` |  |
 
 Operations: Load.
 
@@ -317,7 +319,7 @@ API path: `/people/{id}`
 
 | Field | Description |
 | --- | --- |
-| `split` |  |
+| `splits` |  |
 | `type` |  |
 
 Operations: List.
@@ -328,7 +330,7 @@ API path: `/people/{id}/stats`
 
 | Field | Description |
 | --- | --- |
-| `jersey_number` |  |
+| `jerseyNumber` |  |
 | `person` |  |
 | `position` |  |
 
@@ -341,11 +343,11 @@ API path: `/teams/{id}/roster`
 | Field | Description |
 | --- | --- |
 | `date` |  |
-| `game` |  |
-| `total_event` |  |
-| `total_game` |  |
-| `total_item` |  |
-| `total_match` |  |
+| `games` |  |
+| `totalEvents` |  |
+| `totalGames` |  |
+| `totalItems` |  |
+| `totalMatches` |  |
 
 Operations: List.
 
@@ -357,7 +359,7 @@ API path: `/schedule`
 | --- | --- |
 | `conference` |  |
 | `division` |  |
-| `team_record` |  |
+| `teamRecords` |  |
 
 Operations: List.
 
@@ -371,14 +373,14 @@ API path: `/standings`
 | `conference` |  |
 | `copyright` |  |
 | `division` |  |
-| `first_year_of_play` |  |
+| `firstYearOfPlay` |  |
 | `franchise` |  |
 | `id` |  |
 | `link` |  |
-| `location_name` |  |
+| `locationName` |  |
 | `name` |  |
-| `team` |  |
-| `team_name` |  |
+| `teamName` |  |
+| `teams` |  |
 | `venue` |  |
 
 Operations: List, Load.
@@ -405,7 +407,7 @@ Create an instance: `conference = client.Conference()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `conference` | `list` |  |
+| `conferences` | `list` |  |
 | `copyright` | `str` |  |
 | `id` | `int` |  |
 | `link` | `str` |  |
@@ -440,7 +442,7 @@ Create an instance: `division = client.Division()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `str` |  |
-| `division` | `list` |  |
+| `divisions` | `list` |  |
 | `id` | `int` |  |
 | `link` | `str` |  |
 | `name` | `str` |  |
@@ -472,12 +474,13 @@ Create an instance: `game = client.Game()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `away` | `dict` |  |
 | `copyright` | `str` |  |
-| `game_data` | `dict` |  |
-| `game_pk` | `int` |  |
+| `gameData` | `dict` |  |
+| `gamePk` | `int` |  |
+| `home` | `dict` |  |
 | `link` | `str` |  |
-| `live_data` | `dict` |  |
-| `team` | `dict` |  |
+| `liveData` | `dict` |  |
 
 #### Example: Load
 
@@ -501,7 +504,7 @@ Create an instance: `player = client.Player()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `str` |  |
-| `person` | `list` |  |
+| `people` | `list` |  |
 
 #### Example: Load
 
@@ -524,13 +527,13 @@ Create an instance: `player_stat = client.PlayerStat()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `split` | `list` |  |
+| `splits` | `list` |  |
 | `type` | `dict` |  |
 
 #### Example: List
 
 ```python
-player_stats = client.PlayerStat().list()
+player_stats = client.PlayerStat().list({"person_id": 1})
 ```
 
 
@@ -548,14 +551,14 @@ Create an instance: `roster = client.Roster()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `jersey_number` | `str` |  |
+| `jerseyNumber` | `str` |  |
 | `person` | `dict` |  |
 | `position` | `dict` |  |
 
 #### Example: List
 
 ```python
-rosters = client.Roster().list()
+rosters = client.Roster().list({"team_id": 1})
 ```
 
 
@@ -574,11 +577,11 @@ Create an instance: `schedule = client.Schedule()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `date` | `str` |  |
-| `game` | `list` |  |
-| `total_event` | `int` |  |
-| `total_game` | `int` |  |
-| `total_item` | `int` |  |
-| `total_match` | `int` |  |
+| `games` | `list` |  |
+| `totalEvents` | `int` |  |
+| `totalGames` | `int` |  |
+| `totalItems` | `int` |  |
+| `totalMatches` | `int` |  |
 
 #### Example: List
 
@@ -603,7 +606,7 @@ Create an instance: `standing = client.Standing()`
 | --- | --- | --- |
 | `conference` | `dict` |  |
 | `division` | `dict` |  |
-| `team_record` | `list` |  |
+| `teamRecords` | `list` |  |
 
 #### Example: List
 
@@ -631,14 +634,14 @@ Create an instance: `team = client.Team()`
 | `conference` | `dict` |  |
 | `copyright` | `str` |  |
 | `division` | `dict` |  |
-| `first_year_of_play` | `str` |  |
+| `firstYearOfPlay` | `str` |  |
 | `franchise` | `dict` |  |
 | `id` | `int` |  |
 | `link` | `str` |  |
-| `location_name` | `str` |  |
+| `locationName` | `str` |  |
 | `name` | `str` |  |
-| `team` | `list` |  |
-| `team_name` | `str` |  |
+| `teamName` | `str` |  |
+| `teams` | `list` |  |
 | `venue` | `dict` |  |
 
 #### Example: Load
@@ -729,11 +732,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-conference = client.Conference()
-conference.list()
+division = client.Division()
+division.list()
 
-# conference.data_get() now returns the conference data from the last list
-# conference.match_get() returns the last match criteria
+# division.data_get() now returns the division data from the last list
+# division.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

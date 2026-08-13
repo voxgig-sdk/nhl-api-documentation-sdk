@@ -34,7 +34,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "conference",
+            ["name"] = "conferences",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 0,
@@ -77,6 +77,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/conferences",
                 ["parts"] = {
@@ -85,7 +86,7 @@ local function make_config()
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.conferences`",
                 },
                 ["index$"] = 0,
               },
@@ -111,6 +112,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/conferences/{id}",
                 ["parts"] = {
@@ -147,7 +149,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "division",
+            ["name"] = "divisions",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 1,
@@ -183,6 +185,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/divisions",
                 ["parts"] = {
@@ -191,7 +194,7 @@ local function make_config()
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.divisions`",
                 },
                 ["index$"] = 0,
               },
@@ -217,6 +220,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/divisions/{id}",
                 ["parts"] = {
@@ -246,45 +250,52 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "copyright",
+            ["name"] = "away",
             ["req"] = false,
-            ["type"] = "`$STRING`",
+            ["type"] = "`$OBJECT`",
             ["index$"] = 0,
           },
           {
             ["active"] = true,
-            ["name"] = "game_data",
+            ["name"] = "copyright",
             ["req"] = false,
-            ["type"] = "`$OBJECT`",
+            ["type"] = "`$STRING`",
             ["index$"] = 1,
           },
           {
             ["active"] = true,
-            ["name"] = "game_pk",
+            ["name"] = "gameData",
             ["req"] = false,
-            ["type"] = "`$INTEGER`",
+            ["type"] = "`$OBJECT`",
             ["index$"] = 2,
           },
           {
             ["active"] = true,
-            ["name"] = "link",
+            ["name"] = "gamePk",
             ["req"] = false,
-            ["type"] = "`$STRING`",
+            ["type"] = "`$INTEGER`",
             ["index$"] = 3,
           },
           {
             ["active"] = true,
-            ["name"] = "live_data",
+            ["name"] = "home",
             ["req"] = false,
             ["type"] = "`$OBJECT`",
             ["index$"] = 4,
           },
           {
             ["active"] = true,
-            ["name"] = "team",
+            ["name"] = "link",
+            ["req"] = false,
+            ["type"] = "`$STRING`",
+            ["index$"] = 5,
+          },
+          {
+            ["active"] = true,
+            ["name"] = "liveData",
             ["req"] = false,
             ["type"] = "`$OBJECT`",
-            ["index$"] = 5,
+            ["index$"] = 6,
           },
         },
         ["name"] = "game",
@@ -308,6 +319,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/game/{id}/boxscore",
                 ["parts"] = {
@@ -323,7 +335,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.teams`",
                 },
                 ["index$"] = 0,
               },
@@ -342,6 +354,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/game/{id}/feed/live",
                 ["parts"] = {
@@ -381,7 +394,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "person",
+            ["name"] = "people",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 1,
@@ -408,6 +421,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/people/{id}",
                 ["parts"] = {
@@ -437,7 +451,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "split",
+            ["name"] = "splits",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 0,
@@ -489,6 +503,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/people/{id}/stats",
                 ["parts"] = {
@@ -510,7 +525,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.stats`",
                 },
                 ["index$"] = 0,
               },
@@ -530,7 +545,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "jersey_number",
+            ["name"] = "jerseyNumber",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 0,
@@ -581,6 +596,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/teams/{id}/roster",
                 ["parts"] = {
@@ -628,35 +644,35 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "game",
+            ["name"] = "games",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 1,
           },
           {
             ["active"] = true,
-            ["name"] = "total_event",
+            ["name"] = "totalEvents",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 2,
           },
           {
             ["active"] = true,
-            ["name"] = "total_game",
+            ["name"] = "totalGames",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 3,
           },
           {
             ["active"] = true,
-            ["name"] = "total_item",
+            ["name"] = "totalItems",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 4,
           },
           {
             ["active"] = true,
-            ["name"] = "total_match",
+            ["name"] = "totalMatches",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
             ["index$"] = 5,
@@ -706,6 +722,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/schedule",
                 ["parts"] = {
@@ -721,7 +738,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.dates`",
                 },
                 ["index$"] = 0,
               },
@@ -751,7 +768,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "team_record",
+            ["name"] = "teamRecords",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 2,
@@ -777,6 +794,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/standings",
                 ["parts"] = {
@@ -789,7 +807,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.records`",
                 },
                 ["index$"] = 0,
               },
@@ -833,7 +851,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "first_year_of_play",
+            ["name"] = "firstYearOfPlay",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 4,
@@ -861,7 +879,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "location_name",
+            ["name"] = "locationName",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 8,
@@ -875,16 +893,16 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "team",
+            ["name"] = "teamName",
             ["req"] = false,
-            ["type"] = "`$ARRAY`",
+            ["type"] = "`$STRING`",
             ["index$"] = 10,
           },
           {
             ["active"] = true,
-            ["name"] = "team_name",
+            ["name"] = "teams",
             ["req"] = false,
-            ["type"] = "`$STRING`",
+            ["type"] = "`$ARRAY`",
             ["index$"] = 11,
           },
           {
@@ -923,6 +941,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/teams",
                 ["parts"] = {
@@ -936,7 +955,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.teams`",
                 },
                 ["index$"] = 0,
               },
@@ -972,6 +991,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/teams/{id}",
                 ["parts"] = {

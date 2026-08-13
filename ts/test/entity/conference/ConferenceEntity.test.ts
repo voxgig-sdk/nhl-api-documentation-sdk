@@ -26,8 +26,8 @@ import {
 describe('ConferenceEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when NHLAPIDOCUMENTATION_TEST_LIVE=TRUE.
-  afterEach(liveDelay('NHLAPIDOCUMENTATION_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when NHL_API_DOCUMENTATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('NHL_API_DOCUMENTATION_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = NhlApiDocumentationSDK.test()
@@ -63,13 +63,13 @@ describe('ConferenceEntity', async () => {
     const conference_ref01_ent = client.Conference()
     const conference_ref01_match: any = {}
 
-    const conference_ref01_list = await conference_ref01_ent.list(conference_ref01_match)
+    const conference_ref01_list = (await conference_ref01_ent.list(conference_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const conference_ref01_match_dt0: any = {}
     conference_ref01_match_dt0.id = conference_ref01_data.id
-    const conference_ref01_data_dt0 = await conference_ref01_ent.load(conference_ref01_match_dt0)
+    const conference_ref01_data_dt0 = (await conference_ref01_ent.load(conference_ref01_match_dt0)).data()
     assert(conference_ref01_data_dt0.id === conference_ref01_data.id)
 
 

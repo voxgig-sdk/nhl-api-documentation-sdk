@@ -6,7 +6,7 @@ main: kit: entity: conference: {
 
   fields: [
     {
-      name: "conference"
+      name: "conferences"
       req: false
       type: "`$ARRAY`"
     }
@@ -50,7 +50,7 @@ main: kit: entity: conference: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.conferences`"
           }
         }
       ]

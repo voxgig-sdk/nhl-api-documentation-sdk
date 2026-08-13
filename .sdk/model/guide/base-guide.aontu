@@ -8,6 +8,7 @@ guide: {
   entity: conference: {
     path: "/conferences": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.conferences`")|top
     }
     path: "/conferences/{id}": {
       op: load: method: *GET
@@ -17,6 +18,7 @@ guide: {
   entity: division: {
     path: "/divisions": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.divisions`")|top
     }
     path: "/divisions/{id}": {
       op: load: method: *GET
@@ -27,6 +29,7 @@ guide: {
     path: "/game/{id}/boxscore": {
       action: "boxscore": {}
       op: load: method: *GET
+      op: load: transform: res: *("`body.teams`")|top
     }
     path: "/game/{id}/feed/live": {
       action: "feed_live": {}
@@ -44,6 +47,7 @@ guide: {
     path: "/people/{id}/stats": {
       rename: param: "id": *"person_id"
       op: list: method: *GET
+      op: list: transform: res: *("`body.stats`")|top
     }
   }
 
@@ -58,18 +62,21 @@ guide: {
   entity: schedule: {
     path: "/schedule": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.dates`")|top
     }
   }
 
   entity: standing: {
     path: "/standings": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.records`")|top
     }
   }
 
   entity: team: {
     path: "/teams": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.teams`")|top
     }
     path: "/teams/{id}": {
       op: load: method: *GET

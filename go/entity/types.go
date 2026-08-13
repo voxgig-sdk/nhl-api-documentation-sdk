@@ -6,11 +6,15 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/voxgig-sdk/nhl-api-documentation-sdk/go/core"
+)
 
 // Conference is the typed data model for the conference entity.
 type Conference struct {
-	Conference *[]any `json:"conference,omitempty"`
+	Conferences *[]any `json:"conferences,omitempty"`
 	Copyright *string `json:"copyright,omitempty"`
 	Id *int `json:"id,omitempty"`
 	Link *string `json:"link,omitempty"`
@@ -24,7 +28,7 @@ type ConferenceLoadMatch struct {
 
 // ConferenceListMatch is the typed request payload for Conference.ListTyped.
 type ConferenceListMatch struct {
-	Conference *[]any `json:"conference,omitempty"`
+	Conferences *[]any `json:"conferences,omitempty"`
 	Copyright *string `json:"copyright,omitempty"`
 	Id *int `json:"id,omitempty"`
 	Link *string `json:"link,omitempty"`
@@ -34,7 +38,7 @@ type ConferenceListMatch struct {
 // Division is the typed data model for the division entity.
 type Division struct {
 	Copyright *string `json:"copyright,omitempty"`
-	Division *[]any `json:"division,omitempty"`
+	Divisions *[]any `json:"divisions,omitempty"`
 	Id *int `json:"id,omitempty"`
 	Link *string `json:"link,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -48,7 +52,7 @@ type DivisionLoadMatch struct {
 // DivisionListMatch is the typed request payload for Division.ListTyped.
 type DivisionListMatch struct {
 	Copyright *string `json:"copyright,omitempty"`
-	Division *[]any `json:"division,omitempty"`
+	Divisions *[]any `json:"divisions,omitempty"`
 	Id *int `json:"id,omitempty"`
 	Link *string `json:"link,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -56,12 +60,13 @@ type DivisionListMatch struct {
 
 // Game is the typed data model for the game entity.
 type Game struct {
+	Away *map[string]any `json:"away,omitempty"`
 	Copyright *string `json:"copyright,omitempty"`
-	GameData *map[string]any `json:"game_data,omitempty"`
-	GamePk *int `json:"game_pk,omitempty"`
+	GameData *map[string]any `json:"gameData,omitempty"`
+	GamePk *int `json:"gamePk,omitempty"`
+	Home *map[string]any `json:"home,omitempty"`
 	Link *string `json:"link,omitempty"`
-	LiveData *map[string]any `json:"live_data,omitempty"`
-	Team *map[string]any `json:"team,omitempty"`
+	LiveData *map[string]any `json:"liveData,omitempty"`
 }
 
 // GameLoadMatch is the typed request payload for Game.LoadTyped.
@@ -72,7 +77,7 @@ type GameLoadMatch struct {
 // Player is the typed data model for the player entity.
 type Player struct {
 	Copyright *string `json:"copyright,omitempty"`
-	Person *[]any `json:"person,omitempty"`
+	People *[]any `json:"people,omitempty"`
 }
 
 // PlayerLoadMatch is the typed request payload for Player.LoadTyped.
@@ -82,7 +87,7 @@ type PlayerLoadMatch struct {
 
 // PlayerStat is the typed data model for the player_stat entity.
 type PlayerStat struct {
-	Split *[]any `json:"split,omitempty"`
+	Splits *[]any `json:"splits,omitempty"`
 	Type *map[string]any `json:"type,omitempty"`
 }
 
@@ -93,7 +98,7 @@ type PlayerStatListMatch struct {
 
 // Roster is the typed data model for the roster entity.
 type Roster struct {
-	JerseyNumber *string `json:"jersey_number,omitempty"`
+	JerseyNumber *string `json:"jerseyNumber,omitempty"`
 	Person *map[string]any `json:"person,omitempty"`
 	Position *map[string]any `json:"position,omitempty"`
 }
@@ -106,35 +111,35 @@ type RosterListMatch struct {
 // Schedule is the typed data model for the schedule entity.
 type Schedule struct {
 	Date *string `json:"date,omitempty"`
-	Game *[]any `json:"game,omitempty"`
-	TotalEvent *int `json:"total_event,omitempty"`
-	TotalGame *int `json:"total_game,omitempty"`
-	TotalItem *int `json:"total_item,omitempty"`
-	TotalMatch *int `json:"total_match,omitempty"`
+	Games *[]any `json:"games,omitempty"`
+	TotalEvents *int `json:"totalEvents,omitempty"`
+	TotalGames *int `json:"totalGames,omitempty"`
+	TotalItems *int `json:"totalItems,omitempty"`
+	TotalMatches *int `json:"totalMatches,omitempty"`
 }
 
 // ScheduleListMatch is the typed request payload for Schedule.ListTyped.
 type ScheduleListMatch struct {
 	Date *string `json:"date,omitempty"`
-	Game *[]any `json:"game,omitempty"`
-	TotalEvent *int `json:"total_event,omitempty"`
-	TotalGame *int `json:"total_game,omitempty"`
-	TotalItem *int `json:"total_item,omitempty"`
-	TotalMatch *int `json:"total_match,omitempty"`
+	Games *[]any `json:"games,omitempty"`
+	TotalEvents *int `json:"totalEvents,omitempty"`
+	TotalGames *int `json:"totalGames,omitempty"`
+	TotalItems *int `json:"totalItems,omitempty"`
+	TotalMatches *int `json:"totalMatches,omitempty"`
 }
 
 // Standing is the typed data model for the standing entity.
 type Standing struct {
 	Conference *map[string]any `json:"conference,omitempty"`
 	Division *map[string]any `json:"division,omitempty"`
-	TeamRecord *[]any `json:"team_record,omitempty"`
+	TeamRecords *[]any `json:"teamRecords,omitempty"`
 }
 
 // StandingListMatch is the typed request payload for Standing.ListTyped.
 type StandingListMatch struct {
 	Conference *map[string]any `json:"conference,omitempty"`
 	Division *map[string]any `json:"division,omitempty"`
-	TeamRecord *[]any `json:"team_record,omitempty"`
+	TeamRecords *[]any `json:"teamRecords,omitempty"`
 }
 
 // Team is the typed data model for the team entity.
@@ -143,14 +148,14 @@ type Team struct {
 	Conference *map[string]any `json:"conference,omitempty"`
 	Copyright *string `json:"copyright,omitempty"`
 	Division *map[string]any `json:"division,omitempty"`
-	FirstYearOfPlay *string `json:"first_year_of_play,omitempty"`
+	FirstYearOfPlay *string `json:"firstYearOfPlay,omitempty"`
 	Franchise *map[string]any `json:"franchise,omitempty"`
 	Id *int `json:"id,omitempty"`
 	Link *string `json:"link,omitempty"`
-	LocationName *string `json:"location_name,omitempty"`
+	LocationName *string `json:"locationName,omitempty"`
 	Name *string `json:"name,omitempty"`
-	Team *[]any `json:"team,omitempty"`
-	TeamName *string `json:"team_name,omitempty"`
+	TeamName *string `json:"teamName,omitempty"`
+	Teams *[]any `json:"teams,omitempty"`
 	Venue *map[string]any `json:"venue,omitempty"`
 }
 
@@ -165,14 +170,14 @@ type TeamListMatch struct {
 	Conference *map[string]any `json:"conference,omitempty"`
 	Copyright *string `json:"copyright,omitempty"`
 	Division *map[string]any `json:"division,omitempty"`
-	FirstYearOfPlay *string `json:"first_year_of_play,omitempty"`
+	FirstYearOfPlay *string `json:"firstYearOfPlay,omitempty"`
 	Franchise *map[string]any `json:"franchise,omitempty"`
 	Id *int `json:"id,omitempty"`
 	Link *string `json:"link,omitempty"`
-	LocationName *string `json:"location_name,omitempty"`
+	LocationName *string `json:"locationName,omitempty"`
 	Name *string `json:"name,omitempty"`
-	Team *[]any `json:"team,omitempty"`
-	TeamName *string `json:"team_name,omitempty"`
+	TeamName *string `json:"teamName,omitempty"`
+	Teams *[]any `json:"teams,omitempty"`
 	Venue *map[string]any `json:"venue,omitempty"`
 }
 
@@ -188,12 +193,26 @@ func asMap(v any) map[string]any {
 	return out
 }
 
-// typedFrom decodes a runtime value (a map[string]any produced by the op
-// pipeline) into a typed model T via a JSON round-trip. On any error it
-// returns the zero value of T; the op's own (value, error) tuple carries the
-// real error.
+// entityData unwraps an entity to its data map.
+//
+// Operations resolve to the ENTITY, not the raw data (see AGENTS.md), and an
+// entity's fields are UNEXPORTED — marshalling one directly yields `{}`, so
+// every typed accessor would silently hand back a zero-valued struct. The
+// typed boundary therefore takes the data hop first.
+func entityData(v any) any {
+	if ent, ok := v.(core.Entity); ok {
+		return ent.Data()
+	}
+	return v
+}
+
+// typedFrom decodes a runtime value (an entity, or the map[string]any the op
+// pipeline produced) into a typed model T via a JSON round-trip. On any error
+// it returns the zero value of T; the op's own (value, error) tuple carries
+// the real error.
 func typedFrom[T any](v any) T {
 	var out T
+	v = entityData(v)
 	if v == nil {
 		return out
 	}
@@ -205,12 +224,20 @@ func typedFrom[T any](v any) T {
 	return out
 }
 
-// typedSliceFrom decodes a runtime list value ([]any of maps) into a typed
-// slice []T via a JSON round-trip, for list ops.
+// typedSliceFrom decodes a runtime list value into a typed slice []T via a
+// JSON round-trip, for list ops. `list` resolves to a slice of ENTITY
+// instances, so each element takes the data hop.
 func typedSliceFrom[T any](v any) []T {
 	var out []T
 	if v == nil {
 		return out
+	}
+	if list, ok := v.([]any); ok {
+		unwrapped := make([]any, 0, len(list))
+		for _, item := range list {
+			unwrapped = append(unwrapped, entityData(item))
+		}
+		v = unwrapped
 	}
 	b, err := json.Marshal(v)
 	if err != nil {

@@ -6,7 +6,7 @@ main: kit: entity: player_stat: {
 
   fields: [
     {
-      name: "split"
+      name: "splits"
       req: false
       type: "`$ARRAY`"
     }
@@ -71,7 +71,7 @@ main: kit: entity: player_stat: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.stats`"
           }
         }
       ]

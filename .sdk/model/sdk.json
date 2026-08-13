@@ -5,6 +5,10 @@
       "desc": ""
     },
     "kit": {
+      "author": {
+        "name": "",
+        "url": ""
+      },
       "config": {
         "docs_order": [
           "ts",
@@ -18,6 +22,7 @@
           "content-type": "application/json"
         }
       },
+      "contributor": {},
       "entity": {
         "conference": {
           "active": true,
@@ -27,7 +32,7 @@
           "fields": [
             {
               "active": true,
-              "name": "conference",
+              "name": "conferences",
               "req": false,
               "type": "`$ARRAY`"
             },
@@ -69,6 +74,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/conferences",
                   "parts": [
@@ -77,7 +83,7 @@
                   "select": {},
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.conferences`"
                   }
                 }
               ]
@@ -100,6 +106,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/conferences/{id}",
                   "parts": [
@@ -137,7 +144,7 @@
             },
             {
               "active": true,
-              "name": "division",
+              "name": "divisions",
               "req": false,
               "type": "`$ARRAY`"
             },
@@ -173,6 +180,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/divisions",
                   "parts": [
@@ -181,7 +189,7 @@
                   "select": {},
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.divisions`"
                   }
                 }
               ]
@@ -204,6 +212,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/divisions/{id}",
                   "parts": [
@@ -235,21 +244,33 @@
           "fields": [
             {
               "active": true,
+              "name": "away",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
               "name": "copyright",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "game_data",
+              "name": "gameData",
               "req": false,
               "type": "`$OBJECT`"
             },
             {
               "active": true,
-              "name": "game_pk",
+              "name": "gamePk",
               "req": false,
               "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "home",
+              "req": false,
+              "type": "`$OBJECT`"
             },
             {
               "active": true,
@@ -259,13 +280,7 @@
             },
             {
               "active": true,
-              "name": "live_data",
-              "req": false,
-              "type": "`$OBJECT`"
-            },
-            {
-              "active": true,
-              "name": "team",
+              "name": "liveData",
               "req": false,
               "type": "`$OBJECT`"
             }
@@ -290,6 +305,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/game/{id}/boxscore",
                   "parts": [
@@ -305,7 +321,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.teams`"
                   }
                 },
                 {
@@ -322,6 +338,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/game/{id}/feed/live",
                   "parts": [
@@ -362,7 +379,7 @@
             },
             {
               "active": true,
-              "name": "person",
+              "name": "people",
               "req": false,
               "type": "`$ARRAY`"
             }
@@ -387,6 +404,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/people/{id}",
                   "parts": [
@@ -418,7 +436,7 @@
           "fields": [
             {
               "active": true,
-              "name": "split",
+              "name": "splits",
               "req": false,
               "type": "`$ARRAY`"
             },
@@ -467,6 +485,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/people/{id}/stats",
                   "parts": [
@@ -488,7 +507,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.stats`"
                   }
                 }
               ]
@@ -510,7 +529,7 @@
           "fields": [
             {
               "active": true,
-              "name": "jersey_number",
+              "name": "jerseyNumber",
               "req": false,
               "type": "`$STRING`"
             },
@@ -557,6 +576,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/teams/{id}/roster",
                   "parts": [
@@ -605,31 +625,31 @@
             },
             {
               "active": true,
-              "name": "game",
+              "name": "games",
               "req": false,
               "type": "`$ARRAY`"
             },
             {
               "active": true,
-              "name": "total_event",
+              "name": "totalEvents",
               "req": false,
               "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "total_game",
+              "name": "totalGames",
               "req": false,
               "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "total_item",
+              "name": "totalItems",
               "req": false,
               "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "total_match",
+              "name": "totalMatches",
               "req": false,
               "type": "`$INTEGER`"
             }
@@ -678,6 +698,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/schedule",
                   "parts": [
@@ -693,7 +714,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.dates`"
                   }
                 }
               ]
@@ -723,7 +744,7 @@
             },
             {
               "active": true,
-              "name": "team_record",
+              "name": "teamRecords",
               "req": false,
               "type": "`$ARRAY`"
             }
@@ -748,6 +769,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/standings",
                   "parts": [
@@ -760,7 +782,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.records`"
                   }
                 }
               ]
@@ -802,7 +824,7 @@
             },
             {
               "active": true,
-              "name": "first_year_of_play",
+              "name": "firstYearOfPlay",
               "req": false,
               "type": "`$STRING`"
             },
@@ -826,7 +848,7 @@
             },
             {
               "active": true,
-              "name": "location_name",
+              "name": "locationName",
               "req": false,
               "type": "`$STRING`"
             },
@@ -838,15 +860,15 @@
             },
             {
               "active": true,
-              "name": "team",
+              "name": "teamName",
               "req": false,
-              "type": "`$ARRAY`"
+              "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "team_name",
+              "name": "teams",
               "req": false,
-              "type": "`$STRING`"
+              "type": "`$ARRAY`"
             },
             {
               "active": true,
@@ -887,6 +909,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/teams",
                   "parts": [
@@ -900,7 +923,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.teams`"
                   }
                 }
               ]
@@ -933,6 +956,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/teams/{id}",
                   "parts": [
@@ -1397,18 +1421,41 @@
         "website": "https://statsapi.web.nhl.com"
       },
       "option": {},
+      "repo": {
+        "host": "github.com",
+        "path": ""
+      },
       "target": {
         "go": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [
+              "test/feature_test.go"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "nhl-api-documentation"
+            "goversion": "",
+            "name": "nhl-api-documentation",
+            "package": "",
+            "path": ""
           },
           "name": "go",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1430,22 +1477,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Golang"
         },
         "go-cli": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "nhl-api-documentation"
+            "goversion": "",
+            "name": "nhl-api-documentation",
+            "package": "",
+            "path": ""
           },
           "name": "go-cli",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -1484,21 +1549,39 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go CLI"
         },
         "go-mcp": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "nhl-api-documentation"
+            "goversion": "",
+            "name": "nhl-api-documentation",
+            "package": "",
+            "path": ""
           },
           "name": "go-mcp",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -1537,12 +1620,17 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go MCP server"
         },
         "lua": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "--"
           },
@@ -1554,10 +1642,23 @@
             }
           },
           "ext": "lua",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "nhl-api-documentation"
+            "goversion": "",
+            "name": "nhl-api-documentation",
+            "package": "",
+            "path": ""
           },
           "name": "lua",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1579,22 +1680,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Lua"
         },
         "php": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "php",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "nhl-api-documentation"
+            "goversion": "",
+            "name": "nhl-api-documentation",
+            "package": "",
+            "path": ""
           },
           "name": "php",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1616,13 +1735,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "PHP"
         },
         "py": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -1634,10 +1758,23 @@
             }
           },
           "ext": "py",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "nhl-api-documentation"
+            "goversion": "",
+            "name": "nhl-api-documentation",
+            "package": "",
+            "path": ""
           },
           "name": "py",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1659,13 +1796,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Python"
         },
         "rb": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -1682,10 +1824,23 @@
             }
           },
           "ext": "rb",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "nhl-api-documentation"
+            "goversion": "",
+            "name": "nhl-api-documentation",
+            "package": "",
+            "path": ""
           },
           "name": "rb",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1707,13 +1862,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Ruby"
         },
         "ts": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
@@ -1736,10 +1896,23 @@
             }
           },
           "ext": "ts",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "nhl-api-documentation"
+            "goversion": "",
+            "name": "nhl-api-documentation",
+            "package": "",
+            "path": ""
           },
           "name": "ts",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1761,9 +1934,17 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "TypeScript"
+        }
+      },
+      "test": {
+        "live": {
+          "app": false,
+          "base": "",
+          "strict": false
         }
       }
     }

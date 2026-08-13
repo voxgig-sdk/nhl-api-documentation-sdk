@@ -15,7 +15,7 @@ declare(strict_types=1);
 /** Conference entity data model. */
 class Conference
 {
-    public ?array $conference = null;
+    public ?array $conferences = null;
     public ?string $copyright = null;
     public ?int $id = null;
     public ?string $link = null;
@@ -31,7 +31,7 @@ class ConferenceLoadMatch
 /** Request payload for Conference#list. */
 class ConferenceListMatch
 {
-    public ?array $conference = null;
+    public ?array $conferences = null;
     public ?string $copyright = null;
     public ?int $id = null;
     public ?string $link = null;
@@ -42,7 +42,7 @@ class ConferenceListMatch
 class Division
 {
     public ?string $copyright = null;
-    public ?array $division = null;
+    public ?array $divisions = null;
     public ?int $id = null;
     public ?string $link = null;
     public ?string $name = null;
@@ -58,7 +58,7 @@ class DivisionLoadMatch
 class DivisionListMatch
 {
     public ?string $copyright = null;
-    public ?array $division = null;
+    public ?array $divisions = null;
     public ?int $id = null;
     public ?string $link = null;
     public ?string $name = null;
@@ -67,12 +67,13 @@ class DivisionListMatch
 /** Game entity data model. */
 class Game
 {
+    public ?array $away = null;
     public ?string $copyright = null;
-    public ?array $game_data = null;
-    public ?int $game_pk = null;
+    public ?array $gameData = null;
+    public ?int $gamePk = null;
+    public ?array $home = null;
     public ?string $link = null;
-    public ?array $live_data = null;
-    public ?array $team = null;
+    public ?array $liveData = null;
 }
 
 /** Request payload for Game#load. */
@@ -85,7 +86,7 @@ class GameLoadMatch
 class Player
 {
     public ?string $copyright = null;
-    public ?array $person = null;
+    public ?array $people = null;
 }
 
 /** Request payload for Player#load. */
@@ -97,7 +98,7 @@ class PlayerLoadMatch
 /** PlayerStat entity data model. */
 class PlayerStat
 {
-    public ?array $split = null;
+    public ?array $splits = null;
     public ?array $type = null;
 }
 
@@ -110,7 +111,7 @@ class PlayerStatListMatch
 /** Roster entity data model. */
 class Roster
 {
-    public ?string $jersey_number = null;
+    public ?string $jerseyNumber = null;
     public ?array $person = null;
     public ?array $position = null;
 }
@@ -125,22 +126,22 @@ class RosterListMatch
 class Schedule
 {
     public ?string $date = null;
-    public ?array $game = null;
-    public ?int $total_event = null;
-    public ?int $total_game = null;
-    public ?int $total_item = null;
-    public ?int $total_match = null;
+    public ?array $games = null;
+    public ?int $totalEvents = null;
+    public ?int $totalGames = null;
+    public ?int $totalItems = null;
+    public ?int $totalMatches = null;
 }
 
 /** Request payload for Schedule#list. */
 class ScheduleListMatch
 {
     public ?string $date = null;
-    public ?array $game = null;
-    public ?int $total_event = null;
-    public ?int $total_game = null;
-    public ?int $total_item = null;
-    public ?int $total_match = null;
+    public ?array $games = null;
+    public ?int $totalEvents = null;
+    public ?int $totalGames = null;
+    public ?int $totalItems = null;
+    public ?int $totalMatches = null;
 }
 
 /** Standing entity data model. */
@@ -148,7 +149,7 @@ class Standing
 {
     public ?array $conference = null;
     public ?array $division = null;
-    public ?array $team_record = null;
+    public ?array $teamRecords = null;
 }
 
 /** Request payload for Standing#list. */
@@ -156,7 +157,7 @@ class StandingListMatch
 {
     public ?array $conference = null;
     public ?array $division = null;
-    public ?array $team_record = null;
+    public ?array $teamRecords = null;
 }
 
 /** Team entity data model. */
@@ -166,14 +167,14 @@ class Team
     public ?array $conference = null;
     public ?string $copyright = null;
     public ?array $division = null;
-    public ?string $first_year_of_play = null;
+    public ?string $firstYearOfPlay = null;
     public ?array $franchise = null;
     public ?int $id = null;
     public ?string $link = null;
-    public ?string $location_name = null;
+    public ?string $locationName = null;
     public ?string $name = null;
-    public ?array $team = null;
-    public ?string $team_name = null;
+    public ?string $teamName = null;
+    public ?array $teams = null;
     public ?array $venue = null;
 }
 
@@ -190,14 +191,14 @@ class TeamListMatch
     public ?array $conference = null;
     public ?string $copyright = null;
     public ?array $division = null;
-    public ?string $first_year_of_play = null;
+    public ?string $firstYearOfPlay = null;
     public ?array $franchise = null;
     public ?int $id = null;
     public ?string $link = null;
-    public ?string $location_name = null;
+    public ?string $locationName = null;
     public ?string $name = null;
-    public ?array $team = null;
-    public ?string $team_name = null;
+    public ?string $teamName = null;
+    public ?array $teams = null;
     public ?array $venue = null;
 }
 

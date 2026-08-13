@@ -37,7 +37,7 @@ class PlayerStatEntity extends NhlApiDocumentationEntityBase<PlayerStat> {
 
 
 
-  async list(this: any, reqmatch?: PlayerStatListMatch, ctrl?: Control): Promise<PlayerStat[]> {
+  async list(this: any, reqmatch?: PlayerStatListMatch, ctrl?: Control): Promise<PlayerStatEntity[]> {
 
     const utility = this._utility
 

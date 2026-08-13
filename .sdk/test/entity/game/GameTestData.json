@@ -2,30 +2,33 @@
   "existing": {
     "game": {
       "GAME00": {
-        "copyright": "s3c",
-        "game_data": {},
-        "game_pk": "s3e",
-        "link": "s3f",
-        "live_data": {},
-        "team": {},
+        "away": {},
+        "copyright": "s47",
+        "gameData": {},
+        "gamePk": "s49",
+        "home": {},
+        "link": "s4b",
+        "liveData": {},
         "id": "GAME00"
       },
       "GAME01": {
-        "copyright": "s78",
-        "game_data": {},
-        "game_pk": "s7a",
-        "link": "s7b",
-        "live_data": {},
-        "team": {},
+        "away": {},
+        "copyright": "s8d",
+        "gameData": {},
+        "gamePk": "s8f",
+        "home": {},
+        "link": "s91",
+        "liveData": {},
         "id": "GAME01"
       },
       "GAME02": {
-        "copyright": "sb4",
-        "game_data": {},
-        "game_pk": "sb6",
-        "link": "sb7",
-        "live_data": {},
-        "team": {},
+        "away": {},
+        "copyright": "sd3",
+        "gameData": {},
+        "gamePk": "sd5",
+        "home": {},
+        "link": "sd7",
+        "liveData": {},
         "id": "GAME02"
       }
     }
@@ -33,12 +36,13 @@
   "new": {
     "game": {
       "game_ref01": {
-        "copyright": "sf0",
-        "game_data": {},
-        "game_pk": "sf2",
-        "link": "sf3",
-        "live_data": {},
-        "team": {}
+        "away": {},
+        "copyright": "s119",
+        "gameData": {},
+        "gamePk": "s11b",
+        "home": {},
+        "link": "s11d",
+        "liveData": {}
       }
     }
   }

@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# NhlApiDocumentation SDK exists test
 
 import pytest
 from nhlapidocumentation_sdk import NhlApiDocumentationSDK

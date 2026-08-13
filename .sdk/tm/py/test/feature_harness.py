@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import NhlApiDocumentationControl
-from core.error import NhlApiDocumentationError
-from core.result import NhlApiDocumentationResult
-from core.spec import NhlApiDocumentationSpec
+from projectname_sdk.config import make_config
+from projectname_sdk.features import _make_feature
+from projectname_sdk.core.control import NhlApiDocumentationControl
+from projectname_sdk.core.error import NhlApiDocumentationError
+from projectname_sdk.core.result import NhlApiDocumentationResult
+from projectname_sdk.core.spec import NhlApiDocumentationSpec
 
 
 # True when this SDK was generated with the named feature.

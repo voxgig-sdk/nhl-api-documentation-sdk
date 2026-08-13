@@ -26,8 +26,8 @@ import {
 describe('RosterEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when NHLAPIDOCUMENTATION_TEST_LIVE=TRUE.
-  afterEach(liveDelay('NHLAPIDOCUMENTATION_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when NHL_API_DOCUMENTATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('NHL_API_DOCUMENTATION_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = NhlApiDocumentationSDK.test()
@@ -64,7 +64,7 @@ describe('RosterEntity', async () => {
     const roster_ref01_match: any = {}
     roster_ref01_match['team_id'] = setup.idmap['team01']
 
-    const roster_ref01_list = await roster_ref01_ent.list(roster_ref01_match)
+    const roster_ref01_list = (await roster_ref01_ent.list(roster_ref01_match)).map((e: any) => e.data())
 
 
   })

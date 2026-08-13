@@ -74,11 +74,11 @@ def player_stat_direct_setup(mockres)
   calls = []
 
   env = Runner.env_override({
-    "NHLAPIDOCUMENTATION_TEST_PLAYER_STAT_ENTID" => {},
-    "NHLAPIDOCUMENTATION_TEST_LIVE" => "FALSE",
+    "NHL_API_DOCUMENTATION_TEST_PLAYER_STAT_ENTID" => {},
+    "NHL_API_DOCUMENTATION_TEST_LIVE" => "FALSE",
   })
 
-  live = env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
+  live = env["NHL_API_DOCUMENTATION_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {

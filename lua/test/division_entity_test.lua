@@ -70,7 +70,7 @@ describe("DivisionEntity", function()
     -- The basic flow consumes synthetic IDs from the fixture. In live mode
     -- without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup.synthetic_only then
-      pending("live entity test uses synthetic IDs from fixture — set NHLAPIDOCUMENTATION_TEST_DIVISION_ENTID JSON to run live")
+      pending("live entity test uses synthetic IDs from fixture — set NHL_API_DOCUMENTATION_TEST_DIVISION_ENTID JSON to run live")
       return
     end
     local client = setup.client
@@ -97,7 +97,7 @@ describe("DivisionEntity", function()
     }
     local division_ref01_data_dt0_loaded, err = division_ref01_ent:load(division_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local division_ref01_data_dt0_load_result = helpers.to_map(division_ref01_data_dt0_loaded)
+    local division_ref01_data_dt0_load_result = helpers.to_map(type(division_ref01_data_dt0_loaded) == 'table' and division_ref01_data_dt0_loaded.data_get and division_ref01_data_dt0_loaded:data_get() or division_ref01_data_dt0_loaded)
     assert.is_not_nil(division_ref01_data_dt0_load_result)
     assert.are.equal(division_ref01_data_dt0_load_result["id"], division_ref01_data["id"])
 
@@ -136,22 +136,22 @@ function division_basic_setup(extra)
   -- Detect ENTID env override before envOverride consumes it. When live
   -- mode is on without a real override, the basic test runs against synthetic
   -- IDs from the fixture and 4xx's. Surface this so the test can skip.
-  local entid_env_raw = os.getenv("NHLAPIDOCUMENTATION_TEST_DIVISION_ENTID")
+  local entid_env_raw = os.getenv("NHL_API_DOCUMENTATION_TEST_DIVISION_ENTID")
   local idmap_overridden = entid_env_raw ~= nil and entid_env_raw:match("^%s*{") ~= nil
 
   local env = runner.env_override({
-    ["NHLAPIDOCUMENTATION_TEST_DIVISION_ENTID"] = idmap,
-    ["NHLAPIDOCUMENTATION_TEST_LIVE"] = "FALSE",
-    ["NHLAPIDOCUMENTATION_TEST_EXPLAIN"] = "FALSE",
+    ["NHL_API_DOCUMENTATION_TEST_DIVISION_ENTID"] = idmap,
+    ["NHL_API_DOCUMENTATION_TEST_LIVE"] = "FALSE",
+    ["NHL_API_DOCUMENTATION_TEST_EXPLAIN"] = "FALSE",
   })
 
   local idmap_resolved = helpers.to_map(
-    env["NHLAPIDOCUMENTATION_TEST_DIVISION_ENTID"])
+    env["NHL_API_DOCUMENTATION_TEST_DIVISION_ENTID"])
   if idmap_resolved == nil then
     idmap_resolved = helpers.to_map(idmap)
   end
 
-  if env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE" then
+  if env["NHL_API_DOCUMENTATION_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
       },
@@ -160,13 +160,13 @@ function division_basic_setup(extra)
     client = sdk.new(helpers.to_map(merged_opts))
   end
 
-  local live = env["NHLAPIDOCUMENTATION_TEST_LIVE"] == "TRUE"
+  local live = env["NHL_API_DOCUMENTATION_TEST_LIVE"] == "TRUE"
   return {
     client = client,
     data = entity_data,
     idmap = idmap_resolved,
     env = env,
-    explain = env["NHLAPIDOCUMENTATION_TEST_EXPLAIN"] == "TRUE",
+    explain = env["NHL_API_DOCUMENTATION_TEST_EXPLAIN"] == "TRUE",
     live = live,
     synthetic_only = live and not idmap_overridden,
     now = os.time() * 1000,

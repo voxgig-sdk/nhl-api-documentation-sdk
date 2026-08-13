@@ -26,8 +26,8 @@ import {
 describe('StandingEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when NHLAPIDOCUMENTATION_TEST_LIVE=TRUE.
-  afterEach(liveDelay('NHLAPIDOCUMENTATION_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when NHL_API_DOCUMENTATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('NHL_API_DOCUMENTATION_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = NhlApiDocumentationSDK.test()
@@ -63,7 +63,7 @@ describe('StandingEntity', async () => {
     const standing_ref01_ent = client.Standing()
     const standing_ref01_match: any = {}
 
-    const standing_ref01_list = await standing_ref01_ent.list(standing_ref01_match)
+    const standing_ref01_list = (await standing_ref01_ent.list(standing_ref01_match)).map((e: any) => e.data())
 
 
   })

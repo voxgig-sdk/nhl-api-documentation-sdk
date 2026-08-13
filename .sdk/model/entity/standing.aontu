@@ -16,7 +16,7 @@ main: kit: entity: standing: {
       type: "`$OBJECT`"
     }
     {
-      name: "team_record"
+      name: "teamRecords"
       req: false
       type: "`$ARRAY`"
     }
@@ -51,7 +51,7 @@ main: kit: entity: standing: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.records`"
           }
         }
       ]

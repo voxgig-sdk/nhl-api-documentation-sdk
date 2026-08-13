@@ -26,8 +26,8 @@ import {
 describe('GameEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when NHLAPIDOCUMENTATION_TEST_LIVE=TRUE.
-  afterEach(liveDelay('NHLAPIDOCUMENTATION_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when NHL_API_DOCUMENTATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('NHL_API_DOCUMENTATION_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = NhlApiDocumentationSDK.test()

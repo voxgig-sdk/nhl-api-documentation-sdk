@@ -26,8 +26,8 @@ import {
 describe('DivisionEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when NHLAPIDOCUMENTATION_TEST_LIVE=TRUE.
-  afterEach(liveDelay('NHLAPIDOCUMENTATION_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when NHL_API_DOCUMENTATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('NHL_API_DOCUMENTATION_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = NhlApiDocumentationSDK.test()
@@ -63,13 +63,13 @@ describe('DivisionEntity', async () => {
     const division_ref01_ent = client.Division()
     const division_ref01_match: any = {}
 
-    const division_ref01_list = await division_ref01_ent.list(division_ref01_match)
+    const division_ref01_list = (await division_ref01_ent.list(division_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const division_ref01_match_dt0: any = {}
     division_ref01_match_dt0.id = division_ref01_data.id
-    const division_ref01_data_dt0 = await division_ref01_ent.load(division_ref01_match_dt0)
+    const division_ref01_data_dt0 = (await division_ref01_ent.load(division_ref01_match_dt0)).data()
     assert(division_ref01_data_dt0.id === division_ref01_data.id)
 
 

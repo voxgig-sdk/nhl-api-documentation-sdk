@@ -6,7 +6,7 @@ main: kit: entity: roster: {
 
   fields: [
     {
-      name: "jersey_number"
+      name: "jerseyNumber"
       req: false
       type: "`$STRING`"
     }

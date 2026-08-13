@@ -125,7 +125,7 @@ conference = client.Conference
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | `Array` | No |  |
+| `conferences` | `Array` | No |  |
 | `copyright` | `String` | No |  |
 | `id` | `Integer` | No |  |
 | `link` | `String` | No |  |
@@ -190,7 +190,7 @@ division = client.Division
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `String` | No |  |
-| `division` | `Array` | No |  |
+| `divisions` | `Array` | No |  |
 | `id` | `Integer` | No |  |
 | `link` | `String` | No |  |
 | `name` | `String` | No |  |
@@ -253,12 +253,13 @@ game = client.Game
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `away` | `Hash` | No |  |
 | `copyright` | `String` | No |  |
-| `game_data` | `Hash` | No |  |
-| `game_pk` | `Integer` | No |  |
+| `gameData` | `Hash` | No |  |
+| `gamePk` | `Integer` | No |  |
+| `home` | `Hash` | No |  |
 | `link` | `String` | No |  |
-| `live_data` | `Hash` | No |  |
-| `team` | `Hash` | No |  |
+| `liveData` | `Hash` | No |  |
 
 ### Operations
 
@@ -311,7 +312,7 @@ player = client.Player
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `String` | No |  |
-| `person` | `Array` | No |  |
+| `people` | `Array` | No |  |
 
 ### Operations
 
@@ -363,7 +364,7 @@ player_stat = client.PlayerStat
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `split` | `Array` | No |  |
+| `splits` | `Array` | No |  |
 | `type` | `Hash` | No |  |
 
 ### Operations
@@ -416,7 +417,7 @@ roster = client.Roster
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `jersey_number` | `String` | No |  |
+| `jerseyNumber` | `String` | No |  |
 | `person` | `Hash` | No |  |
 | `position` | `Hash` | No |  |
 
@@ -471,11 +472,11 @@ schedule = client.Schedule
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `date` | `String` | No |  |
-| `game` | `Array` | No |  |
-| `total_event` | `Integer` | No |  |
-| `total_game` | `Integer` | No |  |
-| `total_item` | `Integer` | No |  |
-| `total_match` | `Integer` | No |  |
+| `games` | `Array` | No |  |
+| `totalEvents` | `Integer` | No |  |
+| `totalGames` | `Integer` | No |  |
+| `totalItems` | `Integer` | No |  |
+| `totalMatches` | `Integer` | No |  |
 
 ### Operations
 
@@ -529,7 +530,7 @@ standing = client.Standing
 | --- | --- | --- | --- |
 | `conference` | `Hash` | No |  |
 | `division` | `Hash` | No |  |
-| `team_record` | `Array` | No |  |
+| `teamRecords` | `Array` | No |  |
 
 ### Operations
 
@@ -585,14 +586,14 @@ team = client.Team
 | `conference` | `Hash` | No |  |
 | `copyright` | `String` | No |  |
 | `division` | `Hash` | No |  |
-| `first_year_of_play` | `String` | No |  |
+| `firstYearOfPlay` | `String` | No |  |
 | `franchise` | `Hash` | No |  |
 | `id` | `Integer` | No |  |
 | `link` | `String` | No |  |
-| `location_name` | `String` | No |  |
+| `locationName` | `String` | No |  |
 | `name` | `String` | No |  |
-| `team` | `Array` | No |  |
-| `team_name` | `String` | No |  |
+| `teamName` | `String` | No |  |
+| `teams` | `Array` | No |  |
 | `venue` | `Hash` | No |  |
 
 ### Operations

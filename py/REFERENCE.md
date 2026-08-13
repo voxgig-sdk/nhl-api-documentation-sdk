@@ -119,7 +119,7 @@ conference = client.Conference()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | `list` | No |  |
+| `conferences` | `list` | No |  |
 | `copyright` | `str` | No |  |
 | `id` | `int` | No |  |
 | `link` | `str` | No |  |
@@ -185,7 +185,7 @@ division = client.Division()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `str` | No |  |
-| `division` | `list` | No |  |
+| `divisions` | `list` | No |  |
 | `id` | `int` | No |  |
 | `link` | `str` | No |  |
 | `name` | `str` | No |  |
@@ -249,12 +249,13 @@ game = client.Game()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `away` | `dict` | No |  |
 | `copyright` | `str` | No |  |
-| `game_data` | `dict` | No |  |
-| `game_pk` | `int` | No |  |
+| `gameData` | `dict` | No |  |
+| `gamePk` | `int` | No |  |
+| `home` | `dict` | No |  |
 | `link` | `str` | No |  |
-| `live_data` | `dict` | No |  |
-| `team` | `dict` | No |  |
+| `liveData` | `dict` | No |  |
 
 ### Operations
 
@@ -306,7 +307,7 @@ player = client.Player()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `str` | No |  |
-| `person` | `list` | No |  |
+| `people` | `list` | No |  |
 
 ### Operations
 
@@ -357,7 +358,7 @@ player_stat = client.PlayerStat()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `split` | `list` | No |  |
+| `splits` | `list` | No |  |
 | `type` | `dict` | No |  |
 
 ### Operations
@@ -367,7 +368,7 @@ player_stat = client.PlayerStat()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.PlayerStat().list()
+results = client.PlayerStat().list({"person_id": 1})
 for player_stat in results:
     print(player_stat)
 ```
@@ -411,7 +412,7 @@ roster = client.Roster()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `jersey_number` | `str` | No |  |
+| `jerseyNumber` | `str` | No |  |
 | `person` | `dict` | No |  |
 | `position` | `dict` | No |  |
 
@@ -422,7 +423,7 @@ roster = client.Roster()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Roster().list()
+results = client.Roster().list({"team_id": 1})
 for roster in results:
     print(roster)
 ```
@@ -467,11 +468,11 @@ schedule = client.Schedule()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `date` | `str` | No |  |
-| `game` | `list` | No |  |
-| `total_event` | `int` | No |  |
-| `total_game` | `int` | No |  |
-| `total_item` | `int` | No |  |
-| `total_match` | `int` | No |  |
+| `games` | `list` | No |  |
+| `totalEvents` | `int` | No |  |
+| `totalGames` | `int` | No |  |
+| `totalItems` | `int` | No |  |
+| `totalMatches` | `int` | No |  |
 
 ### Operations
 
@@ -526,7 +527,7 @@ standing = client.Standing()
 | --- | --- | --- | --- |
 | `conference` | `dict` | No |  |
 | `division` | `dict` | No |  |
-| `team_record` | `list` | No |  |
+| `teamRecords` | `list` | No |  |
 
 ### Operations
 
@@ -583,14 +584,14 @@ team = client.Team()
 | `conference` | `dict` | No |  |
 | `copyright` | `str` | No |  |
 | `division` | `dict` | No |  |
-| `first_year_of_play` | `str` | No |  |
+| `firstYearOfPlay` | `str` | No |  |
 | `franchise` | `dict` | No |  |
 | `id` | `int` | No |  |
 | `link` | `str` | No |  |
-| `location_name` | `str` | No |  |
+| `locationName` | `str` | No |  |
 | `name` | `str` | No |  |
-| `team` | `list` | No |  |
-| `team_name` | `str` | No |  |
+| `teamName` | `str` | No |  |
+| `teams` | `list` | No |  |
 | `venue` | `dict` | No |  |
 
 ### Operations

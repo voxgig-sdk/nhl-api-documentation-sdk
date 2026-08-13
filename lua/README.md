@@ -62,7 +62,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local conferences, err = client:Conference():list()
+local divisions, err = client:Division():list()
 if err then error(err) end
 ```
 
@@ -120,7 +120,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Conference():list()
+local result, err = client:Division():list()
 -- result is the returned data; err is set on failure
 ```
 
@@ -249,7 +249,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `conference` |  |
+| `conferences` |  |
 | `copyright` |  |
 | `id` |  |
 | `link` |  |
@@ -264,7 +264,7 @@ API path: `/conferences`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
-| `division` |  |
+| `divisions` |  |
 | `id` |  |
 | `link` |  |
 | `name` |  |
@@ -277,12 +277,13 @@ API path: `/divisions`
 
 | Field | Description |
 | --- | --- |
+| `away` |  |
 | `copyright` |  |
-| `game_data` |  |
-| `game_pk` |  |
+| `gameData` |  |
+| `gamePk` |  |
+| `home` |  |
 | `link` |  |
-| `live_data` |  |
-| `team` |  |
+| `liveData` |  |
 
 Operations: Load.
 
@@ -293,7 +294,7 @@ API path: `/game/{id}/boxscore`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
-| `person` |  |
+| `people` |  |
 
 Operations: Load.
 
@@ -303,7 +304,7 @@ API path: `/people/{id}`
 
 | Field | Description |
 | --- | --- |
-| `split` |  |
+| `splits` |  |
 | `type` |  |
 
 Operations: List.
@@ -314,7 +315,7 @@ API path: `/people/{id}/stats`
 
 | Field | Description |
 | --- | --- |
-| `jersey_number` |  |
+| `jerseyNumber` |  |
 | `person` |  |
 | `position` |  |
 
@@ -327,11 +328,11 @@ API path: `/teams/{id}/roster`
 | Field | Description |
 | --- | --- |
 | `date` |  |
-| `game` |  |
-| `total_event` |  |
-| `total_game` |  |
-| `total_item` |  |
-| `total_match` |  |
+| `games` |  |
+| `totalEvents` |  |
+| `totalGames` |  |
+| `totalItems` |  |
+| `totalMatches` |  |
 
 Operations: List.
 
@@ -343,7 +344,7 @@ API path: `/schedule`
 | --- | --- |
 | `conference` |  |
 | `division` |  |
-| `team_record` |  |
+| `teamRecords` |  |
 
 Operations: List.
 
@@ -357,14 +358,14 @@ API path: `/standings`
 | `conference` |  |
 | `copyright` |  |
 | `division` |  |
-| `first_year_of_play` |  |
+| `firstYearOfPlay` |  |
 | `franchise` |  |
 | `id` |  |
 | `link` |  |
-| `location_name` |  |
+| `locationName` |  |
 | `name` |  |
-| `team` |  |
-| `team_name` |  |
+| `teamName` |  |
+| `teams` |  |
 | `venue` |  |
 
 Operations: List, Load.
@@ -391,7 +392,7 @@ Create an instance: `local conference = client:Conference(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `conference` | `table` |  |
+| `conferences` | `table` |  |
 | `copyright` | `string` |  |
 | `id` | `number` |  |
 | `link` | `string` |  |
@@ -426,7 +427,7 @@ Create an instance: `local division = client:Division(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `string` |  |
-| `division` | `table` |  |
+| `divisions` | `table` |  |
 | `id` | `number` |  |
 | `link` | `string` |  |
 | `name` | `string` |  |
@@ -458,12 +459,13 @@ Create an instance: `local game = client:Game(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `away` | `table` |  |
 | `copyright` | `string` |  |
-| `game_data` | `table` |  |
-| `game_pk` | `number` |  |
+| `gameData` | `table` |  |
+| `gamePk` | `number` |  |
+| `home` | `table` |  |
 | `link` | `string` |  |
-| `live_data` | `table` |  |
-| `team` | `table` |  |
+| `liveData` | `table` |  |
 
 #### Example: Load
 
@@ -487,7 +489,7 @@ Create an instance: `local player = client:Player(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `string` |  |
-| `person` | `table` |  |
+| `people` | `table` |  |
 
 #### Example: Load
 
@@ -510,7 +512,7 @@ Create an instance: `local player_stat = client:PlayerStat(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `split` | `table` |  |
+| `splits` | `table` |  |
 | `type` | `table` |  |
 
 #### Example: List
@@ -534,7 +536,7 @@ Create an instance: `local roster = client:Roster(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `jersey_number` | `string` |  |
+| `jerseyNumber` | `string` |  |
 | `person` | `table` |  |
 | `position` | `table` |  |
 
@@ -560,11 +562,11 @@ Create an instance: `local schedule = client:Schedule(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `date` | `string` |  |
-| `game` | `table` |  |
-| `total_event` | `number` |  |
-| `total_game` | `number` |  |
-| `total_item` | `number` |  |
-| `total_match` | `number` |  |
+| `games` | `table` |  |
+| `totalEvents` | `number` |  |
+| `totalGames` | `number` |  |
+| `totalItems` | `number` |  |
+| `totalMatches` | `number` |  |
 
 #### Example: List
 
@@ -589,7 +591,7 @@ Create an instance: `local standing = client:Standing(nil)`
 | --- | --- | --- |
 | `conference` | `table` |  |
 | `division` | `table` |  |
-| `team_record` | `table` |  |
+| `teamRecords` | `table` |  |
 
 #### Example: List
 
@@ -617,14 +619,14 @@ Create an instance: `local team = client:Team(nil)`
 | `conference` | `table` |  |
 | `copyright` | `string` |  |
 | `division` | `table` |  |
-| `first_year_of_play` | `string` |  |
+| `firstYearOfPlay` | `string` |  |
 | `franchise` | `table` |  |
 | `id` | `number` |  |
 | `link` | `string` |  |
-| `location_name` | `string` |  |
+| `locationName` | `string` |  |
 | `name` | `string` |  |
-| `team` | `table` |  |
-| `team_name` | `string` |  |
+| `teamName` | `string` |  |
+| `teams` | `table` |  |
 | `venue` | `table` |  |
 
 #### Example: Load
@@ -716,11 +718,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local conference = client:Conference()
-conference:list()
+local division = client:Division()
+division:list()
 
--- conference:data_get() now returns the conference data from the last list
--- conference:match_get() returns the last match criteria
+-- division:data_get() now returns the division data from the last list
+-- division:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

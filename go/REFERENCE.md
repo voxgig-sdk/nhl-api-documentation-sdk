@@ -130,7 +130,7 @@ fmt.Println(conference.GetName()) // "conference"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | `[]any` | No |  |
+| `conferences` | `[]any` | No |  |
 | `copyright` | `string` | No |  |
 | `id` | `int` | No |  |
 | `link` | `string` | No |  |
@@ -198,7 +198,7 @@ fmt.Println(division.GetName()) // "division"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `string` | No |  |
-| `division` | `[]any` | No |  |
+| `divisions` | `[]any` | No |  |
 | `id` | `int` | No |  |
 | `link` | `string` | No |  |
 | `name` | `string` | No |  |
@@ -264,12 +264,13 @@ fmt.Println(game.GetName()) // "game"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `away` | `map[string]any` | No |  |
 | `copyright` | `string` | No |  |
-| `game_data` | `map[string]any` | No |  |
-| `game_pk` | `int` | No |  |
+| `gameData` | `map[string]any` | No |  |
+| `gamePk` | `int` | No |  |
+| `home` | `map[string]any` | No |  |
 | `link` | `string` | No |  |
-| `live_data` | `map[string]any` | No |  |
-| `team` | `map[string]any` | No |  |
+| `liveData` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -321,7 +322,7 @@ fmt.Println(player.GetName()) // "player"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `string` | No |  |
-| `person` | `[]any` | No |  |
+| `people` | `[]any` | No |  |
 
 ### Operations
 
@@ -372,7 +373,7 @@ fmt.Println(playerStat.GetName()) // "player_stat"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `split` | `[]any` | No |  |
+| `splits` | `[]any` | No |  |
 | `type` | `map[string]any` | No |  |
 
 ### Operations
@@ -424,7 +425,7 @@ fmt.Println(roster.GetName()) // "roster"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `jersey_number` | `string` | No |  |
+| `jerseyNumber` | `string` | No |  |
 | `person` | `map[string]any` | No |  |
 | `position` | `map[string]any` | No |  |
 
@@ -478,11 +479,11 @@ fmt.Println(schedule.GetName()) // "schedule"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `date` | `string` | No |  |
-| `game` | `[]any` | No |  |
-| `total_event` | `int` | No |  |
-| `total_game` | `int` | No |  |
-| `total_item` | `int` | No |  |
-| `total_match` | `int` | No |  |
+| `games` | `[]any` | No |  |
+| `totalEvents` | `int` | No |  |
+| `totalGames` | `int` | No |  |
+| `totalItems` | `int` | No |  |
+| `totalMatches` | `int` | No |  |
 
 ### Operations
 
@@ -535,7 +536,7 @@ fmt.Println(standing.GetName()) // "standing"
 | --- | --- | --- | --- |
 | `conference` | `map[string]any` | No |  |
 | `division` | `map[string]any` | No |  |
-| `team_record` | `[]any` | No |  |
+| `teamRecords` | `[]any` | No |  |
 
 ### Operations
 
@@ -590,14 +591,14 @@ fmt.Println(team.GetName()) // "team"
 | `conference` | `map[string]any` | No |  |
 | `copyright` | `string` | No |  |
 | `division` | `map[string]any` | No |  |
-| `first_year_of_play` | `string` | No |  |
+| `firstYearOfPlay` | `string` | No |  |
 | `franchise` | `map[string]any` | No |  |
 | `id` | `int` | No |  |
 | `link` | `string` | No |  |
-| `location_name` | `string` | No |  |
+| `locationName` | `string` | No |  |
 | `name` | `string` | No |  |
-| `team` | `[]any` | No |  |
-| `team_name` | `string` | No |  |
+| `teamName` | `string` | No |  |
+| `teams` | `[]any` | No |  |
 | `venue` | `map[string]any` | No |  |
 
 ### Operations

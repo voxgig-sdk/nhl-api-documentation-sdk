@@ -4,17 +4,17 @@
       "STANDING00": {
         "conference": {},
         "division": {},
-        "team_record": []
+        "teamRecords": []
       },
       "STANDING01": {
         "conference": {},
         "division": {},
-        "team_record": []
+        "teamRecords": []
       },
       "STANDING02": {
         "conference": {},
         "division": {},
-        "team_record": []
+        "teamRecords": []
       }
     }
   },
@@ -23,7 +23,7 @@
       "standing_ref01": {
         "conference": {},
         "division": {},
-        "team_record": []
+        "teamRecords": []
       }
     }
   }

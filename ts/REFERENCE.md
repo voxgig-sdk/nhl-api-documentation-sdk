@@ -212,7 +212,7 @@ const conference = client.Conference()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `conference` | `any[]` | No |  |
+| `conferences` | `any[]` | No |  |
 | `copyright` | `string` | No |  |
 | `id` | `number` | No |  |
 | `link` | `string` | No |  |
@@ -275,7 +275,7 @@ const division = client.Division()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `string` | No |  |
-| `division` | `any[]` | No |  |
+| `divisions` | `any[]` | No |  |
 | `id` | `number` | No |  |
 | `link` | `string` | No |  |
 | `name` | `string` | No |  |
@@ -336,12 +336,34 @@ const game = client.Game()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `away` | `Record<string, any>` | No |  |
 | `copyright` | `string` | No |  |
-| `game_data` | `Record<string, any>` | No |  |
-| `game_pk` | `number` | No |  |
+| `gameData` | `Record<string, any>` | No |  |
+| `gamePk` | `number` | No |  |
+| `home` | `Record<string, any>` | No |  |
 | `link` | `string` | No |  |
-| `live_data` | `Record<string, any>` | No |  |
-| `team` | `Record<string, any>` | No |  |
+| `liveData` | `Record<string, any>` | No |  |
+
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `boxscore` | `/game/{id}/boxscore` | `client.Game().load({ $action: 'boxscore', ... })` |
+| `feed_live` | `/game/{id}/feed/live` | `client.Game().load({ $action: 'feed_live', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Game record — check the API definition for its shape.
+
+```ts
+const result = await client.Game().load({
+  $action: 'boxscore',
+  /* ...the action's own arguments */
+})
+```
 
 ### Operations
 
@@ -392,7 +414,7 @@ const player = client.Player()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `string` | No |  |
-| `person` | `any[]` | No |  |
+| `people` | `any[]` | No |  |
 
 ### Operations
 
@@ -442,7 +464,7 @@ const player_stat = client.PlayerStat()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `split` | `any[]` | No |  |
+| `splits` | `any[]` | No |  |
 | `type` | `Record<string, any>` | No |  |
 
 ### Operations
@@ -452,7 +474,7 @@ const player_stat = client.PlayerStat()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.PlayerStat().list()
+const results = await client.PlayerStat().list({ person_id: 1 })
 ```
 
 ### Common Methods
@@ -493,7 +515,7 @@ const roster = client.Roster()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `jersey_number` | `string` | No |  |
+| `jerseyNumber` | `string` | No |  |
 | `person` | `Record<string, any>` | No |  |
 | `position` | `Record<string, any>` | No |  |
 
@@ -504,7 +526,7 @@ const roster = client.Roster()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Roster().list()
+const results = await client.Roster().list({ team_id: 1 })
 ```
 
 ### Common Methods
@@ -546,11 +568,11 @@ const schedule = client.Schedule()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `date` | `string` | No |  |
-| `game` | `any[]` | No |  |
-| `total_event` | `number` | No |  |
-| `total_game` | `number` | No |  |
-| `total_item` | `number` | No |  |
-| `total_match` | `number` | No |  |
+| `games` | `any[]` | No |  |
+| `totalEvents` | `number` | No |  |
+| `totalGames` | `number` | No |  |
+| `totalItems` | `number` | No |  |
+| `totalMatches` | `number` | No |  |
 
 ### Operations
 
@@ -602,7 +624,7 @@ const standing = client.Standing()
 | --- | --- | --- | --- |
 | `conference` | `Record<string, any>` | No |  |
 | `division` | `Record<string, any>` | No |  |
-| `team_record` | `any[]` | No |  |
+| `teamRecords` | `any[]` | No |  |
 
 ### Operations
 
@@ -656,14 +678,14 @@ const team = client.Team()
 | `conference` | `Record<string, any>` | No |  |
 | `copyright` | `string` | No |  |
 | `division` | `Record<string, any>` | No |  |
-| `first_year_of_play` | `string` | No |  |
+| `firstYearOfPlay` | `string` | No |  |
 | `franchise` | `Record<string, any>` | No |  |
 | `id` | `number` | No |  |
 | `link` | `string` | No |  |
-| `location_name` | `string` | No |  |
+| `locationName` | `string` | No |  |
 | `name` | `string` | No |  |
-| `team` | `any[]` | No |  |
-| `team_name` | `string` | No |  |
+| `teamName` | `string` | No |  |
+| `teams` | `any[]` | No |  |
 | `venue` | `Record<string, any>` | No |  |
 
 ### Operations

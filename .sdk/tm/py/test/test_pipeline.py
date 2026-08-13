@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import NhlApiDocumentationSDK
-from core.error import NhlApiDocumentationError
-from core.result import NhlApiDocumentationResult
-from core.response import NhlApiDocumentationResponse
-from core.spec import NhlApiDocumentationSpec
-from feature.base_feature import NhlApiDocumentationBaseFeature
+from projectname_sdk.core.error import NhlApiDocumentationError
+from projectname_sdk.core.result import NhlApiDocumentationResult
+from projectname_sdk.core.response import NhlApiDocumentationResponse
+from projectname_sdk.core.spec import NhlApiDocumentationSpec
+from projectname_sdk.feature.base_feature import NhlApiDocumentationBaseFeature
 
 
 def _client():
