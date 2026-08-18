@@ -23,6 +23,7 @@ build = {
   modules = {
     ["nhl-api-documentation_sdk"] = "nhl-api-documentation_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }

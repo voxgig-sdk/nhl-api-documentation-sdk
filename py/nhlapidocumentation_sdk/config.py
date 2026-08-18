@@ -1,7 +1,30 @@
 # NhlApiDocumentation SDK configuration
 
 
+_shared_config = None
+
+
+def shared_config():
+    """Return the process-wide config, built once on first use.
+
+    The SDK reads the config on every request and never writes to it, so one
+    instance is shared by every client rather than rebuilt per client.
+
+    The returned dict is shared: treat it as read-only. Callers that need to
+    mutate should use make_config, which always returns a fresh copy.
+    """
+    global _shared_config
+    if _shared_config is None:
+        _shared_config = make_config()
+    return _shared_config
+
+
 def make_config():
+    """Build a fresh, fully materialised config dict.
+
+    Every call rebuilds the whole structure, so prefer shared_config unless
+    you need a private copy you intend to mutate.
+    """
     return {
         "main": {
             "name": "NhlApiDocumentation",
@@ -34,39 +57,24 @@ def make_config():
       "conference": {
         "fields": [
           {
-            "active": True,
             "name": "conferences",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "copyright",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "id",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "link",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "name",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 4,
           },
         ],
         "name": "conference",
@@ -76,7 +84,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "GET",
@@ -89,27 +96,22 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.conferences`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
           "load": {
             "input": "data",
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "id",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -129,10 +131,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -142,39 +142,24 @@ def make_config():
       "division": {
         "fields": [
           {
-            "active": True,
             "name": "copyright",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "divisions",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "id",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "link",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "name",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 4,
           },
         ],
         "name": "division",
@@ -184,7 +169,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "GET",
@@ -197,27 +181,22 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.divisions`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
           "load": {
             "input": "data",
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "id",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -237,10 +216,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -250,53 +227,32 @@ def make_config():
       "game": {
         "fields": [
           {
-            "active": True,
             "name": "away",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "copyright",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "gameData",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "gamePk",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "home",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "link",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "liveData",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 6,
           },
         ],
         "name": "game",
@@ -306,17 +262,14 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "id",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -338,20 +291,16 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.teams`",
                 },
-                "index$": 0,
               },
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "id",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -374,10 +323,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 1,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -387,18 +334,12 @@ def make_config():
       "player": {
         "fields": [
           {
-            "active": True,
             "name": "copyright",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "people",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 1,
           },
         ],
         "name": "player",
@@ -408,17 +349,14 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "id",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -438,10 +376,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -451,18 +387,12 @@ def make_config():
       "player_stat": {
         "fields": [
           {
-            "active": True,
             "name": "splits",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "type",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 1,
           },
         ],
         "name": "player_stat",
@@ -472,30 +402,24 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "person_id",
                       "orig": "id",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "index$": 0,
                     },
                   ],
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "season",
                       "orig": "season",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "stat",
                       "orig": "stat",
@@ -528,10 +452,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.stats`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -545,25 +467,16 @@ def make_config():
       "roster": {
         "fields": [
           {
-            "active": True,
             "name": "jerseyNumber",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "person",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "position",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 2,
           },
         ],
         "name": "roster",
@@ -573,26 +486,21 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "team_id",
                       "orig": "id",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "index$": 0,
                     },
                   ],
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "season",
                       "orig": "season",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -620,10 +528,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.roster`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -637,46 +543,28 @@ def make_config():
       "schedule": {
         "fields": [
           {
-            "active": True,
             "name": "date",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "games",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "totalEvents",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "totalGames",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "totalItems",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "totalMatches",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 5,
           },
         ],
         "name": "schedule",
@@ -686,39 +574,30 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "end_date",
                       "orig": "end_date",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "season",
                       "orig": "season",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "start_date",
                       "orig": "start_date",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "team_id",
                       "orig": "team_id",
-                      "reqd": False,
                       "type": "`$INTEGER`",
                     },
                   ],
@@ -741,10 +620,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.dates`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -754,25 +631,16 @@ def make_config():
       "standing": {
         "fields": [
           {
-            "active": True,
             "name": "conference",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "division",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "teamRecords",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 2,
           },
         ],
         "name": "standing",
@@ -782,15 +650,12 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "season",
                       "orig": "season",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -810,10 +675,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.records`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -823,95 +686,56 @@ def make_config():
       "team": {
         "fields": [
           {
-            "active": True,
             "name": "abbreviation",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "conference",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "copyright",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "division",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "firstYearOfPlay",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "franchise",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "id",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 6,
           },
           {
-            "active": True,
             "name": "link",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 7,
           },
           {
-            "active": True,
             "name": "locationName",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 8,
           },
           {
-            "active": True,
             "name": "name",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 9,
           },
           {
-            "active": True,
             "name": "teamName",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 10,
           },
           {
-            "active": True,
             "name": "teams",
-            "req": False,
             "type": "`$ARRAY`",
-            "index$": 11,
           },
           {
-            "active": True,
             "name": "venue",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 12,
           },
         ],
         "name": "team",
@@ -921,23 +745,18 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "expand",
                       "orig": "expand",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "season",
                       "orig": "season",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -958,36 +777,29 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.teams`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
           "load": {
             "input": "data",
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "id",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "index$": 0,
                     },
                   ],
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "expand",
                       "orig": "expand",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -1009,10 +821,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {

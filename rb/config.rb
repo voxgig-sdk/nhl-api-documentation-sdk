@@ -1,6 +1,20 @@
 # NhlApiDocumentation SDK configuration
 
 module NhlApiDocumentationConfig
+  # Return the process-wide config, built once on first use. The SDK reads
+  # the config on every request and never writes to it, so one instance is
+  # shared by every client rather than rebuilt per client.
+  #
+  # The returned hash is shared: treat it as read-only. Callers that need to
+  # mutate should use make_config, which always returns a fresh copy.
+  def self.shared_config
+    @shared_config ||= make_config
+  end
+
+
+  # Build a fresh, fully materialised config hash. Every call rebuilds the
+  # whole structure, so prefer shared_config unless you need a private copy
+  # you intend to mutate.
   def self.make_config
     {
       "main" => {
@@ -34,39 +48,24 @@ module NhlApiDocumentationConfig
         "conference" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "conferences",
-              "req" => false,
               "type" => "`$ARRAY`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "copyright",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "id",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "link",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "name",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 4,
             },
           ],
           "name" => "conference",
@@ -76,7 +75,6 @@ module NhlApiDocumentationConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -89,27 +87,22 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.conferences`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -129,10 +122,8 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -142,39 +133,24 @@ module NhlApiDocumentationConfig
         "division" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "copyright",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "divisions",
-              "req" => false,
               "type" => "`$ARRAY`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "id",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "link",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "name",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 4,
             },
           ],
           "name" => "division",
@@ -184,7 +160,6 @@ module NhlApiDocumentationConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -197,27 +172,22 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.divisions`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -237,10 +207,8 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -250,53 +218,32 @@ module NhlApiDocumentationConfig
         "game" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "away",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "copyright",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "gameData",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "gamePk",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "home",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "link",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "liveData",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 6,
             },
           ],
           "name" => "game",
@@ -306,17 +253,14 @@ module NhlApiDocumentationConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -338,20 +282,16 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.teams`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -374,10 +314,8 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -387,18 +325,12 @@ module NhlApiDocumentationConfig
         "player" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "copyright",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "people",
-              "req" => false,
               "type" => "`$ARRAY`",
-              "index$" => 1,
             },
           ],
           "name" => "player",
@@ -408,17 +340,14 @@ module NhlApiDocumentationConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -438,10 +367,8 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -451,18 +378,12 @@ module NhlApiDocumentationConfig
         "player_stat" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "splits",
-              "req" => false,
               "type" => "`$ARRAY`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "type",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 1,
             },
           ],
           "name" => "player_stat",
@@ -472,30 +393,24 @@ module NhlApiDocumentationConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "person_id",
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "season",
                         "orig" => "season",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "stat",
                         "orig" => "stat",
@@ -528,10 +443,8 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.stats`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
           },
           "relations" => {
@@ -545,25 +458,16 @@ module NhlApiDocumentationConfig
         "roster" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "jerseyNumber",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "person",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "position",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 2,
             },
           ],
           "name" => "roster",
@@ -573,26 +477,21 @@ module NhlApiDocumentationConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "team_id",
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "season",
                         "orig" => "season",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                     ],
@@ -620,10 +519,8 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.roster`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
           },
           "relations" => {
@@ -637,46 +534,28 @@ module NhlApiDocumentationConfig
         "schedule" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "date",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "games",
-              "req" => false,
               "type" => "`$ARRAY`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "totalEvents",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "totalGames",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "totalItems",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "totalMatches",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 5,
             },
           ],
           "name" => "schedule",
@@ -686,39 +565,30 @@ module NhlApiDocumentationConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "end_date",
                         "orig" => "end_date",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "season",
                         "orig" => "season",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "start_date",
                         "orig" => "start_date",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "team_id",
                         "orig" => "team_id",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                     ],
@@ -741,10 +611,8 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.dates`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
           },
           "relations" => {
@@ -754,25 +622,16 @@ module NhlApiDocumentationConfig
         "standing" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "conference",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "division",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "teamRecords",
-              "req" => false,
               "type" => "`$ARRAY`",
-              "index$" => 2,
             },
           ],
           "name" => "standing",
@@ -782,15 +641,12 @@ module NhlApiDocumentationConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "season",
                         "orig" => "season",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                     ],
@@ -810,10 +666,8 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.records`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
           },
           "relations" => {
@@ -823,95 +677,56 @@ module NhlApiDocumentationConfig
         "team" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "abbreviation",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "conference",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "copyright",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "division",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "firstYearOfPlay",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "franchise",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "id",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "link",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "locationName",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "name",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "teamName",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "teams",
-              "req" => false,
               "type" => "`$ARRAY`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "venue",
-              "req" => false,
               "type" => "`$OBJECT`",
-              "index$" => 12,
             },
           ],
           "name" => "team",
@@ -921,23 +736,18 @@ module NhlApiDocumentationConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "expand",
                         "orig" => "expand",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "season",
                         "orig" => "season",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                     ],
@@ -958,36 +768,29 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.teams`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "expand",
                         "orig" => "expand",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                     ],
@@ -1009,10 +812,8 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {

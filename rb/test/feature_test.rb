@@ -15,7 +15,7 @@ require_relative "../NhlApiDocumentation_sdk"
 module NhlApiDocumentationFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = NhlApiDocumentationConfig.make_config["feature"]
+    f = NhlApiDocumentationConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

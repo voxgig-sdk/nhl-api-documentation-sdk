@@ -1,5 +1,12 @@
 package core
 
+import (
+	"sync"
+)
+
+// MakeConfig builds a fresh, fully materialised config map. Every call
+// rebuilds the whole structure, so prefer SharedConfig unless you need a
+// private copy you intend to mutate.
 func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
@@ -33,39 +40,24 @@ func MakeConfig() map[string]any {
 			"conference": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "conferences",
-						"req": false,
 						"type": "`$ARRAY`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "copyright",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 1,
 					},
 					map[string]any{
-						"active": true,
 						"name": "id",
-						"req": false,
 						"type": "`$INTEGER`",
-						"index$": 2,
 					},
 					map[string]any{
-						"active": true,
 						"name": "link",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 3,
 					},
 					map[string]any{
-						"active": true,
 						"name": "name",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 4,
 					},
 				},
 				"name": "conference",
@@ -75,7 +67,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
@@ -88,7 +79,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body.conferences`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -97,17 +87,14 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"active": true,
 											"kind": "param",
 											"name": "id",
 											"orig": "id",
 											"reqd": true,
 											"type": "`$INTEGER`",
-											"index$": 0,
 										},
 									},
 								},
@@ -127,7 +114,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -139,39 +125,24 @@ func MakeConfig() map[string]any {
 			"division": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "copyright",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "divisions",
-						"req": false,
 						"type": "`$ARRAY`",
-						"index$": 1,
 					},
 					map[string]any{
-						"active": true,
 						"name": "id",
-						"req": false,
 						"type": "`$INTEGER`",
-						"index$": 2,
 					},
 					map[string]any{
-						"active": true,
 						"name": "link",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 3,
 					},
 					map[string]any{
-						"active": true,
 						"name": "name",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 4,
 					},
 				},
 				"name": "division",
@@ -181,7 +152,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
@@ -194,7 +164,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body.divisions`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -203,17 +172,14 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"active": true,
 											"kind": "param",
 											"name": "id",
 											"orig": "id",
 											"reqd": true,
 											"type": "`$INTEGER`",
-											"index$": 0,
 										},
 									},
 								},
@@ -233,7 +199,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -245,53 +210,32 @@ func MakeConfig() map[string]any {
 			"game": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "away",
-						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "copyright",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 1,
 					},
 					map[string]any{
-						"active": true,
 						"name": "gameData",
-						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 2,
 					},
 					map[string]any{
-						"active": true,
 						"name": "gamePk",
-						"req": false,
 						"type": "`$INTEGER`",
-						"index$": 3,
 					},
 					map[string]any{
-						"active": true,
 						"name": "home",
-						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 4,
 					},
 					map[string]any{
-						"active": true,
 						"name": "link",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 5,
 					},
 					map[string]any{
-						"active": true,
 						"name": "liveData",
-						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 6,
 					},
 				},
 				"name": "game",
@@ -301,17 +245,14 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"active": true,
 											"kind": "param",
 											"name": "id",
 											"orig": "id",
 											"reqd": true,
 											"type": "`$INTEGER`",
-											"index$": 0,
 										},
 									},
 								},
@@ -333,20 +274,16 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body.teams`",
 								},
-								"index$": 0,
 							},
 							map[string]any{
-								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"active": true,
 											"kind": "param",
 											"name": "id",
 											"orig": "id",
 											"reqd": true,
 											"type": "`$INTEGER`",
-											"index$": 0,
 										},
 									},
 								},
@@ -369,7 +306,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 1,
 							},
 						},
 					},
@@ -381,18 +317,12 @@ func MakeConfig() map[string]any {
 			"player": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "copyright",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "people",
-						"req": false,
 						"type": "`$ARRAY`",
-						"index$": 1,
 					},
 				},
 				"name": "player",
@@ -402,17 +332,14 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"active": true,
 											"kind": "param",
 											"name": "id",
 											"orig": "id",
 											"reqd": true,
 											"type": "`$INTEGER`",
-											"index$": 0,
 										},
 									},
 								},
@@ -432,7 +359,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -444,18 +370,12 @@ func MakeConfig() map[string]any {
 			"player_stat": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "splits",
-						"req": false,
 						"type": "`$ARRAY`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "type",
-						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 1,
 					},
 				},
 				"name": "player_stat",
@@ -465,30 +385,24 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"active": true,
 											"kind": "param",
 											"name": "person_id",
 											"orig": "id",
 											"reqd": true,
 											"type": "`$INTEGER`",
-											"index$": 0,
 										},
 									},
 									"query": []any{
 										map[string]any{
-											"active": true,
 											"kind": "query",
 											"name": "season",
 											"orig": "season",
-											"reqd": false,
 											"type": "`$STRING`",
 										},
 										map[string]any{
-											"active": true,
 											"kind": "query",
 											"name": "stat",
 											"orig": "stat",
@@ -521,7 +435,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body.stats`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -537,25 +450,16 @@ func MakeConfig() map[string]any {
 			"roster": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "jerseyNumber",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "person",
-						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 1,
 					},
 					map[string]any{
-						"active": true,
 						"name": "position",
-						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 2,
 					},
 				},
 				"name": "roster",
@@ -565,26 +469,21 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"active": true,
 											"kind": "param",
 											"name": "team_id",
 											"orig": "id",
 											"reqd": true,
 											"type": "`$INTEGER`",
-											"index$": 0,
 										},
 									},
 									"query": []any{
 										map[string]any{
-											"active": true,
 											"kind": "query",
 											"name": "season",
 											"orig": "season",
-											"reqd": false,
 											"type": "`$STRING`",
 										},
 									},
@@ -612,7 +511,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body.roster`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -628,46 +526,28 @@ func MakeConfig() map[string]any {
 			"schedule": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "date",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "games",
-						"req": false,
 						"type": "`$ARRAY`",
-						"index$": 1,
 					},
 					map[string]any{
-						"active": true,
 						"name": "totalEvents",
-						"req": false,
 						"type": "`$INTEGER`",
-						"index$": 2,
 					},
 					map[string]any{
-						"active": true,
 						"name": "totalGames",
-						"req": false,
 						"type": "`$INTEGER`",
-						"index$": 3,
 					},
 					map[string]any{
-						"active": true,
 						"name": "totalItems",
-						"req": false,
 						"type": "`$INTEGER`",
-						"index$": 4,
 					},
 					map[string]any{
-						"active": true,
 						"name": "totalMatches",
-						"req": false,
 						"type": "`$INTEGER`",
-						"index$": 5,
 					},
 				},
 				"name": "schedule",
@@ -677,39 +557,30 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{
 									"query": []any{
 										map[string]any{
-											"active": true,
 											"kind": "query",
 											"name": "end_date",
 											"orig": "end_date",
-											"reqd": false,
 											"type": "`$STRING`",
 										},
 										map[string]any{
-											"active": true,
 											"kind": "query",
 											"name": "season",
 											"orig": "season",
-											"reqd": false,
 											"type": "`$STRING`",
 										},
 										map[string]any{
-											"active": true,
 											"kind": "query",
 											"name": "start_date",
 											"orig": "start_date",
-											"reqd": false,
 											"type": "`$STRING`",
 										},
 										map[string]any{
-											"active": true,
 											"kind": "query",
 											"name": "team_id",
 											"orig": "team_id",
-											"reqd": false,
 											"type": "`$INTEGER`",
 										},
 									},
@@ -732,7 +603,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body.dates`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -744,25 +614,16 @@ func MakeConfig() map[string]any {
 			"standing": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "conference",
-						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "division",
-						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 1,
 					},
 					map[string]any{
-						"active": true,
 						"name": "teamRecords",
-						"req": false,
 						"type": "`$ARRAY`",
-						"index$": 2,
 					},
 				},
 				"name": "standing",
@@ -772,15 +633,12 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{
 									"query": []any{
 										map[string]any{
-											"active": true,
 											"kind": "query",
 											"name": "season",
 											"orig": "season",
-											"reqd": false,
 											"type": "`$STRING`",
 										},
 									},
@@ -800,7 +658,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body.records`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -812,95 +669,56 @@ func MakeConfig() map[string]any {
 			"team": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"active": true,
 						"name": "abbreviation",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 0,
 					},
 					map[string]any{
-						"active": true,
 						"name": "conference",
-						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 1,
 					},
 					map[string]any{
-						"active": true,
 						"name": "copyright",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 2,
 					},
 					map[string]any{
-						"active": true,
 						"name": "division",
-						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 3,
 					},
 					map[string]any{
-						"active": true,
 						"name": "firstYearOfPlay",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 4,
 					},
 					map[string]any{
-						"active": true,
 						"name": "franchise",
-						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 5,
 					},
 					map[string]any{
-						"active": true,
 						"name": "id",
-						"req": false,
 						"type": "`$INTEGER`",
-						"index$": 6,
 					},
 					map[string]any{
-						"active": true,
 						"name": "link",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 7,
 					},
 					map[string]any{
-						"active": true,
 						"name": "locationName",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 8,
 					},
 					map[string]any{
-						"active": true,
 						"name": "name",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 9,
 					},
 					map[string]any{
-						"active": true,
 						"name": "teamName",
-						"req": false,
 						"type": "`$STRING`",
-						"index$": 10,
 					},
 					map[string]any{
-						"active": true,
 						"name": "teams",
-						"req": false,
 						"type": "`$ARRAY`",
-						"index$": 11,
 					},
 					map[string]any{
-						"active": true,
 						"name": "venue",
-						"req": false,
 						"type": "`$OBJECT`",
-						"index$": 12,
 					},
 				},
 				"name": "team",
@@ -910,23 +728,18 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{
 									"query": []any{
 										map[string]any{
-											"active": true,
 											"kind": "query",
 											"name": "expand",
 											"orig": "expand",
-											"reqd": false,
 											"type": "`$STRING`",
 										},
 										map[string]any{
-											"active": true,
 											"kind": "query",
 											"name": "season",
 											"orig": "season",
-											"reqd": false,
 											"type": "`$STRING`",
 										},
 									},
@@ -947,7 +760,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body.teams`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -956,26 +768,21 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"active": true,
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"active": true,
 											"kind": "param",
 											"name": "id",
 											"orig": "id",
 											"reqd": true,
 											"type": "`$INTEGER`",
-											"index$": 0,
 										},
 									},
 									"query": []any{
 										map[string]any{
-											"active": true,
 											"kind": "query",
 											"name": "expand",
 											"orig": "expand",
-											"reqd": false,
 											"type": "`$STRING`",
 										},
 									},
@@ -997,7 +804,6 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"index$": 0,
 							},
 						},
 					},
@@ -1008,6 +814,24 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+var (
+	sharedConfigOnce sync.Once
+	sharedConfigVal  map[string]any
+)
+
+// SharedConfig returns the process-wide config, built once on first use.
+// The SDK reads the config on every request and never writes to it, so one
+// instance is shared by every client rather than rebuilt per client.
+//
+// The returned map is shared: treat it as read-only. Callers that need to
+// mutate should use MakeConfig, which always returns a fresh copy.
+func SharedConfig() map[string]any {
+	sharedConfigOnce.Do(func() {
+		sharedConfigVal = MakeConfig()
+	})
+	return sharedConfigVal
 }
 
 func makeFeature(name string) Feature {

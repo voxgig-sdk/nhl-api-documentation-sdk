@@ -40,7 +40,7 @@ class NhlApiDocumentationSDK
         $utility = new NhlApiDocumentationUtility();
         $this->_utility = $utility;
 
-        $config = NhlApiDocumentationConfig::make_config();
+        $config = NhlApiDocumentationConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

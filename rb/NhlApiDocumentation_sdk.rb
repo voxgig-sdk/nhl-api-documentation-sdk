@@ -28,7 +28,7 @@ class NhlApiDocumentationSDK
     utility = NhlApiDocumentationUtility.new
     @_utility = utility
 
-    config = NhlApiDocumentationConfig.make_config
+    config = NhlApiDocumentationConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,
