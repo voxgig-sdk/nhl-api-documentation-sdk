@@ -1,0 +1,11 @@
+# Entity Models
+
+@"conference.aon"
+@"division.aon"
+@"game.aon"
+@"player.aon"
+@"player_stat.aon"
+@"roster.aon"
+@"schedule.aon"
+@"standing.aon"
+@"team.aon"

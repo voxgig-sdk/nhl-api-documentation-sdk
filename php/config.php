@@ -33,6 +33,9 @@ class NhlApiDocumentationConfig
         return [
             "main" => [
                 "name" => "NhlApiDocumentation",
+                "slug" => "nhl-api-documentation",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
