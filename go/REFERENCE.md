@@ -269,6 +269,7 @@ fmt.Println(game.GetName()) // "game"
 | `gameData` | `map[string]any` | No |  |
 | `gamePk` | `int` | No |  |
 | `home` | `map[string]any` | No |  |
+| `id` | `string` | No |  |
 | `link` | `string` | No |  |
 | `liveData` | `map[string]any` | No |  |
 
@@ -322,6 +323,7 @@ fmt.Println(player.GetName()) // "player"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `string` | No |  |
+| `id` | `string` | No |  |
 | `people` | `[]any` | No |  |
 
 ### Operations

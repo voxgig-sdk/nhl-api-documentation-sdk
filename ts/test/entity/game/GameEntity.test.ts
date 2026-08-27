@@ -59,9 +59,12 @@ describe('GameEntity', async () => {
 
     let game_ref01_data = Object.values(setup.data.existing.game)[0] as any
 
-    // LOAD: skipped — no entity id field and load requires path params.
-    // Entity-var is declared here so later flow steps still compile.
+    // LOAD
     const game_ref01_ent = client.Game()
+    const game_ref01_match_dt0: any = {}
+    game_ref01_match_dt0.id = game_ref01_data.id
+    const game_ref01_data_dt0 = (await game_ref01_ent.load(game_ref01_match_dt0)).data()
+    assert(game_ref01_data_dt0.id === game_ref01_data.id)
 
 
   })

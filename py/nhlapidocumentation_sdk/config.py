@@ -37,6 +37,7 @@ def make_config():
         "options": {
           "active": False,
         },
+        "transport": "base",
       },
         },
         "options": {
@@ -250,6 +251,10 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "name": "id",
+            "type": "`$STRING`",
+          },
+          {
             "name": "link",
             "type": "`$STRING`",
           },
@@ -338,6 +343,10 @@ def make_config():
         "fields": [
           {
             "name": "copyright",
+            "type": "`$STRING`",
+          },
+          {
+            "name": "id",
             "type": "`$STRING`",
           },
           {

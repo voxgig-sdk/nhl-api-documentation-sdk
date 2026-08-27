@@ -304,6 +304,7 @@ API path: `/divisions`
 | `gameData` |  |
 | `gamePk` |  |
 | `home` |  |
+| `id` |  |
 | `link` |  |
 | `liveData` |  |
 
@@ -316,6 +317,7 @@ API path: `/game/{id}/boxscore`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
+| `id` |  |
 | `people` |  |
 
 Operations: Load.
@@ -490,6 +492,7 @@ Create an instance: `$game = $client->Game();`
 | `gameData` | `array` |  |
 | `gamePk` | `int` |  |
 | `home` | `array` |  |
+| `id` | `string` |  |
 | `link` | `string` |  |
 | `liveData` | `array` |  |
 
@@ -516,6 +519,7 @@ Create an instance: `$player = $client->Player();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `string` |  |
+| `id` | `string` |  |
 | `people` | `array` |  |
 
 #### Example: Load

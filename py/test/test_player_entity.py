@@ -48,9 +48,13 @@ class TestPlayerEntity:
 
         # LOAD
         player_ref01_ent = client.Player(None)
-        player_ref01_match_dt0 = {}
+        player_ref01_match_dt0 = {
+            "id": player_ref01_data["id"],
+        }
         player_ref01_data_dt0_loaded = player_ref01_ent.load(player_ref01_match_dt0, None)
-        assert player_ref01_data_dt0_loaded is not None
+        player_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(player_ref01_data_dt0_loaded))
+        assert player_ref01_data_dt0_load_result is not None
+        assert player_ref01_data_dt0_load_result["id"] == player_ref01_data["id"]
 
 
 

@@ -48,9 +48,13 @@ class GameEntityTest extends TestCase
 
         // LOAD
         $game_ref01_ent = $client->Game(null);
-        $game_ref01_match_dt0 = [];
+        $game_ref01_match_dt0 = [
+            "id" => $game_ref01_data["id"],
+        ];
         $game_ref01_data_dt0_loaded = $game_ref01_ent->load($game_ref01_match_dt0, null);
-        $this->assertNotNull($game_ref01_data_dt0_loaded);
+        $game_ref01_data_dt0_load_result = Helpers::to_map(is_object($game_ref01_data_dt0_loaded) && method_exists($game_ref01_data_dt0_loaded, 'data_get') ? $game_ref01_data_dt0_loaded->data_get() : $game_ref01_data_dt0_loaded);
+        $this->assertNotNull($game_ref01_data_dt0_load_result);
+        $this->assertEquals($game_ref01_data_dt0_load_result["id"], $game_ref01_data["id"]);
 
     }
 }

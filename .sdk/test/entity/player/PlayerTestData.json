@@ -2,26 +2,26 @@
   "existing": {
     "player": {
       "PLAYER00": {
-        "copyright": "s14",
-        "people": [],
-        "id": "PLAYER00"
+        "copyright": "s1e",
+        "id": "PLAYER00",
+        "people": []
       },
       "PLAYER01": {
-        "copyright": "s28",
-        "people": [],
-        "id": "PLAYER01"
+        "copyright": "s3c",
+        "id": "PLAYER01",
+        "people": []
       },
       "PLAYER02": {
-        "copyright": "s3c",
-        "people": [],
-        "id": "PLAYER02"
+        "copyright": "s5a",
+        "id": "PLAYER02",
+        "people": []
       }
     }
   },
   "new": {
     "player": {
       "player_ref01": {
-        "copyright": "s50",
+        "copyright": "s78",
         "people": []
       }
     }

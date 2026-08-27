@@ -16,6 +16,7 @@ local function make_config()
         ["options"] = {
           ["active"] = false,
         },
+        ["transport"] = "base",
       },
     },
     options = {
@@ -229,6 +230,10 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
+          {
             ["name"] = "link",
             ["type"] = "`$STRING`",
           },
@@ -317,6 +322,10 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "copyright",
+            ["type"] = "`$STRING`",
+          },
+          {
+            ["name"] = "id",
             ["type"] = "`$STRING`",
           },
           {

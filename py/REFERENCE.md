@@ -254,6 +254,7 @@ game = client.Game()
 | `gameData` | `dict` | No |  |
 | `gamePk` | `int` | No |  |
 | `home` | `dict` | No |  |
+| `id` | `str` | No |  |
 | `link` | `str` | No |  |
 | `liveData` | `dict` | No |  |
 
@@ -307,6 +308,7 @@ player = client.Player()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `str` | No |  |
+| `id` | `str` | No |  |
 | `people` | `list` | No |  |
 
 ### Operations

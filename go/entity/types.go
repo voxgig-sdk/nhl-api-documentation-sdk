@@ -65,6 +65,7 @@ type Game struct {
 	GameData *map[string]any `json:"gameData,omitempty"`
 	GamePk *int `json:"gamePk,omitempty"`
 	Home *map[string]any `json:"home,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Link *string `json:"link,omitempty"`
 	LiveData *map[string]any `json:"liveData,omitempty"`
 }
@@ -77,6 +78,7 @@ type GameLoadMatch struct {
 // Player is the typed data model for the player entity.
 type Player struct {
 	Copyright *string `json:"copyright,omitempty"`
+	Id *string `json:"id,omitempty"`
 	People *[]any `json:"people,omitempty"`
 }
 

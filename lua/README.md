@@ -282,6 +282,7 @@ API path: `/divisions`
 | `gameData` |  |
 | `gamePk` |  |
 | `home` |  |
+| `id` |  |
 | `link` |  |
 | `liveData` |  |
 
@@ -294,6 +295,7 @@ API path: `/game/{id}/boxscore`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
+| `id` |  |
 | `people` |  |
 
 Operations: Load.
@@ -464,6 +466,7 @@ Create an instance: `local game = client:Game(nil)`
 | `gameData` | `table` |  |
 | `gamePk` | `number` |  |
 | `home` | `table` |  |
+| `id` | `string` |  |
 | `link` | `string` |  |
 | `liveData` | `table` |  |
 
@@ -489,6 +492,7 @@ Create an instance: `local player = client:Player(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `string` |  |
+| `id` | `string` |  |
 | `people` | `table` |  |
 
 #### Example: Load

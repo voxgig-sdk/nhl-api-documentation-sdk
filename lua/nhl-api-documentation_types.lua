@@ -46,6 +46,7 @@
 ---@field gameData? table
 ---@field gamePk? number
 ---@field home? table
+---@field id? string
 ---@field link? string
 ---@field liveData? table
 
@@ -54,6 +55,7 @@
 
 ---@class Player
 ---@field copyright? string
+---@field id? string
 ---@field people? table
 
 ---@class PlayerLoadMatch

@@ -255,6 +255,7 @@ local game = client:Game(nil)
 | `gameData` | `table` | No |  |
 | `gamePk` | `number` | No |  |
 | `home` | `table` | No |  |
+| `id` | `string` | No |  |
 | `link` | `string` | No |  |
 | `liveData` | `table` | No |  |
 
@@ -309,6 +310,7 @@ local player = client:Player(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `string` | No |  |
+| `id` | `string` | No |  |
 | `people` | `table` | No |  |
 
 ### Operations

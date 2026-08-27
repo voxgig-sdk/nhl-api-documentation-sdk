@@ -72,6 +72,7 @@ class Game
     public ?array $gameData = null;
     public ?int $gamePk = null;
     public ?array $home = null;
+    public ?string $id = null;
     public ?string $link = null;
     public ?array $liveData = null;
 }
@@ -86,6 +87,7 @@ class GameLoadMatch
 class Player
 {
     public ?string $copyright = null;
+    public ?string $id = null;
     public ?array $people = null;
 }
 

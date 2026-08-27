@@ -51,6 +51,7 @@ export interface Game {
   gameData?: Record<string, any>
   gamePk?: number
   home?: Record<string, any>
+  id?: string
   link?: string
   liveData?: Record<string, any>
 }
@@ -67,6 +68,7 @@ export interface GameLoadMatch {
 
 export interface Player {
   copyright?: string
+  id?: string
   people?: any[]
 }
 

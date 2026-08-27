@@ -62,6 +62,7 @@ class Game(TypedDict, total=False):
     gameData: dict
     gamePk: int
     home: dict
+    id: str
     link: str
     liveData: dict
 
@@ -72,6 +73,7 @@ class GameLoadMatch(TypedDict):
 
 class Player(TypedDict, total=False):
     copyright: str
+    id: str
     people: list
 
 

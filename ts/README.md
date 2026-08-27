@@ -343,6 +343,7 @@ API path: `/divisions`
 | `gameData` |  |
 | `gamePk` |  |
 | `home` |  |
+| `id` |  |
 | `link` |  |
 | `liveData` |  |
 
@@ -355,6 +356,7 @@ API path: `/game/{id}/boxscore`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
+| `id` |  |
 | `people` |  |
 
 Operations: load.
@@ -525,6 +527,7 @@ Create an instance: `const game = client.Game()`
 | `gameData` | `Record<string, any>` |  |
 | `gamePk` | `number` |  |
 | `home` | `Record<string, any>` |  |
+| `id` | `string` |  |
 | `link` | `string` |  |
 | `liveData` | `Record<string, any>` |  |
 
@@ -550,6 +553,7 @@ Create an instance: `const player = client.Player()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `string` |  |
+| `id` | `string` |  |
 | `people` | `any[]` |  |
 
 #### Example: Load

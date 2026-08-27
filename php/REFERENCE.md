@@ -257,6 +257,7 @@ $game = $client->Game();
 | `gameData` | `array` | No |  |
 | `gamePk` | `int` | No |  |
 | `home` | `array` | No |  |
+| `id` | `string` | No |  |
 | `link` | `string` | No |  |
 | `liveData` | `array` | No |  |
 
@@ -311,6 +312,7 @@ $player = $client->Player();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `string` | No |  |
+| `id` | `string` | No |  |
 | `people` | `array` | No |  |
 
 ### Operations

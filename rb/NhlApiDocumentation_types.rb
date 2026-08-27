@@ -143,6 +143,9 @@ DivisionListMatch = Struct.new(
 # @!attribute [rw] home
 #   @return [Hash, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] link
 #   @return [String, nil]
 #
@@ -154,6 +157,7 @@ Game = Struct.new(
   :gameData,
   :gamePk,
   :home,
+  :id,
   :link,
   :liveData,
   keyword_init: true
@@ -173,10 +177,14 @@ GameLoadMatch = Struct.new(
 # @!attribute [rw] copyright
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] people
 #   @return [Array, nil]
 Player = Struct.new(
   :copyright,
+  :id,
   :people,
   keyword_init: true
 )

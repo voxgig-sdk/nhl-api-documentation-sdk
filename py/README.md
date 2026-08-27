@@ -297,6 +297,7 @@ API path: `/divisions`
 | `gameData` |  |
 | `gamePk` |  |
 | `home` |  |
+| `id` |  |
 | `link` |  |
 | `liveData` |  |
 
@@ -309,6 +310,7 @@ API path: `/game/{id}/boxscore`
 | Field | Description |
 | --- | --- |
 | `copyright` |  |
+| `id` |  |
 | `people` |  |
 
 Operations: Load.
@@ -479,6 +481,7 @@ Create an instance: `game = client.Game()`
 | `gameData` | `dict` |  |
 | `gamePk` | `int` |  |
 | `home` | `dict` |  |
+| `id` | `str` |  |
 | `link` | `str` |  |
 | `liveData` | `dict` |  |
 
@@ -504,6 +507,7 @@ Create an instance: `player = client.Player()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `str` |  |
+| `id` | `str` |  |
 | `people` | `list` |  |
 
 #### Example: Load

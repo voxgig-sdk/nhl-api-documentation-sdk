@@ -40,7 +40,8 @@ class Config {
      test:     {
       "options": {
         "active": false
-      }
+      },
+      "transport": "base"
     },
 
   }
@@ -280,6 +281,10 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "name": "id",
+          "type": "`$STRING`"
+        },
+        {
           "name": "link",
           "type": "`$STRING`"
         },
@@ -368,6 +373,10 @@ class Config {
       "fields": [
         {
           "name": "copyright",
+          "type": "`$STRING`"
+        },
+        {
+          "name": "id",
           "type": "`$STRING`"
         },
         {

@@ -28,6 +28,7 @@ module NhlApiDocumentationConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
@@ -241,6 +242,10 @@ module NhlApiDocumentationConfig
               "type" => "`$OBJECT`",
             },
             {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
+            {
               "name" => "link",
               "type" => "`$STRING`",
             },
@@ -329,6 +334,10 @@ module NhlApiDocumentationConfig
           "fields" => [
             {
               "name" => "copyright",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "id",
               "type" => "`$STRING`",
             },
             {

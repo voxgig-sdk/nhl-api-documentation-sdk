@@ -341,6 +341,7 @@ const game = client.Game()
 | `gameData` | `Record<string, any>` | No |  |
 | `gamePk` | `number` | No |  |
 | `home` | `Record<string, any>` | No |  |
+| `id` | `string` | No |  |
 | `link` | `string` | No |  |
 | `liveData` | `Record<string, any>` | No |  |
 
@@ -414,6 +415,7 @@ const player = client.Player()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `string` | No |  |
+| `id` | `string` | No |  |
 | `people` | `any[]` | No |  |
 
 ### Operations

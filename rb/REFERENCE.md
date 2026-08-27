@@ -258,6 +258,7 @@ game = client.Game
 | `gameData` | `Hash` | No |  |
 | `gamePk` | `Integer` | No |  |
 | `home` | `Hash` | No |  |
+| `id` | `String` | No |  |
 | `link` | `String` | No |  |
 | `liveData` | `Hash` | No |  |
 
@@ -312,6 +313,7 @@ player = client.Player
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `copyright` | `String` | No |  |
+| `id` | `String` | No |  |
 | `people` | `Array` | No |  |
 
 ### Operations

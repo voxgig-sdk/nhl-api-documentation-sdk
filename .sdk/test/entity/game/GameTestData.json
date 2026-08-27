@@ -3,33 +3,33 @@
     "game": {
       "GAME00": {
         "away": {},
-        "copyright": "s47",
+        "copyright": "s51",
         "gameData": {},
-        "gamePk": "s49",
+        "gamePk": "s53",
         "home": {},
-        "link": "s4b",
-        "liveData": {},
-        "id": "GAME00"
+        "id": "GAME00",
+        "link": "s56",
+        "liveData": {}
       },
       "GAME01": {
         "away": {},
-        "copyright": "s8d",
+        "copyright": "sa1",
         "gameData": {},
-        "gamePk": "s8f",
+        "gamePk": "sa3",
         "home": {},
-        "link": "s91",
-        "liveData": {},
-        "id": "GAME01"
+        "id": "GAME01",
+        "link": "sa6",
+        "liveData": {}
       },
       "GAME02": {
         "away": {},
-        "copyright": "sd3",
+        "copyright": "sf1",
         "gameData": {},
-        "gamePk": "sd5",
+        "gamePk": "sf3",
         "home": {},
-        "link": "sd7",
-        "liveData": {},
-        "id": "GAME02"
+        "id": "GAME02",
+        "link": "sf6",
+        "liveData": {}
       }
     }
   },
@@ -37,11 +37,11 @@
     "game": {
       "game_ref01": {
         "away": {},
-        "copyright": "s119",
+        "copyright": "s141",
         "gameData": {},
-        "gamePk": "s11b",
+        "gamePk": "s143",
         "home": {},
-        "link": "s11d",
+        "link": "s146",
         "liveData": {}
       }
     }

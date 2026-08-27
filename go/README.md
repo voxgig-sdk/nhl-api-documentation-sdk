@@ -310,6 +310,7 @@ API path: `/divisions`
 | `"gameData"` |  |
 | `"gamePk"` |  |
 | `"home"` |  |
+| `"id"` |  |
 | `"link"` |  |
 | `"liveData"` |  |
 
@@ -322,6 +323,7 @@ API path: `/game/{id}/boxscore`
 | Field | Description |
 | --- | --- |
 | `"copyright"` |  |
+| `"id"` |  |
 | `"people"` |  |
 
 Operations: Load.
@@ -508,6 +510,7 @@ Create an instance: `game := client.Game(nil)`
 | `gameData` | `map[string]any` |  |
 | `gamePk` | `int` |  |
 | `home` | `map[string]any` |  |
+| `id` | `string` |  |
 | `link` | `string` |  |
 | `liveData` | `map[string]any` |  |
 
@@ -537,6 +540,7 @@ Create an instance: `player := client.Player(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `copyright` | `string` |  |
+| `id` | `string` |  |
 | `people` | `[]any` |  |
 
 #### Example: Load

@@ -31,6 +31,11 @@ main: kit: entity: game: {
       type: "`$OBJECT`"
     }
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "link"
       req: false
       type: "`$STRING`"
@@ -41,6 +46,11 @@ main: kit: entity: game: {
       type: "`$OBJECT`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "game"
   op: {

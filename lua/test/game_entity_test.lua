@@ -44,10 +44,14 @@ describe("GameEntity", function()
 
     -- LOAD
     local game_ref01_ent = client:Game(nil)
-    local game_ref01_match_dt0 = {}
+    local game_ref01_match_dt0 = {
+      id = game_ref01_data["id"],
+    }
     local game_ref01_data_dt0_loaded, err = game_ref01_ent:load(game_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(game_ref01_data_dt0_loaded)
+    local game_ref01_data_dt0_load_result = helpers.to_map(type(game_ref01_data_dt0_loaded) == 'table' and game_ref01_data_dt0_loaded.data_get and game_ref01_data_dt0_loaded:data_get() or game_ref01_data_dt0_loaded)
+    assert.is_not_nil(game_ref01_data_dt0_load_result)
+    assert.are.equal(game_ref01_data_dt0_load_result["id"], game_ref01_data["id"])
 
   end)
 end)
