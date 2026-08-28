@@ -86,8 +86,13 @@ class PlayerStat(TypedDict, total=False):
     type: dict
 
 
-class PlayerStatListMatch(TypedDict):
+class PlayerStatListMatchRequired(TypedDict):
     person_id: int
+    stat: str
+
+
+class PlayerStatListMatch(PlayerStatListMatchRequired, total=False):
+    season: str
 
 
 class Roster(TypedDict, total=False):
@@ -96,8 +101,12 @@ class Roster(TypedDict, total=False):
     position: dict
 
 
-class RosterListMatch(TypedDict):
+class RosterListMatchRequired(TypedDict):
     team_id: int
+
+
+class RosterListMatch(RosterListMatchRequired, total=False):
+    season: str
 
 
 class Schedule(TypedDict, total=False):
@@ -110,12 +119,10 @@ class Schedule(TypedDict, total=False):
 
 
 class ScheduleListMatch(TypedDict, total=False):
-    date: str
-    games: list
-    totalEvents: int
-    totalGames: int
-    totalItems: int
-    totalMatches: int
+    end_date: str
+    season: str
+    start_date: str
+    team_id: int
 
 
 class Standing(TypedDict, total=False):
@@ -125,9 +132,7 @@ class Standing(TypedDict, total=False):
 
 
 class StandingListMatch(TypedDict, total=False):
-    conference: dict
-    division: dict
-    teamRecords: list
+    season: str
 
 
 class Team(TypedDict, total=False):
@@ -146,21 +151,14 @@ class Team(TypedDict, total=False):
     venue: dict
 
 
-class TeamLoadMatch(TypedDict):
+class TeamLoadMatchRequired(TypedDict):
     id: int
+
+
+class TeamLoadMatch(TeamLoadMatchRequired, total=False):
+    expand: str
 
 
 class TeamListMatch(TypedDict, total=False):
-    abbreviation: str
-    conference: dict
-    copyright: str
-    division: dict
-    firstYearOfPlay: str
-    franchise: dict
-    id: int
-    link: str
-    locationName: str
-    name: str
-    teamName: str
-    teams: list
-    venue: dict
+    expand: str
+    season: str

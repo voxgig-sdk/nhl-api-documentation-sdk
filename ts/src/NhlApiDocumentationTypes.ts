@@ -83,6 +83,8 @@ export interface PlayerStat {
 
 export interface PlayerStatListMatch {
   person_id: number
+  season?: string
+  stat: string
 }
 
 export interface Roster {
@@ -93,6 +95,7 @@ export interface Roster {
 
 export interface RosterListMatch {
   team_id: number
+  season?: string
 }
 
 export interface Schedule {
@@ -105,12 +108,10 @@ export interface Schedule {
 }
 
 export interface ScheduleListMatch {
-  date?: string
-  games?: any[]
-  totalEvents?: number
-  totalGames?: number
-  totalItems?: number
-  totalMatches?: number
+  end_date?: string
+  season?: string
+  start_date?: string
+  team_id?: number
 }
 
 export interface Standing {
@@ -120,9 +121,7 @@ export interface Standing {
 }
 
 export interface StandingListMatch {
-  conference?: Record<string, any>
-  division?: Record<string, any>
-  teamRecords?: any[]
+  season?: string
 }
 
 export interface Team {
@@ -143,21 +142,11 @@ export interface Team {
 
 export interface TeamLoadMatch {
   id: number
+  expand?: string
 }
 
 export interface TeamListMatch {
-  abbreviation?: string
-  conference?: Record<string, any>
-  copyright?: string
-  division?: Record<string, any>
-  firstYearOfPlay?: string
-  franchise?: Record<string, any>
-  id?: number
-  link?: string
-  locationName?: string
-  name?: string
-  teamName?: string
-  teams?: any[]
-  venue?: Record<string, any>
+  expand?: string
+  season?: string
 }
 

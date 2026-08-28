@@ -215,8 +215,16 @@ PlayerStat = Struct.new(
 #
 # @!attribute [rw] person_id
 #   @return [Integer]
+#
+# @!attribute [rw] season
+#   @return [String, nil]
+#
+# @!attribute [rw] stat
+#   @return [String]
 PlayerStatListMatch = Struct.new(
   :person_id,
+  :season,
+  :stat,
   keyword_init: true
 )
 
@@ -241,8 +249,12 @@ Roster = Struct.new(
 #
 # @!attribute [rw] team_id
 #   @return [Integer]
+#
+# @!attribute [rw] season
+#   @return [String, nil]
 RosterListMatch = Struct.new(
   :team_id,
+  :season,
   keyword_init: true
 )
 
@@ -277,30 +289,22 @@ Schedule = Struct.new(
 
 # Request payload for Schedule#list.
 #
-# @!attribute [rw] date
+# @!attribute [rw] end_date
 #   @return [String, nil]
 #
-# @!attribute [rw] games
-#   @return [Array, nil]
+# @!attribute [rw] season
+#   @return [String, nil]
 #
-# @!attribute [rw] totalEvents
-#   @return [Integer, nil]
+# @!attribute [rw] start_date
+#   @return [String, nil]
 #
-# @!attribute [rw] totalGames
-#   @return [Integer, nil]
-#
-# @!attribute [rw] totalItems
-#   @return [Integer, nil]
-#
-# @!attribute [rw] totalMatches
+# @!attribute [rw] team_id
 #   @return [Integer, nil]
 ScheduleListMatch = Struct.new(
-  :date,
-  :games,
-  :totalEvents,
-  :totalGames,
-  :totalItems,
-  :totalMatches,
+  :end_date,
+  :season,
+  :start_date,
+  :team_id,
   keyword_init: true
 )
 
@@ -323,18 +327,10 @@ Standing = Struct.new(
 
 # Request payload for Standing#list.
 #
-# @!attribute [rw] conference
-#   @return [Hash, nil]
-#
-# @!attribute [rw] division
-#   @return [Hash, nil]
-#
-# @!attribute [rw] teamRecords
-#   @return [Array, nil]
+# @!attribute [rw] season
+#   @return [String, nil]
 StandingListMatch = Struct.new(
-  :conference,
-  :division,
-  :teamRecords,
+  :season,
   keyword_init: true
 )
 
@@ -399,65 +395,25 @@ Team = Struct.new(
 #
 # @!attribute [rw] id
 #   @return [Integer]
+#
+# @!attribute [rw] expand
+#   @return [String, nil]
 TeamLoadMatch = Struct.new(
   :id,
+  :expand,
   keyword_init: true
 )
 
 # Request payload for Team#list.
 #
-# @!attribute [rw] abbreviation
+# @!attribute [rw] expand
 #   @return [String, nil]
 #
-# @!attribute [rw] conference
-#   @return [Hash, nil]
-#
-# @!attribute [rw] copyright
+# @!attribute [rw] season
 #   @return [String, nil]
-#
-# @!attribute [rw] division
-#   @return [Hash, nil]
-#
-# @!attribute [rw] firstYearOfPlay
-#   @return [String, nil]
-#
-# @!attribute [rw] franchise
-#   @return [Hash, nil]
-#
-# @!attribute [rw] id
-#   @return [Integer, nil]
-#
-# @!attribute [rw] link
-#   @return [String, nil]
-#
-# @!attribute [rw] locationName
-#   @return [String, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] teamName
-#   @return [String, nil]
-#
-# @!attribute [rw] teams
-#   @return [Array, nil]
-#
-# @!attribute [rw] venue
-#   @return [Hash, nil]
 TeamListMatch = Struct.new(
-  :abbreviation,
-  :conference,
-  :copyright,
-  :division,
-  :firstYearOfPlay,
-  :franchise,
-  :id,
-  :link,
-  :locationName,
-  :name,
-  :teamName,
-  :teams,
-  :venue,
+  :expand,
+  :season,
   keyword_init: true
 )
 

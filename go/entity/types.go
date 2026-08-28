@@ -96,6 +96,8 @@ type PlayerStat struct {
 // PlayerStatListMatch is the typed request payload for PlayerStat.ListTyped.
 type PlayerStatListMatch struct {
 	PersonId int `json:"person_id"`
+	Season *string `json:"season,omitempty"`
+	Stat string `json:"stat"`
 }
 
 // Roster is the typed data model for the roster entity.
@@ -108,6 +110,7 @@ type Roster struct {
 // RosterListMatch is the typed request payload for Roster.ListTyped.
 type RosterListMatch struct {
 	TeamId int `json:"team_id"`
+	Season *string `json:"season,omitempty"`
 }
 
 // Schedule is the typed data model for the schedule entity.
@@ -122,12 +125,10 @@ type Schedule struct {
 
 // ScheduleListMatch is the typed request payload for Schedule.ListTyped.
 type ScheduleListMatch struct {
-	Date *string `json:"date,omitempty"`
-	Games *[]any `json:"games,omitempty"`
-	TotalEvents *int `json:"totalEvents,omitempty"`
-	TotalGames *int `json:"totalGames,omitempty"`
-	TotalItems *int `json:"totalItems,omitempty"`
-	TotalMatches *int `json:"totalMatches,omitempty"`
+	EndDate *string `json:"end_date,omitempty"`
+	Season *string `json:"season,omitempty"`
+	StartDate *string `json:"start_date,omitempty"`
+	TeamId *int `json:"team_id,omitempty"`
 }
 
 // Standing is the typed data model for the standing entity.
@@ -139,9 +140,7 @@ type Standing struct {
 
 // StandingListMatch is the typed request payload for Standing.ListTyped.
 type StandingListMatch struct {
-	Conference *map[string]any `json:"conference,omitempty"`
-	Division *map[string]any `json:"division,omitempty"`
-	TeamRecords *[]any `json:"teamRecords,omitempty"`
+	Season *string `json:"season,omitempty"`
 }
 
 // Team is the typed data model for the team entity.
@@ -164,23 +163,13 @@ type Team struct {
 // TeamLoadMatch is the typed request payload for Team.LoadTyped.
 type TeamLoadMatch struct {
 	Id int `json:"id"`
+	Expand *string `json:"expand,omitempty"`
 }
 
 // TeamListMatch is the typed request payload for Team.ListTyped.
 type TeamListMatch struct {
-	Abbreviation *string `json:"abbreviation,omitempty"`
-	Conference *map[string]any `json:"conference,omitempty"`
-	Copyright *string `json:"copyright,omitempty"`
-	Division *map[string]any `json:"division,omitempty"`
-	FirstYearOfPlay *string `json:"firstYearOfPlay,omitempty"`
-	Franchise *map[string]any `json:"franchise,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Link *string `json:"link,omitempty"`
-	LocationName *string `json:"locationName,omitempty"`
-	Name *string `json:"name,omitempty"`
-	TeamName *string `json:"teamName,omitempty"`
-	Teams *[]any `json:"teams,omitempty"`
-	Venue *map[string]any `json:"venue,omitempty"`
+	Expand *string `json:"expand,omitempty"`
+	Season *string `json:"season,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

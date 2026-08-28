@@ -108,6 +108,8 @@ class PlayerStat
 class PlayerStatListMatch
 {
     public int $person_id;
+    public ?string $season = null;
+    public string $stat;
 }
 
 /** Roster entity data model. */
@@ -122,6 +124,7 @@ class Roster
 class RosterListMatch
 {
     public int $team_id;
+    public ?string $season = null;
 }
 
 /** Schedule entity data model. */
@@ -138,12 +141,10 @@ class Schedule
 /** Request payload for Schedule#list. */
 class ScheduleListMatch
 {
-    public ?string $date = null;
-    public ?array $games = null;
-    public ?int $totalEvents = null;
-    public ?int $totalGames = null;
-    public ?int $totalItems = null;
-    public ?int $totalMatches = null;
+    public ?string $end_date = null;
+    public ?string $season = null;
+    public ?string $start_date = null;
+    public ?int $team_id = null;
 }
 
 /** Standing entity data model. */
@@ -157,9 +158,7 @@ class Standing
 /** Request payload for Standing#list. */
 class StandingListMatch
 {
-    public ?array $conference = null;
-    public ?array $division = null;
-    public ?array $teamRecords = null;
+    public ?string $season = null;
 }
 
 /** Team entity data model. */
@@ -184,23 +183,13 @@ class Team
 class TeamLoadMatch
 {
     public int $id;
+    public ?string $expand = null;
 }
 
 /** Request payload for Team#list. */
 class TeamListMatch
 {
-    public ?string $abbreviation = null;
-    public ?array $conference = null;
-    public ?string $copyright = null;
-    public ?array $division = null;
-    public ?string $firstYearOfPlay = null;
-    public ?array $franchise = null;
-    public ?int $id = null;
-    public ?string $link = null;
-    public ?string $locationName = null;
-    public ?string $name = null;
-    public ?string $teamName = null;
-    public ?array $teams = null;
-    public ?array $venue = null;
+    public ?string $expand = null;
+    public ?string $season = null;
 }
 

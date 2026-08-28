@@ -67,6 +67,8 @@
 
 ---@class PlayerStatListMatch
 ---@field person_id number
+---@field season? string
+---@field stat string
 
 ---@class Roster
 ---@field jerseyNumber? string
@@ -75,6 +77,7 @@
 
 ---@class RosterListMatch
 ---@field team_id number
+---@field season? string
 
 ---@class Schedule
 ---@field date? string
@@ -85,12 +88,10 @@
 ---@field totalMatches? number
 
 ---@class ScheduleListMatch
----@field date? string
----@field games? table
----@field totalEvents? number
----@field totalGames? number
----@field totalItems? number
----@field totalMatches? number
+---@field end_date? string
+---@field season? string
+---@field start_date? string
+---@field team_id? number
 
 ---@class Standing
 ---@field conference? table
@@ -98,9 +99,7 @@
 ---@field teamRecords? table
 
 ---@class StandingListMatch
----@field conference? table
----@field division? table
----@field teamRecords? table
+---@field season? string
 
 ---@class Team
 ---@field abbreviation? string
@@ -119,21 +118,11 @@
 
 ---@class TeamLoadMatch
 ---@field id number
+---@field expand? string
 
 ---@class TeamListMatch
----@field abbreviation? string
----@field conference? table
----@field copyright? string
----@field division? table
----@field firstYearOfPlay? string
----@field franchise? table
----@field id? number
----@field link? string
----@field locationName? string
----@field name? string
----@field teamName? string
----@field teams? table
----@field venue? table
+---@field expand? string
+---@field season? string
 
 local M = {}
 
