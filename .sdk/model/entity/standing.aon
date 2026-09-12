@@ -41,8 +41,10 @@ main: kit: entity: standing: {
           }
           method: "GET"
           orig: "/standings"
-          parts: [
-            "standings"
+          segments: [
+            {
+              lit: "standings"
+            }
           ]
           select: {
             exist: [

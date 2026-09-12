@@ -86,6 +86,10 @@ class NhlApiDocumentationConfig
               'type' => '`$STRING`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'conference',
           'op' => [
             'list' => [
@@ -97,13 +101,18 @@ class NhlApiDocumentationConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/conferences',
-                  'parts' => [
-                    'conferences',
+                  'segments' => [
+                    [
+                      'lit' => 'conferences',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.conferences`',
+                  ],
+                  'parts' => [
+                    'conferences',
                   ],
                 ],
               ],
@@ -127,9 +136,13 @@ class NhlApiDocumentationConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/conferences/{id}',
-                  'parts' => [
-                    'conferences',
-                    '{id}',
+                  'segments' => [
+                    [
+                      'lit' => 'conferences',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -139,6 +152,10 @@ class NhlApiDocumentationConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'conferences',
+                    '{id}',
                   ],
                 ],
               ],
@@ -171,6 +188,10 @@ class NhlApiDocumentationConfig
               'type' => '`$STRING`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'division',
           'op' => [
             'list' => [
@@ -182,13 +203,18 @@ class NhlApiDocumentationConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/divisions',
-                  'parts' => [
-                    'divisions',
+                  'segments' => [
+                    [
+                      'lit' => 'divisions',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.divisions`',
+                  ],
+                  'parts' => [
+                    'divisions',
                   ],
                 ],
               ],
@@ -212,9 +238,13 @@ class NhlApiDocumentationConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/divisions/{id}',
-                  'parts' => [
-                    'divisions',
-                    '{id}',
+                  'segments' => [
+                    [
+                      'lit' => 'divisions',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -224,6 +254,10 @@ class NhlApiDocumentationConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'divisions',
+                    '{id}',
                   ],
                 ],
               ],
@@ -268,6 +302,10 @@ class NhlApiDocumentationConfig
               'type' => '`$OBJECT`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'game',
           'op' => [
             'load' => [
@@ -289,10 +327,16 @@ class NhlApiDocumentationConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/game/{id}/boxscore',
-                  'parts' => [
-                    'game',
-                    '{id}',
-                    'boxscore',
+                  'segments' => [
+                    [
+                      'lit' => 'game',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
+                    [
+                      'lit' => 'boxscore',
+                    ],
                   ],
                   'select' => [
                     '$action' => 'boxscore',
@@ -303,6 +347,11 @@ class NhlApiDocumentationConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.teams`',
+                  ],
+                  'parts' => [
+                    'game',
+                    '{id}',
+                    'boxscore',
                   ],
                 ],
                 [
@@ -320,11 +369,19 @@ class NhlApiDocumentationConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/game/{id}/feed/live',
-                  'parts' => [
-                    'game',
-                    '{id}',
-                    'feed',
-                    'live',
+                  'segments' => [
+                    [
+                      'lit' => 'game',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
+                    [
+                      'lit' => 'feed',
+                    ],
+                    [
+                      'lit' => 'live',
+                    ],
                   ],
                   'select' => [
                     '$action' => 'feed_live',
@@ -335,6 +392,12 @@ class NhlApiDocumentationConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'game',
+                    '{id}',
+                    'feed',
+                    'live',
                   ],
                 ],
               ],
@@ -359,6 +422,10 @@ class NhlApiDocumentationConfig
               'type' => '`$ARRAY`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'player',
           'op' => [
             'load' => [
@@ -380,9 +447,13 @@ class NhlApiDocumentationConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/people/{id}',
-                  'parts' => [
-                    'people',
-                    '{id}',
+                  'segments' => [
+                    [
+                      'lit' => 'people',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -392,6 +463,10 @@ class NhlApiDocumentationConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'people',
+                    '{id}',
                   ],
                 ],
               ],
@@ -448,14 +523,20 @@ class NhlApiDocumentationConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/people/{id}/stats',
-                  'parts' => [
-                    'people',
-                    '{person_id}',
-                    'stats',
-                  ],
                   'rename' => [
                     'param' => [
                       'id' => 'person_id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'people',
+                    ],
+                    [
+                      'var' => 'person_id',
+                    ],
+                    [
+                      'lit' => 'stats',
                     ],
                   ],
                   'select' => [
@@ -468,6 +549,11 @@ class NhlApiDocumentationConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.stats`',
+                  ],
+                  'parts' => [
+                    'people',
+                    '{person_id}',
+                    'stats',
                   ],
                 ],
               ],
@@ -525,14 +611,20 @@ class NhlApiDocumentationConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/teams/{id}/roster',
-                  'parts' => [
-                    'teams',
-                    '{team_id}',
-                    'roster',
-                  ],
                   'rename' => [
                     'param' => [
                       'id' => 'team_id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'teams',
+                    ],
+                    [
+                      'var' => 'team_id',
+                    ],
+                    [
+                      'lit' => 'roster',
                     ],
                   ],
                   'select' => [
@@ -544,6 +636,11 @@ class NhlApiDocumentationConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.roster`',
+                  ],
+                  'parts' => [
+                    'teams',
+                    '{team_id}',
+                    'roster',
                   ],
                 ],
               ],
@@ -560,6 +657,7 @@ class NhlApiDocumentationConfig
         'schedule' => [
           'fields' => [
             [
+              'format' => 'date',
               'name' => 'date',
               'type' => '`$STRING`',
             ],
@@ -622,8 +720,10 @@ class NhlApiDocumentationConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/schedule',
-                  'parts' => [
-                    'schedule',
+                  'segments' => [
+                    [
+                      'lit' => 'schedule',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -636,6 +736,9 @@ class NhlApiDocumentationConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.dates`',
+                  ],
+                  'parts' => [
+                    'schedule',
                   ],
                 ],
               ],
@@ -680,8 +783,10 @@ class NhlApiDocumentationConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/standings',
-                  'parts' => [
-                    'standings',
+                  'segments' => [
+                    [
+                      'lit' => 'standings',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -691,6 +796,9 @@ class NhlApiDocumentationConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.records`',
+                  ],
+                  'parts' => [
+                    'standings',
                   ],
                 ],
               ],
@@ -755,6 +863,10 @@ class NhlApiDocumentationConfig
               'type' => '`$OBJECT`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'team',
           'op' => [
             'list' => [
@@ -781,8 +893,10 @@ class NhlApiDocumentationConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/teams',
-                  'parts' => [
-                    'teams',
+                  'segments' => [
+                    [
+                      'lit' => 'teams',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -793,6 +907,9 @@ class NhlApiDocumentationConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.teams`',
+                  ],
+                  'parts' => [
+                    'teams',
                   ],
                 ],
               ],
@@ -824,9 +941,13 @@ class NhlApiDocumentationConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/teams/{id}',
-                  'parts' => [
-                    'teams',
-                    '{id}',
+                  'segments' => [
+                    [
+                      'lit' => 'teams',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -837,6 +958,10 @@ class NhlApiDocumentationConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'teams',
+                    '{id}',
                   ],
                 ],
               ],

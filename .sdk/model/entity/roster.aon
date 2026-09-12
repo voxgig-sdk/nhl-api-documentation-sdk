@@ -50,16 +50,22 @@ main: kit: entity: roster: {
           }
           method: "GET"
           orig: "/teams/{id}/roster"
-          parts: [
-            "teams"
-            "{team_id}"
-            "roster"
-          ]
           rename: {
             param: {
               id: "team_id"
             }
           }
+          segments: [
+            {
+              lit: "teams"
+            }
+            {
+              var: "team_id"
+            }
+            {
+              lit: "roster"
+            }
+          ]
           select: {
             exist: [
               "season"

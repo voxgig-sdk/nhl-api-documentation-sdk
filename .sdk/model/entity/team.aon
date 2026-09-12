@@ -103,8 +103,10 @@ main: kit: entity: team: {
           }
           method: "GET"
           orig: "/teams"
-          parts: [
-            "teams"
+          segments: [
+            {
+              lit: "teams"
+            }
           ]
           select: {
             exist: [
@@ -145,9 +147,13 @@ main: kit: entity: team: {
           }
           method: "GET"
           orig: "/teams/{id}"
-          parts: [
-            "teams"
-            "{id}"
+          segments: [
+            {
+              lit: "teams"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

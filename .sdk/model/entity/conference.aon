@@ -45,8 +45,10 @@ main: kit: entity: conference: {
         {
           method: "GET"
           orig: "/conferences"
-          parts: [
-            "conferences"
+          segments: [
+            {
+              lit: "conferences"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -72,9 +74,13 @@ main: kit: entity: conference: {
           }
           method: "GET"
           orig: "/conferences/{id}"
-          parts: [
-            "conferences"
-            "{id}"
+          segments: [
+            {
+              lit: "conferences"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

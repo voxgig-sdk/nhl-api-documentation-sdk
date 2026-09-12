@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -111,6 +122,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "conference",
       "op": {
         "list": {
@@ -122,14 +137,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/conferences",
-              "parts": [
-                "conferences"
+              "segments": [
+                {
+                  "lit": "conferences"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.conferences`"
-              }
+              },
+              "parts": [
+                "conferences"
+              ]
             }
           ]
         },
@@ -152,9 +172,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/conferences/{id}",
-              "parts": [
-                "conferences",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "conferences"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -164,7 +188,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "conferences",
+                "{id}"
+              ]
             }
           ]
         }
@@ -196,6 +224,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "division",
       "op": {
         "list": {
@@ -207,14 +239,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/divisions",
-              "parts": [
-                "divisions"
+              "segments": [
+                {
+                  "lit": "divisions"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.divisions`"
-              }
+              },
+              "parts": [
+                "divisions"
+              ]
             }
           ]
         },
@@ -237,9 +274,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/divisions/{id}",
-              "parts": [
-                "divisions",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "divisions"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -249,7 +290,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "divisions",
+                "{id}"
+              ]
             }
           ]
         }
@@ -293,6 +338,10 @@ class Config {
           "type": "`$OBJECT`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "game",
       "op": {
         "load": {
@@ -314,10 +363,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/game/{id}/boxscore",
-              "parts": [
-                "game",
-                "{id}",
-                "boxscore"
+              "segments": [
+                {
+                  "lit": "game"
+                },
+                {
+                  "var": "id"
+                },
+                {
+                  "lit": "boxscore"
+                }
               ],
               "select": {
                 "$action": "boxscore",
@@ -328,7 +383,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.teams`"
-              }
+              },
+              "parts": [
+                "game",
+                "{id}",
+                "boxscore"
+              ]
             },
             {
               "args": {
@@ -345,11 +405,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/game/{id}/feed/live",
-              "parts": [
-                "game",
-                "{id}",
-                "feed",
-                "live"
+              "segments": [
+                {
+                  "lit": "game"
+                },
+                {
+                  "var": "id"
+                },
+                {
+                  "lit": "feed"
+                },
+                {
+                  "lit": "live"
+                }
               ],
               "select": {
                 "$action": "feed_live",
@@ -360,7 +428,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "game",
+                "{id}",
+                "feed",
+                "live"
+              ]
             }
           ]
         }
@@ -384,6 +458,10 @@ class Config {
           "type": "`$ARRAY`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "player",
       "op": {
         "load": {
@@ -405,9 +483,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/people/{id}",
-              "parts": [
-                "people",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "people"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -417,7 +499,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "people",
+                "{id}"
+              ]
             }
           ]
         }
@@ -473,16 +559,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/people/{id}/stats",
-              "parts": [
-                "people",
-                "{person_id}",
-                "stats"
-              ],
               "rename": {
                 "param": {
                   "id": "person_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "people"
+                },
+                {
+                  "var": "person_id"
+                },
+                {
+                  "lit": "stats"
+                }
+              ],
               "select": {
                 "exist": [
                   "person_id",
@@ -493,7 +585,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.stats`"
-              }
+              },
+              "parts": [
+                "people",
+                "{person_id}",
+                "stats"
+              ]
             }
           ]
         }
@@ -550,16 +647,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/teams/{id}/roster",
-              "parts": [
-                "teams",
-                "{team_id}",
-                "roster"
-              ],
               "rename": {
                 "param": {
                   "id": "team_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "teams"
+                },
+                {
+                  "var": "team_id"
+                },
+                {
+                  "lit": "roster"
+                }
+              ],
               "select": {
                 "exist": [
                   "season",
@@ -569,7 +672,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.roster`"
-              }
+              },
+              "parts": [
+                "teams",
+                "{team_id}",
+                "roster"
+              ]
             }
           ]
         }
@@ -585,6 +693,7 @@ class Config {
     "schedule": {
       "fields": [
         {
+          "format": "date",
           "name": "date",
           "type": "`$STRING`"
         },
@@ -647,8 +756,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/schedule",
-              "parts": [
-                "schedule"
+              "segments": [
+                {
+                  "lit": "schedule"
+                }
               ],
               "select": {
                 "exist": [
@@ -661,7 +772,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.dates`"
-              }
+              },
+              "parts": [
+                "schedule"
+              ]
             }
           ]
         }
@@ -705,8 +819,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/standings",
-              "parts": [
-                "standings"
+              "segments": [
+                {
+                  "lit": "standings"
+                }
               ],
               "select": {
                 "exist": [
@@ -716,7 +832,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.records`"
-              }
+              },
+              "parts": [
+                "standings"
+              ]
             }
           ]
         }
@@ -780,6 +899,10 @@ class Config {
           "type": "`$OBJECT`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "team",
       "op": {
         "list": {
@@ -806,8 +929,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/teams",
-              "parts": [
-                "teams"
+              "segments": [
+                {
+                  "lit": "teams"
+                }
               ],
               "select": {
                 "exist": [
@@ -818,7 +943,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.teams`"
-              }
+              },
+              "parts": [
+                "teams"
+              ]
             }
           ]
         },
@@ -849,9 +977,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/teams/{id}",
-              "parts": [
-                "teams",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "teams"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -862,7 +994,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "teams",
+                "{id}"
+              ]
             }
           ]
         }
@@ -878,6 +1014,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

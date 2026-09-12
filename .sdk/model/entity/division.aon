@@ -45,8 +45,10 @@ main: kit: entity: division: {
         {
           method: "GET"
           orig: "/divisions"
-          parts: [
-            "divisions"
+          segments: [
+            {
+              lit: "divisions"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -72,9 +74,13 @@ main: kit: entity: division: {
           }
           method: "GET"
           orig: "/divisions/{id}"
-          parts: [
-            "divisions"
-            "{id}"
+          segments: [
+            {
+              lit: "divisions"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

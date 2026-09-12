@@ -52,16 +52,22 @@ main: kit: entity: player_stat: {
           }
           method: "GET"
           orig: "/people/{id}/stats"
-          parts: [
-            "people"
-            "{person_id}"
-            "stats"
-          ]
           rename: {
             param: {
               id: "person_id"
             }
           }
+          segments: [
+            {
+              lit: "people"
+            }
+            {
+              var: "person_id"
+            }
+            {
+              lit: "stats"
+            }
+          ]
           select: {
             exist: [
               "person_id"

@@ -72,6 +72,10 @@ module NhlApiDocumentationConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "conference",
           "op" => {
             "list" => {
@@ -83,14 +87,19 @@ module NhlApiDocumentationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/conferences",
-                  "parts" => [
-                    "conferences",
+                  "segments" => [
+                    {
+                      "lit" => "conferences",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.conferences`",
                   },
+                  "parts" => [
+                    "conferences",
+                  ],
                 },
               ],
             },
@@ -113,9 +122,13 @@ module NhlApiDocumentationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/conferences/{id}",
-                  "parts" => [
-                    "conferences",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "conferences",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -126,6 +139,10 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "conferences",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -157,6 +174,10 @@ module NhlApiDocumentationConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "division",
           "op" => {
             "list" => {
@@ -168,14 +189,19 @@ module NhlApiDocumentationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/divisions",
-                  "parts" => [
-                    "divisions",
+                  "segments" => [
+                    {
+                      "lit" => "divisions",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.divisions`",
                   },
+                  "parts" => [
+                    "divisions",
+                  ],
                 },
               ],
             },
@@ -198,9 +224,13 @@ module NhlApiDocumentationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/divisions/{id}",
-                  "parts" => [
-                    "divisions",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "divisions",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -211,6 +241,10 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "divisions",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -254,6 +288,10 @@ module NhlApiDocumentationConfig
               "type" => "`$OBJECT`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "game",
           "op" => {
             "load" => {
@@ -275,10 +313,16 @@ module NhlApiDocumentationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/game/{id}/boxscore",
-                  "parts" => [
-                    "game",
-                    "{id}",
-                    "boxscore",
+                  "segments" => [
+                    {
+                      "lit" => "game",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                    {
+                      "lit" => "boxscore",
+                    },
                   ],
                   "select" => {
                     "$action" => "boxscore",
@@ -290,6 +334,11 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.teams`",
                   },
+                  "parts" => [
+                    "game",
+                    "{id}",
+                    "boxscore",
+                  ],
                 },
                 {
                   "args" => {
@@ -306,11 +355,19 @@ module NhlApiDocumentationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/game/{id}/feed/live",
-                  "parts" => [
-                    "game",
-                    "{id}",
-                    "feed",
-                    "live",
+                  "segments" => [
+                    {
+                      "lit" => "game",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                    {
+                      "lit" => "feed",
+                    },
+                    {
+                      "lit" => "live",
+                    },
                   ],
                   "select" => {
                     "$action" => "feed_live",
@@ -322,6 +379,12 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "game",
+                    "{id}",
+                    "feed",
+                    "live",
+                  ],
                 },
               ],
             },
@@ -345,6 +408,10 @@ module NhlApiDocumentationConfig
               "type" => "`$ARRAY`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "player",
           "op" => {
             "load" => {
@@ -366,9 +433,13 @@ module NhlApiDocumentationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/people/{id}",
-                  "parts" => [
-                    "people",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "people",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -379,6 +450,10 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "people",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -434,16 +509,22 @@ module NhlApiDocumentationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/people/{id}/stats",
-                  "parts" => [
-                    "people",
-                    "{person_id}",
-                    "stats",
-                  ],
                   "rename" => {
                     "param" => {
                       "id" => "person_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "people",
+                    },
+                    {
+                      "var" => "person_id",
+                    },
+                    {
+                      "lit" => "stats",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "person_id",
@@ -455,6 +536,11 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.stats`",
                   },
+                  "parts" => [
+                    "people",
+                    "{person_id}",
+                    "stats",
+                  ],
                 },
               ],
             },
@@ -511,16 +597,22 @@ module NhlApiDocumentationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/teams/{id}/roster",
-                  "parts" => [
-                    "teams",
-                    "{team_id}",
-                    "roster",
-                  ],
                   "rename" => {
                     "param" => {
                       "id" => "team_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "teams",
+                    },
+                    {
+                      "var" => "team_id",
+                    },
+                    {
+                      "lit" => "roster",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "season",
@@ -531,6 +623,11 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.roster`",
                   },
+                  "parts" => [
+                    "teams",
+                    "{team_id}",
+                    "roster",
+                  ],
                 },
               ],
             },
@@ -546,6 +643,7 @@ module NhlApiDocumentationConfig
         "schedule" => {
           "fields" => [
             {
+              "format" => "date",
               "name" => "date",
               "type" => "`$STRING`",
             },
@@ -608,8 +706,10 @@ module NhlApiDocumentationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/schedule",
-                  "parts" => [
-                    "schedule",
+                  "segments" => [
+                    {
+                      "lit" => "schedule",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -623,6 +723,9 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.dates`",
                   },
+                  "parts" => [
+                    "schedule",
+                  ],
                 },
               ],
             },
@@ -666,8 +769,10 @@ module NhlApiDocumentationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/standings",
-                  "parts" => [
-                    "standings",
+                  "segments" => [
+                    {
+                      "lit" => "standings",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -678,6 +783,9 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.records`",
                   },
+                  "parts" => [
+                    "standings",
+                  ],
                 },
               ],
             },
@@ -741,6 +849,10 @@ module NhlApiDocumentationConfig
               "type" => "`$OBJECT`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "team",
           "op" => {
             "list" => {
@@ -767,8 +879,10 @@ module NhlApiDocumentationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/teams",
-                  "parts" => [
-                    "teams",
+                  "segments" => [
+                    {
+                      "lit" => "teams",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -780,6 +894,9 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.teams`",
                   },
+                  "parts" => [
+                    "teams",
+                  ],
                 },
               ],
             },
@@ -810,9 +927,13 @@ module NhlApiDocumentationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/teams/{id}",
-                  "parts" => [
-                    "teams",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "teams",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -824,6 +945,10 @@ module NhlApiDocumentationConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "teams",
+                    "{id}",
+                  ],
                 },
               ],
             },

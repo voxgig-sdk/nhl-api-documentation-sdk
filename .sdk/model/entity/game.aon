@@ -71,10 +71,16 @@ main: kit: entity: game: {
           }
           method: "GET"
           orig: "/game/{id}/boxscore"
-          parts: [
-            "game"
-            "{id}"
-            "boxscore"
+          segments: [
+            {
+              lit: "game"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "boxscore"
+            }
           ]
           select: {
             "$action": "boxscore"
@@ -101,11 +107,19 @@ main: kit: entity: game: {
           }
           method: "GET"
           orig: "/game/{id}/feed/live"
-          parts: [
-            "game"
-            "{id}"
-            "feed"
-            "live"
+          segments: [
+            {
+              lit: "game"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "feed"
+            }
+            {
+              lit: "live"
+            }
           ]
           select: {
             "$action": "feed_live"
