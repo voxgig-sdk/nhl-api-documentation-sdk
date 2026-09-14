@@ -105,7 +105,7 @@ local results, err = client:Division():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/nhl-api-documentation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nhl-api-documentation-sdk/releases) |
+| TypeScript | `@voxgig-sdk/nhl-api-documentation-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nhl-api-documentation-sdk/releases) |
 | Python | `voxgig-sdk-nhl-api-documentation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nhl-api-documentation-sdk/releases) |
 | PHP | `voxgig-sdk/nhl-api-documentation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/nhl-api-documentation-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/nhl-api-documentation-sdk/go` | `go get github.com/voxgig-sdk/nhl-api-documentation-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Division():list()
 ### TypeScript
 
 ```ts
-import { NhlApiDocumentationSDK } from '@voxgig-sdk/nhl-api-documentation'
+import { NhlApiDocumentationSDK } from '@voxgig-sdk/nhl-api-documentation-sdk'
 
 const client = new NhlApiDocumentationSDK()
 

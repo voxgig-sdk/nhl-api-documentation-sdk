@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { NhlApiDocumentationSDK } from '@voxgig-sdk/nhl-api-documentation'
+import { NhlApiDocumentationSDK } from '@voxgig-sdk/nhl-api-documentation-sdk'
 
 const client = new NhlApiDocumentationSDK()
 ```
@@ -789,7 +789,7 @@ nhl-api-documentation/
 Import the SDK from the package root:
 
 ```ts
-import { NhlApiDocumentationSDK } from '@voxgig-sdk/nhl-api-documentation'
+import { NhlApiDocumentationSDK } from '@voxgig-sdk/nhl-api-documentation-sdk'
 ```
 
 ### Entity state
